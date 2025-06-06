@@ -1502,13 +1502,13 @@
         font-family: var(--tp-ff-didoneright);
         font-style: normal;
         font-weight: 500;
-        font-size: 180px;
+        font-size: 100px;
         line-height: 1;
         letter-spacing: -0.03em;
         color: var(--tp-common-white);
         margin-bottom: 25px;
         @media #{$xl}{
-            font-size: 155px;
+            font-size: 100px;
         }
         @media #{$lg}{
             font-size: 115px;
