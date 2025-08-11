@@ -1,12 +1,9 @@
-
-
-
 .header-top-wrapper {
 	position: relative;
     @include flex;
     justify-content: space-between; 
 	padding: 10px 50px;
-    background-color: #0061ab;
+    background-image: url(../img/bg/headerTopBg.png);
 	background-repeat: no-repeat; 
 	background-position: center; 
 	clip-path: polygon(1110px 0px, 100% 0px, 100% 50px, 100% calc( 100% - 49px), 100% 100%, 199px 100%, 27px 100%, 38px 0px);
