@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A1 Adjectives Listening Comprehension</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #f4f4f9; color: #333; line-height: 1.6; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1, h2 { color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px; margin-top: 20px; }
+        .audio-control { background-color: #ff9800; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-bottom: 20px; display: inline-block; font-weight: bold; }
+        .audio-control:hover { background-color: #e68900; }
+        .question-block { margin-bottom: 15px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        .options label { display: block; margin: 5px 0; cursor: pointer; }
+        .options input[type="radio"], .fill-in input[type="text"] { margin-right: 8px; }
+        .feedback { margin-top: 10px; padding: 10px; border-radius: 5px; font-weight: bold; display: none; }
+        .correct { background-color: #d4edda; color: #155724; border-color: #c3e6cb; }
+        .incorrect { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; }
+        .check-btn { background-color: #28a745; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        .check-btn:hover { background-color: #218838; }
+        .fill-in input[type="text"] { padding: 5px; border: 1px solid #ccc; border-radius: 3px; }
+        /* Style for a clean embedded audio element (hidden by default, only shown when button is clicked) */
+        .audio-player { width: 100%; margin-top: 10px; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎧 Listen and Understand: A1 Adjectives</h1>
+    <p>Click **Listen Here** for each conversation, and then answer the questions. Good luck! 🚀</p>
+
+    <div id="conv1">
+        <h2>Conversation 1: Describing a Room and a Person</h2>
+        <button class="audio-control" onclick="toggleAudio('audio1')">▶️ Listen Here</button>
+        <audio id="audio1" class="audio-player" controls>
+            <source src="path/to/conversation1.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <div class="question-block" data-correct="large" data-type="mc">
+            <p>1. How does Alex describe the apartment?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="small"> small and dark</label>
+                <label><input type="radio" name="q1" value="large"> large and bright</label>
+                <label><input type="radio" name="q1" value="old"> old and modern</label>
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv1', 1)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="false" data-type="tf">
+            <p>2. The kitchen is small.</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="true"> True</label>
+                <label><input type="radio" name="q2" value="false"> False</label>
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv1', 2)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="small" data-type="fill">
+            <p>3. Alex thinks the bedroom is too _______.</p>
+            <div class="fill-in">
+                <input type="text" name="q3" placeholder="Type the adjective">
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv1', 3)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="new" data-type="opposite">
+            <p>4. What is the opposite of old?</p>
+            <div class="fill-in">
+                <input type="text" name="q4" placeholder="Type the opposite">
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv1', 4)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="funny" data-type="fill">
+            <p>5. The person in the picture is kind, helpful, and very _______ because she tells great jokes.</p>
+            <div class="fill-in">
+                <input type="text" name="q5" placeholder="Type the adjective">
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv1', 5)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+    </div>
+
+    ---
+
+    <div id="conv2">
+        <h2>Conversation 2: Describing Appearance</h2>
+        <button class="audio-control" onclick="toggleAudio('audio2')">▶️ Listen Here</button>
+        <audio id="audio2" class="audio-player" controls>
+            <source src="path/to/conversation2.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <div class="question-block" data-correct="pink" data-type="mc">
+            <p>6. What colour are Clara's new shoes?</p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="brown"> brown</label>
+                <label><input type="radio" name="q6" value="nice"> nice</label>
+                <label><input type="radio" name="q6" value="pink"> pink</label>
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv2', 6)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="true" data-type="tf">
+            <p>7. David says Clara's hair is curly.</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="true"> True</label>
+                <label><input type="radio" name="q7" value="false"> False</label>
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv2', 7)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="short" data-type="opposite">
+            <p>8. David is tall. What is the opposite adjective used to describe the little girl?</p>
+            <div class="fill-in">
+                <input type="text" name="q8" placeholder="Type the opposite">
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv2', 8)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="talkative" data-type="fill">
+            <p>9. The little girl is very _______ because she is always speaking.</p>
+            <div class="fill-in">
+                <input type="text" name="q9" placeholder="Type the adjective">
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv2', 9)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="big" data-type="mc">
+            <p>10. The dog is...</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="young"> young</label>
+                <label><input type="radio" name="q10" value="straight"> straight</label>
+                <label><input type="radio" name="q10" value="big"> big</label>
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv2', 10)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+    </div>
+
+    ---
+
+    <div id="conv3">
+        <h2>Conversation 3: Describing Personality and Mood</h2>
+        <button class="audio-control" onclick="toggleAudio('audio3')">▶️ Listen Here</button>
+        <audio id="audio3" class="audio-player" controls>
+            <source src="path/to/conversation3.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <div class="question-block" data-correct="blond" data-type="fill">
+            <p>11. Sarah has _______ hair.</p>
+            <div class="fill-in">
+                <input type="text" name="q11" placeholder="Type the adjective">
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv3', 11)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="true" data-type="tf">
+            <p>12. Sarah is friendly and funny.</p>
+            <div class="options">
+                <label><input type="radio" name="q12" value="true"> True</label>
+                <label><input type="radio" name="q12" value="false"> False</label>
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv3', 12)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="intelligent" data-type="mc">
+            <p>13. Sarah is very friendly and funny. She is also very...</p>
+            <div class="options">
+                <label><input type="radio" name="q13" value="messy"> messy</label>
+                <label><input type="radio" name="q13" value="lovely"> lovely</label>
+                <label><input type="radio" name="q13" value="intelligent"> intelligent</label>
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv3', 13)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="clean" data-type="opposite">
+            <p>14. Sarah's room is sometimes messy. What is the opposite of messy?</p>
+            <div class="fill-in">
+                <input type="text" name="q14" placeholder="Type the opposite">
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv3', 14)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="energetic" data-type="fill">
+            <p>15. Emily says Sarah looks so _______!</p>
+            <div class="fill-in">
+                <input type="text" name="q15" placeholder="Type the adjective">
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv3', 15)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+    </div>
+
+    ---
+
+    <div id="conv4">
+        <h2>Conversation 4: Describing Things and Actions</h2>
+        <button class="audio-control" onclick="toggleAudio('audio4')">▶️ Listen Here</button>
+        <audio id="audio4" class="audio-player" controls>
+            <source src="path/to/conversation4.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <div class="question-block" data-correct="blue" data-type="mc">
+            <p>16. What colour are the bird's feathers?</p>
+            <div class="options">
+                <label><input type="radio" name="q16" value="white"> white</label>
+                <label><input type="radio" name="q16" value="blue"> blue</label>
+                <label><input type="radio" name="q16" value="little"> little</label>
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv4', 16)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="true" data-type="tf">
+            <p>17. George hopes the bird is brave.</p>
+            <div class="options">
+                <label><input type="radio" name="q17" value="true"> True</label>
+                <label><input type="radio" name="q17" value="false"> False</label>
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv4', 17)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="short" data-type="opposite">
+            <p>18. The man is curious about the long street sign. What is the opposite of long?</p>
+            <div class="fill-in">
+                <input type="text" name="q18" placeholder="Type the opposite">
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv4', 18)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="dirty" data-type="fill">
+            <p>19. The man's hands are _______.</p>
+            <div class="fill-in">
+                <input type="text" name="q19" placeholder="Type the adjective">
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv4', 19)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="serious" data-type="mc">
+            <p>20. George says the man looks very...</p>
+            <div class="options">
+                <label><input type="radio" name="q20" value="curious"> curious</label>
+                <label><input type="radio" name="q20" value="little"> little</label>
+                <label><input type="radio" name="q20" value="serious"> serious</label>
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv4', 20)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+    </div>
+
+    ---
+
+    <div id="conv5">
+        <h2>Conversation 5: Describing Quality and Colour</h2>
+        <button class="audio-control" onclick="toggleAudio('audio5')">▶️ Listen Here</button>
+        <audio id="audio5" class="audio-player" controls>
+            <source src="path/to/conversation5.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <div class="question-block" data-correct="good" data-type="fill">
+            <p>21. The red apple is very _______.</p>
+            <div class="fill-in">
+                <input type="text" name="q21" placeholder="Type the adjective">
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv5', 21)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="true" data-type="tf">
+            <p>22. The yellow bananas are excellent.</p>
+            <div class="options">
+                <label><input type="radio" name="q22" value="true"> True</label>
+                <label><input type="radio" name="q22" value="false"> False</label>
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv5', 22)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="yellow" data-type="mc">
+            <p>23. What colour are the bananas?</p>
+            <div class="options">
+                <label><input type="radio" name="q23" value="red"> red</label>
+                <label><input type="radio" name="q23" value="orange"> orange</label>
+                <label><input type="radio" name="q23" value="yellow"> yellow</label>
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv5', 23)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="good" data-type="opposite">
+            <p>24. The juice was bad. What is the opposite of bad?</p>
+            <div class="fill-in">
+                <input type="text" name="q24" placeholder="Type the opposite">
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv5', 24)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question-block" data-correct="terrible" data-type="fill">
+            <p>25. The orange juice was bad and _______.</p>
+            <div class="fill-in">
+                <input type="text" name="q25" placeholder="Type the adjective">
+            </div>
+            <button class="check-btn" onclick="checkAnswer('conv5', 25)">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Function to show/hide the audio player
+    function toggleAudio(audioId) {
+        const audioPlayer = document.getElementById(audioId);
+        if (audioPlayer.style.display === 'none' || audioPlayer.style.display === '') {
+            audioPlayer.style.display = 'block';
+        } else {
+            audioPlayer.style.display = 'none';
+            audioPlayer.pause(); // Pause the audio when hiding
+            audioPlayer.currentTime = 0; // Rewind to start
+        }
+    }
+
+    // Function to check the answers
+    function checkAnswer(convId, qNum) {
+        // Calculate the correct question index relative to the block
+        const offset = (convId === 'conv1' ? 0 : convId === 'conv2' ? 5 : convId === 'conv3' ? 10 : convId === 'conv4' ? 15 : 20);
+        const block = document.querySelector(`#${convId} .question-block:nth-child(${qNum - offset + 1})`);
+        
+        // Ensure block is found before proceeding
+        if (!block) {
+            console.error(`Question block for ${convId}, question ${qNum} not found.`);
+            return;
+        }
+
+        const correctValue = block.getAttribute('data-correct').toLowerCase().trim();
+        const type = block.getAttribute('data-type');
+        const feedbackElement = block.querySelector('.feedback');
+        let userAnswer;
+
+        if (type === 'mc' || type === 'tf') {
+            userAnswer = block.querySelector(`input[name="q${qNum}"]:checked`);
+            userAnswer = userAnswer ? userAnswer.value.toLowerCase().trim() : '';
+        } else if (type === 'fill' || type === 'opposite') {
+            // Get value from text input for fill-in/opposite
+            userAnswer = block.querySelector(`input[name="q${qNum}"]`).value.toLowerCase().trim();
+        }
+
+        feedbackElement.style.display = 'block';
+
+        if (userAnswer === correctValue) {
+            feedbackElement.className = 'feedback correct';
+            feedbackElement.textContent = '✅ Correct! Well done!';
+        } else if (userAnswer === '') {
+            feedbackElement.className = 'feedback incorrect';
+            feedbackElement.textContent = '❌ Please select an answer or fill in the gap.';
+        } else {
+            feedbackElement.className = 'feedback incorrect';
+            // Give a hint for incorrect answers (the first two letters)
+            feedbackElement.textContent = `❌ Incorrect. The correct answer starts with the letter(s): ${correctValue.slice(0, 2).toUpperCase()}... Try listening again!`;
+        }
+    }
+</script>
+
+</body>
+</html>
