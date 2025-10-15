@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>A1 Adjective Writing Practice</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; background-color: #f4f4f9; }
+        h1 { color: #007bff; border-bottom: 3px solid #007bff; padding-bottom: 10px; }
+        h2 { color: #333; border-bottom: 2px solid #5cb85c; padding-bottom: 5px; margin-top: 30px; }
+        h3 { color: #5cb85c; margin-top: 25px; }
+
+        /* General Styles for Inputs/Feedback */
+        .feedback { margin-top: 5px; font-weight: bold; }
+        .correct { color: green; }
+        .incorrect { color: red; }
+        button { background-color: #5cb85c; color: white; padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; margin-right: 10px; }
+        button:hover { background-color: #4cae4c; }
+        
+        /* Writing Exercise Specific Styles */
+        .writing-exercise { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .question { margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 3px; box-sizing: border-box; }
+        input[type="text"] { padding: 5px; border: 1px solid #ccc; border-radius: 3px; width: 80%; box-sizing: border-box;}
+
+        /* Model Answer Feedback */
+        .model-answer { margin-top: 15px; padding: 10px; border: 1px dashed #007bff; background-color: #e6f7ff; border-radius: 4px; display: none; }
+        .model-answer strong { color: #007bff; }
+    </style>
+</head>
+<body>
+
+    <h1>A1 English Adjective Writing Practice ✍️</h1>
+    <p>Use these exercises to practice writing full, simple sentences using target vocabulary and correct A1 grammar structures.</p>
+    <p>After you complete an exercise and check the requirements, click the "Show Model Answer & Structure" button to check your own grammar, tense, and word order against a perfect example.</p>
+    
+    <hr>
+    <h2>Writing Exercises</h2>
+
+    <div class="writing-exercise" id="ex1">
+        <h3>1. Personal Descriptions: My Home Inventory 🏠</h3>
+        <p>Write five simple sentences describing your home or room. You must use the Simple Present tense (is/are) and at least three of these adjectives: large, small, clean, old, modern, colourful.</p>
+        <textarea id="ex1_input" rows="5" placeholder="Example: My room is small."></textarea><br>
+        <button onclick="checkEx1()">Check Requirements</button>
+        <button onclick="showModelEx1()">Show Model Answer & Structure</button>
+        <div class="feedback"></div>
+        <div class="model-answer" id="model_ex1">
+            <strong>Model Answer Structure (Simple Present Tense):</strong>
+            <ul>
+                <li>The kitchen <strong>is</strong> very <strong>clean</strong>.</li>
+                <li>My desk <strong>is</strong> <strong>old</strong>.</li>
+                <li>The windows <strong>are</strong> <strong>large</strong>.</li>
+                <li>My chair <strong>is</strong> <strong>modern</strong>.</li>
+                <li>The wall <strong>is</strong> <strong>colourful</strong>.</li>
+            </ul>
+            *Compare your sentences above to check your word order (Subject + is/are + Adjective) and use of the Simple Present tense.*
+        </div>
+    </div>
+
+    <div class="writing-exercise" id="ex2">
+        <h3>2. Opposites and Negatives: Transformation Practice 🔄</h3>
+        <p>Rewrite each sentence to use the opposite adjective and the word "not." (You only need to type the final word.)</p>
+        
+        <div class="question" id="ex2_1">
+            <p>1. The dog is large. → The dog is not...</p>
+            <input type="text" id="ex2_1_input"><br>
+            <button onclick="checkEx2('ex2_1', 'small|tiny', 'The opposite of large is small.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="question" id="ex2_2">
+            <p>2. The tea was good. → The tea was not...</p>
+            <input type="text" id="ex2_2_input"><br>
+            <button onclick="checkEx2('ex2_2', 'bad|terrible', 'The opposite of good is bad or terrible.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="question" id="ex2_3">
+            <p>3. She is happy. → She is not...</p>
+            <input type="text" id="ex2_3_input"><br>
+            <button onclick="checkEx2('ex2_3', 'sad|unhappy', 'The opposite of happy is sad or unhappy.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+    </div>
+
+    <div class="writing-exercise" id="ex3">
+        <h3>3. Creative Application: The Secret of the Little Cat 🐱</h3>
+        <p>Write a short story (5-6 sentences). Use the Simple Past or Simple Present tense. You must use one adjective from each group below:</p>
+        <p>1. Appearance: little or long or blue</p>
+        <p>2. Personality: shy or brave or curious</p>
+        <p>3. Object: dirty or white</p>
+        <textarea id="ex3_input" rows="7" placeholder="Start your story here..."></textarea><br>
+        <button onclick="checkEx3()">Check Requirements</button>
+        <button onclick="showModelEx3()">Show Model Answer & Structure</button>
+        <div class="feedback"></div>
+        <div class="model-answer" id="model_ex3">
+            <strong>Model Story Example:</strong>
+            <p>Today, I <strong>saw</strong> a <strong>little</strong> cat. Its eyes <strong>were</strong> <strong>blue</strong>. At first, it <strong>was</strong> very <strong>shy</strong>. It <strong>looked</strong> at a man with <strong>dirty</strong> shoes. Then, the cat <strong>became</strong> <strong>brave</strong>. The man <strong>gave</strong> the cat a <strong>white</strong> cloth to play with.</p>
+            *Check your story to ensure your verbs (saw, were, was, looked, became, gave, etc.) are in the correct tense for clear narration.*
+        </div>
+    </div>
+
+    <script>
+        // --- Helper Functions ---
+        function normalizeText(text) {
+            // Converts to lower case and removes punctuation/newlines for general checking
+            return text.toLowerCase().trim().replace(/[^a-z0-9\s]/g, '');
+        }
+        
+        function normalizeWord(word) {
+            // Converts to lower case and removes all non-alphanumeric characters for strict word checking
+            return word.toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+        }
+
+        // --- Writing Logic ---
+
+        // Exercise 1 Logic (Home Inventory)
+        function checkEx1() {
+            const input = document.getElementById('ex1_input');
+            const feedback = document.querySelector('#ex1 .feedback');
+            const userText = normalizeText(input.value);
+            
+            const possibleWords = ['large', 'small', 'clean', 'old', 'modern', 'colourful'];
+            let wordsUsed = [];
+
+            // Check for sentence/length minimum (5 sentences * ~4 words = 20 words minimum)
+            if (userText.split(/\s+/).length < 20) {
+                 feedback.innerHTML = '<span class="incorrect">Not quite. Please write at least 5 complete sentences.</span>';
+                 return;
+            }
+
+            for (const word of possibleWords) {
+                if (userText.includes(word)) {
+                    wordsUsed.push(word);
+                }
+            }
+
+            if (wordsUsed.length >= 3) {
+                feedback.innerHTML = `<span class="correct">Correct! Great job. You successfully used ${wordsUsed.length} required words: (${wordsUsed.map(w => w.toUpperCase()).join(', ')}). Now, click 'Show Model Answer' to check your grammar and structure!</span>`;
+            } else {
+                feedback.innerHTML = `<span class="incorrect">Not quite. You only used ${wordsUsed.length} of the 3 required words. Try using more adjectives from the list.</span>`;
+            }
+        }
+        
+        // Show Model Answer for Exercise 1
+        function showModelEx1() {
+            const modelDiv = document.getElementById('model_ex1');
+            modelDiv.style.display = modelDiv.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Exercise 2 Logic (Negation)
+        function checkEx2(questionId, correctAnswers, feedbackText) {
+            const container = document.getElementById(questionId);
+            const input = document.getElementById(questionId + '_input');
+            const feedback = container.querySelector('.feedback');
+            
+            const userText = normalizeWord(input.value); 
+            const correctWords = correctAnswers.split('|').map(ans => normalizeWord(ans));
+            
+            if (!userText) {
+                feedback.innerHTML = '<span class="incorrect">Please write your answer.</span>';
+                return;
+            }
+
+            let isCorrect = false;
+            let actualCorrectWord = '';
+
+            for (const correctWord of correctWords) {
+                if (userText.includes(correctWord)) {
+                    isCorrect = true;
+                    actualCorrectWord = correctWord;
+                    break;
+                }
+            }
+
+            if (isCorrect) {
+                const alternativeWords = correctWords.filter(word => word !== actualCorrectWord);
+                
+                let correctFeedback = '<span class="correct">Correct! The full sentence is "The dog is not ' + actualCorrectWord + '."';
+
+                if (alternativeWords.length > 0) {
+                    const altDisplay = alternativeWords.map(word => word.toUpperCase()).join(' or ');
+                    correctFeedback += ' (Alternative: ' + altDisplay + ').';
+                }
+                correctFeedback += '</span>';
+
+                feedback.innerHTML = correctFeedback;
+
+            } else {
+                feedback.innerHTML = '<span class="incorrect">Not quite. Hint: ' + feedbackText + '</span>';
+            }
+        }
+
+        // Exercise 3 Logic (Creative Story)
+        function checkEx3() {
+            const input = document.getElementById('ex3_input');
+            const feedback = document.querySelector('#ex3 .feedback');
+            const userText = normalizeText(input.value);
+            
+            const groups = {
+                appearance: ['little', 'long', 'blue'],
+                personality: ['shy', 'brave', 'curious'],
+                object: ['dirty', 'white']
+            };
+
+            let found = { appearance: false, personality: false, object: false };
+
+            // Check for story length minimum (5 sentences * ~6 words = 30 words minimum)
+            if (userText.split(/\s+/).length < 30) {
+                feedback.innerHTML = '<span class="incorrect">Not quite. Please make your story a bit longer (5-6 sentences).</span>';
+                return;
+            }
+
+            for (const group in groups) {
+                for (const word of groups[group]) {
+                    if (userText.includes(word)) {
+                        found[group] = true;
+                        break; 
+                    }
+                }
+            }
+
+            if (found.appearance && found.personality && found.object) {
+                feedback.innerHTML = `<span class="correct">Correct! Excellent story. You used all three required adjective types. Now, click 'Show Model Answer' to check your grammar and structure!</span>`;
+            } else {
+                let missing = [];
+                if (!found.appearance) missing.push(`Appearance (${groups.appearance.map(w => w.toUpperCase()).join('/')})`);
+                if (!found.personality) missing.push(`Personality (${groups.personality.map(w => w.toUpperCase()).join('/')})`);
+                if (!found.object) missing.push(`Object (${groups.object.map(w => w.toUpperCase()).join('/')})`);
+
+                feedback.innerHTML = `<span class="incorrect">Not quite. You are missing at least one word from the following groups: ${missing.join(', ')}.</span>`;
+            }
+        }
+        
+        // Show Model Answer for Exercise 3
+        function showModelEx3() {
+            const modelDiv = document.getElementById('model_ex3');
+            modelDiv.style.display = modelDiv.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+
+</body>
+</html>

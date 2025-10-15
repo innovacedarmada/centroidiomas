@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adjective Quiz for A1 Students</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; background-color: #f4f4f9; }
+        .story-section { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h2 { color: #333; border-bottom: 2px solid #5cb85c; padding-bottom: 5px; }
+        
+        .story-text { margin-bottom: 20px; font-style: italic; padding: 15px; border-radius: 5px;}
+        /* Pastel Colors for Stories */
+        #story1 .story-text { background-color: #ffebf3; /* Pastel Pink */ }
+        #story2 .story-text { background-color: #ffe8d6; /* Pastel Peach */ }
+        #story3 .story-text { background-color: #e6f7ff; /* Pastel Blue */ }
+        #story4 .story-text { background-color: #e6ffe6; /* Pastel Green */ }
+        #story5 .story-text { background-color: #fff0e1; /* Pastel Yellow */ }
+        
+        .question { margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        .question strong { color: #007bff; }
+        .feedback { margin-top: 5px; font-weight: bold; }
+        .correct { color: green; }
+        .incorrect { color: red; }
+        button { background-color: #5cb85c; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+        button:hover { background-color: #4cae4c; }
+        input[type="radio"] { margin-right: 5px; }
+        input[type="text"] { padding: 5px; border: 1px solid #ccc; border-radius: 3px; width: 80%; }
+    </style>
+</head>
+<body>
+
+    <h1>Adjective Comprehension Check! ✅</h1>
+    <p>Read each story and then answer the questions below. Click "Check Answer" to get feedback! (You can type the word, or the full rephrased sentence.)</p>
+
+    <div class="story-section" id="story1">
+        <h2>Story 1: Describing a Room and a Person</h2>
+        <div class="story-text">
+            My friend, Lisa, lives in a large apartment. It is very bright because of the big windows. Her kitchen is always so clean. The living room is colourful with many paintings. However, the bathroom is quite small. Lisa has an old desk, but she just bought a modern chair. The new chair is very comfortable. Lisa is a kind person, and she is also very funny! She is beautiful and always very helpful to her neighbors.
+        </div>
+        
+        <div class="question" id="q1_1">
+            <p>1. What is the opposite of the apartment's size?</p>
+            <label><input type="radio" name="q1_1_answer" value="a"> bright</label><br>
+            <label><input type="radio" name="q1_1_answer" value="b"> small</label><br>
+            <label><input type="radio" name="q1_1_answer" value="c"> clean</label><br>
+            <button onclick="checkMC('q1_1', 'b', 'The opposite of a large apartment is a small one.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q1_2">
+            <p>2. True or False: Lisa's new chair is old.</p>
+            <label><input type="radio" name="q1_2_answer" value="true"> True</label><br>
+            <label><input type="radio" name="q1_2_answer" value="false"> False</label><br>
+            <button onclick="checkMC('q1_2', 'false', 'The story says she bought a modern chair, which means it\'s new.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q1_3">
+            <p>3. Provide the Opposite: Lisa is a kind person. What is the opposite of 'kind'?</p>
+            <input type="text" id="q1_3_input"><br>
+            <button onclick="checkText('q1_3', 'unkind|mean|cruel', 'Think of words like unkind, mean, or cruel.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q1_4">
+            <p>4. Rephrase the Idea: Her kitchen is always so clean! (Start with: The kitchen is never...)</p>
+            <input type="text" id="q1_4_input"><br>
+            <button onclick="checkText('q1_4', 'dirty|messy', 'The correct word is an opposite of clean, such as dirty or messy.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+    </div>
+
+    <div class="story-section" id="story2">
+        <h2>Story 2: Describing Appearance</h2>
+        <div class="story-text">
+            My sister, Mia, has curly hair, but her friend Tom has straight hair. Mia just bought a new dress. It is pink and very nice! Tom has a big smile, and everyone thinks he's a great guy. He is very tall, and he has a young face. Their dog has brown fur. The dog is quite short, but it is very talkative (it barks a lot!).
+        </div>
+
+        <div class="question" id="q2_1">
+            <p>1. Which word describes Mia's hair?</p>
+            <label><input type="radio" name="q2_1_answer" value="a"> straight</label><br>
+            <label><input type="radio" name="q2_1_answer" value="b"> brown</label><br>
+            <label><input type="radio" name="q2_1_answer" value="c"> curly</label><br>
+            <button onclick="checkMC('q2_1', 'c', 'Mia has curly hair.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q2_2">
+            <p>2. True or False: The dog is tall.</p>
+            <label><input type="radio" name="q2_2_answer" value="true"> True</label><br>
+            <label><input type="radio" name="q2_2_answer" value="false"> False</label><br>
+            <button onclick="checkMC('q2_2', 'false', 'The story says the dog is quite short.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q2_3">
+            <p>3. Provide the Opposite: Tom is very tall. What is the opposite of 'tall'?</p>
+            <input type="text" id="q2_3_input"><br>
+            <button onclick="checkText('q2_3', 'short', 'The opposite of tall is short.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q2_4">
+            <p>4. Rephrase the Idea: Mia just bought a new dress. (Start with: The dress is not...)</p>
+            <input type="text" id="q2_4_input"><br>
+            <button onclick="checkText('q2_4', 'old', 'The opposite of new is old.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+    </div>
+
+    <div class="story-section" id="story3">
+        <h2>Story 3: Describing Personality and Mood</h2>
+        <div class="story-text">
+            My friend, Sam, has blond hair. He is usually very happy and energetic. Sam is very friendly to everyone and has a lovely laugh. He is also very intelligent and responsible at school. He is often funny and very honest about his feelings. However, his desk is a bit messy sometimes! Sam is very creative and loves painting. Today, he is wearing a black jacket.
+        </div>
+        
+        <div class="question" id="q3_1">
+            <p>1. Which adjective describes Sam's hair colour?</p>
+            <label><input type="radio" name="q3_1_answer" value="a"> black</label><br>
+            <label><input type="radio" name="q3_1_answer" value="b"> blond</label><br>
+            <label><input type="radio" name="q3_1_answer" value="c"> messy</label><br>
+            <button onclick="checkMC('q3_1', 'b', 'Sam has blond hair.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q3_2">
+            <p>2. True or False: Sam is very friendly and honest.</p>
+            <label><input type="radio" name="q3_2_answer" value="true"> True</label><br>
+            <label><input type="radio" name="q3_2_answer" value="false"> False</label><br>
+            <button onclick="checkMC('q3_2', 'true', 'The story says Sam is very friendly and very honest.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q3_3">
+            <p>3. Provide the Opposite: Sam is very happy. What is the opposite of 'happy'?</p>
+            <input type="text" id="q3_3_input"><br>
+            <button onclick="checkText('q3_3', 'sad|unhappy', 'Think of sad or unhappy.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q3_4">
+            <p>4. Rephrase the Idea: His desk is a bit messy sometimes! (Start with: His desk is not always...)</p>
+            <input type="text" id="q3_4_input"><br>
+            <button onclick="checkText('q3_4', 'clean|tidy', 'The opposite of messy is clean or tidy.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+    </div>
+
+    <div class="story-section" id="story4">
+        <h2>Story 4: Describing Things and Actions</h2>
+        <div class="story-text">
+            We saw a little cat today. It was shy at first, but it became brave and came to us. It was definitely not a coward! The cat has a long tail and beautiful blue eyes. It was very curious about a man working nearby. The man looked serious and had dirty shoes. We wanted to give him a white cloth to clean them.
+        </div>
+        
+        <div class="question" id="q4_1">
+            <p>1. What colour were the cat's eyes?</p>
+            <label><input type="radio" name="q4_1_answer" value="a"> white</label><br>
+            <label><input type="radio" name="q4_1_answer" value="b"> blue</label><br>
+            <label><input type="radio" name="q4_1_answer" value="c"> dirty</label><br>
+            <button onclick="checkMC('q4_1', 'b', 'The cat had beautiful blue eyes.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q4_2">
+            <p>2. True or False: The cat was a coward.</p>
+            <label><input type="radio" name="q4_2_answer" value="true"> True</label><br>
+            <label><input type="radio" name="q4_2_answer" value="false"> False</label><br>
+            <button onclick="checkMC('q4_2', 'false', 'The cat was brave, which is the opposite of a coward.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q4_3">
+            <p>3. Provide the Opposite: The man looked very serious. What is the opposite of 'serious'?</p>
+            <input type="text" id="q4_3_input"><br>
+            <button onclick="checkText('q4_3', 'funny|silly', 'The opposite of serious is funny or silly.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q4_4">
+            <p>4. Rephrase the Idea: The cat has a long tail. (Start with: The cat's tail is not...)</p>
+            <input type="text" id="q4_4_input"><br>
+            <button onclick="checkText('q4_4', 'short', 'The opposite of long is short.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+    </div>
+    
+    <div class="story-section" id="story5">
+        <h2>Story 5: Describing Quality and Colour</h2>
+        <div class="story-text">
+            I went to a new café this morning. The waitress brought me a red cup of tea. It was very good! I also tried a yellow pastry. It was excellent! Then, I ordered a small salad. Unfortunately, the salad was bad. It was really terrible! Next time, I will only order tea and pastry.
+        </div>
+        
+        <div class="question" id="q5_1">
+            <p>1. What word describes the quality of the tea?</p>
+            <label><input type="radio" name="q5_1_answer" value="a"> terrible</label><br>
+            <label><input type="radio" name="q5_1_answer" value="b"> yellow</label><br>
+            <label><input type="radio" name="q5_1_answer" value="c"> good</label><br>
+            <button onclick="checkMC('q5_1', 'c', 'The story says the tea was very good.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q5_2">
+            <p>2. True or False: The yellow pastry was bad.</p>
+            <label><input type="radio" name="q5_2_answer" value="true"> True</label><br>
+            <label><input type="radio" name="q5_2_answer" value="false"> False</label><br>
+            <button onclick="checkMC('q5_2', 'false', 'The story says the yellow pastry was excellent (which is very good!).')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q5_3">
+            <p>3. Provide the Opposite: The salad was terrible. What is the opposite of 'terrible'? (Use a word from the story.)</p>
+            <input type="text" id="q5_3_input"><br>
+            <button onclick="checkText('q5_3', 'good|excellent', 'Use good or excellent from the story.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q5_4">
+            <p>4. Rephrase the Idea: I ordered a small salad. (Start with: The salad was not...)</p>
+            <input type="text" id="q5_4_input"><br>
+            <button onclick="checkText('q5_4', 'big|large', 'The opposite of small is big or large.')">Check Answer</button>
+            <div class="feedback"></div>
+        </div>
+    </div>
+    
+
+    <script>
+        function normalizeText(text) {
+            // Normalizes the text by converting to lower case, removing punctuation, and trimming spaces.
+            // This is used for checking user input which might be a full sentence.
+            return text.toLowerCase().trim().replace(/[^a-z0-9\s]/g, '');
+        }
+        
+        function normalizeWord(word) {
+            // Normalizes a single word for the correct answer list.
+            return word.toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+        }
+
+        function checkMC(questionId, correctValue, feedbackText) {
+            const container = document.getElementById(questionId);
+            const selected = container.querySelector('input[name="' + questionId + '_answer"]:checked');
+            const feedback = container.querySelector('.feedback');
+            
+            if (!selected) {
+                feedback.innerHTML = '<span class="incorrect">Please select an answer.</span>';
+                return;
+            }
+
+            if (selected.value === correctValue) {
+                feedback.innerHTML = '<span class="correct">Correct! Well done.</span>';
+            } else {
+                feedback.innerHTML = '<span class="incorrect">Incorrect. Hint: ' + feedbackText + '</span>';
+            }
+        }
+
+        function checkText(questionId, correctAnswers, feedbackText) {
+            const container = document.getElementById(questionId);
+            const input = document.getElementById(questionId + '_input');
+            const feedback = container.querySelector('.feedback');
+            
+            // Normalize user input (may be a full sentence)
+            const userText = normalizeText(input.value);
+            // Normalize the list of correct words
+            const correctWords = correctAnswers.split('|').map(ans => normalizeWord(ans));
+            
+            if (!userText) {
+                feedback.innerHTML = '<span class="incorrect">Please write your answer.</span>';
+                return;
+            }
+
+            let isCorrect = false;
+            let actualCorrectWord = '';
+
+            // Check if user input CONTAINS any of the correct words (flexible check for sentence vs. single word)
+            for (const correctWord of correctWords) {
+                // Check if the user's normalized input contains the correct word as a substring
+                if (userText.includes(correctWord)) {
+                    isCorrect = true;
+                    actualCorrectWord = correctWord;
+                    break;
+                }
+            }
+
+            if (isCorrect) {
+                // CORRECT LOGIC: Mark correct and provide alternative if one exists.
+                // Filter out the word that was actually used to find alternatives
+                const alternativeWords = correctWords.filter(word => word !== actualCorrectWord);
+                
+                let correctFeedback = '<span class="correct">Correct! Great job.';
+
+                if (alternativeWords.length > 0) {
+                    // Display alternatives separated by ' or ' in upper case for emphasis
+                    const altDisplay = alternativeWords.map(word => word.toUpperCase()).join(' or ');
+                    correctFeedback += ' Another good option is: (' + altDisplay + ').';
+                }
+                correctFeedback += '</span>';
+
+                feedback.innerHTML = correctFeedback;
+
+            } else {
+                // INCORRECT LOGIC: Show "Not quite" and the simplified hint text.
+                feedback.innerHTML = '<span class="incorrect">Not quite. Hint: ' + feedbackText + '</span>';
+            }
+        }
+    </script>
+
+</body>
+</html>

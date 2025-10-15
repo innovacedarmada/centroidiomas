@@ -343,43 +343,41 @@
 
     // Function to check the answers
     function checkAnswer(convId, qNum) {
-        // Calculate the correct question index relative to the block
-        const offset = (convId === 'conv1' ? 0 : convId === 'conv2' ? 5 : convId === 'conv3' ? 10 : convId === 'conv4' ? 15 : 20);
-        const block = document.querySelector(`#${convId} .question-block:nth-child(${qNum - offset + 1})`);
-        
-        // Ensure block is found before proceeding
-        if (!block) {
-            console.error(`Question block for ${convId}, question ${qNum} not found.`);
-            return;
-        }
+    // Busca directamente el bloque que contiene el input con el name correspondiente
+    const block = document.querySelector(`#${convId} [name="q${qNum}"]`)?.closest('.question-block');
 
-        const correctValue = block.getAttribute('data-correct').toLowerCase().trim();
-        const type = block.getAttribute('data-type');
-        const feedbackElement = block.querySelector('.feedback');
-        let userAnswer;
-
-        if (type === 'mc' || type === 'tf') {
-            userAnswer = block.querySelector(`input[name="q${qNum}"]:checked`);
-            userAnswer = userAnswer ? userAnswer.value.toLowerCase().trim() : '';
-        } else if (type === 'fill' || type === 'opposite') {
-            // Get value from text input for fill-in/opposite
-            userAnswer = block.querySelector(`input[name="q${qNum}"]`).value.toLowerCase().trim();
-        }
-
-        feedbackElement.style.display = 'block';
-
-        if (userAnswer === correctValue) {
-            feedbackElement.className = 'feedback correct';
-            feedbackElement.textContent = '✅ Correct! Well done!';
-        } else if (userAnswer === '') {
-            feedbackElement.className = 'feedback incorrect';
-            feedbackElement.textContent = '❌ Please select an answer or fill in the gap.';
-        } else {
-            feedbackElement.className = 'feedback incorrect';
-            // Give a hint for incorrect answers (the first two letters)
-            feedbackElement.textContent = `❌ Incorrect. The correct answer starts with the letter(s): ${correctValue.slice(0, 2).toUpperCase()}... Try listening again!`;
-        }
+    if (!block) {
+        console.error(`No se encontró el bloque para la pregunta ${qNum} en ${convId}`);
+        return;
     }
+
+    const correctValue = block.getAttribute('data-correct').toLowerCase().trim();
+    const type = block.getAttribute('data-type');
+    const feedbackElement = block.querySelector('.feedback');
+    let userAnswer = '';
+
+    if (type === 'mc' || type === 'tf') {
+        const checked = block.querySelector(`input[name="q${qNum}"]:checked`);
+        if (checked) userAnswer = checked.value.toLowerCase().trim();
+    } else if (type === 'fill' || type === 'opposite') {
+        const input = block.querySelector(`input[name="q${qNum}"]`);
+        if (input) userAnswer = input.value.toLowerCase().trim();
+    }
+
+    feedbackElement.style.display = 'block';
+
+    if (userAnswer === correctValue) {
+        feedbackElement.className = 'feedback correct';
+        feedbackElement.textContent = '✅ Correct! Well done!';
+    } else if (userAnswer === '') {
+        feedbackElement.className = 'feedback incorrect';
+        feedbackElement.textContent = '❌ Please select an answer or fill in the gap.';
+    } else {
+        feedbackElement.className = 'feedback incorrect';
+        feedbackElement.textContent = `❌ Incorrect. The correct answer starts with: "${correctValue.slice(0, 2).toUpperCase()}..." Try again!`;
+    }
+}
+
 </script>
 
 </body>

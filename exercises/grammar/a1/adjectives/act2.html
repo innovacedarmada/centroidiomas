@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EF English: Adjective Categories Challenge</title>
+    
+    <style>
+        /* --- CSS Styling --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Adjective Bank Styling */
+        #adjective-bank {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        #adjective-bank h2 {
+            color: #007bff;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        
+        .adjective {
+            display: inline-block;
+            padding: 8px 15px;
+            margin: 5px;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 20px;
+            cursor: grab;
+            font-weight: bold;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        
+        .adjective:hover {
+            background-color: #dee2e6;
+            transform: translateY(-2px);
+        }
+        
+        /* Category Containers Styling */
+        #category-containers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .category-box {
+            background-color: #fff;
+            border: 3px dashed #ced4da;
+            border-radius: 8px;
+            min-height: 200px;
+            padding: 15px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        
+        .category-box h3 {
+            color: #495057;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e9ecef;
+            margin-bottom: 10px;
+        }
+        
+        /* Drag & Drop Feedback Styles */
+        .category-box.drag-over {
+            background-color: #d1ecf1;
+            border-color: #007bff;
+        }
+        
+        /* Correct/Incorrect feedback on check */
+        .adjective.correct {
+            background-color: #d4edda !important;
+            border-color: #28a745 !important;
+        }
+        
+        .adjective.incorrect {
+            background-color: #f8d7da !important;
+            border-color: #dc3545 !important;
+        }
+
+        .category-box.incorrect {
+            border: 3px solid #dc3545; /* Highlight box if it has an error */
+        }
+        
+        /* Button and Feedback */
+        #check-button {
+            display: block;
+            width: 250px;
+            margin: 30px auto;
+            padding: 15px 20px;
+            font-size: 1.1em;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        #check-button:hover {
+            background-color: #218838;
+        }
+        
+        #feedback {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Adjective Categories Challenge 🧠</h1>
+        <p>Drag each adjective into its correct category box below.</p>
+    </header>
+
+    <main>
+        <div id="adjective-bank">
+            <h2>Adjective Bank</h2>
+            <div class="adjective" draggable="true" data-category="size">large</div>
+            <div class="adjective" draggable="true" data-category="appearance">bright</div>
+            <div class="adjective" draggable="true" data-category="appearance">clean</div>
+            <div class="adjective" draggable="true" data-category="appearance">colorful</div>
+            <div class="adjective" draggable="true" data-category="size">small</div>
+            <div class="adjective" draggable="true" data-category="age">old</div>
+            <div class="adjective" draggable="true" data-category="age">modern</div>
+            <div class="adjective" draggable="true" data-category="quality">comfortable</div>
+            <div class="adjective" draggable="true" data-category="personality">kind</div>
+            <div class="adjective" draggable="true" data-category="personality">funny</div>
+            <div class="adjective" draggable="true" data-category="appearance">beautiful</div>
+            <div class="adjective" draggable="true" data-category="personality">helpful</div>
+            <div class="adjective" draggable="true" data-category="appearance">curly</div>
+            <div class="adjective" draggable="true" data-category="appearance">straight</div>
+            <div class="adjective" draggable="true" data-category="age">new</div>
+            <div class="adjective" draggable="true" data-category="size">big</div>
+            <div class="adjective" draggable="true" data-category="appearance">pink</div>
+            <div class="adjective" draggable="true" data-category="quality">nice</div>
+            <div class="adjective" draggable="true" data-category="quality">great</div>
+            <div class="adjective" draggable="true" data-category="personality">talkative</div>
+            <div class="adjective" draggable="true" data-category="size">tall</div>
+            <div class="adjective" draggable="true" data-category="appearance">brown</div>
+            <div class="adjective" draggable="true" data-category="age">young</div>
+            <div class="adjective" draggable="true" data-category="size">short</div>
+            <div class="adjective" draggable="true" data-category="appearance">blond</div>
+            <div class="adjective" draggable="true" data-category="appearance">black</div>
+            <div class="adjective" draggable="true" data-category="personality">happy</div>
+            <div class="adjective" draggable="true" data-category="personality">energetic</div>
+            <div class="adjective" draggable="true" data-category="personality">friendly</div>
+            <div class="adjective" draggable="true" data-category="personality">lovely</div>
+            <div class="adjective" draggable="true" data-category="personality">intelligent</div>
+            <div class="adjective" draggable="true" data-category="personality">responsible</div>
+            <div class="adjective" draggable="true" data-category="appearance">messy</div>
+            <div class="adjective" draggable="true" data-category="personality">creative</div>
+            <div class="adjective" draggable="true" data-category="personality">honest</div>
+            <div class="adjective" draggable="true" data-category="personality">brave</div>
+            <div class="adjective" draggable="true" data-category="size">long</div>
+            <div class="adjective" draggable="true" data-category="personality">shy</div>
+            <div class="adjective" draggable="true" data-category="personality">coward</div>
+            <div class="adjective" draggable="true" data-category="appearance">dirty</div>
+            <div class="adjective" draggable="true" data-category="personality">serious</div>
+            <div class="adjective" draggable="true" data-category="personality">curious</div>
+            <div class="adjective" draggable="true" data-category="size">little</div>
+            <div class="adjective" draggable="true" data-category="appearance">blue</div>
+            <div class="adjective" draggable="true" data-category="appearance">white</div>
+            <div class="adjective" draggable="true" data-category="appearance">red</div>
+            <div class="adjective" draggable="true" data-category="appearance">yellow</div>
+            <div class="adjective" draggable="true" data-category="quality">good</div>
+            <div class="adjective" draggable="true" data-category="quality">bad</div>
+            <div class="adjective" draggable="true" data-category="quality">excellent</div>
+            <div class="adjective" draggable="true" data-category="quality">terrible</div>
+        </div>
+
+        <div id="category-containers">
+            <div class="category-box" id="size-box" data-category="size">
+                <h3>1. Size and Measurement 📏</h3>
+            </div>
+            <div class="category-box" id="age-box" data-category="age">
+                <h3>2. Age and Time ⏳</h3>
+            </div>
+            <div class="category-box" id="appearance-box" data-category="appearance">
+                <h3>3. Appearance and Color 🌈</h3>
+            </div>
+            <div class="category-box" id="personality-box" data-category="personality">
+                <h3>4. Personality and Character 🤗</h3>
+            </div>
+            <div class="category-box" id="quality-box" data-category="quality">
+                <h3>5. Quality and Judgment 👍</h3>
+            </div>
+        </div>
+
+        <button id="check-button">Check My Answers</button>
+        <p id="feedback"></p>
+    </main>
+
+    <script>
+        // --- JavaScript Interactivity ---
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const adjectives = document.querySelectorAll('.adjective');
+            const dropZones = document.querySelectorAll('.category-box');
+            const checkButton = document.getElementById('check-button');
+            const feedback = document.getElementById('feedback');
+            let draggedItem = null;
+
+            // --- Drag Start and End Handlers ---
+            adjectives.forEach(adj => {
+                adj.addEventListener('dragstart', (e) => {
+                    draggedItem = e.target;
+                    // Add a class for visual feedback during drag
+                    setTimeout(() => {
+                        e.target.style.opacity = '0.5';
+                    }, 0);
+                });
+
+                adj.addEventListener('dragend', (e) => {
+                    e.target.style.opacity = '1';
+                    draggedItem = null;
+                });
+            });
+
+            // --- Drop Zone Handlers ---
+            dropZones.forEach(zone => {
+                // Prevent default behavior to allow dropping
+                zone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    zone.classList.add('drag-over');
+                });
+
+                // Remove highlight when not hovering
+                zone.addEventListener('dragleave', () => {
+                    zone.classList.remove('drag-over');
+                });
+
+                // Handle the actual drop
+                zone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    zone.classList.remove('drag-over');
+
+                    if (draggedItem) {
+                        // Append the dragged adjective to the category box
+                        zone.appendChild(draggedItem);
+                        draggedItem.style.margin = '5px'; // Adjust spacing inside the box
+                    }
+                });
+            });
+
+            // --- Check Answers Logic ---
+            checkButton.addEventListener('click', () => {
+                let correctCount = 0;
+                let totalCount = adjectives.length;
+
+                // 1. Reset all category box and adjective styles
+                dropZones.forEach(zone => zone.classList.remove('correct', 'incorrect'));
+                adjectives.forEach(adj => adj.classList.remove('correct', 'incorrect'));
+
+                // 2. Check each adjective's placement
+                adjectives.forEach(adj => {
+                    // Check if the parent is a category box and has a dataset
+                    const parentElement = adj.parentElement;
+                    if (parentElement && parentElement.classList.contains('category-box')) {
+                        const assignedCategory = parentElement.dataset.category;
+                        const correctCategory = adj.dataset.category;
+                        
+                        // Check if the word is in the correct container
+                        if (assignedCategory === correctCategory) {
+                            correctCount++;
+                            adj.classList.add('correct');
+                        } else {
+                            adj.classList.add('incorrect');
+                        }
+                    } else {
+                        // If it's still in the adjective bank, it's considered incorrect for scoring
+                        adj.classList.add('incorrect');
+                    }
+                });
+
+                // 3. Provide overall feedback
+                if (correctCount === totalCount) {
+                    feedback.textContent = `🎉 Excellent! You got ${correctCount}/${totalCount} (100%). All categories are correct!`;
+                    feedback.style.color = '#28a745';
+                } else {
+                    feedback.textContent = `Try again! You got ${correctCount}/${totalCount} correct. Review the words marked in red.`;
+                    feedback.style.color = '#dc3545';
+                }
+
+                // 4. Highlight categories where errors occurred
+                dropZones.forEach(zone => {
+                    const hasIncorrect = zone.querySelector('.incorrect');
+                    if (hasIncorrect) {
+                        zone.classList.add('incorrect');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

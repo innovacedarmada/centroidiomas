@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>A1 Solo Speaking Practice</title>
+    <style>
+        /* General Styles */
+        body { font-family: 'Inter', Arial, sans-serif; line-height: 1.6; padding: 20px; background-color: #e6f9ff; /* Light Blue Background */ }
+        h1 { color: #007bff; border-bottom: 3px solid #007bff; padding-bottom: 10px; margin-bottom: 20px; text-align: center; }
+        h2 { color: #333; border-bottom: 2px solid #5cb85c; padding-bottom: 5px; margin-top: 35px; }
+        h3 { color: #5cb85c; margin-top: 15px; font-size: 1.1em; }
+
+        /* Activity Card Styles */
+        .activity-card { 
+            background: #fff; 
+            padding: 25px; 
+            border-radius: 12px; 
+            margin-bottom: 40px; 
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+        }
+
+        /* Instructions and Tooltip Styles */
+        .instructions { 
+            background-color: #f7f7f7; 
+            padding: 15px; 
+            border-left: 5px solid #007bff; 
+            margin-bottom: 15px;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+        .instructions strong { color: #007bff; }
+        
+        /* Recording Area Styles */
+        .recording-area { 
+            border: 1px dashed #aaa; 
+            padding: 10px; 
+            margin-top: 15px; 
+            text-align: center; 
+            border-radius: 8px; 
+            background-color: #f0f8ff; /* Very light background for contrast */
+        }
+        .recording-area h4 { margin-top: 0; color: #007bff; font-size: 1em; }
+        .recording-area button { margin: 3px; }
+
+        /* Button and Control Styles */
+        .record-controls button { 
+            background-color: #007bff; 
+            color: white; 
+            padding: 8px 12px; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            transition: background-color 0.3s, transform 0.1s;
+            font-weight: bold;
+        }
+        .record-controls button:hover { background-color: #0056b3; transform: scale(1.02); }
+        .record-controls button:disabled { background-color: #ccc; cursor: not-allowed; }
+        .stop-btn { background-color: #dc3545; }
+        .stop-btn:hover { background-color: #c82333; }
+        .play-btn { background-color: #ffc107; color: #333; }
+        .play-btn:hover { background-color: #e0a800; }
+
+        /* Structure Hint Styles */
+        .structure-hint { 
+            margin-top: 15px; 
+            padding: 15px; 
+            background-color: #e6ffe6; /* Pastel Green */
+            border: 1px solid #5cb85c; 
+            border-radius: 8px; 
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .structure-hint strong { color: #333; }
+
+        /* Activity Specific Styles */
+        .opposite-list { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 15px; }
+        .opposite-list div { 
+            background-color: #f0f0f0; 
+            padding: 8px 15px; 
+            margin: 5px; 
+            border-radius: 4px; 
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>A1 Solo Speaking Practice 🗣️</h1>
+    <p>Practice speaking aloud for each exercise. Your goal is to speak clearly, use the correct grammar (is/are), and use the required vocabulary. Use the recorder provided with each activity to hear yourself and self-correct.</p>
+
+    <div class="activity-card" id="activity1">
+        <h2>1. The 30-Second Inventory 🏠</h2>
+        
+        <div class="instructions">
+            <p>Task: Describe objects around you using the Simple Present tense (is/are).</p>
+            <p>Goal: Speak for at least 30 seconds, describing at least 5 objects.</p>
+            <p>Required Adjectives: large, small, clean, dirty, old, new, modern, colourful.</p>
+        </div>
+
+        <p>Set the timer and record yourself speaking about things you see now. </p>
+
+        <div class="structure-hint">
+            <strong>Target Structure Examples:</strong>
+            My [Object] is [Adjective]. (e.g., My computer is modern.)
+            The [Objects] are [Adjective]. (e.g., The shoes are dirty.)
+        </div>
+        
+        <div class="recording-area">
+            <h4>Your Personal Voice Recorder</h4>
+            <div class="record-controls">
+                <button id="startBtn1" onclick="startRecording(1)">Start Recording</button>
+                <button id="stopBtn1" onclick="stopRecording(1)" class="stop-btn" disabled>Stop Recording</button>
+                <button id="playBtn1" onclick="playRecording(1)" class="play-btn" disabled>Play Recording</button>
+            </div>
+            <div id="audioPlayerContainer1"></div>
+            <p id="recorderStatus1" style="margin-top: 5px; font-style: italic; font-size: 0.85em;">Status: Ready.</p>
+        </div>
+    </div>
+
+    <div class="activity-card" id="activity2">
+        <h2>2. Self-Interview: "This or That?" ❓</h2>
+        
+        <div class="instructions">
+            <p>Task: Ask and answer simple questions about opposites. Act as both the interviewer and the interviewee.</p>
+            <p>Goal: Complete 4 question-and-answer pairs without stopping the recording.</p>
+            <p>Required Adjective Pairs: happy/sad, tall/short, good/bad, kind/mean.</p>
+        </div>
+
+        <p>Record the question, pause briefly, and then record the answer.</p>
+
+        <div class="structure-hint">
+            <strong>Dialogue Structure Examples:</strong>
+            - Am I [Adjective 1] or [Adjective 2]? [PAUSE] You are [Adjective 1/2].
+            - Is the weather good or bad? [PAUSE] It is good.
+        </div>
+
+        <div class="recording-area">
+            <h4>Your Personal Voice Recorder</h4>
+            <div class="record-controls">
+                <button id="startBtn2" onclick="startRecording(2)">Start Recording</button>
+                <button id="stopBtn2" onclick="stopRecording(2)" class="stop-btn" disabled>Stop Recording</button>
+                <button id="playBtn2" onclick="playRecording(2)" class="play-btn" disabled>Play Recording</button>
+            </div>
+            <div id="audioPlayerContainer2"></div>
+            <p id="recorderStatus2" style="margin-top: 5px; font-style: italic; font-size: 0.85em;">Status: Ready.</p>
+        </div>
+    </div>
+
+
+    <div class="activity-card" id="activity3">
+        <h2>3. Describe a Photo 🖼️</h2>
+        
+        <div class="instructions">
+            <p>Task: Find a picture of a person (family, friend, celebrity) and describe their appearance and personality.</p>
+            <p>Goal: Speak for at least 1 minute (use timer if needed) and use 6 different sentences.</p>
+            <p>Required Adjectives: curly, straight, tall, short, young, friendly, funny, serious, kind.</p>
+        </div>
+
+        <p>Look at your chosen photo and deliver a monologue describing the person.</p>
+
+        <div class="structure-hint">
+            <strong>Sentence Starter Examples:</strong>
+            - He/She is [Adjective] (for personality or height).
+            - He/She has [Adjective] hair.
+            - I think he/she is [Adjective].
+        </div>
+
+        <div class="recording-area">
+            <h4>Your Personal Voice Recorder</h4>
+            <div class="record-controls">
+                <button id="startBtn3" onclick="startRecording(3)">Start Recording</button>
+                <button id="stopBtn3" onclick="stopRecording(3)" class="stop-btn" disabled>Stop Recording</button>
+                <button id="playBtn3" onclick="playRecording(3)" class="play-btn" disabled>Play Recording</button>
+            </div>
+            <div id="audioPlayerContainer3"></div>
+            <p id="recorderStatus3" style="margin-top: 5px; font-style: italic; font-size: 0.85em;">Status: Ready.</p>
+        </div>
+    </div>
+
+    <div class="activity-card" id="activity4">
+        <h2>4. The Opposite Challenge ⏱️</h2>
+        
+        <div class="instructions">
+            <p>Task: Quickly say the opposite of the given word.</p>
+            <p>Goal: Say 10 opposites in less than 60 seconds.</p>
+        </div>
+
+        <p>Read the first word aloud, then immediately say its opposite. Try to go as fast as you can without stopping!</p>
+
+        <div class="opposite-list">
+            <div>1. Happy → ...</div>
+            <div>2. Clean → ...</div>
+            <div>3. Old → ...</div>
+            <div>4. Brave → ...</div>
+            <div>5. Long → ...</div>
+            <div>6. Bad → ...</div>
+            <div>7. Small → ...</div>
+            <div>8. Kind → ...</div>
+            <div>9. Dirty → ...</div>
+            <div>10. Serious → ...</div>
+        </div>
+
+        <div class="recording-area">
+            <h4>Your Personal Voice Recorder</h4>
+            <div class="record-controls">
+                <button id="startBtn4" onclick="startRecording(4)">Start Recording</button>
+                <button id="stopBtn4" onclick="stopRecording(4)" class="stop-btn" disabled>Stop Recording</button>
+                <button id="playBtn4" onclick="playRecording(4)" class="play-btn" disabled>Play Recording</button>
+            </div>
+            <div id="audioPlayerContainer4"></div>
+            <p id="recorderStatus4" style="margin-top: 5px; font-style: italic; font-size: 0.85em;">Status: Ready.</p>
+        </div>
+    </div>
+
+
+    <script>
+        // --- GLOBAL RECORDER STATE ---
+        const recorders = {};
+
+        // --- VOICE RECORDER LOGIC ---
+
+        function getElements(id) {
+            return {
+                startBtn: document.getElementById('startBtn' + id),
+                stopBtn: document.getElementById('stopBtn' + id),
+                playBtn: document.getElementById('playBtn' + id),
+                statusText: document.getElementById('recorderStatus' + id),
+                playerContainer: document.getElementById('audioPlayerContainer' + id)
+            };
+        }
+
+        async function startRecording(id) {
+            const elements = getElements(id);
+            const state = recorders[id] = { audioChunks: [], audioBlob: null, audioPlayer: null, stream: null, mediaRecorder: null };
+
+            // Clear previous player
+            elements.playerContainer.innerHTML = '';
+            
+            elements.startBtn.disabled = true;
+            elements.stopBtn.disabled = true;
+            elements.playBtn.disabled = true;
+            elements.statusText.textContent = 'Status: Waiting for mic...';
+
+            try {
+                // Request microphone access
+                state.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                state.mediaRecorder = new MediaRecorder(state.stream);
+                
+                state.mediaRecorder.ondataavailable = event => {
+                    state.audioChunks.push(event.data);
+                };
+                
+                state.mediaRecorder.onstop = () => {
+                    state.audioBlob = new Blob(state.audioChunks, { type: 'audio/wav' });
+                    
+                    state.audioPlayer = document.createElement('audio');
+                    state.audioPlayer.controls = true;
+                    state.audioPlayer.src = URL.createObjectURL(state.audioBlob);
+                    elements.playerContainer.appendChild(state.audioPlayer);
+
+                    elements.statusText.textContent = 'Status: Recording ready.';
+                    elements.startBtn.disabled = false;
+                    elements.playBtn.disabled = false;
+                    
+                    // Stop stream tracks to release microphone
+                    state.stream.getTracks().forEach(track => track.stop());
+                };
+                
+                state.mediaRecorder.start();
+                
+                elements.statusText.textContent = 'Status: Recording...';
+                elements.startBtn.disabled = true;
+                elements.stopBtn.disabled = false;
+                elements.playBtn.disabled = true;
+
+            } catch (err) {
+                elements.statusText.textContent = 'Status: Error accessing microphone. Check permissions.';
+                console.error('Error accessing microphone:', err);
+                elements.startBtn.disabled = false;
+                elements.stopBtn.disabled = true;
+                elements.playBtn.disabled = true;
+                // If stream was partially acquired, stop tracks
+                if (state.stream) state.stream.getTracks().forEach(track => track.stop());
+            }
+        }
+
+        function stopRecording(id) {
+            const state = recorders[id];
+            const elements = getElements(id);
+            if (state && state.mediaRecorder && state.mediaRecorder.state !== 'inactive') {
+                state.mediaRecorder.stop();
+                elements.stopBtn.disabled = true;
+                elements.statusText.textContent = 'Status: Processing recording...';
+            }
+        }
+
+        function playRecording(id) {
+            const state = recorders[id];
+            const elements = getElements(id);
+            if (state && state.audioPlayer) {
+                state.audioPlayer.play();
+                elements.statusText.textContent = 'Status: Playing recording...';
+                state.audioPlayer.onended = () => {
+                    elements.statusText.textContent = 'Status: Recording ready.';
+                };
+            }
+        }
+
+        // Initialize button states on load
+        document.addEventListener('DOMContentLoaded', () => {
+            for (let i = 1; i <= 4; i++) {
+                const elements = getElements(i);
+                elements.stopBtn.disabled = true;
+                elements.playBtn.disabled = true;
+            }
+        });
+    </script>
+
+</body>
+</html>

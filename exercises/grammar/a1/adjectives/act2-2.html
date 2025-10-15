@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order of Adjectives Challenge</title>
+    <style>
+        /* Base Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #8A2BE2; /* BlueViolet */
+            text-align: center;
+            border-bottom: 2px solid #E0B0FF;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #007bff;
+            border-left: 5px solid #007bff;
+            padding-left: 10px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Lesson Block */
+        .lesson-block {
+            background-color: #f0f8ff; /* AliceBlue */
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #cceeff;
+            margin-bottom: 30px;
+        }
+
+        .lesson-block table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .lesson-block th, .lesson-block td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .lesson-block th {
+            background-color: #add8e6; /* LightBlue */
+            color: #0056b3;
+        }
+
+        .lesson-block td:first-child {
+            font-weight: bold;
+        }
+
+        /* Exercise Styles */
+        .exercise-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #ffffff;
+        }
+
+        .question-group {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px dashed #ced4da;
+            border-radius: 6px;
+        }
+
+        .sentence {
+            font-size: 1.1em;
+            font-style: italic;
+            margin: 10px 0;
+            padding: 5px;
+            border-radius: 4px;
+        }
+
+        .feedback-message {
+            margin-top: 10px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+
+        .correct {
+            color: #28a745; /* Green */
+        }
+
+        .incorrect {
+            color: #dc3545; /* Red */
+        }
+
+        .check-button {
+            padding: 10px 20px;
+            background-color: #ffc107; /* Yellow */
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px #e0a800;
+        }
+
+        .check-button:active {
+            box-shadow: none;
+            transform: translateY(2px);
+        }
+
+        /* Exercise B (Drag and Drop Specific) */
+        .adjective-bank-b {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            min-height: 60px;
+            margin-top: 10px;
+        }
+
+        .adj-tile {
+            padding: 8px 15px;
+            margin: 5px;
+            background-color: #ADD8E6; /* Light Blue */
+            border: 1px solid #007bff;
+            border-radius: 20px;
+            cursor: grab;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        
+        .adj-tile:hover {
+            background-color: #87CEEB; /* Sky Blue */
+        }
+
+        .sentence-structure {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+
+        .slot {
+            display: inline-block;
+            min-width: 120px;
+            min-height: 40px;
+            margin: 0 10px;
+            border: 2px dashed #007bff;
+            border-radius: 8px;
+            background-color: #e9f5ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        .slot.drag-over {
+            border-color: #28a745;
+            background-color: #d4edda;
+        }
+
+        .adj-tile.placed {
+            margin: 0;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <h1>Mastering the Order of Adjectives ✍️</h1>
+        <p>In English, we don't place adjectives randomly! When you use three or more adjectives before a noun, they must follow a specific, predictable sequence. Let's learn the rule!</p>
+
+        <hr>
+        <h2>The Rule: OSASCOMP (Opinion, Size, Age, Shape, Color...)</h2>
+
+        <div class="lesson-block">
+            <p>The most common and important categories for ordering adjectives are listed below. You generally move from subjective (what you think) to objective (what is physically true).</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Definition</th>
+                        <th>Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1. Opinion</td>
+                        <td>What you think of it (subjective judgment).</td>
+                        <td>beautiful, nice, great, terrible, happy, kind, lovely</td>
+                    </tr>
+                    <tr>
+                        <td>2. Size</td>
+                        <td>How big it is.</td>
+                        <td>large, small, big, tall, short, little, long</td>
+                    </tr>
+                    <tr>
+                        <td>3. Age</td>
+                        <td>How old it is.</td>
+                        <td>old, new, modern, young</td>
+                    </tr>
+                    <tr>
+                        <td>4. Shape/Physical</td>
+                        <td>Physical state, texture, or shape.</td>
+                        <td>curly, straight, clean, dirty, messy</td>
+                    </tr>
+                    <tr>
+                        <td>5. Color</td>
+                        <td>What color it is.</td>
+                        <td>pink, brown, blond, black, blue, white, red, yellow</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Correct Example:</strong> A <mark>beautiful</mark> (Opinion), <mark>large</mark> (Size), <mark>old</mark> (Age) house.</p>
+        </div>
+
+        <hr>
+
+        <!-- Exercise A: Identification (10 Questions) -->
+        <div id="exercise-a" class="exercise-section">
+            <h2>Exercise A: Identifying the Order (10 Questions)</h2>
+            <p>Read the sentences below. Decide if the adjectives are in the **Correct** or **Incorrect** standard order.</p>
+
+            <div class="question-group" data-correct-answer="correct">
+                <p>1. She bought a nice, young, energetic puppy.</p>
+                <input type="radio" name="q1" value="correct"> Correct Order<br>
+                <input type="radio" name="q1" value="incorrect"> Incorrect Order<br>
+                <div id="feedback1" class="feedback-message"></div>
+            </div>
+
+            <div class="question-group" data-correct-answer="incorrect">
+                <p>2. We saw a colorful, terrible, happy painting.</p>
+                <input type="radio" name="q2" value="correct"> Correct Order<br>
+                <input type="radio" name="q2" value="incorrect"> Incorrect Order<br>
+                <div id="feedback2" class="feedback-message"></div>
+            </div>
+
+            <div class="question-group" data-correct-answer="incorrect">
+                <p>3. They found a new, excellent, big house.</p>
+                <input type="radio" name="q3" value="correct"> Correct Order<br>
+                <input type="radio" name="q3" value="incorrect"> Incorrect Order<br>
+                <div id="feedback3" class="feedback-message"></div>
+            </div>
+
+            <div class="question-group" data-correct-answer="incorrect">
+                <p>4. He drove a black, modern, small car.</p>
+                <input type="radio" name="q4" value="correct"> Correct Order<br>
+                <input type="radio" name="q4" value="incorrect"> Incorrect Order<br>
+                <div id="feedback4" class="feedback-message"></div>
+            </div>
+
+            <div class="question-group" data-correct-answer="correct">
+                <p>5. I met a talkative, intelligent, shy teacher.</p>
+                <input type="radio" name="q5" value="correct"> Correct Order<br>
+                <input type="radio" name="q5" value="incorrect"> Incorrect Order<br>
+                <div id="feedback5" class="feedback-message"></div>
+            </div>
+
+            <div class="question-group" data-correct-answer="incorrect">
+                <p>6. She wore a yellow, little, lovely dress.</p>
+                <input type="radio" name="q6" value="correct"> Correct Order<br>
+                <input type="radio" name="q6" value="incorrect"> Incorrect Order<br>
+                <div id="feedback6" class="feedback-message"></div>
+            </div>
+
+            <div class="question-group" data-correct-answer="correct">
+                <p>7. This is a great, big, brown dog.</p>
+                <input type="radio" name="q7" value="correct"> Correct Order<br>
+                <input type="radio" name="q7" value="incorrect"> Incorrect Order<br>
+                <div id="feedback7" class="feedback-message"></div>
+            </div>
+
+            <div class="question-group" data-correct-answer="correct">
+                <p>8. They lived in a comfortable, large, old home.</p>
+                <input type="radio" name="q8" value="correct"> Correct Order<br>
+                <input type="radio" name="q8" value="incorrect"> Incorrect Order<br>
+                <div id="feedback8" class="feedback-message"></div>
+            </div>
+
+            <div class="question-group" data-correct-answer="correct">
+                <p>9. We saw a brave, short, blond man.</p>
+                <input type="radio" name="q9" value="correct"> Correct Order<br>
+                <input type="radio" name="q9" value="incorrect"> Incorrect Order<br>
+                <div id="feedback9" class="feedback-message"></div>
+            </div>
+
+            <div class="question-group" data-correct-answer="correct">
+                <p>10. I bought an excellent, small, new gadget.</p>
+                <input type="radio" name="q10" value="correct"> Correct Order<br>
+                <input type="radio" name="q10" value="incorrect"> Incorrect Order<br>
+                <div id="feedback10" class="feedback-message"></div>
+            </div>
+
+            <button class="check-button" onclick="checkExerciseA()">Check Exercise A</button>
+        </div>
+
+        <hr>
+
+        <!-- Exercise B: Reordering (10 Questions) -->
+        <div id="exercise-b" class="exercise-section">
+            <h2>Exercise B: Reorder the Adjectives (10 Questions)</h2>
+            <p>Drag the adjective tiles from the bank into the empty slots in the correct order for each sentence.</p>
+
+            <!-- Question 1 (Opinion, Size, Shape/Physical) -->
+            <div class="question-group">
+                <p>1. We rented a</p>
+                <div class="sentence-structure" data-correct-order="great,small,clean">
+                    <span class="slot" data-slot-id="1-1"></span>
+                    <span class="slot" data-slot-id="1-2"></span>
+                    <span class="slot" data-slot-id="1-3"></span>
+                    <span>room.</span>
+                </div>
+                <div class="adjective-bank-b" id="bank-1">
+                    <div class="adj-tile" draggable="true" data-word="great" data-q="1">great</div>
+                    <div class="adj-tile" draggable="true" data-word="clean" data-q="1">clean</div>
+                    <div class="adj-tile" draggable="true" data-word="small" data-q="1">small</div>
+                </div>
+                <div id="feedback11" class="feedback-message"></div>
+            </div>
+
+            <!-- Question 2 (Opinion, Age, Shape/Physical) -->
+            <div class="question-group">
+                <p>2. My neighbor has a</p>
+                <div class="sentence-structure" data-correct-order="friendly,young,curly">
+                    <span class="slot" data-slot-id="2-1"></span>
+                    <span class="slot" data-slot-id="2-2"></span>
+                    <span class="slot" data-slot-id="2-3"></span>
+                    <span>dog.</span>
+                </div>
+                <div class="adjective-bank-b" id="bank-2">
+                    <div class="adj-tile" draggable="true" data-word="young" data-q="2">young</div>
+                    <div class="adj-tile" draggable="true" data-word="curly" data-q="2">curly</div>
+                    <div class="adj-tile" draggable="true" data-word="friendly" data-q="2">friendly</div>
+                </div>
+                <div id="feedback12" class="feedback-message"></div>
+            </div>
+
+            <!-- Question 3 (Opinion, Size, Color) -->
+            <div class="question-group">
+                <p>3. I saw a</p>
+                <div class="sentence-structure" data-correct-order="curious,short,black">
+                    <span class="slot" data-slot-id="3-1"></span>
+                    <span class="slot" data-slot-id="3-2"></span>
+                    <span class="slot" data-slot-id="3-3"></span>
+                    <span>cat today.</span>
+                </div>
+                <div class="adjective-bank-b" id="bank-3">
+                    <div class="adj-tile" draggable="true" data-word="black" data-q="3">black</div>
+                    <div class="adj-tile" draggable="true" data-word="short" data-q="3">short</div>
+                    <div class="adj-tile" draggable="true" data-word="curious" data-q="3">curious</div>
+                </div>
+                <div id="feedback13" class="feedback-message"></div>
+            </div>
+
+            <!-- Question 4 (Size, Age, Color) -->
+            <div class="question-group">
+                <p>4. They bought a</p>
+                <div class="sentence-structure" data-correct-order="big,modern,red">
+                    <span class="slot" data-slot-id="4-1"></span>
+                    <span class="slot" data-slot-id="4-2"></span>
+                    <span class="slot" data-slot-id="4-3"></span>
+                    <span>car.</span>
+                </div>
+                <div class="adjective-bank-b" id="bank-4">
+                    <div class="adj-tile" draggable="true" data-word="modern" data-q="4">modern</div>
+                    <div class="adj-tile" draggable="true" data-word="big" data-q="4">big</div>
+                    <div class="adj-tile" draggable="true" data-word="red" data-q="4">red</div>
+                </div>
+                <div id="feedback14" class="feedback-message"></div>
+            </div>
+
+            <!-- Question 5 (Opinion, Size, Shape/Physical) -->
+            <div class="question-group">
+                <p>5. We adopted a</p>
+                <div class="sentence-structure" data-correct-order="lovely,small,energetic">
+                    <span class="slot" data-slot-id="5-1"></span>
+                    <span class="slot" data-slot-id="5-2"></span>
+                    <span class="slot" data-slot-id="5-3"></span>
+                    <span>puppy.</span>
+                </div>
+                <div class="adjective-bank-b" id="bank-5">
+                    <div class="adj-tile" draggable="true" data-word="lovely" data-q="5">lovely</div>
+                    <div class="adj-tile" draggable="true" data-word="energetic" data-q="5">energetic</div>
+                    <div class="adj-tile" draggable="true" data-word="small" data-q="5">small</div>
+                </div>
+                <div id="feedback15" class="feedback-message"></div>
+            </div>
+            
+            <!-- Question 6 (Opinion, Opinion, Opinion) -->
+            <div class="question-group">
+                <p>6. It was a</p>
+                <div class="sentence-structure" data-correct-order="terrible,serious,honest">
+                    <span class="slot" data-slot-id="6-1"></span>
+                    <span class="slot" data-slot-id="6-2"></span>
+                    <span class="slot" data-slot-id="6-3"></span>
+                    <span>argument.</span>
+                </div>
+                <div class="adjective-bank-b" id="bank-6">
+                    <div class="adj-tile" draggable="true" data-word="terrible" data-q="6">terrible</div>
+                    <div class="adj-tile" draggable="true" data-word="serious" data-q="6">serious</div>
+                    <div class="adj-tile" draggable="true" data-word="honest" data-q="6">honest</div>
+                </div>
+                <div id="feedback16" class="feedback-message"></div>
+            </div>
+
+            <!-- Question 7 (Size, Age, Color) -->
+            <div class="question-group">
+                <p>7. I found a</p>
+                <div class="sentence-structure" data-correct-order="little,old,blue">
+                    <span class="slot" data-slot-id="7-1"></span>
+                    <span class="slot" data-slot-id="7-2"></span>
+                    <span class="slot" data-slot-id="7-3"></span>
+                    <span>coin.</span>
+                </div>
+                <div class="adjective-bank-b" id="bank-7">
+                    <div class="adj-tile" draggable="true" data-word="old" data-q="7">old</div>
+                    <div class="adj-tile" draggable="true" data-word="little" data-q="7">little</div>
+                    <div class="adj-tile" draggable="true" data-word="blue" data-q="7">blue</div>
+                </div>
+                <div id="feedback17" class="feedback-message"></div>
+            </div>
+
+            <!-- Question 8 (Opinion, Opinion, Opinion) -->
+            <div class="question-group">
+                <p>8. They hired an</p>
+                <div class="sentence-structure" data-correct-order="intelligent,responsible,helpful">
+                    <span class="slot" data-slot-id="8-1"></span>
+                    <span class="slot" data-slot-id="8-2"></span>
+                    <span class="slot" data-slot-id="8-3"></span>
+                    <span>assistant.</span>
+                </div>
+                <div class="adjective-bank-b" id="bank-8">
+                    <div class="adj-tile" draggable="true" data-word="responsible" data-q="8">responsible</div>
+                    <div class="adj-tile" draggable="true" data-word="helpful" data-q="8">helpful</div>
+                    <div class="adj-tile" draggable="true" data-word="intelligent" data-q="8">intelligent</div>
+                </div>
+                <div id="feedback18" class="feedback-message"></div>
+            </div>
+
+            <!-- Question 9 (Opinion, Size, Color) -->
+            <div class="question-group">
+                <p>9. He owns a</p>
+                <div class="sentence-structure" data-correct-order="beautiful,long,white">
+                    <span class="slot" data-slot-id="9-1"></span>
+                    <span class="slot" data-slot-id="9-2"></span>
+                    <span class="slot" data-slot-id="9-3"></span>
+                    <span>yacht.</span>
+                </div>
+                <div class="adjective-bank-b" id="bank-9">
+                    <div class="adj-tile" draggable="true" data-word="long" data-q="9">long</div>
+                    <div class="adj-tile" draggable="true" data-word="white" data-q="9">white</div>
+                    <div class="adj-tile" draggable="true" data-word="beautiful" data-q="9">beautiful</div>
+                </div>
+                <div id="feedback19" class="feedback-message"></div>
+            </div>
+
+            <!-- Question 10 (Opinion, Size, Color) -->
+            <div class="question-group">
+                <p>10. That is an</p>
+                <div class="sentence-structure" data-correct-order="excellent,big,colorful">
+                    <span class="slot" data-slot-id="10-1"></span>
+                    <span class="slot" data-slot-id="10-2"></span>
+                    <span class="slot" data-slot-id="10-3"></span>
+                    <span>painting.</span>
+                </div>
+                <div class="adjective-bank-b" id="bank-10">
+                    <div class="adj-tile" draggable="true" data-word="colorful" data-q="10">colorful</div>
+                    <div class="adj-tile" draggable="true" data-word="big" data-q="10">big</div>
+                    <div class="adj-tile" draggable="true" data-word="excellent" data-q="10">excellent</div>
+                </div>
+                <div id="feedback20" class="feedback-message"></div>
+            </div>
+
+            <button class="check-button" onclick="checkExerciseB()">Check Exercise B</button>
+        </div>
+    </main>
+
+    <script>
+        // --- JavaScript Logic ---
+
+        // Helper function for drag-and-drop
+        function setupDragAndDrop() {
+            let draggedItem = null;
+
+            document.querySelectorAll('.adj-tile').forEach(tile => {
+                tile.addEventListener('dragstart', (e) => {
+                    draggedItem = e.target;
+                    // Allow movement between slots/banks
+                    if (draggedItem.parentElement.classList.contains('slot')) {
+                        draggedItem.parentElement.innerHTML = ''; // Clear slot when starting drag
+                        draggedItem.classList.remove('placed');
+                    }
+                    setTimeout(() => e.target.style.opacity = '0.5', 0);
+                });
+
+                tile.addEventListener('dragend', (e) => {
+                    e.target.style.opacity = '1';
+                    draggedItem = null;
+                });
+            });
+
+            document.querySelectorAll('.slot, .adjective-bank-b').forEach(zone => {
+                zone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    zone.classList.add('drag-over');
+                });
+
+                zone.addEventListener('dragleave', () => {
+                    zone.classList.remove('drag-over');
+                });
+
+                zone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    zone.classList.remove('drag-over');
+
+                    if (draggedItem && (zone.classList.contains('slot') || zone.classList.contains('adjective-bank-b'))) {
+                        
+                        // Prevent dropping a tile into a slot that already has one
+                        if (zone.classList.contains('slot') && zone.children.length === 0) {
+                            zone.appendChild(draggedItem);
+                            draggedItem.classList.add('placed');
+                        } else if (zone.classList.contains('adjective-bank-b')) {
+                            // Drop back into the bank
+                            zone.appendChild(draggedItem);
+                            draggedItem.classList.remove('placed');
+                        }
+                    }
+                });
+            });
+        }
+
+        // --- Exercise A: Identification Checker ---
+        function checkExerciseA() {
+            const questions = [
+                // Q1-3 updated, Q4-10 new
+                { id: 1, correct: 'correct', explanation: "Correct! Opinion (nice) comes before Age (young). Energetic is a physical state." },
+                { id: 2, correct: 'incorrect', explanation: "Incorrect! Opinion (terrible/happy) should come first. The correct pattern is Opinion, Opinion, Color." },
+                { id: 3, correct: 'incorrect', explanation: "Incorrect! Opinion (excellent) must come first. The correct pattern is Opinion, Size, Age." },
+                { id: 4, correct: 'incorrect', explanation: "Incorrect! Size (small) should precede Age (modern) and Color (black). The correct pattern is Size, Age, Color." },
+                { id: 5, correct: 'correct', explanation: "Correct! These are all Opinion/Personality traits and can generally be grouped together." },
+                { id: 6, correct: 'incorrect', explanation: "Incorrect! Opinion (lovely) must come first. The correct pattern is Opinion, Size, Color." },
+                { id: 7, correct: 'correct', explanation: "Correct! Opinion (great) comes first, followed by Size (big), and then Color (brown)." },
+                { id: 8, correct: 'correct', explanation: "Correct! Opinion (comfortable) comes first, followed by Size (large), and then Age (old)." },
+                { id: 9, correct: 'correct', explanation: "Correct! Opinion (brave) comes first, followed by Size (short), and then Color (blond)." },
+                { id: 10, correct: 'correct', explanation: "Correct! Opinion (excellent) comes first, followed by Size (small), and then Age (new)." }
+            ];
+
+            questions.forEach(q => {
+                const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
+                const feedbackEl = document.getElementById(`feedback${q.id}`);
+
+                feedbackEl.textContent = '';
+                feedbackEl.classList.remove('correct', 'incorrect');
+
+                if (selected) {
+                    if (selected.value === q.correct) {
+                        feedbackEl.textContent = `Correct! 🎉 ${q.explanation}`;
+                        feedbackEl.classList.add('correct');
+                    } else {
+                        feedbackEl.textContent = `Not quite. 😔 ${q.explanation}`;
+                        feedbackEl.classList.add('incorrect');
+                    }
+                } else {
+                    feedbackEl.textContent = "Please select an answer.";
+                    feedbackEl.classList.add('incorrect');
+                }
+            });
+        }
+
+        // --- Exercise B: Reordering Checker ---
+        function checkExerciseB() {
+            const groups = document.querySelectorAll('#exercise-b .sentence-structure');
+            let overallCorrect = 0;
+            const totalGroups = groups.length;
+
+            groups.forEach((group, index) => {
+                // Feedback elements for Exercise B start at index 11
+                const feedbackIndex = index + 11; 
+                
+                const correctOrderStr = group.dataset.correctOrder;
+                const correctOrderArray = correctOrderStr.split(',');
+                const slots = group.querySelectorAll('.slot');
+                const feedbackEl = document.getElementById(`feedback${feedbackIndex}`); 
+
+                feedbackEl.textContent = '';
+                feedbackEl.classList.remove('correct', 'incorrect');
+                let groupCorrect = true;
+
+                for (let i = 0; i < slots.length; i++) {
+                    const tile = slots[i].querySelector('.adj-tile');
+                    const requiredWord = correctOrderArray[i];
+
+                    if (!tile || tile.dataset.word !== requiredWord) {
+                        groupCorrect = false;
+                        break;
+                    }
+                }
+
+                if (groupCorrect) {
+                    feedbackEl.textContent = "Awesome! That sentence is perfectly ordered. ✅";
+                    feedbackEl.classList.add('correct');
+                    overallCorrect++;
+                } else {
+                    feedbackEl.textContent = `Keep trying! The correct order is: ${correctOrderArray.join(', ')}.`;
+                    feedbackEl.classList.add('incorrect');
+                }
+            });
+
+            if (overallCorrect === totalGroups) {
+                // Using a custom message in the feedback area instead of alert()
+                document.getElementById('feedback').textContent = "CONGRATULATIONS! You aced both Exercise A and B!";
+                document.getElementById('feedback').style.color = '#28a745';
+            } else {
+                 document.getElementById('feedback').textContent = ""; // Clear main feedback if not all correct
+            }
+        }
+
+        // Initialize drag and drop when the page loads
+        document.addEventListener('DOMContentLoaded', setupDragAndDrop);
+    </script>
+</body>
+</html>
