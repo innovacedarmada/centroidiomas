@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Can / Can't Practice — A1 Story</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial; background:#f7fafc; color:#0f172a; padding:20px;}
+  .container{max-width:820px;margin:0 auto}
+  .card{background:white;border-radius:12px;padding:18px;margin:16px 0;box-shadow:0 6px 18px rgba(2,6,23,.08)}
+  h1{margin-top:0}
+  .story{line-height:1.6;font-size:1rem;margin-top:10px}
+  .instructions{background:#eef2ff;border-left:4px solid #6366f1;padding:10px;border-radius:8px}
+  .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:none;background:#4f46e5;color:white;font-weight:700;cursor:pointer;margin:6px 4px}
+  .btn-green{background:#059669}
+  .btn-red{background:#dc2626}
+  .result{margin-top:10px;font-weight:700}
+  select{padding:6px;border-radius:6px;border:1px solid #cbd5e1;margin:0 4px}
+  .timer{font-weight:bold;font-size:1.2rem;color:#dc2626;margin-top:10px}
+  audio{margin-top:10px;width:100%}
+  .score-box{background:#ecfdf5;border:1px solid #10b981;padding:10px;border-radius:8px;margin-top:12px}
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Can / Can't — A1 Practice</h1>
+
+    <!-- Activity 1 -->
+    <section class="card">
+      <h2>Activity 1 — Read</h2>
+      <div class="instructions">
+        <strong>Instructions:</strong> Read the story carefully. Then go to Activity 2.
+      </div>
+      <article class="story">
+        <strong>Title: My Friendly Dog</strong>
+        <p>
+        My name is Ana. I have a small dog named Max. Every morning we go to the park. Max likes to run and play with a red ball. He is friendly and meets other dogs. Sometimes Max sits by the pond and watches the ducks. I bring a sandwich and drink. We sit under a big tree and read a book together. People smile when they see Max. He sleeps near my bed at night and gives me a warm paw. He makes me happy every single day. We have fun and learn together.
+        </p>
+      </article>
+    </section>
+
+    <!-- Activity 2 -->
+    <section class="card">
+      <h2>Activity 2 — Choose <em>can</em> or <em>can't</em></h2>
+      <div class="instructions">
+        <strong>Instructions:</strong> Complete the story with <em>can</em> or <em>can't</em>. Then click <em>Check Answers</em>.
+      </div>
+      <article class="story" id="fillStory">
+        <p>
+          Ana has a small dog, Max. Every morning we 
+          <select id="b1"><option value="">---</option><option>can</option><option>can't</option></select> 
+          walk to the park. Max 
+          <select id="b2"><option value="">---</option><option>can</option><option>can't</option></select> 
+          run and play with a red ball. He 
+          <select id="b3"><option value="">---</option><option>can</option><option>can't</option></select> 
+          meet other dogs. Sometimes he 
+          <select id="b4"><option value="">---</option><option>can</option><option>can't</option></select> 
+          sit by the pond. Max 
+          <select id="b5"><option value="">---</option><option>can</option><option>can't</option></select> 
+          swim in the pond, so he 
+          <select id="b6"><option value="">---</option><option>can</option><option>can't</option></select> 
+          swim. At night he 
+          <select id="b7"><option value="">---</option><option>can</option><option>can't</option></select> 
+          sleep near Ana's bed.
+        </p>
+      </article>
+      <div>
+        <button class="btn" id="checkBtn">Check Answers</button>
+        <button class="btn btn-green" id="showBtn">Show Answers</button>
+        <div id="feedback" class="result"></div>
+      </div>
+    </section>
+
+    <!-- Activity 3 -->
+    <section class="card">
+      <h2>Activity 3 — Speak & Pronunciation Score</h2>
+      <div class="instructions">
+        <strong>Instructions:</strong> Read your completed story aloud. Your speech will be recorded and transcribed. You will get a pronunciation score based on how closely your words match the target story.
+      </div>
+      <div>
+        <button class="btn" id="startSpeaking">🎤 Start Speaking</button>
+        <button class="btn btn-red" id="stopSpeaking">⏹️ Stop</button>
+        <div id="timer" class="timer"></div>
+        <audio id="playback" controls></audio>
+        <div id="speechText" class="result"></div>
+        <div id="scoreBox" class="score-box" style="display:none;"></div>
+      </div>
+    </section>
+  </div>
+
+<script>
+  // --- Correct answers for Activity 2 ---
+  const answers = {b1:"can",b2:"can",b3:"can",b4:"can",b5:"can't",b6:"can't",b7:"can"};
+
+  function checkAnswers(){
+    let total = Object.keys(answers).length, correct = 0;
+    for(const id in answers){
+      const sel = document.getElementById(id);
+      if(sel.value === answers[id]){ correct++; sel.style.borderColor="#10b981";}
+      else{ sel.style.borderColor="#ef4444"; }
+    }
+    document.getElementById("feedback").innerHTML = 
+      `You got <strong>${correct}</strong> out of <strong>${total}</strong> correct.`;
+  }
+  function showAnswers(){
+    for(const id in answers){
+      const sel=document.getElementById(id);
+      sel.value=answers[id]; sel.style.borderColor="#10b981";
+    }
+    document.getElementById("feedback").innerHTML="Answers shown.";
+  }
+  document.getElementById("checkBtn").addEventListener("click", checkAnswers);
+  document.getElementById("showBtn").addEventListener("click", showAnswers);
+
+  // --- Speech + Recording + Pronunciation Scoring ---
+  let timer, timeLeft=45, mediaRecorder, audioChunks=[];
+  let recognition; 
+  const targetText = "Ana has a small dog, Max. Every morning we can walk to the park. Max can run and play with a red ball. He can meet other dogs. Sometimes he can sit by the pond. Max can't swim in the pond, so he can't swim. At night he can sleep near Ana's bed.";
+
+  async function startSpeaking(){
+    // reset timer
+    clearInterval(timer); timeLeft=45;
+    document.getElementById("timer").innerText="⏱️ 45 seconds left";
+    timer=setInterval(()=>{
+      timeLeft--; document.getElementById("timer").innerText=`⏱️ ${timeLeft} seconds left`;
+      if(timeLeft<=0){ stopSpeaking(); }
+    },1000);
+
+    // start audio recording
+    try{
+      const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+      mediaRecorder=new MediaRecorder(stream);
+      audioChunks=[];
+      mediaRecorder.ondataavailable=e=>{ if(e.data.size>0) audioChunks.push(e.data); };
+      mediaRecorder.onstop=()=>{
+        const blob=new Blob(audioChunks,{type:'audio/webm'});
+        document.getElementById("playback").src=URL.createObjectURL(blob);
+      };
+      mediaRecorder.start();
+    }catch(err){ alert("Microphone access denied or not available."); }
+
+    // start speech recognition
+    window.SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+    if(!window.SpeechRecognition){ alert("SpeechRecognition not supported in this browser."); return; }
+    recognition=new SpeechRecognition();
+    recognition.lang="en-US";
+    recognition.interimResults=false;
+    recognition.continuous=true;
+    let transcript="";
+    recognition.onresult=(e)=>{
+      transcript += Array.from(e.results).map(r=>r[0].transcript).join(" ");
+      document.getElementById("speechText").innerHTML="<strong>You said:</strong> "+transcript;
+    };
+    recognition.start();
+  }
+
+  function stopSpeaking(){
+    clearInterval(timer);
+    document.getElementById("timer").innerText="⏹️ Speaking stopped.";
+    if(mediaRecorder && mediaRecorder.state!=="inactive"){ mediaRecorder.stop(); }
+    if(recognition){ recognition.stop(); recognition.onend=()=>scorePronunciation(); }
+  }
+
+  function scorePronunciation(){
+    const spoken=document.getElementById("speechText").innerText.replace("You said:","").toLowerCase();
+    const target=targetText.toLowerCase();
+    let spokenWords=spoken.split(/\s+/), targetWords=target.split(/\s+/);
+    let matches=0;
+    spokenWords.forEach(w=>{ if(targetWords.includes(w)) matches++; });
+    let score=Math.round((matches/targetWords.length)*100);
+    document.getElementById("scoreBox").style.display="block";
+    document.getElementById("scoreBox").innerHTML=`Pronunciation Score: <strong>${score}%</strong><br>(Matched ${matches} of ${targetWords.length} words)`;
+  }
+
+  document.getElementById("startSpeaking").addEventListener("click", startSpeaking);
+  document.getElementById("stopSpeaking").addEventListener("click", stopSpeaking);
+</script>
+</body>
+</html>
+

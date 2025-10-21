@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demonstratives: Drag & Drop! 🎯</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+            padding-top: 20px;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .instructions {
+            margin-bottom: 25px;
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        /* Container for the whole quiz */
+        .quiz-container {
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto 40px;
+            text-align: left;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- Review Section Styling --- */
+        #review-rules {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #3498db;
+            border-radius: 8px;
+            background-color: #eaf6ff;
+        }
+
+        .rule-box {
+            display: inline-block;
+            width: 48%;
+            padding: 10px;
+            margin-right: 1%;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            vertical-align: top;
+            text-align: center;
+        }
+
+        .rule-box strong {
+            display: block;
+            font-size: 1.1em;
+            color: #2980b9;
+            margin-bottom: 5px;
+        }
+        
+        /* --- Scoring System Styling --- */
+        #score-board {
+            text-align: right;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2ecc71;
+            margin-bottom: 15px;
+        }
+        
+        /* Drag Items Container - Sticky */
+        #drag-words-container {
+            position: sticky; 
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 2px dashed #3498db;
+            border-radius: 10px;
+            background-color: #ecf0f1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .drag-word {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px 10px;
+            border-radius: 25px;
+            cursor: grab;
+            font-weight: bold;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s, transform 0.2s;
+            user-select: none;
+        }
+
+        .drag-word:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .dragging {
+            opacity: 0.4;
+        }
+
+        /* Drag & Drop Sentences */
+        .sentence {
+            padding: 15px 0;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        .context {
+            font-size: 0.9em;
+            color: #95a5a6;
+            flex-shrink: 0;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        
+        .drop-zone {
+            display: inline-block;
+            min-width: 100px;
+            min-height: 30px;
+            border: 2px solid #bdc3c7;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin: 0 5px;
+            padding: 5px;
+            text-align: center;
+            line-height: 28px;
+            vertical-align: middle;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .drop-zone.drag-over {
+            background-color: #d5dbdb;
+            border-color: #3498db;
+        }
+
+        .drop-zone .drag-word {
+            margin: 0;
+            cursor: default;
+        }
+
+        /* Part 2: Identify the Mistake */
+        .mistake-exercise {
+            padding: 15px 0;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dotted #ccc;
+            align-items: flex-start;
+        }
+        
+        .mistake-question {
+            flex-grow: 1;
+            padding-right: 20px;
+            font-weight: bold;
+        }
+
+        .mistake-input {
+            width: 150px;
+            padding: 8px;
+            border: 2px solid #bdc3c7;
+            border-radius: 5px;
+            transition: border-color 0.2s;
+        }
+        
+        .mistake-input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .mistake-feedback {
+            width: 30px;
+            text-align: center;
+            line-height: 30px;
+            font-size: 1.2em;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        /* Button & Feedback */
+        #check-button {
+            background-color: #2ecc71;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 40px;
+            transition: background-color 0.2s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        #check-button:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        #feedback-overall {
+            margin-top: 20px;
+            font-size: 1.3em;
+            font-weight: bold;
+            min-height: 30px;
+        }
+
+        .correct-text {
+            color: #27ae60;
+        }
+
+        .incorrect-text {
+            color: #e74c3c;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Demonstratives: Drag & Drop! 🎯</h1>
+    
+    <div class="quiz-container">
+    
+        <h2>Review the Rules 🧠</h2>
+        <div id="review-rules">
+            <div class="rule-box" style="margin-bottom: 10px;">
+                <strong>NEAR (Close to you)</strong>
+                <p>Use **THIS** for **one** singular item.</p>
+                <p>Use **THESE** for **many** plural items.</p>
+            </div>
+            <div class="rule-box" style="margin-bottom: 10px;">
+                <strong>FAR (Not close to you)</strong>
+                <p>Use **THAT** for **one** singular item.</p>
+                <p>Use **THOSE** for **many** plural items.</p>
+            </div>
+        </div>
+        
+        <div id="score-board">
+            Current Score: <span id="current-score">0</span> / 20
+        </div>
+        
+        <h2>Part 1: Drag and Drop. 📝</h2>
+        
+        <p class="instructions">👉 **Drag** the correct demonstrative into the empty box (___). Use the context clues to help you! **The word box will scroll with you!**</p>
+
+        <div id="drag-words-container">
+            <div class="drag-word" draggable="true" id="drag-this">THIS</div>
+            <div class="drag-word" draggable="true" id="drag-that">THAT</div>
+            <div class="drag-word" draggable="true" id="drag-these">THESE</div>
+            <div class="drag-word" draggable="true" id="drag-those">THOSE</div>
+        </div>
+
+        <div id="part-1-exercises">
+            <div class="sentence" data-correct-answer="THIS">
+                <p>1. Jack: <span class="drop-zone" id="drop-1"></span> jacket is warm.</p>
+                <span class="context">(Jack is wearing a new jacket, **NEAR**) 🧥</span>
+            </div>
+            <div class="sentence" data-correct-answer="THAT">
+                <p>2. Jack: Is <span class="drop-zone" id="drop-2"></span> bus number 10?</p>
+                <span class="context">(He points to **one bus** down the street, **FAR**) 🚌</span>
+            </div>
+            <div class="sentence" data-correct-answer="THESE">
+                <p>3. Lucy: <span class="drop-zone" id="drop-3"></span> tickets are for the movie.</p>
+                <span class="context">(Lucy has **three tickets** in her hands, **NEAR**) 🎟️🎟️🎟️</span>
+            </div>
+            <div class="sentence" data-correct-answer="THESE">
+                <p>4. Lucy: <span class="drop-zone" id="drop-4"></span> plants need water.</p>
+                <span class="context">(Lucy looks at **two plants** on the shelf next to her, **NEAR**) 🌱🌱</span>
+            </div>
+            <div class="sentence" data-correct-answer="THAT">
+                <p>5. John: Can you see <span class="drop-zone" id="drop-5"></span> star?</p>
+                <span class="context">(John points to **one star** in the sky, **FAR**) ⭐</span>
+            </div>
+            <div class="sentence" data-correct-answer="THESE">
+                <p>6. John: <span class="drop-zone" id="drop-6"></span> markers are dry.</p>
+                <span class="context">(John shows **four markers** in his hand, **NEAR**) 🖍️🖍️🖍️🖍️</span>
+            </div>
+            <div class="sentence" data-correct-answer="THOSE">
+                <p>7. Mark: Are <span class="drop-zone" id="drop-7"></span> shoes expensive?</p>
+                <span class="context">(Mark and Fred look at **too many shoes** on the top shelf, **FAR**) 👟👟👟</span>
+            </div>
+            <div class="sentence" data-correct-answer="THIS">
+                <p>8. Freddy: <span class="drop-zone" id="drop-8"></span> notebook is mine.</p>
+                <span class="context">(Freddy touches **a notebook** on his desk, **NEAR**) 📓</span>
+            </div>
+             <div class="sentence" data-correct-answer="THOSE">
+                <p>9. Teacher: Please put away <span class="drop-zone" id="drop-9"></span> empty bottles over there.</p>
+                <span class="context">(She points to **several bottles**, **FAR**) 🗑️</span>
+            </div>
+            <div class="sentence" data-correct-answer="THAT">
+                <p>10. Ann: I really like <span class="drop-zone" id="drop-10"></span> sandwich you're holding.</p>
+                <span class="context">(Talking about **one sandwich** she isn't eating, **FAR**) 🥪</span>
+            </div>
+        </div>
+
+        ---
+
+        <h2>Part 2: Identify the Mistake and Correct. 🛠️</h2>
+
+        <p class="instructions">👉 Read the sentence. The demonstrative in **bold** is incorrect. In the box, type the **correct** demonstrative (**this, that, these, or those**) based on the context clue. ✍️</p>
+
+        <div id="part-2-exercises">
+            <div class="mistake-exercise" data-correct-answer="THIS">
+                <p class="mistake-question">1. (I have a coin in my hand, NEAR) **That** coin is very old.</p>
+                <input type="text" class="mistake-input" id="input-1" placeholder="Correct word...">
+                <span class="mistake-feedback" id="feedback-1"></span>
+            </div>
+            <div class="mistake-exercise" data-correct-answer="THOSE">
+                <p class="mistake-question">2. (He sees three birds flying high, FAR) Look at **these** birds!</p>
+                <input type="text" class="mistake-input" id="input-2" placeholder="Correct word...">
+                <span class="mistake-feedback" id="feedback-2"></span>
+            </div>
+            <div class="mistake-exercise" data-correct-answer="THESE">
+                <p class="mistake-question">3. (Maria is showing her paintings, NEAR) **Those** are my new paintings.</p>
+                <input type="text" class="mistake-input" id="input-3" placeholder="Correct word...">
+                <span class="mistake-feedback" id="feedback-3"></span>
+            </div>
+            <div class="mistake-exercise" data-correct-answer="THAT">
+                <p class="mistake-question">4. (Point to one car parked far away, FAR) **This** car is red.</p>
+                <input type="text" class="mistake-input" id="input-4" placeholder="Correct word...">
+                <span class="mistake-feedback" id="feedback-4"></span>
+            </div>
+            <div class="mistake-exercise" data-correct-answer="THIS">
+                <p class="mistake-question">5. (Touching a pen on the desk, NEAR) Is **that** your pen?</p>
+                <input type="text" class="mistake-input" id="input-5" placeholder="Correct word...">
+                <span class="mistake-feedback" id="feedback-5"></span>
+            </div>
+            <div class="mistake-exercise" data-correct-answer="THOSE">
+                <p class="mistake-question">6. (Looking at a group of students in another room, FAR) Are **these** students ready?</p>
+                <input type="text" class="mistake-input" id="input-6" placeholder="Correct word...">
+                <span class="mistake-feedback" id="feedback-6"></span>
+            </div>
+            <div class="mistake-exercise" data-correct-answer="THESE">
+                <p class="mistake-question">7. (You have two apples you want to share, NEAR) I'll give you one of **those** apples.</p>
+                <input type="text" class="mistake-input" id="input-7" placeholder="Correct word...">
+                <span class="mistake-feedback" id="feedback-7"></span>
+            </div>
+            <div class="mistake-exercise" data-correct-answer="THAT">
+                <p class="mistake-question">8. (Referring to a specific shop across the street, FAR) We need to go to **this** shop.</p>
+                <input type="text" class="mistake-input" id="input-8" placeholder="Correct word...">
+                <span class="mistake-feedback" id="feedback-8"></span>
+            </div>
+            <div class="mistake-exercise" data-correct-answer="THIS">
+                <p class="mistake-question">9. (Holding a single photo, NEAR) **These** photo is lovely.</p>
+                <input type="text" class="mistake-input" id="input-9" placeholder="Correct word...">
+                <span class="mistake-feedback" id="feedback-9"></span>
+            </div>
+            <div class="mistake-exercise" data-correct-answer="THOSE">
+                <p class="mistake-question">10. (Looking at the mountains far in the distance, FAR) **These** mountains are huge!</p>
+                <input type="text" class="mistake-input" id="input-10" placeholder="Correct word...">
+                <span class="mistake-feedback" id="feedback-10"></span>
+            </div>
+        </div>
+
+    </div>
+
+    <button id="check-button">Check All Answers! ✅</button>
+    <div id="feedback-overall"></div>
+    
+    <script>
+        // --- Part 1: Drag & Drop Logic ---
+        const draggableWords = document.querySelectorAll('.drag-word');
+        const dropZones = document.querySelectorAll('.drop-zone');
+        let draggedItem = null;
+
+        draggableWords.forEach(word => {
+            word.addEventListener('dragstart', (e) => {
+                draggedItem = e.target;
+                e.dataTransfer.setData('text/plain', draggedItem.id);
+                setTimeout(() => {
+                    draggedItem.classList.add('dragging');
+                }, 0);
+            });
+
+            word.addEventListener('dragend', () => {
+                draggedItem.classList.remove('dragging');
+                draggedItem = null;
+            });
+        });
+
+        dropZones.forEach(zone => {
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault(); 
+                zone.classList.add('drag-over');
+            });
+
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('drag-over');
+            });
+
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('drag-over');
+                
+                const data = e.dataTransfer.getData('text/plain');
+                const draggedElement = document.getElementById(data);
+                
+                // If the drop zone already has a word, return it to the word container
+                if (zone.children.length > 0) {
+                    const originalWord = zone.children[0];
+                    document.getElementById('drag-words-container').appendChild(originalWord);
+                }
+
+                zone.appendChild(draggedElement);
+            });
+        });
+        
+        // --- Part 2: Identify the Mistake Logic ---
+        const mistakeExercises = document.querySelectorAll('.mistake-exercise');
+
+        // --- Check Button Logic (Combines Part 1 and Part 2) ---
+        const checkButton = document.getElementById('check-button');
+        const feedbackDivOverall = document.getElementById('feedback-overall');
+        const scoreDisplay = document.getElementById('current-score');
+        const totalQuestions = dropZones.length + mistakeExercises.length; // 10 + 10 = 20
+
+        checkButton.addEventListener('click', () => {
+            let correctCount = 0;
+
+            // --- Check Part 1 (Drag & Drop) ---
+            dropZones.forEach(zone => {
+                const sentence = zone.closest('.sentence');
+                const correctAnswer = sentence.getAttribute('data-correct-answer');
+                let userAnswer = '';
+
+                if (zone.children.length > 0) {
+                    userAnswer = zone.children[0].textContent.toUpperCase();
+                }
+
+                if (userAnswer === correctAnswer) {
+                    zone.style.borderColor = '#2ecc71';
+                    zone.style.backgroundColor = '#e6fff0';
+                    correctCount++;
+                } else {
+                    zone.style.borderColor = '#e74c3c';
+                    zone.style.backgroundColor = '#ffeded';
+                }
+            });
+
+            // --- Check Part 2 (Identify the Mistake) ---
+            mistakeExercises.forEach((exercise) => {
+                const correctAnswer = exercise.getAttribute('data-correct-answer').toUpperCase();
+                const inputElement = exercise.querySelector('.mistake-input');
+                const feedbackElement = exercise.querySelector('.mistake-feedback');
+                
+                // Trim and convert user answer to uppercase for comparison
+                const userAnswer = inputElement.value.trim().toUpperCase();
+
+                // Check for empty input (don't count as correct)
+                if (userAnswer.length === 0) {
+                    inputElement.style.borderColor = '#bdc3c7'; // Neutral border
+                    feedbackElement.innerHTML = ''; // Clear feedback
+                } else if (userAnswer === correctAnswer) {
+                    inputElement.style.borderColor = '#2ecc71';
+                    feedbackElement.innerHTML = '✅';
+                    feedbackElement.classList.remove('incorrect-text');
+                    feedbackElement.classList.add('correct-text');
+                    correctCount++;
+                } else {
+                    inputElement.style.borderColor = '#e74c3c';
+                    feedbackElement.innerHTML = '❌';
+                    feedbackElement.classList.remove('correct-text');
+                    feedbackElement.classList.add('incorrect-text');
+                }
+            });
+
+            // --- Update Score Board ---
+            scoreDisplay.textContent = correctCount;
+
+            // --- Display Overall Feedback ---
+            if (correctCount === totalQuestions) {
+                feedbackDivOverall.innerHTML = `🎉 **FANTASTIC!** You got all ${totalQuestions} questions correct! You are a master of demonstratives! 🏆`;
+                feedbackDivOverall.className = 'correct-text';
+            } else {
+                feedbackDivOverall.innerHTML = `Keep practicing! You scored **${correctCount}** out of **${totalQuestions}**. Review the rules and try again! 🤔`;
+                feedbackDivOverall.className = 'incorrect-text';
+            }
+        });
+
+    </script>
+</body>
+</html>

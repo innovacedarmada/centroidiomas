@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Can / Can't – Interactive Exercises (A1)</title>
+  <style>
+    :root{
+      --bg:#f7fafc;--card:#ffffff;--ink:#1a202c;--muted:#4a5568;--accent:#2563eb;--good:#16a34a;--bad:#dc2626;--soft:#e5e7eb;
+    }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Helvetica,Arial,sans-serif;}
+    .wrap{max-width:980px;margin:24px auto;padding:0 16px 80px}
+    header{display:flex;align-items:center;gap:16px;margin:16px 0 8px}
+    header h1{font-size:clamp(20px,3.5vw,34px);margin:0}
+    header p{margin:0;color:var(--muted)}
+    .card{background:var(--card);border:1px solid var(--soft);border-radius:18px;box-shadow:0 6px 16px rgba(0,0,0,.06);padding:20px;margin:16px 0}
+    h2{margin:.2rem 0 1rem;font-size:clamp(18px,2.8vw,26px)}
+    .item{padding:10px 12px;border-radius:12px;border:1px dashed var(--soft);margin:.5rem 0;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .num{background:var(--soft);border-radius:10px;padding:4px 8px;font-weight:700;font-size:.9rem}
+    select, input[type="text"]{font-size:1rem;padding:8px 10px;border:1px solid var(--soft);border-radius:10px;background:#fff}
+    button{appearance:none;border:none;background:var(--accent);color:#fff;padding:10px 14px;border-radius:12px;font-weight:700;cursor:pointer}
+    button.ghost{background:#fff;color:var(--accent);border:1px solid var(--accent)}
+    .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+    .feedback{font-weight:700;margin-left:auto}
+    .good{color:var(--good)}
+    .bad{color:var(--bad)}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .score{font-weight:800}
+    .small{color:var(--muted);font-size:.95rem}
+    figure{margin:0;display:flex;align-items:center;gap:12px}
+    .pic{font-size:44px;line-height:1.1;border-radius:14px;border:1px solid var(--soft);background:#fff;padding:10px;display:inline-flex;align-items:center;justify-content:center;min-width:64px}
+    .prompt{font-weight:600}
+    details{margin-top:10px}
+    .footer{margin-top:20px;color:var(--muted);font-size:.9rem}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="pic" aria-hidden="true">🗣️</div>
+      <div>
+        <h1>Can / Can't – Interactive Exercises (A1)</h1>
+        <p class="small">Instructions: Choose or write the correct answers. Click <strong>Check answers</strong> to see your score. Pictures are included where stated.</p>
+      </div>
+      <div style="margin-left:auto" class="controls">
+        <button id="printBtn" title="Print this page">🖨️ Print</button>
+        <button class="ghost" id="resetAll">↺ Reset all</button>
+      </div>
+    </header>
+
+    <!-- Exercise 1 -->
+    <section class="card" id="ex1">
+      <h2>Exercise 1: Choose the correct option</h2>
+      <p class="small">Read each sentence and choose <em>can</em> or <em>can't</em>.</p>
+      <div class="item" data-answer="can't">
+        <span class="num">1</span>
+        <span>A fish</span>
+        <select aria-label="Q1">
+          <option value="">— choose —</option>
+          <option>can</option>
+          <option>can't</option>
+        </select>
+        <span>fly.</span>
+        <span class="feedback"></span>
+      </div>
+      <div class="item" data-answer="can">
+        <span class="num">2</span>
+        <span>A bird</span>
+        <select aria-label="Q2">
+          <option value="">— choose —</option>
+          <option>can</option>
+          <option>can't</option>
+        </select>
+        <span>fly.</span>
+        <span class="feedback"></span>
+      </div>
+      <div class="item" data-answer="can">
+        <span class="num">3</span>
+        <span>I am strong! I</span>
+        <select aria-label="Q3">
+          <option value="">— choose —</option>
+          <option>can</option>
+          <option>can't</option>
+        </select>
+        <span>lift this box.</span>
+        <span class="feedback"></span>
+      </div>
+      <div class="item" data-answer="can't">
+        <span class="num">4</span>
+        <span>He is tired. He</span>
+        <select aria-label="Q4">
+          <option value="">— choose —</option>
+          <option>can</option>
+          <option>can't</option>
+        </select>
+        <span>run fast.</span>
+        <span class="feedback"></span>
+      </div>
+      <div class="item" data-answer="can">
+        <span class="num">5</span>
+        <span>My grandmother is 85. She</span>
+        <select aria-label="Q5">
+          <option value="">— choose —</option>
+          <option>can</option>
+          <option>can't</option>
+        </select>
+        <span>drive a car.</span>
+        <span class="feedback"></span>
+      </div>
+      <div class="item" data-answer="can't">
+        <span class="num">6</span>
+        <span>A baby</span>
+        <select aria-label="Q6">
+          <option value="">— choose —</option>
+          <option>can</option>
+          <option>can't</option>
+        </select>
+        <span>speak.</span>
+        <span class="feedback"></span>
+      </div>
+      <div class="controls">
+        <button class="check" data-target="ex1">Check answers</button>
+        <span class="score" id="score1"></span>
+      </div>
+    </section>
+
+    <!-- Exercise 2 -->
+    <section class="card" id="ex2">
+      <h2>Exercise 2: Complete the sentences</h2>
+      <p class="small">Complete with <em>can</em> or <em>can't</em>.</p>
+      <div class="item" data-answer="can|can't">
+        <span class="num">1</span>
+        <span>A cat</span>
+        <select aria-label="E2-1a"><option value="">—</option><option>can</option><option>can't</option></select>
+        <span>climb a tree, but it</span>
+        <select aria-label="E2-1b"><option value="">—</option><option>can</option><option>can't</option></select>
+        <span>swim very well.</span>
+        <span class="feedback"></span>
+      </div>
+      <div class="item" data-answer="can|can't">
+        <span class="num">2</span>
+        <span>I</span>
+        <select aria-label="E2-2a"><option value="">—</option><option>can</option><option>can't</option></select>
+        <span>play the guitar, but I</span>
+        <select aria-label="E2-2b"><option value="">—</option><option>can</option><option>can't</option></select>
+        <span>sing.</span>
+        <span class="feedback"></span>
+      </div>
+      <div class="item" data-answer="can">
+        <span class="num">3</span>
+        <span>She is a great artist. She</span>
+        <select aria-label="E2-3a"><option value="">—</option><option>can</option><option>can't</option></select>
+        <span>draw beautiful pictures.</span>
+        <span class="feedback"></span>
+      </div>
+      <div class="item" data-answer="can't|can">
+        <span class="num">4</span>
+        <span>My dog</span>
+        <select aria-label="E2-4a"><option value="">—</option><option>can</option><option>can't</option></select>
+        <span>understand English, but it</span>
+        <select aria-label="E2-4b"><option value="">—</option><option>can</option><option>can't</option></select>
+        <span>understand commands like "sit" or "stay."</span>
+        <span class="feedback"></span>
+      </div>
+      <div class="item" data-answer="can't|can">
+        <span class="num">5</span>
+        <span>A snake</span>
+        <select aria-label="E2-5a"><option value="">—</option><option>can</option><option>can't</option></select>
+        <span>walk. It</span>
+        <select aria-label="E2-5b"><option value="">—</option><option>can</option><option>can't</option></select>
+        <span>slither.</span>
+        <span class="feedback"></span>
+      </div>
+      <div class="item" data-answer="can't">
+        <span class="num">6</span>
+        <span>I</span>
+        <select aria-label="E2-6a"><option value="">—</option><option>can</option><option>can't</option></select>
+        <span>come to the party. I'm busy.</span>
+        <span class="feedback"></span>
+      </div>
+      <div class="controls">
+        <button class="check" data-target="ex2">Check answers</button>
+        <span class="score" id="score2"></span>
+      </div>
+    </section>
+
+    <!-- Exercise 3 -->
+    <section class="card" id="ex3">
+      <h2>Exercise 3: Make sentences</h2>
+      <p class="small">Look at the images and the words, then write a full sentence with <em>can</em> or <em>can't</em>.</p>
+
+      <div class="item">
+        <figure>
+          <div class="pic" aria-hidden="true">🐒🌳</div>
+          <figcaption class="prompt">(climb a tree)</figcaption>
+        </figure>
+        <div class="row" style="flex:1 1 auto">
+          <input type="text" placeholder="Example: A monkey can climb a tree." aria-label="E3-1" />
+        </div>
+      </div>
+
+      <div class="item">
+        <figure>
+          <div class="pic" aria-hidden="true">👦⚽</div>
+          <figcaption class="prompt">(play football)</figcaption>
+        </figure>
+        <div class="row" style="flex:1 1 auto">
+          <input type="text" placeholder="Example: The boy can't play football." aria-label="E3-2" />
+        </div>
+      </div>
+
+      <div class="item">
+        <figure>
+          <div class="pic" aria-hidden="true">📖🧒</div>
+          <figcaption class="prompt">(read a book)</figcaption>
+        </figure>
+        <div class="row" style="flex:1 1 auto">
+          <input type="text" placeholder="Your turn! Write the sentence here." aria-label="E3-3" />
+        </div>
+      </div>
+
+      <div class="item">
+        <figure>
+          <div class="pic" aria-hidden="true">🕊️✈️</div>
+          <figcaption class="prompt">(fly)</figcaption>
+        </figure>
+        <div class="row" style="flex:1 1 auto">
+          <input type="text" placeholder="Your turn! Write the sentence here." aria-label="E3-4" />
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="checkFree">Self-check</button>
+        <button class="ghost" id="showModels">Show model answers</button>
+        <span id="freeMsg" class="small"></span>
+      </div>
+
+      <details id="models">
+        <summary>Model answers (one of many possible)</summary>
+        <ul>
+          <li>A monkey <strong>can</strong> climb a tree.</li>
+          <li>The boy <strong>can't</strong> play football.</li>
+          <li>The girl <strong>can</strong> read a book. / The baby <strong>can't</strong> read a book.</li>
+          <li>A bird <strong>can</strong> fly. / A fish <strong>can't</strong> fly. / An airplane <strong>can</strong> fly.</li>
+        </ul>
+      </details>
+    </section>
+
+    <section class="card footer">
+      Tip: Use simple subjects (A cat / The boy / Birds / Airplanes) and include <em>can</em> or <em>can't</em> before the verb.
+    </section>
+  </div>
+
+<script>
+  const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+  // Print & Reset
+  document.getElementById('printBtn').addEventListener('click', () => window.print());
+  document.getElementById('resetAll').addEventListener('click', () => {
+    $$('select').forEach(s=>s.value='');
+    $$('input[type="text"]').forEach(i=>i.value='');
+    $$('.feedback').forEach(f=>{f.textContent=''; f.className='feedback';});
+    document.getElementById('score1').textContent='';
+    document.getElementById('score2').textContent='';
+    document.getElementById('freeMsg').textContent='';
+    document.getElementById('models').open=false;
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  function evaluateSection(sectionId){
+    const section = document.getElementById(sectionId);
+    const items = Array.from(section.querySelectorAll('.item'));
+    let correct=0, total=0;
+
+    items.forEach(item=>{
+      const fb = item.querySelector('.feedback');
+      if(!fb) return; // skip free-writing ones
+      const expected = item.getAttribute('data-answer');
+      const parts = expected.split('|');
+      const selects = Array.from(item.querySelectorAll('select'));
+      if(selects.length!==parts.length){ return; }
+      const allAnswered = selects.every(s=>s.value !== '');
+      if(!allAnswered){ fb.textContent = 'Complete all blanks'; fb.className='feedback bad'; return; }
+
+      total += parts.length;
+      let localCorrect = 0;
+      selects.forEach((s,idx)=>{
+        if(s.value.trim().toLowerCase()===parts[idx]) localCorrect++;
+      });
+
+      if(localCorrect===parts.length){
+        correct += parts.length;
+        fb.textContent = 'Great!';
+        fb.className='feedback good';
+      } else {
+        // Show the correct answer(s)
+        fb.textContent = 'Correct answer: ' + parts.join(' , ');
+        fb.className='feedback bad';
+      }
+    });
+
+    return {correct,total};
+  }
+
+  $$('.check').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const id = btn.getAttribute('data-target');
+      const result = evaluateSection(id);
+      if(!result) return;
+      const {correct,total} = result;
+      const scoreEl = document.getElementById(id==='ex1'?'score1':'score2');
+      const answered = correct + Array.from(document.getElementById(id).querySelectorAll('.feedback.bad')).length;
+      const allQuestions = Array.from(document.getElementById(id).querySelectorAll('.item')).reduce((sum,it)=>sum + it.getAttribute('data-answer').split('|').length,0);
+      if(answered < allQuestions){
+        scoreEl.textContent = 'Please answer all items before checking.';
+        return;
+      }
+      scoreEl.textContent = `Score: ${correct} / ${allQuestions}`;
+    });
+  });
+
+  // Simple self-check for free-writing: ensure can/can't & key phrase present
+  document.getElementById('checkFree').addEventListener('click',()=>{
+    const rows = [
+      {sel:'[aria-label="E3-1"]', must:['climb','tree']},
+      {sel:'[aria-label="E3-2"]', must:['play','football']},
+      {sel:'[aria-label="E3-3"]', must:['read','book']},
+      {sel:'[aria-label="E3-4"]', must:['fly']}
+    ];
+    let ok = true;
+    for(const r of rows){
+      const v = document.querySelector(r.sel).value.toLowerCase();
+      const hasModal = /\bcan('?t)?\b/.test(v);
+      const hasAll = r.must.every(m=>v.includes(m));
+      if(!(hasModal && hasAll)) { ok = false; break; }
+    }
+    const msg = document.getElementById('freeMsg');
+    if(ok){ msg.textContent = 'Nice! Your sentences use can/can\'t and the key words.'; }
+    else { msg.textContent = 'Check: include can or can\'t and the key words in each sentence.'; }
+  });
+
+  document.getElementById('showModels').addEventListener('click',()=>{
+    document.getElementById('models').open = true;
+    document.getElementById('models').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+</script>
+</body>
+</html>
+

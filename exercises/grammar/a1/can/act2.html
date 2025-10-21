@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Listening Activity - Can & Can't</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+    h1 { color: #333; }
+    .question { background: #fff; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .options label { display: block; margin: 5px 0; }
+    .feedback { margin-top: 10px; font-weight: bold; display: none; }
+    .correct { color: green; }
+    .incorrect { color: red; }
+    .buttons { margin-top: 20px; }
+    button { padding: 10px 15px; margin-right: 10px; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { opacity: 0.9; }
+    .check { background: #4CAF50; color: white; }
+    .reset { background: #f44336; color: white; }
+    .print { background: #008CBA; color: white; }
+    #final-score { font-size: 18px; font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Listening Activity: Can & Can't</h1>
+  <p>Listen to the conversation and answer the questions.</p>
+  <audio controls>
+    <source src="descarga.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div id="quiz"></div>
+
+  <div class="buttons">
+    <button class="check" onclick="checkAnswers()">Check Answers</button>
+    <button class="reset" onclick="resetQuiz()">Reset</button>
+    <button class="print" onclick="window.print()">Print</button>
+  </div>
+
+  <p id="final-score"></p>
+
+  <script>
+    const questions = [
+      {
+        question: "What is Alex good at?",
+        options: ["Playing basketball.", "Drawing and painting.", "Hiking.", "Playing tennis and basketball."],
+        answer: 1,
+        explanation: "The correct answer is b) Drawing and painting. Alex states, 'But, I can draw and paint. It's so relaxing for me.'"
+      },
+      {
+        question: "What can't Ben do well?",
+        options: ["Play basketball.", "Go hiking.", "Draw.", "Play tennis."],
+        answer: 2,
+        explanation: "The correct answer is c) Draw. Ben says, 'I can't draw at all. My stick figures even look wrong.'"
+      },
+      {
+        question: "What is the final plan for Alex and Ben's weekend?",
+        options: ["They are going hiking in the mountains.", "They are going to play basketball.", "They are going for a walk in the park and having a picnic.", "They are going to finish their homework."],
+        answer: 2,
+        explanation: "The correct answer is c) They are going for a walk in the park and having a picnic. Alex suggests this, and Ben agrees."
+      },
+      {
+        question: "Who can make cookies?",
+        options: ["Alex.", "Ben.", "Alex's sister.", "Ben's sister."],
+        answer: 2,
+        explanation: "The correct answer is c) Alex's sister. Alex says, 'My sister can make some really good cookies. She can bring them.'"
+      },
+      {
+        question: "How many hours can Ben walk without getting tired?",
+        options: ["A few minutes.", "An hour.", "Just a little bit.", "Hours."],
+        answer: 3,
+        explanation: "The correct answer is d) Hours. Ben states, 'I can walk for hours without getting tired.'"
+      }
+    ];
+
+    let shuffledQuestions = [];
+
+    function shuffleArray(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    function loadQuiz() {
+      shuffledQuestions = shuffleArray([...questions]);
+      const quizDiv = document.getElementById("quiz");
+      quizDiv.innerHTML = "";
+      shuffledQuestions.forEach((q, index) => {
+        const shuffledOptions = shuffleArray(q.options.map((opt, i) => ({ opt, i })));
+        const optionsHTML = shuffledOptions.map(o =>
+          `<label><input type="radio" name="q${index}" value="${o.i}"> ${o.opt}</label>`
+        ).join("");
+        quizDiv.innerHTML += `
+          <div class="question" id="q${index}">
+            <p><strong>Q${index+1}:</strong> ${q.question}</p>
+            <div class="options">${optionsHTML}</div>
+            <div class="feedback" id="feedback${index}"></div>
+          </div>`;
+      });
+      document.getElementById("final-score").textContent = "";
+    }
+
+    function checkAnswers() {
+      let allAnswered = true;
+      shuffledQuestions.forEach((q, index) => {
+        if (!document.querySelector(`input[name="q${index}"]:checked`)) {
+          allAnswered = false;
+        }
+      });
+      if (!allAnswered) {
+        alert("Please answer all questions before checking.");
+        return;
+      }
+
+      let score = 0;
+      shuffledQuestions.forEach((q, index) => {
+        const selected = document.querySelector(`input[name="q${index}"]:checked`).value;
+        const feedbackDiv = document.getElementById(`feedback${index}`);
+        feedbackDiv.style.display = "block";
+        if (parseInt(selected) === q.answer) {
+          feedbackDiv.textContent = "Great!";
+          feedbackDiv.className = "feedback correct";
+          score++;
+        } else {
+          feedbackDiv.textContent = q.explanation;
+          feedbackDiv.className = "feedback incorrect";
+        }
+        document.querySelectorAll(`input[name="q${index}"]`).forEach(r => r.disabled = true);
+      });
+      document.getElementById("final-score").textContent = `Your final score: ${score} / ${shuffledQuestions.length}`;
+    }
+
+    function resetQuiz() {
+      loadQuiz();
+    }
+
+    window.onload = loadQuiz;
+  </script>
+</body>
+</html>

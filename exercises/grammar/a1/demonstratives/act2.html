@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timed Reading Challenge: Demonstratives</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- General Styling --- */
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #a8dadc; /* Initial vibrant background */
+            transition: background-color 1s ease-in-out;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 700px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative; /* For background animations */
+            overflow: hidden; /* Hide overflowing animations */
+            transition: transform 0.5s ease-out;
+        }
+        .container.story-transition {
+            transform: scale(0.95);
+            opacity: 0.7;
+        }
+
+        /* --- Dynamic Background Elements (for visual flair) --- */
+        .background-blob {
+            position: absolute;
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+            pointer-events: none;
+            filter: blur(50px);
+        }
+        .blob1 { top: -20%; left: -20%; width: 50%; height: 50%; background-color: #f7a7a7; border-radius: 60%; animation-delay: 0s; }
+        .blob2 { bottom: -20%; right: -20%; width: 40%; height: 40%; background-color: #a2e8c1; border-radius: 50%; animation-delay: 5s; }
+        .blob3 { top: 30%; right: -15%; width: 30%; height: 30%; background-color: #a8cff2; border-radius: 55%; animation-delay: 10s; }
+        @keyframes float {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+
+        /* --- Timer and Instructions --- */
+        #timer {
+            font-size: 3em;
+            font-weight: 700;
+            color: #e74c3c;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        .instruction {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+        
+        /* --- Text Sections --- */
+        .text-content {
+            font-size: 1.1em;
+            line-height: 1.7;
+            text-align: left;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            opacity: 1;
+            transition: opacity 1.5s ease-out;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+        #reading-text p {
+            margin-bottom: 1em;
+        }
+        #quiz-section {
+            display: none;
+            text-align: left;
+        }
+
+        /* --- Input Fields --- */
+        .fill-in-box {
+            display: inline-block;
+            margin: 0 2px;
+            vertical-align: bottom; /* Align inputs better with text baseline */
+        }
+        .fill-in-box input {
+            width: 55px; /* Slightly wider for longer demonstratives */
+            padding: 5px 8px;
+            border: none;
+            border-bottom: 3px solid #3498db;
+            text-align: center;
+            font-size: 1em;
+            font-family: 'Poppins', sans-serif;
+            background-color: #eaf6fd;
+            border-radius: 3px;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        .fill-in-box input:focus {
+            outline: none;
+            border-bottom-color: #e74c3c;
+            background-color: #fff8e1;
+        }
+
+        /* --- Buttons and Feedback --- */
+        .action-button {
+            padding: 12px 30px;
+            font-size: 1.2em;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 30px;
+        }
+        .action-button:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+        .action-button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        #check-button {
+            background-color: #e67e22;
+        }
+        #check-button:hover {
+            background-color: #d35400;
+        }
+        #next-story-button {
+            background-color: #3498db;
+            display: none; /* Hidden until quiz is checked */
+        }
+        #next-story-button:hover {
+            background-color: #2980b9;
+        }
+
+        #result-feedback {
+            margin-top: 25px;
+            font-size: 1.25em;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        .correct-feedback { color: #2ecc71; }
+        .incorrect-feedback { color: #e74c3c; }
+        .neutral-feedback { color: #3498db; }
+
+        /* --- Final Message --- */
+        #completion-message {
+            display: none;
+            padding: 30px;
+            background-color: #d4edda;
+            border: 1px solid #28a745;
+            border-radius: 10px;
+            color: #155724;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="main-container">
+    
+    <div class="background-blob blob1"></div>
+    <div class="background-blob blob2"></div>
+    <div class="background-blob blob3"></div>
+
+    <div id="intro-section">
+        <h2 id="story-title-intro">Reading and Recall: The Shopping Trip</h2>
+        <p class="instruction">You will have **30 seconds** to read and memorize the text below. Pay attention to the demonstrative words (this, that, these, those).</p>
+        <button id="start-button" class="action-button" onclick="startChallenge()">Start Reading</button>
+    </div>
+
+    <div id="timed-section" style="display: none;">
+        <div id="timer">00:30</div>
+        <p class="instruction">Read quickly! Time is running out...</p>
+        <div id="reading-text" class="text-content">
+            </div>
+    </div>
+
+    <div id="quiz-section">
+        <h2 id="story-title-quiz">Recall Challenge</h2>
+        <p class="instruction">The time is up! As you read, **fill in the missing words** (this, that, these, those) from memory.</p>
+        <div id="quiz-content" class="text-content">
+            </div>
+        <button id="check-button" class="action-button" onclick="checkAnswers()">Check Answers</button>
+        <div id="result-feedback"></div>
+        <button id="next-story-button" class="action-button" onclick="nextStory()">Next Story</button>
+    </div>
+
+    <div id="completion-message">
+        <p>🎉 Congratulations! You've completed all the stories!</p>
+        <p>Great job practicing demonstratives!</p>
+    </div>
+</div>
+
+<script>
+    // --- Configuration ---
+    const READING_TIME_SECONDS = 30; 
+    const FADE_TRANSITION_TIME = 1500; 
+    
+    const BACKGROUND_COLORS = ['#a8dadc', '#b0e0e6', '#cbf3d5', '#ffbe86', '#e6a8d7']; 
+    let currentStoryIndex = 0;
+    
+    // Define all stories and their corresponding quiz versions - BOLDING REMOVED FROM readingText
+    const STORIES = [
+        {
+            title: "The Shopping Trip",
+            readingText: `
+                <p style="font-weight: bold;">Story 1 "The Shopping Trip"</p>
+                <p>I am at the store with my mom. I see some fruit near me. "I want to buy this apple," I say. "It looks very red." Mom points to the cart. "Put these bananas and oranges in, please." I look over at the far shelf. "That big bag of flour is for Dad's cake." Mom points to a distant row. "Those boxes of cereal are on sale, but we do not need them." We have these groceries now.</p>
+            `,
+            quizText: `
+                <p style="font-weight: bold;">Story 1 "The Shopping Trip"</p>
+                <p>I am at the store with my mom. I see some fruit near me. "I want to buy {INPUT:this} apple," I say. "It looks very red." Mom points to the cart. "Put {INPUT:these} bananas and oranges in, please." I look over at the far shelf. "{INPUT:That} big bag of flour is for Dad's cake." Mom points to a distant row. "{INPUT:Those} boxes of cereal are on sale, but we do not need them." We have {INPUT:these} groceries now.</p>
+            `,
+            missingWords: ['this', 'these', 'that', 'those', 'these']
+        },
+        {
+            title: "A Day at the Park",
+            readingText: `
+                <p style="font-weight: bold;">Story 2 "A Day at the Park"</p>
+                <p>My brother and I are at the park. "Look at this small butterfly on my hand!" I whisper. It has orange wings. Over there, that tall tree is perfect for climbing. My brother points to his feet. "These new shoes are great for running!" he shouts. We see some people far away playing soccer. "Those players are very fast!" I exclaim. We always enjoy these sunny afternoons.</p>
+            `,
+            quizText: `
+                <p style="font-weight: bold;">Story 2 "A Day at the Park"</p>
+                <p>My brother and I are at the park. "Look at {INPUT:this} small butterfly on my hand!" I whisper. It has orange wings. Over there, {INPUT:that} tall tree is perfect for climbing. My brother points to his feet. "{INPUT:These} new shoes are great for running!" he shouts. We see some people far away playing soccer. "{INPUT:Those} players are very fast!" I exclaim. We always enjoy {INPUT:these} sunny afternoons.</p>
+            `,
+            missingWords: ['this', 'that', 'these', 'those', 'these']
+        },
+        {
+            title: "At the Library",
+            readingText: `
+                <p style="font-weight: bold;">Story 3 "At the Library"</p>
+                <p>I love going to the library. "Is this book about space?" I ask the librarian, holding it close. She smiles. "Yes, it is." I look at a picture on the wall, far away. "That old map is interesting," I think. On the table in front of me, these magazines have many colourful pictures. My friend points to a shelf at the back. "Those history books are very big!" I decide to borrow this new novel.</p>
+            `,
+            quizText: `
+                <p style="font-weight: bold;">Story 3 "At the Library"</p>
+                <p>I love going to the library. "Is {INPUT:this} book about space?" I ask the librarian, holding it close. She smiles. "Yes, it is." I look at a picture on the wall, far away. "{INPUT:That} old map is interesting," I think. On the table in front of me, {INPUT:these} magazines have many colourful pictures. My friend points to a shelf at the back. "{INPUT:Those} history books are very big!" I decide to borrow {INPUT:this} new novel.</p>
+            `,
+            missingWords: ['this', 'that', 'these', 'those', 'this']
+        },
+        {
+            title: "Morning Routine",
+            readingText: `
+                <p style="font-weight: bold;">Story 4 "Morning Routine"</p>
+                <p>Every morning I make breakfast. "This coffee is hot," I say, holding my mug. I look outside. "That big cloud looks like a rabbit," I think. On the counter, these berries are fresh for my cereal. My neighbour's kids are playing far down the street. "Those happy children are so loud!" After breakfast, I check my phone. "This message is from my sister."</p>
+            `,
+            quizText: `
+                <p style="font-weight: bold;">Story 4 "Morning Routine"</p>
+                <p>Every morning I make breakfast. "{INPUT:This} coffee is hot," I say, holding my mug. I look outside. "{INPUT:That} big cloud looks like a rabbit," I think. On the counter, {INPUT:these} berries are fresh for my cereal. My neighbour's kids are playing far down the street. "{INPUT:Those} happy children are so loud!" After breakfast, I check my phone. "{INPUT:This} message is from my sister."</p>
+            `,
+            missingWords: ['this', 'that', 'these', 'those', 'this']
+        },
+        {
+            title: "A Trip to the Zoo",
+            readingText: `
+                <p style="font-weight: bold;">Story 5 "A Trip to the Zoo"</p>
+                <p>Today we went to the zoo! "Wow, this lion is very big!" I say, pointing to the enclosure right in front of us. My dad points to the other side of the zoo. "That giraffe has a very long neck." Near the fence, these small monkeys are eating fruit. Far away in the water, "Those swimming penguins are so funny!" I think. I love all these amazing animals.</p>
+            `,
+            quizText: `
+                <p style="font-weight: bold;">Story 5 "A Trip to the Zoo"</p>
+                <p>Today we went to the zoo! "Wow, {INPUT:this} lion is very big!" I say, pointing to the enclosure right in front of us. My dad points to the other side of the zoo. "{INPUT:That} giraffe has a very long neck." Near the fence, {INPUT:these} small monkeys are eating fruit. Far away in the water, "{INPUT:Those} swimming penguins are so funny!" I think. I love all {INPUT:these} amazing animals.</p>
+            `,
+            missingWords: ['this', 'that', 'these', 'those', 'these']
+        }
+    ];
+
+    // --- Global Variables ---
+    let timerInterval;
+    let timeRemaining = READING_TIME_SECONDS;
+    const mainContainer = document.getElementById('main-container');
+
+    // --- DOM Elements ---
+    const introSection = document.getElementById('intro-section');
+    const timedSection = document.getElementById('timed-section');
+    const quizSection = document.getElementById('quiz-section');
+    const completionMessage = document.getElementById('completion-message');
+
+    const storyTitleIntro = document.getElementById('story-title-intro');
+    const storyTitleQuiz = document.getElementById('story-title-quiz');
+    const readingTextDiv = document.getElementById('reading-text');
+    const quizContentDiv = document.getElementById('quiz-content');
+    const timerDisplay = document.getElementById('timer');
+    const startButton = document.getElementById('start-button');
+    const checkButton = document.getElementById('check-button');
+    const nextStoryButton = document.getElementById('next-story-button');
+    const resultFeedback = document.getElementById('result-feedback');
+
+    // --- Initial Setup ---
+    document.addEventListener('DOMContentLoaded', loadStory);
+
+    function loadStory() {
+        if (currentStoryIndex >= STORIES.length) {
+            showCompletionScreen();
+            return;
+        }
+
+        const currentStory = STORIES[currentStoryIndex];
+        
+        // Reset visibility and buttons
+        introSection.style.display = 'block';
+        timedSection.style.display = 'none';
+        quizSection.style.display = 'none';
+        completionMessage.style.display = 'none';
+        
+        startButton.disabled = false;
+        checkButton.disabled = false;
+        checkButton.style.display = 'block'; 
+        nextStoryButton.style.display = 'none';
+        resultFeedback.textContent = ''; 
+
+        // Update titles and content
+        storyTitleIntro.textContent = `Reading and Recall: ${currentStory.title}`;
+        storyTitleQuiz.textContent = `Recall Challenge: ${currentStory.title}`;
+        readingTextDiv.innerHTML = currentStory.readingText;
+        timerDisplay.textContent = `00:${READING_TIME_SECONDS.toString().padStart(2, '0')}`; 
+
+        // Apply dynamic background color
+        document.body.style.backgroundColor = BACKGROUND_COLORS[currentStoryIndex % BACKGROUND_COLORS.length];
+    }
+
+    // --- Main Logic: Start the Challenge ---
+    function startChallenge() {
+        // Smooth transition effect
+        mainContainer.classList.add('story-transition'); 
+        setTimeout(() => {
+            introSection.style.display = 'none';
+            timedSection.style.display = 'block';
+            mainContainer.classList.remove('story-transition'); 
+        }, 500); 
+
+        timeRemaining = READING_TIME_SECONDS;
+        timerDisplay.textContent = `00:${timeRemaining.toString().padStart(2, '0')}`;
+
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    
+    // --- Timer Update Function ---
+    function updateTimer() {
+        timeRemaining--;
+        timerDisplay.textContent = `00:${timeRemaining.toString().padStart(2, '0')}`;
+
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            endReadingPhase();
+        }
+    }
+
+    // --- End Reading Phase (Fade and Transition) ---
+    function endReadingPhase() {
+        readingTextDiv.style.opacity = '0'; 
+        
+        setTimeout(() => {
+            timedSection.style.display = 'none';
+            
+            createQuiz(); 
+            quizSection.style.display = 'block';
+            readingTextDiv.style.opacity = '1'; 
+        }, FADE_TRANSITION_TIME); 
+    }
+
+    // --- Utility Function: Create Quiz Content ---
+    function createQuiz() {
+        const currentStory = STORIES[currentStoryIndex];
+        let quizHTML = currentStory.quizText;
+        let inputIndex = 0;
+
+        quizHTML = quizHTML.replace(/{INPUT:(.*?)}/g, (match, correctWord) => {
+            const size = correctWord.length + 2; 
+            const inputField = `<span class="fill-in-box">
+                                    <input type="text" id="quizInput${inputIndex++}" data-correct="${correctWord.toLowerCase()}" size="${size}" maxlength="${size + 1}">
+                                </span>`;
+            return inputField;
+        });
+        
+        quizContentDiv.innerHTML = quizHTML;
+    }
+    
+    // --- Quiz Checking Function ---
+    function checkAnswers() {
+        const inputs = document.querySelectorAll('#quiz-content input[type="text"]');
+        let correctCount = 0;
+        let total = STORIES[currentStoryIndex].missingWords.length; 
+        
+        inputs.forEach(input => {
+            const studentAnswer = input.value.trim().toLowerCase();
+            const correctAnswer = input.dataset.correct.toLowerCase();
+            
+            if (studentAnswer === correctAnswer) {
+                correctCount++;
+                input.style.borderBottomColor = '#2ecc71'; 
+                input.style.backgroundColor = '#e8f5e9';
+            } else {
+                input.style.borderBottomColor = '#e74c3c'; 
+                input.style.backgroundColor = '#fbeaea';
+                input.value = `${input.value.trim()} [${correctAnswer}]`; 
+            }
+            input.disabled = true; 
+        });
+
+        if (correctCount === total) {
+            resultFeedback.className = 'result-feedback correct-feedback';
+            resultFeedback.innerHTML = `🎉 Excellent! You got all ${total} words correct!`;
+        } else {
+            resultFeedback.className = 'result-feedback incorrect-feedback';
+            resultFeedback.innerHTML = `Keep trying! You recalled ${correctCount} out of ${total} words correctly. The correct words are shown in brackets.`;
+        }
+        
+        checkButton.disabled = true;
+        checkButton.style.display = 'none'; 
+        nextStoryButton.style.display = 'block'; 
+    }
+
+    // --- Transition to Next Story ---
+    function nextStory() {
+        mainContainer.classList.add('story-transition'); 
+        resultFeedback.className = 'result-feedback neutral-feedback'; 
+        resultFeedback.textContent = ''; 
+
+        setTimeout(() => {
+            currentStoryIndex++;
+            loadStory(); 
+            mainContainer.classList.remove('story-transition'); 
+        }, 500); 
+    }
+
+    // --- Show Completion Screen ---
+    function showCompletionScreen() {
+        introSection.style.display = 'none';
+        timedSection.style.display = 'none';
+        quizSection.style.display = 'none';
+        completionMessage.style.display = 'block';
+        document.body.style.backgroundColor = '#d4edda'; 
+    }
+</script>
+
+</body>
+</html>

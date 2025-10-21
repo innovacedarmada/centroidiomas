@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A1 Articles Listening Comprehension</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .conversation {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .conversation:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .conversation-title {
+            font-size: 1.8em;
+            color: #764ba2;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .listen-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .listen-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .listen-btn:active {
+            transform: scale(0.98);
+        }
+
+        .question {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .question-text {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background: #f0f4ff;
+            border-color: #667eea;
+        }
+
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 10px;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+        }
+
+        .option label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 1em;
+        }
+
+        .check-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .check-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+        }
+
+        .feedback {
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 1.1em;
+            text-align: center;
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feedback.correct {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: #0d5d3d;
+            border: 3px solid #10b981;
+        }
+
+        .feedback.incorrect {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: #7f1d1d;
+            border: 3px solid #ef4444;
+        }
+
+        .correct-answer {
+            background: #d1fae5 !important;
+            border-color: #10b981 !important;
+        }
+
+        .incorrect-answer {
+            background: #fee2e2 !important;
+            border-color: #ef4444 !important;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .conversation-title {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎧 Listening Comprehension Exercises</h1>
+        <p class="subtitle">A1 Articles Focus</p>
+
+        <!-- Conversation 1 -->
+        <div class="conversation" id="conv1">
+            <h2 class="conversation-title">☕ Conversation 1: At the Café - Ordering Food</h2>
+            <!-- <button class="listen-btn" onclick="playAudio('audio1')">🔊 Listen</button> -->
+            <audio id="audio1" class="audio-player" controls>
+                <source src="audios/ex1.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+
+            <div class="question">
+                <p class="question-text">1. Why does Speaker A say "a coffee" at the start?</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="c1q1a" name="c1q1" value="A">
+                        <label for="c1q1a">A. Because it is a specific type of coffee.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c1q1b" name="c1q1" value="B">
+                        <label for="c1q1b">B. Because it is the first time the item is mentioned.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c1q1c" name="c1q1" value="C">
+                        <label for="c1q1c">C. Because all drinks need the article "a".</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">2. Which is the correct word or symbol to put before "water"?</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="c1q2a" name="c1q2" value="A">
+                        <label for="c1q2a">A. a</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c1q2b" name="c1q2" value="B">
+                        <label for="c1q2b">B. the</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c1q2c" name="c1q2" value="C">
+                        <label for="c1q2c">C. ∅ (No article)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">3. Speaker A uses "the apple" because the server already offered the apple as a choice.</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="checkbox" id="c1q3true" name="c1q3" value="True">
+                        <label for="c1q3true">□ True</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" id="c1q3false" name="c1q3" value="False">
+                        <label for="c1q3false">□ False</label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="check-btn" onclick="checkAnswers(1)">Check My Answers</button>
+            <div class="feedback" id="feedback1"></div>
+        </div>
+
+        <!-- Conversation 2 -->
+        <div class="conversation" id="conv2">
+            <h2 class="conversation-title">🐶 Conversation 2: Introducing Friends and Pets</h2>
+            <audio id="audio2" class="audio-player" controls>
+                <source src="audios/ex2.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            
+            <div class="question">
+                <p class="question-text">1. Why is there no article (∅) before the name "May"?</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="c2q1a" name="c2q1" value="A">
+                        <label for="c2q1a">A. Because he is a student.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c2q1b" name="c2q1" value="B">
+                        <label for="c2q1b">B. Because names do not use articles.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c2q1c" name="c2q1" value="C">
+                        <label for="c2q1c">C. Because "May" starts with a consonant.</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">2. Speaker A uses the article "the" for the word "cat" later in the conversation because:</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="c2q2a" name="c2q2" value="A">
+                        <label for="c2q2a">A. It is an animal.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c2q2b" name="c2q2" value="B">
+                        <label for="c2q2b">B. It is the specific cat in the picture.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c2q2c" name="c2q2" value="C">
+                        <label for="c2q2c">C. It is the first time they talk about a cat.</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">3. When Speaker B says "∅ Animals are nice," they use no article because they are talking about animals in a general way (plural noun).</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="checkbox" id="c2q3true" name="c2q3" value="True">
+                        <label for="c2q3true">□ True</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" id="c2q3false" name="c2q3" value="False">
+                        <label for="c2q3false">□ False</label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="check-btn" onclick="checkAnswers(2)">Check My Answers</button>
+            <div class="feedback" id="feedback2"></div>
+        </div>
+
+        <!-- Conversation 3 -->
+        <div class="conversation" id="conv3">
+            <h2 class="conversation-title">☀️ Conversation 3: Asking about Time and Weather</h2>
+            <audio id="audio3" class="audio-player" controls>
+                <source src="audios/ex3.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            
+            <div class="question">
+                <p class="question-text">1. Why is the article "the" used for "sky"?</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="c3q1a" name="c3q1" value="A">
+                        <label for="c3q1a">A. Because "sky" is plural.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c3q1b" name="c3q1" value="B">
+                        <label for="c3q1b">B. Because it is a special color.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c3q1c" name="c3q1" value="C">
+                        <label for="c3q1c">C. Because "sky" is usually a unique thing.</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">2. Which is the correct word or symbol to use before "Summer"?</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="c3q2a" name="c3q2" value="A">
+                        <label for="c3q2a">A. a</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c3q2b" name="c3q2" value="B">
+                        <label for="c3q2b">B. the</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c3q2c" name="c3q2" value="C">
+                        <label for="c3q2c">C. ∅ (No article)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">3. Speaker B says "a beautiful day" because it is just one singular, descriptive day.</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="checkbox" id="c3q3true" name="c3q3" value="True">
+                        <label for="c3q3true">□ True</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" id="c3q3false" name="c3q3" value="False">
+                        <label for="c3q3false">□ False</label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="check-btn" onclick="checkAnswers(3)">Check My Answers</button>
+            <div class="feedback" id="feedback3"></div>
+        </div>
+
+        <!-- Conversation 4 -->
+        <div class="conversation" id="conv4">
+            <h2 class="conversation-title">🛍️ Conversation 4: Shopping for Clothes</h2>
+            <audio id="audio4" class="audio-player" controls>
+                <source src="audios/ex4.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            
+            <div class="question">
+                <p class="question-text">1. Why does Speaker B use "an excellent shirt" instead of "a excellent shirt"?</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="c4q1a" name="c4q1" value="A">
+                        <label for="c4q1a">A. Because "excellent" starts with a vowel sound.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c4q1b" name="c4q1" value="B">
+                        <label for="c4q1b">B. Because it is a long word.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c4q1c" name="c4q1" value="C">
+                        <label for="c4q1c">C. Because it is a singular item.</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">2. Which is the correct word or symbol to put before "Clothes" when talking generally about money?</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="c4q2a" name="c4q2" value="A">
+                        <label for="c4q2a">A. a</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c4q2b" name="c4q2" value="B">
+                        <label for="c4q2b">B. the</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c4q2c" name="c4q2" value="C">
+                        <label for="c4q2c">C. ∅ (No article)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">3. Speaker A asks about "the shirt" because it is the specific shirt Speaker B is holding or pointing to.</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="checkbox" id="c4q3true" name="c4q3" value="True">
+                        <label for="c4q3true">□ True</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" id="c4q3false" name="c4q3" value="False">
+                        <label for="c4q3false">□ False</label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="check-btn" onclick="checkAnswers(4)">Check My Answers</button>
+            <div class="feedback" id="feedback4"></div>
+        </div>
+
+        <!-- Conversation 5 -->
+        <div class="conversation" id="conv5">
+            <h2 class="conversation-title">🏡 Conversation 5: Talking about Home</h2>
+            <audio id="audio5" class="audio-player" controls>
+                <source src="audios/ex5.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            
+            <div class="question">
+                <p class="question-text">1. When Speaker B asks, "Is the garden big?", why do they use "the"?</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="c5q1a" name="c5q1" value="A">
+                        <label for="c5q1a">A. Because all gardens are big.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c5q1b" name="c5q1" value="B">
+                        <label for="c5q1b">B. Because Speaker A already mentioned the garden.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c5q1c" name="c5q1" value="C">
+                        <label for="c5q1c">C. Because "garden" starts with a consonant.</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">2. Speaker A says her sister likes "______ flowers." Which is the correct word or symbol?</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="c5q2a" name="c5q2" value="A">
+                        <label for="c5q2a">A. a</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c5q2b" name="c5q2" value="B">
+                        <label for="c5q2b">B. the</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="c5q2c" name="c5q2" value="C">
+                        <label for="c5q2c">C. ∅ (No article - for general plural)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">3. Speaker B uses "an apartment" because it is the first time they are asking about this item and "apartment" starts with a vowel sound.</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="checkbox" id="c5q3true" name="c5q3" value="True">
+                        <label for="c5q3true">□ True</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" id="c5q3false" name="c5q3" value="False">
+                        <label for="c5q3false">□ False</label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="check-btn" onclick="checkAnswers(5)">Check My Answers</button>
+            <div class="feedback" id="feedback5"></div>
+        </div>
+    </div>
+
+<script>
+        function playAudio(id) {
+            const audio = document.getElementById(id);
+            audio.play();
+        }
+</script>
+    <script>
+        
+        const answers = {
+            1: { q1: 'B', q2: 'C', q3: 'True' },
+            2: { q1: 'B', q2: 'B', q3: 'True' },
+            3: { q1: 'C', q2: 'C', q3: 'True' },
+            4: { q1: 'A', q2: 'C', q3: 'True' },
+            5: { q1: 'B', q2: 'C', q3: 'True' }
+        };
+
+        function playAudio(convNum) {
+            alert('Audio for Conversation ' + convNum + ' would play here. Please add your audio files.');
+        }
+
+        function checkAnswers(convNum) {
+            let score = 0;
+            let total = 3;
+            const feedback = document.getElementById('feedback' + convNum);
+            
+            // Clear previous highlights
+            document.querySelectorAll('#conv' + convNum + ' .option').forEach(opt => {
+                opt.classList.remove('correct-answer', 'incorrect-answer');
+            });
+
+            // Question 1
+            const q1Answer = document.querySelector('input[name="c' + convNum + 'q1"]:checked');
+            if (q1Answer) {
+                if (q1Answer.value === answers[convNum].q1) {
+                    score++;
+                    q1Answer.parentElement.classList.add('correct-answer');
+                } else {
+                    q1Answer.parentElement.classList.add('incorrect-answer');
+                    // Highlight correct answer
+                    document.querySelector('input[name="c' + convNum + 'q1"][value="' + answers[convNum].q1 + '"]').parentElement.classList.add('correct-answer');
+                }
+            }
+
+            // Question 2
+            const q2Answer = document.querySelector('input[name="c' + convNum + 'q2"]:checked');
+            if (q2Answer) {
+                if (q2Answer.value === answers[convNum].q2) {
+                    score++;
+                    q2Answer.parentElement.classList.add('correct-answer');
+                } else {
+                    q2Answer.parentElement.classList.add('incorrect-answer');
+                    document.querySelector('input[name="c' + convNum + 'q2"][value="' + answers[convNum].q2 + '"]').parentElement.classList.add('correct-answer');
+                }
+            }
+
+            // Question 3 (checkbox)
+            const q3Checkboxes = document.querySelectorAll('input[name="c' + convNum + 'q3"]:checked');
+            let q3Correct = false;
+            
+            if (q3Checkboxes.length === 1) {
+                const checkedValue = q3Checkboxes[0].value;
+                if (checkedValue === answers[convNum].q3) {
+                    score++;
+                    q3Checkboxes[0].parentElement.classList.add('correct-answer');
+                    q3Correct = true;
+                } else {
+                    q3Checkboxes[0].parentElement.classList.add('incorrect-answer');
+                }
+            }
+            
+            if (!q3Correct) {
+                const correctCheckbox = document.querySelector('input[name="c' + convNum + 'q3"][value="' + answers[convNum].q3 + '"]');
+                if (correctCheckbox) {
+                    correctCheckbox.parentElement.classList.add('correct-answer');
+                }
+            }
+
+            // Display feedback
+            feedback.style.display = 'block';
+            if (score === total) {
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = '🎉 Excellent work! You got all ' + total + ' questions correct! 🎉<br>You have a great understanding of English articles!';
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.innerHTML = '📝 You got ' + score + ' out of ' + total + ' correct.<br>Review the highlighted answers and try again! Keep practicing! 💪';
+            }
+
+            feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>

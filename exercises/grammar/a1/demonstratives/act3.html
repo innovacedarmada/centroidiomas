@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demonstratives Pronunciation Practice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #fce4ec, #e1f5fe);
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            text-align: center;
+            color: #4a148c;
+        }
+        .section {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+            margin: 25px auto;
+            padding: 25px;
+            max-width: 850px;
+        }
+        button {
+            background-color: #7b1fa2;
+            border: none;
+            color: white;
+            padding: 8px 14px;
+            margin: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #4a148c;
+        }
+        .exercise {
+            margin: 15px 0;
+            padding: 12px;
+            background: #f3e5f5;
+            border-radius: 10px;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌈 Demonstratives Pronunciation Practice</h1>
+
+    <div class="section">
+        <h2>📘 Explanation</h2>
+        <p><b>Demonstratives:</b> <em>this, these, that, those</em>.</p>
+        <p>They all start with the sound <b>/ð/</b> (like in <em>the</em>). Put your tongue between your teeth and let air pass with your voice.</p>
+        <ul>
+            <li><b>this</b> /ðɪs/ → one thing, near you</li>
+            <li><b>these</b> /ðiːz/ → many things, near you</li>
+            <li><b>that</b> /ðæt/ → one thing, far from you</li>
+            <li><b>those</b> /ðoʊz/ → many things, far from you</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🔊 Try the Single Words</h2>
+        <div class="exercise">
+            <p><b>Word:</b> This</p>
+            <button onclick="playTTS('this','en-US')">🇺🇸 Play US</button>
+            <button onclick="playTTS('this','en-GB')">🇬🇧 Play UK</button>
+            <button onclick="startRecording(this)">Record</button>
+            <button onclick="playRecording(this)">Play Your Voice</button>
+        </div>
+        <div class="exercise">
+            <p><b>Word:</b> These</p>
+            <button onclick="playTTS('these','en-US')">🇺🇸 Play US</button>
+            <button onclick="playTTS('these','en-GB')">🇬🇧 Play UK</button>
+            <button onclick="startRecording(this)">Record</button>
+            <button onclick="playRecording(this)">Play Your Voice</button>
+        </div>
+        <div class="exercise">
+            <p><b>Word:</b> That</p>
+            <button onclick="playTTS('that','en-US')">🇺🇸 Play US</button>
+            <button onclick="playTTS('that','en-GB')">🇬🇧 Play UK</button>
+            <button onclick="startRecording(this)">Record</button>
+            <button onclick="playRecording(this)">Play Your Voice</button>
+        </div>
+        <div class="exercise">
+            <p><b>Word:</b> Those</p>
+            <button onclick="playTTS('those','en-US')">🇺🇸 Play US</button>
+            <button onclick="playTTS('those','en-GB')">🇬🇧 Play UK</button>
+            <button onclick="startRecording(this)">Record</button>
+            <button onclick="playRecording(this)">Play Your Voice</button>
+        </div>
+        <div class="exercise">
+            <p><b>Word:</b> This one</p>
+            <button onclick="playTTS('this one','en-US')">🇺🇸 Play US</button>
+            <button onclick="playTTS('this one','en-GB')">🇬🇧 Play UK</button>
+            <button onclick="startRecording(this)">Record</button>
+            <button onclick="playRecording(this)">Play Your Voice</button>
+        </div>
+        <div class="exercise">
+            <p><b>Word:</b> Those ones</p>
+            <button onclick="playTTS('those ones','en-US')">🇺🇸 Play US</button>
+            <button onclick="playTTS('those ones','en-GB')">🇬🇧 Play UK</button>
+            <button onclick="startRecording(this)">Record</button>
+            <button onclick="playRecording(this)">Play Your Voice</button>
+        </div>
+        <div class="exercise">
+            <p><b>Word:</b> That one</p>
+            <button onclick="playTTS('that one','en-US')">🇺🇸 Play US</button>
+            <button onclick="playTTS('that one','en-GB')">🇬🇧 Play UK</button>
+            <button onclick="startRecording(this)">Record</button>
+            <button onclick="playRecording(this)">Play Your Voice</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🗣️ Practice: Listen, Record, Play</h2>
+        <div class="exercise">
+            <p>Sentence: This is my book.</p>
+            <button onclick="playTTS('This is my book.','en-US')">🇺🇸 Play US</button>
+            <button onclick="playTTS('This is my book.','en-GB')">🇬🇧 Play UK</button>
+            <button onclick="startRecording(this)">Record</button>
+            <button onclick="playRecording(this)">Play Your Voice</button>
+        </div>
+        <div class="exercise">
+            <p>Sentence: Those are my shoes.</p>
+            <button onclick="playTTS('Those are my shoes.','en-US')">🇺🇸 Play US</button>
+            <button onclick="playTTS('Those are my shoes.','en-GB')">🇬🇧 Play UK</button>
+            <button onclick="startRecording(this)">Record</button>
+            <button onclick="playRecording(this)">Play Your Voice</button>
+        </div>
+        <div class="exercise">
+            <p>Sentence: That is a dog.</p>
+            <button onclick="playTTS('That is a dog.','en-US')">🇺🇸 Play US</button>
+            <button onclick="playTTS('That is a dog.','en-GB')">🇬🇧 Play UK</button>
+            <button onclick="startRecording(this)">Record</button>
+            <button onclick="playRecording(this)">Play Your Voice</button>
+        </div>
+        <div class="exercise">
+            <p>Sentence: These are my friends.</p>
+            <button onclick="playTTS('These are my friends.','en-US')">🇺🇸 Play US</button>
+            <button onclick="playTTS('These are my friends.','en-GB')">🇬🇧 Play UK</button>
+            <button onclick="startRecording(this)">Record</button>
+            <button onclick="playRecording(this)">Play Your Voice</button>
+        </div>
+        <div class="exercise">
+            <p>Sentence: This is my pen.</p>
+            <button onclick="playTTS('This is my pen.','en-US')">🇺🇸 Play US</button>
+            <button onclick="playTTS('This is my pen.','en-GB')">🇬🇧 Play UK</button>
+            <button onclick="startRecording(this)">Record</button>
+            <button onclick="playRecording(this)">Play Your Voice</button>
+        </div>
+        <div class="exercise">
+            <p>Sentence: Those are apples.</p>
+            <button onclick="playTTS('Those are apples.','en-US')">🇺🇸 Play US</button>
+            <button onclick="playTTS('Those are apples.','en-GB')">🇬🇧 Play UK</button>
+            <button onclick="startRecording(this)">Record</button>
+            <button onclick="playRecording(this)">Play Your Voice</button>
+        </div>
+        <div class="exercise">
+            <p>Sentence: That is my car.</p>
+            <button onclick="playTTS('That is my car.','en-US')">🇺🇸 Play US</button>
+            <button onclick="playTTS('That is my car.','en-GB')">🇬🇧 Play UK</button>
+            <button onclick="startRecording(this)">Record</button>
+            <button onclick="playRecording(this)">Play Your Voice</button>
+        </div>
+        <div class="exercise">
+            <p>Sentence: These are my toys.</p>
+            <button onclick="playTTS('These are my toys.','en-US')">🇺🇸 Play US</button>
+            <button onclick="playTTS('These are my toys.','en-GB')">🇬🇧 Play UK</button>
+            <button onclick="startRecording(this)">Record</button>
+            <button onclick="playRecording(this)">Play Your Voice</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🎯 Interactive Practice</h2>
+        <p>Choose the correct demonstrative, then check your answer. Look at the clues (near/far, one/many). Listen and repeat.</p>
+        <div id="quiz">
+            <div class="exercise">1. ____ is my house 🏠 (near me). <select><option></option><option>This</option><option>These</option><option>That</option><option>Those</option></select> <span class="feedback"></span></div>
+            <div class="exercise">2. ____ are my pencils ✏️ (on the desk close to me). <select><option></option><option>This</option><option>These</option><option>That</option><option>Those</option></select> <span class="feedback"></span></div>
+            <div class="exercise">3. ____ is my father 👨 (standing next to me). <select><option></option><option>This</option><option>These</option><option>That</option><option>Those</option></select> <span class="feedback"></span></div>
+            <div class="exercise">4. ____ are my friends 👩‍👩‍👦 (here with me). <select><option></option><option>This</option><option>These</option><option>That</option><option>Those</option></select> <span class="feedback"></span></div>
+            <div class="exercise">5. ____ is my bag 🎒 (on the chair beside me). <select><option></option><option>This</option><option>These</option><option>That</option><option>Those</option></select> <span class="feedback"></span></div>
+            <div class="exercise">6. ____ are my shoes 👟 (over there by the door, far). <select><option></option><option>This</option><option>These</option><option>That</option><option>Those</option></select> <span class="feedback"></span></div>
+            <div class="exercise">7. ____ is my teacher 👩‍🏫 (over there at the board, far). <select><option></option><option>This</option><option>These</option><option>That</option><option>Those</option></select> <span class="feedback"></span></div>
+            <div class="exercise">8. ____ are my books 📚 (on the table near me). <select><option></option><option>This</option><option>These</option><option>That</option><option>Those</option></select> <span class="feedback"></span></div>
+            <div class="exercise">9. ____ is a cat 🐈 (far away in the garden). <select><option></option><option>This</option><option>These</option><option>That</option><option>Those</option></select> <span class="feedback"></span></div>
+            <div class="exercise">10. ____ are oranges 🍊 (on that tree, far away). <select><option></option><option>This</option><option>These</option><option>That</option><option>Those</option></select> <span class="feedback"></span></div>
+        </div>
+        <button onclick="checkAnswers()">Check Answers</button>
+    </div>
+
+    <script>
+        const correctAnswers = ["This","These","This","These","This","Those","That","These","That","Those"];
+
+        function playTTS(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            speechSynthesis.speak(utterance);
+        }
+
+        let mediaRecorder;
+        let audioChunks;
+        function startRecording(button) {
+            navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+                mediaRecorder = new MediaRecorder(stream);
+                audioChunks = [];
+                mediaRecorder.ondataavailable = event => audioChunks.push(event.data);
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks);
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    button.parentNode.querySelector(".playback")?.remove();
+                    const newAudio = document.createElement("audio");
+                    newAudio.controls = true;
+                    newAudio.src = audioUrl;
+                    newAudio.classList.add("playback");
+                    button.parentNode.appendChild(newAudio);
+                };
+                mediaRecorder.start();
+                setTimeout(() => mediaRecorder.stop(), 2000);
+            });
+        }
+        function playRecording(button) {
+            const audio = button.parentNode.querySelector("audio");
+            if(audio) audio.play();
+        }
+
+        function checkAnswers() {
+            document.querySelectorAll('#quiz .exercise').forEach((div, i) => {
+                const select = div.querySelector('select');
+                const feedback = div.querySelector('.feedback');
+                if (select.value === correctAnswers[i]) {
+                    feedback.textContent = "✅ Great!";
+                    feedback.style.color = "green";
+                } else {
+                    feedback.textContent = "❌ Correct answer: " + correctAnswers[i];
+                    feedback.style.color = "red";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

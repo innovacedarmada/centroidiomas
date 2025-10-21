@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A1 Grammar Bites: Demonstratives</title>
+    <style>
+        /* --- Basic Styling --- */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            padding-top: 80px; /* Space for the sticky header */
+            background-color: #f4f7f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .instruction-box {
+            background-color: #ffeaa7;
+            border-left: 5px solid #fdcb6e;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+        }
+        .exercise-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #ecf0f1;
+        }
+        h3 {
+            color: #3498db;
+            margin-top: 0;
+        }
+        
+        /* --- STICKY AUDIO PLAYER --- */
+        .audio-player {
+            position: fixed; /* Makes the player stay in place */
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #34495e;
+            padding: 15px 0;
+            text-align: center;
+            z-index: 1000; /* Ensures it stays on top of other content */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .audio-player button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .audio-player button:hover {
+            background-color: #27ae60;
+        }
+
+        /* --- Buttons and Feedback --- */
+        .check-btn {
+            display: block;
+            margin-top: 15px;
+            padding: 8px 15px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .check-btn:hover {
+            background-color: #c0392b;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        /* --- Input/Form Styles --- */
+        input[type="text"], input[type="radio"] {
+            margin-right: 5px;
+        }
+        .radio-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .matching-table, .sorting-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .matching-table td, .matching-table th, .sorting-table td {
+            border: 1px solid #bdc3c7;
+            padding: 10px;
+            text-align: left;
+        }
+        .sorting-table input[type="text"] {
+            width: 80px;
+        }
+        .highlight-example {
+            font-weight: bold;
+            background-color: #dcf8c6; /* A light green background to stand out */
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="audio-player">
+    <audio id="listeningAudio" src="path/to/your/script_audio.mp3"></audio>
+    <button onclick="document.getElementById('listeningAudio').play()">
+        ▶️ Listen to the Lesson
+    </button>
+</div>
+<div class="container">
+    <h1>English Grammar Bites: Demonstratives 📌 (A1)</h1>
+    
+    <div class="instruction-box">
+        Listen to this podcast on demonstratives. Click the button to listen to the conversation. Then develop the activities.
+    </div>
+
+    <div class="exercise-section" id="ex1">
+        <h3>1. Matching</h3>
+        <p>Match the rule to the correct demonstrative word mentioned in the dialogue. Write the word in the box.</p>
+        <table class="matching-table">
+            <thead>
+                <tr><th>Rule</th><th>Answer</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1. More than one thing far away from you.</td><td><input type="text" id="match1" data-correct="Those"></td></tr>
+                <tr><td>2. One thing close to you.</td><td><input type="text" id="match2" data-correct="This"></td></tr>
+                <tr><td>3. One thing far away from you.</td><td><input type="text" id="match3" data-correct="That"></td></tr>
+                <tr><td>4. More than one thing close to you.</td><td><input type="text" id="match4" data-correct="These"></td></tr>
+            </tbody>
+        </table>
+        <button class="check-btn" onclick="checkMatching('ex1', ['match1', 'match2', 'match3', 'match4'])">Check Answers</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-section" id="ex2">
+        <h3>2. True or False</h3>
+        <p>Listen to the dialogue again and decide if these statements are True (T) or False (F).</p>
+        <div class="radio-group">
+            <p>1. The words "that" and "this" are used for many things (plural).
+                <label><input type="radio" name="tf1" value="T"> T</label>
+                <label><input type="radio" name="tf1" value="F"> F</label>
+            </p>
+            <p>2. Demonstratives help us identify the distance and the number of objects.
+                <label><input type="radio" name="tf2" value="T"> T</label>
+                <label><input type="radio" name="tf2" value="F"> F</label>
+            </p>
+            <p>3. Sarah says "Those clouds look dark" is a good example.
+                <label><input type="radio" name="tf3" value="T"> T</label>
+                <label><input type="radio" name="tf3" value="F"> F</label>
+            </p>
+        </div>
+        <button class="check-btn" onclick="checkTF('ex2', ['tf1', 'tf2', 'tf3'], ['F', 'T', 'T'])">Check Answers</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-section" id="ex3">
+        <h3>3. Sentence Completion</h3>
+        <p>Complete the sentences using the demonstrative word (this, that, these, those) from the conversation examples.</p>
+        <p>1. "<input type="text" id="gap1" data-correct="That" size="10"> car is red."</p>
+        <p>2. "<input type="text" id="gap2" data-correct="These" size="10"> books are heavy."</p>
+        <p>3. "<input type="text" id="gap3" data-correct="This" size="10"> pen is blue."</p>
+        <p>4. "<input type="text" id="gap4" data-correct="Those" size="10"> clouds look dark!"</p>
+        <button class="check-btn" onclick="checkMatching('ex3', ['gap1', 'gap2', 'gap3', 'gap4'])">Check Answers</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-section" id="ex4">
+        <h3>4. Multiple Choice</h3>
+        <p>Choose the best word based on the *meaning* in the conversation.</p>
+        <div class="radio-group">
+            <p>1. If you have two books in your hand, you should use:
+                <label><input type="radio" name="mcq1" value="a"> Those</label>
+                <label><input type="radio" name="mcq1" value="b"> That</label>
+                <label><input type="radio" name="mcq1" value="c"> These</label>
+            </p>
+            <p>2. What does the teacher (Sarah) say is essential for a clear conversation?
+                <label><input type="radio" name="mcq2" value="a"> Demonstratives</label>
+                <label><input type="radio" name="mcq2" value="b"> Adjectives</label>
+                <label><input type="radio" name="mcq2" value="c"> Names</label>
+            </p>
+            <p>3. If a house is far from you, you should use:
+                <label><input type="radio" name="mcq3" value="a"> These</label>
+                <label><input type="radio" name="mcq3" value="b"> This</label>
+                <label><input type="radio" name="mcq3" value="c"> That</label>
+            </p>
+        </div>
+        <button class="check-btn" onclick="checkMCQ('ex4', ['mcq1', 'mcq2', 'mcq3'], ['c', 'a', 'c'])">Check Answers</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-section" id="ex5">
+        <h3>5. Identify the Speaker</h3>
+        <p>Who said it, Sarah (T) or Alex (S)?</p>
+        <div class="radio-group">
+            <p>1. "These shoes are new."
+                <label><input type="radio" name="speaker1" value="S"> S</label>
+                <label><input type="radio" name="speaker1" value="T"> T</label>
+            </p>
+            <p>2. "They help us identify the distance and the number..."
+                <label><input type="radio" name="speaker2" value="S"> S</label>
+                <label><input type="radio" name="speaker2" value="T"> T</label>
+            </p>
+            <p>3. "Those are beautiful trees."
+                <label><input type="radio" name="speaker3" value="S"> S</label>
+                <label><input type="radio" name="speaker3" value="T"> T</label>
+            </p>
+        </div>
+        <button class="check-btn" onclick="checkTF('ex5', ['speaker1', 'speaker2', 'speaker3'], ['S', 'T', 'S'])">Check Answers</button>
+        <div class="feedback"></div>
+    </div>
+    
+    <div class="exercise-section" id="ex6">
+        <h3>6. Short Answer</h3>
+        <p>Answer the questions with a very short phrase or word, based on the dialogue.</p>
+        <p>1. What is far away and red in Sarah's example? <input type="text" id="short1" data-correct="car" size="10"></p>
+        <p>2. What is flying away on the roof? <input type="text" id="short2" data-correct="birds" size="10"></p>
+        <p>3. What colour is the pen Alex touches? <input type="text" id="short3" data-correct="blue" size="10"></p>
+        <button class="check-btn" onclick="checkMatching('ex6', ['short1', 'short2', 'short3'], true)">Check Answers</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-section" id="ex7">
+        <h3>7. Error Correction</h3>
+        <p>Write the correct demonstrative word that should be used based on the rule.</p>
+        <p>1. (Talking about a phone in your hand) <strike>That</strike> is my phone. ➡️ <input type="text" id="error1" data-correct="This" size="10"></p>
+        <p>2. (Talking about clouds far away) <strike>These</strike> clouds look dark. ➡️ <input type="text" id="error2" data-correct="Those" size="10"></p>
+        <p>3. (Talking about one apple close to you) <strike>Those</strike> apple is mine. ➡️ <input type="text" id="error3" data-correct="This" size="10"></p>
+        <p>4. (Talking about two houses far across the field) <strike>That</strike> are two houses. ➡️ <input type="text" id="error4" data-correct="Those" size="10"></p>
+        <p>5. (Talking about a key on the table next to you) <strike>These</strike> is my key. ➡️ <input type="text" id="error5" data-correct="This" size="10"></p>
+        <button class="check-btn" onclick="checkMatching('ex7', ['error1', 'error2', 'error3', 'error4', 'error5'])">Check Answers</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-section" id="ex8">
+        <h3>8. Classification/Sorting</h3>
+        <p>Fill in the table with the correct demonstratives (This, That, These, Those).</p>
+        <table class="sorting-table">
+            <tr><th></th><th>Many Things (Plural)</th><th>One Thing (Singular)</th></tr>
+            <tr><td>CLOSE (Proximity)</td><td><input type="text" id="sort1" data-correct="These"></td><td><input type="text" id="sort2" data-correct="This"></td></tr>
+            <tr><td>FAR (Distance)</td><td><input type="text" id="sort3" data-correct="Those"></td><td><input type="text" id="sort4" data-correct="That"></td></tr>
+        </table>
+        <button class="check-btn" onclick="checkMatching('ex8', ['sort1', 'sort2', 'sort3', 'sort4'])">Check Answers</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-section" id="ex9">
+        <h3>9. Sequencing</h3>
+        <p>Put the following events from the dialogue in the correct order (1, 2, 3) by typing the number.</p>
+        <p><input type="text" id="seq1" data-correct="1" size="2"> Sarah explains the concept of proximity (close).</p>
+        <p><input type="text" id="seq2" data-correct="3" size="2"> Alex gives an example about clouds looking dark.</p>
+        <p><input type="text" id="seq3" data-correct="2" size="2"> Sarah explains the concept of distance (far).</p>
+        <button class="check-btn" onclick="checkMatching('ex9', ['seq1', 'seq2', 'seq3'])">Check Answers</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="exercise-section" id="ex10">
+        <h3>10. Quick Challenge</h3>
+        <p>Answer the challenges using the <strong>correct demonstrative phrase</strong> based on the rules. Remember to check distance and number!</p>
+        <p>Example: Imagine a pen is in your hand. What do you say? <span class="highlight-example">This is my pen.</span></p>
+        <hr>
+        
+        <p>1. Imagine several cats sitting on a wall far away.
+        <br>Answer: <input type="text" id="challenge1" data-correct="Those are beautiful cats" size="40" placeholder="e.g., Those are beautiful cats."></p>
+
+        <p>2. Imagine a hat on a chair close to you.
+        <br>Answer: <input type="text" id="challenge2" data-correct="This is my hat" size="40" placeholder="e.g., This is my hat."></p>
+
+        <p>3. Imagine two new pencils you are holding.
+        <br>Answer: <input type="text" id="challenge3" data-correct="These are my pencils" size="40" placeholder="e.g., These are my pencils."></p>
+
+        <p>4. Imagine an airplane flying high and far away.
+        <br>Answer: <input type="text" id="challenge4" data-correct="That is an airplane" size="40" placeholder="e.g., That is an airplane."></p>
+
+        <p>5. Imagine a glass of water on the table next to you.
+        <br>Answer: <input type="text" id="challenge5" data-correct="This is my water" size="40" placeholder="e.g., This is my water."></p>
+        
+        <button class="check-btn" onclick="checkChallengeSet('ex10', ['challenge1', 'challenge2', 'challenge3', 'challenge4', 'challenge5'])">Check Answers</button>
+        <div class="feedback"></div>
+    </div>
+
+</div>
+
+<script>
+    // --- Centralized Checking Functions ---
+
+    // Array of correct starting words for the challenge (case-insensitive)
+    const challengeCorrectStarts = [
+        "those", // 1. cats far (plural)
+        "this",  // 2. hat close (singular)
+        "these", // 3. pencils close (plural)
+        "that",  // 4. airplane far (singular)
+        "this"   // 5. glass close (singular)
+    ];
+
+    /**
+     * Checks text-based inputs (Matching, Gap Fill, Short Answer, Sequencing, Classification)
+     * @param {string} exId - The ID of the exercise section (e.g., 'ex1')
+     * @param {string[]} inputIds - Array of input element IDs
+     * @param {boolean} [caseInsensitive=false] - Whether to ignore case for checking
+     */
+    function checkMatching(exId, inputIds, caseInsensitive = false) {
+        let correctCount = 0;
+        let total = inputIds.length;
+
+        inputIds.forEach(id => {
+            const input = document.getElementById(id);
+            const studentAnswer = caseInsensitive ? input.value.trim().toLowerCase() : input.value.trim();
+            const correctAnswer = caseInsensitive ? input.dataset.correct.toLowerCase() : input.dataset.correct;
+
+            if (studentAnswer === correctAnswer) {
+                correctCount++;
+                input.style.backgroundColor = '#d4edda'; // Green for correct
+            } else {
+                input.style.backgroundColor = '#f8d7da'; // Red for incorrect
+            }
+        });
+
+        displayFeedback(exId, correctCount, total);
+    }
+
+    /**
+     * Checks True/False questions and Identify the Speaker (Radio buttons)
+     */
+    function checkTF(exId, nameAttributes, correctAnswers) {
+        let correctCount = 0;
+        let total = nameAttributes.length;
+
+        nameAttributes.forEach((name, index) => {
+            const radios = document.getElementsByName(name);
+            let isCorrect = false;
+
+            radios.forEach(radio => {
+                if (radio.checked) {
+                    if (radio.value === correctAnswers[index]) {
+                        isCorrect = true;
+                    }
+                }
+            });
+
+            if (isCorrect) {
+                correctCount++;
+            }
+        });
+
+        displayFeedback(exId, correctCount, total);
+    }
+
+    /**
+     * Checks Multiple Choice Questions (Radio buttons)
+     */
+    function checkMCQ(exId, nameAttributes, correctAnswers) {
+        checkTF(exId, nameAttributes, correctAnswers);
+    }
+
+    /**
+     * Checks the final open-ended challenge (checks only for the correct starting demonstrative)
+     */
+    function checkChallengeSet(exId, inputIds) {
+        let correctCount = 0;
+        let total = inputIds.length;
+
+        inputIds.forEach((id, index) => {
+            const input = document.getElementById(id);
+            const studentAnswer = input.value.trim().toLowerCase();
+            const requiredStart = challengeCorrectStarts[index];
+            
+            // Check if the student's answer starts with the correct demonstrative
+            let isCorrect = studentAnswer.startsWith(requiredStart);
+
+            if (isCorrect) {
+                correctCount++;
+                input.style.backgroundColor = '#d4edda'; 
+            } else {
+                input.style.backgroundColor = '#f8d7da'; 
+            }
+        });
+
+        const feedbackElement = document.getElementById(exId).querySelector('.feedback');
+        if (correctCount === total) {
+            feedbackElement.style.color = '#155724';
+            feedbackElement.innerHTML = `🎉 Excellent! You correctly used the demonstrative in all ${total} challenges.`;
+        } else {
+            feedbackElement.style.color = '#721c24';
+            feedbackElement.innerHTML = `Keep practicing! You correctly started ${correctCount} out of ${total} challenges. Remember the rules!`;
+        }
+    }
+
+    /**
+     * Displays the final score feedback
+     */
+    function displayFeedback(exId, correct, total) {
+        const feedbackElement = document.getElementById(exId).querySelector('.feedback');
+        if (correct === total) {
+            feedbackElement.style.color = '#155724';
+            feedbackElement.innerHTML = `🎉 Excellent! You got ${correct} out of ${total} correct.`;
+        } else {
+            feedbackElement.style.color = '#721c24';
+            feedbackElement.innerHTML = `Try again. You got ${correct} out of ${total} correct.`;
+        }
+    }
+</script>
+
+</body>
+</html>
