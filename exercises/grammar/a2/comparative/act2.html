@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Test: Comparative & Superlative Adjectives</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .instructions {
+            background: #e9e9e9;
+            padding: 10px;
+            border-left: 5px solid #007BFF;
+            margin-bottom: 20px;
+        }
+        .reading-passage {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .options label {
+            display: inline-block;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+        .correct-answer {
+            color: green;
+            font-weight: bold;
+        }
+        .incorrect-answer {
+            color: red;
+        }
+        #results {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9e9e9;
+            border-radius: 5px;
+            display: none;
+        }
+        .button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Reading Test: Our Favorite Things</h1>
+
+    <div class="instructions">
+        <p><strong>INSTRUCTIONS:</strong></p>
+        <p><strong>READ THE TEXT ABOUT THREE FRIENDS' FAVORITE THINGS.</strong></p>
+        <p><strong>NOW, DECIDE IF THE FOLLOWING STATEMENTS ARE TRUE OR FALSE.</strong></p>
+    </div>
+
+    <div class="reading-passage">
+        <p>Tom, Lisa, and Sam are good friends. They like to talk about their favorite things. Tom has a new bike. It is faster than Lisa’s old bike. Lisa has a big bag for school. It is bigger than Tom’s small bag. Sam loves animals. His cat, Leo, is friendlier than his neighbor’s dog. Of all their pets, Leo is the friendliest pet in the neighborhood! </p>
+        <p>Lisa loves reading. Her new fantasy book is more interesting than the old book. She thinks it is the most interesting book she has ever read. Tom loves his computer. He thinks his computer is the fastest one for playing games. Sam loves to travel. He says his holiday to the mountains was better than his holiday to the beach. He says it was the best holiday of his life!</p>
+    </div>
+
+    <h2>True or False Statements</h2>
+
+    <form id="quizForm">
+        <div class="question">
+            <p><strong>1. Tom's new bike is faster than Lisa's old bike.</strong></p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="true"> True</label>
+                <label><input type="radio" name="q1" value="false"> False</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p><strong>2. Lisa’s bag is smaller than Tom’s bag.</strong></p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="true"> True</label>
+                <label><input type="radio" name="q2" value="false"> False</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p><strong>3. Sam's cat is the friendliest animal in the neighborhood.</strong></p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="true"> True</label>
+                <label><input type="radio" name="q3" value="false"> False</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p><strong>4. Lisa’s new book is the most interesting one she has ever read.</strong></p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="true"> True</label>
+                <label><input type="radio" name="q4" value="false"> False</label>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p><strong>5. Tom’s computer is the best for playing games.</strong></p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="true"> True</label>
+                <label><input type="radio" name="q5" value="false"> False</label>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p><strong>6. Sam’s holiday to the beach was better than his holiday to the mountains.</strong></p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="true"> True</label>
+                <label><input type="radio" name="q6" value="false"> False</label>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p><strong>7. Lisa's old book was more interesting than her new one.</strong></p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="true"> True</label>
+                <label><input type="radio" name="q7" value="false"> False</label>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p><strong>8. Sam thinks his holiday to the mountains was the best holiday of his life.</strong></p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="true"> True</label>
+                <label><input type="radio" name="q8" value="false"> False</label>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p><strong>9. Tom's bag is bigger than Lisa's.</strong></p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="true"> True</label>
+                <label><input type="radio" name="q9" value="false"> False</label>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p><strong>10. Sam's cat is friendlier than his neighbor's dog.</strong></p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="true"> True</label>
+                <label><input type="radio" name="q10" value="false"> False</label>
+            </div>
+        </div>
+        
+        <button type="button" class="button" onclick="checkAnswers()">Check Answers</button>
+    </form>
+
+    <div id="results"></div>
+
+</div>
+
+<script>
+    const correctAnswers = {
+        q1: 'true',
+        q2: 'false',
+        q3: 'true',
+        q4: 'true',
+        q5: 'true',
+        q6: 'false',
+        q7: 'false',
+        q8: 'true',
+        q9: 'false',
+        q10: 'true'
+    };
+
+    function checkAnswers() {
+        const form = document.getElementById('quizForm');
+        let correctCount = 0;
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = '<h3>Your Results:</h3>';
+        resultsDiv.style.display = 'block';
+
+        for (let i = 1; i <= 10; i++) {
+            const questionName = `q${i}`;
+            const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+            const isCorrect = selectedOption && selectedOption.value === correctAnswers[questionName];
+
+            const resultText = document.createElement('p');
+            resultText.innerHTML = `<strong>Question ${i}:</strong> ${isCorrect ? '<span class="correct-answer">Correct!</span>' : '<span class="incorrect-answer">Incorrect.</span>'}`;
+            resultsDiv.appendChild(resultText);
+
+            if (!isCorrect) {
+                const correctionText = document.createElement('p');
+                const correctAnswerText = correctAnswers[questionName] === 'true' ? 'True' : 'False';
+                correctionText.innerHTML = `The correct answer is <strong>${correctAnswerText}</strong>.`;
+                correctionText.style.marginLeft = '20px';
+                resultsDiv.appendChild(correctionText);
+            }
+        }
+
+        const totalQuestions = Object.keys(correctAnswers).length;
+        const finalScoreText = document.createElement('h3');
+        finalScoreText.textContent = `You got ${correctCount} out of ${totalQuestions} correct!`;
+        resultsDiv.prepend(finalScoreText);
+    }
+</script>
+
+</body>
+</html>
+

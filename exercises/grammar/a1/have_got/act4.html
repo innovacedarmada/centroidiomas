@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Things! - Have Got Practice (A1)</title>
+    <style>
+        /* General Body and Container Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff; /* Light, calming blue */
+            color: #2c3e50; /* Dark blue-gray text */
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Heading Styles */
+        h1 {
+            color: #e74c3c; /* Red for energy */
+            border-bottom: 4px dashed #f39c12; /* Orange for fun */
+            padding-bottom: 12px;
+            margin-top: 0;
+            text-align: center;
+            font-size: 28px;
+        }
+        h2 {
+            color: #27ae60; /* Vibrant green for clear sections */
+            margin-top: 35px;
+            border-left: 6px solid #27ae60;
+            padding-left: 12px;
+            font-size: 24px;
+        }
+        h3 {
+            color: #3498db; /* Light blue for scenario titles */
+            margin-top: 25px;
+        }
+
+        /* Instructions and Goal */
+        .goal-box {
+            background-color: #ecf0f1; /* Very light gray */
+            border: 1px solid #bdc3c7;
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        .goal-box strong {
+            color: #e74c3c;
+        }
+        ol {
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Scenario/Dialogue Styling */
+        .scenario-box {
+            background-color: #f7fcfc; /* Very light blue/white */
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .scenario-box p {
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .prompt-area {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .prompt-area label {
+            display: block;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+        .answer-input {
+            width: 70%;
+            padding: 5px;
+            margin-left: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #2980b9; /* Distinct color for student text */
+            font-weight: bold;
+        }
+        .prompt-area span {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        /* Answer Key Section */
+        #answer-key {
+            background-color: #d4edda;
+            border: 2px solid #2ecc71; /* Strong green border */
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 40px;
+            display: none;
+        }
+        #answer-key h3 {
+            color: #1abc9c;
+            margin-top: 0;
+            border-bottom: 2px solid #1abc9c;
+            padding-bottom: 10px;
+        }
+        #answer-key ol {
+            list-style-type: decimal;
+            padding-left: 20px;
+        }
+        #answer-key ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 5px;
+        }
+        #answer-key li {
+            margin-bottom: 10px;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .show-answers {
+            display: block;
+            margin: 25px auto 0;
+            padding: 12px 25px;
+            background-color: #f1c40f; /* Sunny Yellow button */
+            color: #333;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .show-answers:hover {
+            background-color: #e67e22; /* Orange on hover */
+        }
+    </style>
+    <script>
+        function toggleAnswers() {
+            var key = document.getElementById("answer-key");
+            var button = document.getElementById("answer-button");
+            if (key.style.display === "none") {
+                key.style.display = "block";
+                button.textContent = "Hide Answers";
+            } else {
+                key.style.display = "none";
+                button.textContent = "Check Your Answers! (Self-Check)";
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>📝 My Things! 🏠 Using 'Have Got' and 'Has Got'</h1>
+    <div class="goal-box">
+        <p><strong>GOAL:</strong> You will practice writing sentences and questions using 'have got' and 'has got' (affirmative, negative, and interrogative) in fun scenarios!</p>
+    </div>
+
+    ---
+
+    <h2>🧭 Student Instructions</h2>
+    <ol>
+        <li>Read: Read each Dialogue and Story carefully to understand the context.</li>
+        <li>Write: Complete the prompts in the empty slots using the correct form of 'have got' or 'has got'.</li>
+        <li>Check: Click the button at the bottom to see the answers.</li>
+        <li>Learn: Compare your answers to the key. Good luck!</li>
+    </ol>
+
+    ---
+
+    <h2>1. 🗣️ Interactive Dialogues (Asking and Answering)</h2>
+
+    <h3>1. The Lost Key 🔑 (Focus: I/You)</h3>
+    <div class="scenario-box">
+        <p>Ana: Oh, no, Ben! My bag is open. This is a problem.</p>
+        <p>Ben: What’s wrong, Ana? Are you okay?</p>
+        <p>Ana: I haven't got my house key! It’s not here.</p>
+        <p>Ben: Oh dear. Have you checked your coat pocket? And tell me, Have you got your phone? You can call your mum.</p>
+        <p>Ana: Yes, I have got my phone, but she hasn't got a spare key for me today.</p>
+        <p>Ben: Well, I 've got my bike key. That doesn't help! I'm sorry.</p>
+    </div>
+    <div class="prompt-area">
+        <label>1. (Question) Write Ben's question about the phone. ➡️ <input type="text" class="answer-input"></label>
+        <label>2. (Affirmative) What has Ana got? ➡️ <input type="text" class="answer-input"></label>
+        <label>3. (Negative) What hasn't Ana got? ➡️ <input type="text" class="answer-input"></label>
+    </div>
+
+    <h3>2. Family Photo Day 👨‍👩‍👧‍👦 (Focus: He/She/They)</h3>
+    <div class="scenario-box">
+        <p>Chloe: Look at this photo! It’s my whole family at the beach.</p>
+        <p>Dan: Wow! That’s a big group. Tell me about your brother. Has he got a dog in his new flat?</p>
+        <p>Chloe: No, he hasn't got a dog. He has got a fat, lazy cat! It’s called Mittens.</p>
+        <p>Dan: Mittens! Cute. And have your parents got a big house in the city or a small one?</p>
+        <p>Chloe: They have got a big house with three floors. My sister, Lisa, lives there too, but she hasn't got a car, so she takes the bus.</p>
+    </div>
+    <div class="prompt-area">
+        <label>1. (Negative) Chloe's brother / a dog ➡️ <input type="text" class="answer-input"></label>
+        <label>2. (Affirmative) Chloe's sister / a car (What she doesn't have) ➡️ <input type="text" class="answer-input"></label>
+        <label>3. (Question) Ask about the number of rooms the house has. ➡️ <input type="text" class="answer-input"></label>
+    </div>
+
+    <h3>3. Shopping for Clothes 🛍️ (Focus: We/They)</h3>
+    <div class="scenario-box">
+        <p>Emily: We need new warm shoes for the winter trip. Have we got warm coats that fit the children?</p>
+        <p>Fred: Yes, we have got the coats. But they haven't got hats for the snow. We need to buy two.</p>
+        <p>Emily: Oh, right. And have the children got gloves? What about Tom and Sarah?</p>
+        <p>Fred: Tom hasn't got gloves, but Sarah has got her new blue ones. They are in her backpack.</p>
+        <p>Emily: Okay. I 've got enough money for the shoes and two hats. Let's start shopping!</p>
+    </div>
+    <div class="prompt-area">
+        <label>1. (Question) What does Emily ask about the coats? ➡️ <input type="text" class="answer-input"></label>
+        <label>2. (Negative) What do the coats not have? ➡️ <input type="text" class="answer-input"></label>
+        <label>3. (Affirmative) What has Sarah got? ➡️ <input type="text" class="answer-input"></label>
+    </div>
+
+    ---
+
+    <h2>2. 📖 Engaging Stories (Describing)</h2>
+
+    <h3>1. The Supermarket List 📝</h3>
+    <div class="scenario-box">
+        <p>Mum is at the supermarket and is calling home. Dad and the kids are checking the fridge. The fridge is nearly empty! Dad says, "I'm sorry, Mum. We haven't got any eggs, and we haven't got any milk for your tea." He looks in the vegetable box. "We have got only one small tomato. Wait, Mia is lucky: she has got a big chocolate bar that her uncle gave her! I haven't got one now, but maybe I will buy one!"</p>
+    </div>
+    <div class="prompt-area">
+        <label>1. (Negative) What does the family not have for tea? ➡️ <input type="text" class="answer-input"></label>
+        <label>2. (Affirmative) What has Mia got? ➡️ <input type="text" class="answer-input"></label>
+        <label>3. (Question) Ask if the family has bread. ➡️ <input type="text" class="answer-input"></label>
+    </div>
+
+    <h3>2. The New Office 🏢</h3>
+    <div class="scenario-box">
+        <p>Welcome to our new, small office! It has got two big desks and a beautiful view of the park, but it hasn't got a coffee machine, which is a big problem! We need to buy one. I have got three bright red pens and a nice new notebook on my desk. My colleague, Sara, is ready too. She has got a new computer and a small lamp, but she hasn't got a comfortable chair yet! The old chair is terrible.</p>
+    </div>
+    <div class="prompt-area">
+        <label>1. (Affirmative) The office / a view ➡️ <input type="text" class="answer-input"></label>
+        <label>2. (Negative) What does the office not have for drinks? ➡️ <input type="text" class="answer-input"></label>
+        <label>3. (Affirmative) What has Sara got that helps her work? ➡️ <input type="text" class="answer-input"></label>
+    </div>
+
+    <h3>3. Animals on the Farm 🐓🐖</h3>
+    <div class="scenario-box">
+        <p>Hello! Welcome to Farmer Tom's land. This farm is small and friendly. Farmer Tom has got three very happy, mud-covered pigs. The pigs have got big pink ears and short tails. The farm hasn't got any cows, but it has got five noisy chickens. They make a lot of noise! The chickens haven't got blue feathers; they have got white feathers. They are always hungry.</p>
+    </div>
+    <div class="prompt-area">
+        <label>1. (Affirmative) The farmer / pigs ➡️ <input type="text" class="answer-input"></label>
+        <label>2. (Negative) What doesn't the farm have? ➡️ <input type="text" class="answer-input"></label>
+        <label>3. (Question) Ask if the pigs have small ears. ➡️ <input type="text" class="answer-input"></label>
+    </div>
+
+    ---
+
+    <button id="answer-button" class="show-answers" onclick="toggleAnswers()">Check Your Answers! (Self-Check)</button>
+
+    <div id="answer-key">
+        <h3>✅ Answer Key - Well done!</h3>
+
+        <h4>1. Dialogue Scenarios Answers</h4>
+        <ol>
+            <li>The Lost Key:
+                <ul>
+                    <li>1. Have you got your phone?</li>
+                    <li>2. She has got her phone. / She's got her phone.</li>
+                    <li>3. She hasn't got her house key.</li>
+                </ul>
+            </li>
+            <li>Family Photo Day:
+                <ul>
+                    <li>1. Chloe's brother hasn't got a dog.</li>
+                    <li>2. She hasn't got a car.</li>
+                    <li>3. Has the house got three floors? (Or: How many floors has the house got?)</li>
+                </ul>
+            </li>
+            <li>Shopping for Clothes:
+                <ul>
+                    <li>1. Have we got warm coats?</li>
+                    <li>2. They haven't got hats. (Or: The coats haven't got hats.)</li>
+                    <li>3. Sarah has got new blue gloves. (Or: She's got new blue gloves.)</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h4>2. Story Scenarios Answers</h4>
+        <ol>
+            <li>The Supermarket List:
+                <ul>
+                    <li>1. We haven't got milk. (Or: We haven't got eggs.)</li>
+                    <li>2. Mia has got a big chocolate bar. / Mia's got a big chocolate bar.</li>
+                    <li>3. Have we got bread?</li>
+                </ul>
+            </li>
+            <li>The New Office:
+                <ul>
+                    <li>1. It has got a beautiful view. (Or: It's got a beautiful view.)</li>
+                    <li>2. It hasn't got a coffee machine.</li>
+                    <li>3. She has got a new computer. (Or: She's got a new computer.)</li>
+                </ul>
+            </li>
+            <li>Animals on the Farm:
+                <ul>
+                    <li>1. He has got three pigs. / He's got three pigs.</li>
+                    <li>2. It hasn't got any cows. (Or: The farm hasn't got any cows.)</li>
+                    <li>3. Has the pigs got small ears?</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+</body>
+</html>

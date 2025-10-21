@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Got It! Master the Forms of 'Have Got' (A1)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin: 40px 0 20px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #FFD700;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2::before {
+            content: '📝';
+            font-size: 1.2em;
+        }
+
+        .instructions-block {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 6px solid #2196F3;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .instructions-block p {
+            margin: 10px 0;
+            font-size: 1.05em;
+        }
+
+        .instructions-block strong {
+            color: #1565C0;
+        }
+
+        .example {
+            background: #FFF9C4;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 4px solid #FFC107;
+        }
+
+        .task-container {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #4FC3F7 0%, #29B6F6 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #E0E0E0;
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background-color: #F5F5F5;
+        }
+
+        tr:hover {
+            background-color: #E3F2FD;
+            transition: background-color 0.3s;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #BDBDBD;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .answer-key {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0 0 0;
+            border-left: 6px solid #4CAF50;
+        }
+
+        .answer-key h2 {
+            color: #2E7D32;
+            text-align: center;
+            border-bottom: 3px solid #4CAF50;
+            margin-bottom: 30px;
+        }
+
+        .answer-key h2::before {
+            content: '✅';
+        }
+
+        .answer-key h3 {
+            color: #388E3C;
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .answer-key ol {
+            background: white;
+            padding: 25px 25px 25px 45px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .answer-key li {
+            margin: 12px 0;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .warning {
+            color: #D32F2F;
+            font-weight: bold;
+            background: #FFEBEE;
+            padding: 3px 8px;
+            border-radius: 5px;
+        }
+
+        .task-number {
+            background: #FF9800;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        hr {
+            border: none;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            margin: 40px 0;
+        }
+
+        .toggle-answers-btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+            transition: all 0.3s;
+        }
+
+        .toggle-answers-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 7px 20px rgba(76, 175, 80, 0.6);
+        }
+
+        .answer-key.hidden {
+            display: none;
+        }
+
+        .sentence-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        .sentence-list li {
+            padding: 8px 12px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #2196F3;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✨ Got It! Master 'Have Got' ✨</h1>
+            <div class="subtitle">Level A1 Self-Study Grammar Practice</div>
+        </div>
+
+        <div class="content">
+            <h2>Task 1: Fill in the Gaps (Affirmative/Negative)</h2>
+            <div class="instructions-block">
+                <p><strong>Instructions:</strong> Complete the sentences using the correct <strong>short form</strong> of 'have got' or 'has got' (e.g., <em>I've got</em>, <em>She hasn't got</em>). Use the word in parentheses <strong>(affirmative/negative)</strong> to help you.</p>
+                <div class="example">
+                    <strong>Example:</strong> I _____ a new phone. (affirmative) <br>
+                    <strong>Answer:</strong> I've got a new phone.
+                </div>
+            </div>
+            <div class="task-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">#</th>
+                            <th style="width: 50%;">Prompt</th>
+                            <th style="width: 45%;">Your Answer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>My friend, Leo, _____ a red notebook. (affirmative)</td><td><input type="text"></td></tr>
+                        <tr><td>2</td><td>We _____ a lot of homework tonight. (affirmative)</td><td><input type="text"></td></tr>
+                        <tr><td>3</td><td>I _____ a blue pen. (negative)</td><td><input type="text"></td></tr>
+                        <tr><td>4</td><td>John _____ a pencil case on his desk. (negative)</td><td><input type="text"></td></tr>
+                        <tr><td>5</td><td>They _____ a small dog named Max. (affirmative)</td><td><input type="text"></td></tr>
+                        <tr><td>6</td><td>My sister _____ a big car. (negative)</td><td><input type="text"></td></tr>
+                        <tr><td>7</td><td>It _____ four wheels. (affirmative)</td><td><input type="text"></td></tr>
+                        <tr><td>8</td><td>You _____ time to finish the work. (affirmative)</td><td><input type="text"></td></tr>
+                        <tr><td>9</td><td>We _____ any milk in the fridge. (negative)</td><td><input type="text"></td></tr>
+                        <tr><td>10</td><td>The teacher _____ the answers yet. (negative)</td><td><input type="text"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr>
+
+            <h2>Task 2: Write Questions (Interrogative)</h2>
+            <div class="instructions-block">
+                <p><strong>Instructions:</strong> Read the answer. Write the <strong>full question</strong> that would get this answer, using the interrogative form of 'have got' or 'has got'.</p>
+                <div class="example">
+                    <strong>Example:</strong> Answer: Yes, I have. I've got one brother. <br>
+                    <strong>Question:</strong> Have you got a brother?
+                </div>
+            </div>
+            <div class="task-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">#</th>
+                            <th style="width: 35%;">Answer</th>
+                            <th style="width: 60%;">Your Question</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>No, she hasn't. She hasn't got an umbrella today.</td><td><input type="text"></td></tr>
+                        <tr><td>2</td><td>Yes, we have. We've got a test tomorrow.</td><td><input type="text"></td></tr>
+                        <tr><td>3</td><td>Yes, he has. Alex has got a new job.</td><td><input type="text"></td></tr>
+                        <tr><td>4</td><td>No, they haven't. They haven't got any children.</td><td><input type="text"></td></tr>
+                        <tr><td>5</td><td>Yes, I have. I've got a big sandwich for lunch.</td><td><input type="text"></td></tr>
+                        <tr><td>6</td><td>No, it hasn't. It hasn't got a battery.</td><td><input type="text"></td></tr>
+                        <tr><td>7</td><td>Yes, she has. Maria has got two cousins.</td><td><input type="text"></td></tr>
+                        <tr><td>8</td><td>No, we haven't. We haven't got the address.</td><td><input type="text"></td></tr>
+                        <tr><td>9</td><td>Yes, he has. Mark has got a nice coat.</td><td><input type="text"></td></tr>
+                        <tr><td>10</td><td>No, they haven't. They haven't got a car here.</td><td><input type="text"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr>
+
+            <h2>Task 3: Spot the Mistake</h2>
+            <div class="instructions-block">
+                <p><span class="warning">⚠️ IMPORTANT:</span> For each number, read the three sentences (A, B, C). One sentence has a grammar mistake with 'have got' or 'has got'. Write the letter of the mistake and the full, correct sentence in the boxes provided.</p>
+                <div class="example">
+                    <strong>Example:</strong> Prompts: A. I haven't got much time. B. Has Maria got a calculator? C. They <strong>has got</strong> three pets. <br>
+                    <strong>Mistake Letter:</strong> C | <strong>Correct Sentence:</strong> They have got three pets.
+                </div>
+            </div>
+            <div class="task-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">#</th>
+                            <th style="width: 55%;">Prompts</th>
+                            <th style="width: 10%;">Mistake Letter</th>
+                            <th style="width: 30%;">Correct Sentence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <ul class="sentence-list">
+                                    <li><strong>A.</strong> She have got long hair.</li>
+                                    <li><strong>B.</strong> Has the dog got a blue collar?</li>
+                                    <li><strong>C.</strong> We haven't got classes today.</li>
+                                </ul>
+                            </td>
+                            <td><input type="text" style="width: 60px;"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <ul class="sentence-list">
+                                    <li><strong>A.</strong> You hasn't got the answer.</li>
+                                    <li><strong>B.</strong> Have you got a map?</li>
+                                    <li><strong>C.</strong> I've got two tickets.</li>
+                                </ul>
+                            </td>
+                            <td><input type="text" style="width: 60px;"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>
+                                <ul class="sentence-list">
+                                    <li><strong>A.</strong> It hasn't got a battery.</li>
+                                    <li><strong>B.</strong> The students have got books.</li>
+                                    <li><strong>C.</strong> Have he got a pen?</li>
+                                </ul>
+                            </td>
+                            <td><input type="text" style="width: 60px;"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>
+                                <ul class="sentence-list">
+                                    <li><strong>A.</strong> Peter has got a camera.</li>
+                                    <li><strong>B.</strong> Have we got time to eat?</li>
+                                    <li><strong>C.</strong> I haven't got a keys.</li>
+                                </ul>
+                            </td>
+                            <td><input type="text" style="width: 60px;"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>
+                                <ul class="sentence-list">
+                                    <li><strong>A.</strong> They have got many friends.</li>
+                                    <li><strong>B.</strong> Has you got a question?</li>
+                                    <li><strong>C.</strong> She hasn't got a pencil.</li>
+                                </ul>
+                            </td>
+                            <td><input type="text" style="width: 60px;"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>
+                                <ul class="sentence-list">
+                                    <li><strong>A.</strong> Have the computer got a virus?</li>
+                                    <li><strong>B.</strong> I've got a lot of work.</li>
+                                    <li><strong>C.</strong> We haven't got a problem.</li>
+                                </ul>
+                            </td>
+                            <td><input type="text" style="width: 60px;"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>
+                                <ul class="sentence-list">
+                                    <li><strong>A.</strong> She has got two brothers.</li>
+                                    <li><strong>B.</strong> He haven't got a job.</li>
+                                    <li><strong>C.</strong> Has the cat got food?</li>
+                                </ul>
+                            </td>
+                            <td><input type="text" style="width: 60px;"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>
+                                <ul class="sentence-list">
+                                    <li><strong>A.</strong> They hasn't got money.</li>
+                                    <li><strong>B.</strong> Have your parents got a garden?</li>
+                                    <li><strong>C.</strong> I've got a meeting at three.</li>
+                                </ul>
+                            </td>
+                            <td><input type="text" style="width: 60px;"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>
+                                <ul class="sentence-list">
+                                    <li><strong>A.</strong> The man has got a hat.</li>
+                                    <li><strong>B.</strong> Have I got my bag?</li>
+                                    <li><strong>C.</strong> Lisa and Tom has got a boat.</li>
+                                </ul>
+                            </td>
+                            <td><input type="text" style="width: 60px;"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>
+                                <ul class="sentence-list">
+                                    <li><strong>A.</strong> He has got good shoes.</li>
+                                    <li><strong>B.</strong> Haven't we got enough time?</li>
+                                    <li><strong>C.</strong> Has you got an idea?</li>
+                                </ul>
+                            </td>
+                            <td><input type="text" style="width: 60px;"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr>
+
+            <h2>Task 4: Paraphrasing (Using 'Have/Has Got')</h2>
+            <div class="instructions-block">
+                <p><strong>Instructions:</strong> Rewrite the original sentence so it has the <strong>same meaning</strong>, but you <strong>must</strong> use a form of 'have got' or 'has got' (affirmative, negative, or interrogative).</p>
+                <div class="example">
+                    <strong>Example:</strong> Original Idea: John possesses a new bicycle. <br>
+                    <strong>Answer:</strong> John has got a new bicycle.
+                </div>
+            </div>
+            <div class="task-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">#</th>
+                            <th style="width: 45%;">Original Idea</th>
+                            <th style="width: 50%;">Your Paraphrase (Using 'have got' / 'has got')</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>I do not own a car.</td><td><input type="text"></td></tr>
+                        <tr><td>2</td><td>Does your sister own any pets?</td><td><input type="text"></td></tr>
+                        <tr><td>3</td><td>My parents possess a very big house.</td><td><input type="text"></td></tr>
+                        <tr><td>4</td><td>She has no money today.</td><td><input type="text"></td></tr>
+                        <tr><td>5</td><td>Is this phone her possession?</td><td><input type="text"></td></tr>
+                        <tr><td>6</td><td>We are not in possession of the tickets.</td><td><input type="text"></td></tr>
+                        <tr><td>7</td><td>Does your friend possess a jacket?</td><td><input type="text"></td></tr>
+                        <tr><td>8</td><td>Their children own two bicycles.</td><td><input type="text"></td></tr>
+                        <tr><td>9</td><td>Lisa doesn't have a pen.</td><td><input type="text"></td></tr>
+                        <tr><td>10</td><td>Is it true that you have a meeting?</td><td><input type="text"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <button class="toggle-answers-btn" onclick="toggleAnswers()">
+                👁️ Show Answer Key
+            </button>
+
+            <div class="answer-key hidden" id="answerKey">
+                <h2>Answer Key: Check Your Work!</h2>
+
+                <h3>Task 1 Answers (Short Form)</h3>
+                <ol>
+                    <li>Leo <strong>'s got</strong> (or <strong>has got</strong>) a red notebook.</li>
+                    <li>We <strong>'ve got</strong> (or <strong>have got</strong>) a lot of homework tonight.</li>
+                    <li>I <strong>haven't got</strong> a blue pen.</li>
+                    <li>John <strong>hasn't got</strong> a pencil case.</li>
+                    <li>They <strong>'ve got</strong> (or <strong>have got</strong>) a small dog named Max.</li>
+                    <li>My sister <strong>hasn't got</strong> a big car.</li>
+                    <li>It <strong>'s got</strong> (or <strong>has got</strong>) four wheels.</li>
+                    <li>You <strong>'ve got</strong> (or <strong>have got</strong>) time to finish the work.</li>
+                    <li>We <strong>haven't got</strong> any milk in the fridge.</li>
+                    <li>The teacher <strong>hasn't got</strong> the answers yet.</li>
+                </ol>
+
+                <h3>Task 2 Answers (Questions)</h3>
+                <ol>
+                    <li><strong>Has she got</strong> an umbrella today?</li>
+                    <li><strong>Have you got</strong> a test tomorrow?</li>
+                    <li><strong>Has Alex got</strong> a new job?</li>
+                    <li><strong>Have they got</strong> any children?</li>
+                    <li><strong>Have you got</strong> a big sandwich for lunch?</li>
+                    <li><strong>Has it got</strong> a battery?</li>
+                    <li><strong>Has Maria got</strong> two cousins?</li>
+                    <li><strong>Have we got</strong> the address?</li>
+                    <li><strong>Has Mark got</strong> a nice coat?</li>
+                    <li><strong>Have they got</strong> a car here?</li>
+                </ol>
+
+                <h3>Task 3 Answers (Corrections)</h3>
+                <ol>
+                    <li><strong>A.</strong> Correct sentence: She <strong>has got</strong> long hair.</li>
+                    <li><strong>A.</strong> Correct sentence: You <strong>haven't got</strong> the answer.</li>
+                    <li><strong>C.</strong> Correct sentence: <strong>Has he got</strong> a pen?</li>
+                    <li><strong>C.</strong> Correct sentence: I <strong>haven't got</strong> keys.</li>
+                    <li><strong>B.</strong> Correct sentence: <strong>Have you got</strong> a question?</li>
+                    <li><strong>A.</strong> Correct sentence: <strong>Has the computer got</strong> a virus?</li>
+                    <li><strong>B.</strong> Correct sentence: He <strong>hasn't got</strong> a job.</li>
+                    <li><strong>A.</strong> Correct sentence: They <strong>haven't got</strong> money.</li>
+                    <li><strong>C.</strong> Correct sentence: Lisa and Tom <strong>have got</strong> a boat.</li>
+                    <li><strong>C.</strong> Correct sentence: <strong>Have you got</strong> an idea?</li>
+                </ol>
+
+                <h3>Task 4 Answers (Paraphrasing)</h3>
+                <ol>
+                    <li><strong>I haven't got a car.</strong></li>
+                    <li><strong>Has your sister got any pets?</strong></li>
+                    <li><strong>My parents have got a very big house.</strong></li>
+                    <li><strong>She hasn't got any money today.</strong></li>
+                    <li><strong>Has she got this phone?</strong></li>
+                    <li><strong>We haven't got the tickets.</strong></li>
+                    <li><strong>Has your friend got a jacket?</strong></li>
+                    <li><strong>Their children have got two bicycles.</strong></li>
+                    <li><strong>Lisa hasn't got a pen.</strong></li>
+                    <li><strong>Have you got a meeting?</strong></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleAnswers() {
+            const answerKey = document.getElementById('answerKey');
+            const button = document.querySelector('.toggle-answers-btn');
+            
+            if (answerKey.classList.contains('hidden')) {
+                answerKey.classList.remove('hidden');
+                button.textContent = '👁️ Hide Answer Key';
+                answerKey.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                answerKey.classList.add('hidden');
+                button.textContent = '👁️ Show Answer Key';
+            }
+        }
+    </script>
+</body>
+</html>

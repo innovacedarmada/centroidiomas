@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Listening Comprehension – Comparatives & Superlatives (A2)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --bg:#f7f7fb;
+      --card:#ffffff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --accent:#2563eb;
+      --correct:#10b981;
+      --incorrect:#ef4444;
+      --border:#e5e7eb;
+    }
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.5;
+    }
+    .wrap{
+      max-width:800px; margin:32px auto; padding:0 16px;
+    }
+    header{
+      background:linear-gradient(135deg,#e0ecff, #f5f7ff);
+      border:1px solid var(--border); border-radius:14px; padding:20px 20px 8px;
+      box-shadow:0 1px 2px rgba(0,0,0,.04);
+    }
+    h1{ font-size:1.4rem; margin:0 0 6px }
+    p.lead{ margin:0 0 12px; color:var(--muted) }
+    .card{
+      background:var(--card); border:1px solid var(--border); border-radius:14px;
+      padding:18px; margin-top:16px; box-shadow:0 1px 2px rgba(0,0,0,.03);
+    }
+    .audio-box{ display:flex; gap:12px; align-items:center; flex-wrap:wrap }
+    .hint{ color:var(--muted); font-size:.92rem }
+    fieldset{
+      border:none; margin:0 0 14px; padding:0;
+    }
+    legend{
+      font-weight:600; margin-bottom:8px;
+    }
+    .options{ display:grid; gap:8px; }
+    label{
+      display:flex; gap:10px; align-items:flex-start; padding:10px 12px; border:1px solid var(--border); border-radius:10px;
+      cursor:pointer; background:#fff; transition:.15s ease;
+    }
+    label:hover{ border-color:#cbd5e1; background:#f9fafb }
+    input[type="radio"]{ margin-top:2px }
+    .q-feedback{ font-size:.92rem; margin-top:8px; display:none }
+    .q.correct .q-feedback{ color:var(--correct); display:block }
+    .q.incorrect .q-feedback{ color:var(--incorrect); display:block }
+    .q.unanswered .q-feedback{ color:#a16207; display:block }
+    .q.correct label.correct-option{ border-color:#b7f3de; background:#ecfdf5 }
+    .q.incorrect label.selected{ border-color:#fecaca; background:#fef2f2 }
+    .q .badge{
+      display:inline-block; padding:1px 8px; border-radius:999px; font-size:.78rem;
+      background:#eef2ff; color:#3730a3; margin-left:6px;
+    }
+    .controls{ display:flex; gap:12px; margin-top:8px; flex-wrap:wrap }
+    .btn{
+      appearance:none; border:1px solid var(--border); background:#fff; color:var(--text);
+      padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:600; transition:.15s ease;
+    }
+    .btn.primary{ background:var(--accent); color:#fff; border-color:#1e40af }
+    .btn:hover{ transform:translateY(-1px) }
+    .score{
+      margin-top:8px; font-weight:700
+    }
+    footer{ color:var(--muted); font-size:.9rem; margin-top:16px }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Listening Comprehension – CEFR A2</h1>
+      <p class="lead">Focus: comparative &amp; superlative adjectives. Listen and choose the best answer (a–d).</p>
+      <div class="card audio-box">
+        <audio controls preload="metadata">
+          <!-- Updated MP3 file -->
+          <source src="listening-test.mp3" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+        <div class="hint">Tip: You can listen more than once before checking your answers.</div>
+      </div>
+    </header>
+
+    <form id="quiz" class="card">
+      <!-- Q1 -->
+      <fieldset class="q" data-correct="c">
+        <legend>1) How was the weather compared to her city?</legend>
+        <div class="options">
+          <label><input type="radio" name="q1" value="a" /> a) It was colder.</label>
+          <label><input type="radio" name="q1" value="b" /> b) It was rainier.</label>
+          <label class="correct-option"><input type="radio" name="q1" value="c" /> c) It was warmer.</label>
+          <label><input type="radio" name="q1" value="d" /> d) It was windier.</label>
+        </div>
+        <div class="q-feedback"></div>
+      </fieldset>
+
+      <!-- Q2 -->
+      <fieldset class="q" data-correct="b">
+        <legend>2) What did she say about the pizza?</legend>
+        <div class="options">
+          <label><input type="radio" name="q2" value="a" /> a) It was too expensive.</label>
+          <label class="correct-option"><input type="radio" name="q2" value="b" /> b) It was the best pizza she has ever had.</label>
+          <label><input type="radio" name="q2" value="c" /> c) It was too salty.</label>
+          <label><input type="radio" name="q2" value="d" /> d) It was the worst pizza this year.</label>
+        </div>
+        <div class="q-feedback"></div>
+      </fieldset>
+
+      <!-- Q3 -->
+      <fieldset class="q" data-correct="b">
+        <legend>3) What activity did they plan during the trip?</legend>
+        <div class="options">
+          <label><input type="radio" name="q3" value="a" /> a) Going to the beach.</label>
+          <label class="correct-option"><input type="radio" name="q3" value="b" /> b) Visiting the Vatican City.</label>
+          <label><input type="radio" name="q3" value="c" /> c) Skiing in the mountains.</label>
+          <label><input type="radio" name="q3" value="d" /> d) Shopping at a mall.</label>
+        </div>
+        <div class="q-feedback"></div>
+      </fieldset>
+
+      <!-- Q4 -->
+      <fieldset class="q" data-correct="c">
+        <legend>4) How did Mia afford the trip?</legend>
+        <div class="options">
+          <label><input type="radio" name="q4" value="a" /> a) She won a travel contest.</label>
+          <label><input type="radio" name="q4" value="b" /> b) She borrowed money from a friend.</label>
+          <label class="correct-option"><input type="radio" name="q4" value="c" /> c) Mia found a great deal online.</label>
+          <label><input type="radio" name="q4" value="d" /> d) She got a free flight from a cousin.</label>
+        </div>
+        <div class="q-feedback"></div>
+      </fieldset>
+
+      <!-- Q5 -->
+      <fieldset class="q" data-correct="c">
+        <legend>5) What tip does she share at the end?</legend>
+        <div class="options">
+          <label><input type="radio" name="q5" value="a" /> a) Wake up earlier than usual.</label>
+          <label><input type="radio" name="q5" value="b" /> b) Pack fewer clothes.</label>
+          <label class="correct-option"><input type="radio" name="q5" value="c" /> c) Finding good deals online.</label>
+          <label><input type="radio" name="q5" value="d" /> d) Learn basic Italian before you go.</label>
+        </div>
+        <div class="q-feedback"></div>
+      </fieldset>
+
+      <div class="controls">
+        <button type="button" class="btn primary" id="check">Check Answers</button>
+        <button type="reset" class="btn" id="resetBtn">Reset</button>
+      </div>
+      <div class="score" id="score" aria-live="polite"></div>
+    </form>
+
+    <footer>
+      Teacher note: The audio file is set to <code>listening-test.mp3</code>. Make sure it is in the same folder as this HTML file.
+    </footer>
+  </div>
+
+  <script>
+    (function(){
+      const form = document.getElementById('quiz');
+      const checkBtn = document.getElementById('check');
+      const resetBtn = document.getElementById('resetBtn');
+      const scoreEl = document.getElementById('score');
+
+      function clearStates(){
+        scoreEl.textContent = '';
+        form.querySelectorAll('.q').forEach(q=>{
+          q.classList.remove('correct','incorrect','unanswered');
+          const fb = q.querySelector('.q-feedback');
+          if(fb) fb.textContent = '';
+          q.querySelectorAll('label').forEach(l=>l.classList.remove('selected'));
+        });
+      }
+
+      checkBtn.addEventListener('click', () => {
+        let total = 0, correct = 0;
+
+        form.querySelectorAll('.q').forEach((q, idx) => {
+          total++;
+          const correctVal = q.dataset.correct;
+          const name = 'q' + (idx+1);
+          const selected = form.querySelector(`input[name="${name}"]:checked`);
+          const fb = q.querySelector('.q-feedback');
+          q.classList.remove('correct','incorrect','unanswered');
+
+          if(selected){
+            selected.closest('label').classList.add('selected');
+          }
+
+          if(!selected){
+            q.classList.add('unanswered');
+            fb.textContent = 'No answer selected.';
+            return;
+          }
+
+          if(selected.value === correctVal){
+            q.classList.add('correct');
+            fb.textContent = 'Correct!';
+            correct++;
+          }else{
+            q.classList.add('incorrect');
+            const correctText = q.querySelector(`input[value="${correctVal}"]`).closest('label').textContent.trim();
+            fb.textContent = `Incorrect. Correct answer: ${correctText}`;
+          }
+        });
+
+        scoreEl.textContent = `Score: ${correct} / ${total}`;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      resetBtn.addEventListener('click', () => {
+        setTimeout(clearStates, 0);
+      });
+    })();
+  </script>
+</body>
+</html>

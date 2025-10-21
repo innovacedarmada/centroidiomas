@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Have Got/Has Got - A1 Exercises</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comic Sans MS', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            color: #764ba2;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+        
+        .story-container {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+            min-height: 600px;
+        }
+        
+        .text-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+        
+        .text-box h2 {
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .text-box p {
+            font-size: 1.1em;
+            color: #333;
+        }
+        
+        .story1 .text-box {
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFB3BA 100%);
+            border: 4px solid #FF6B6B;
+        }
+        
+        .story1 .text-box h2 {
+            color: #C92A2A;
+        }
+        
+        .story2 .text-box {
+            background: linear-gradient(135deg, #E5F5FF 0%, #B3D9FF 100%);
+            border: 4px solid #4DABF7;
+        }
+        
+        .story2 .text-box h2 {
+            color: #1864AB;
+        }
+        
+        .story3 .text-box {
+            background: linear-gradient(135deg, #E5FFE5 0%, #B3FFB3 100%);
+            border: 4px solid #51CF66;
+        }
+        
+        .story3 .text-box h2 {
+            color: #2B8A3E;
+        }
+        
+        .story4 .text-box {
+            background: linear-gradient(135deg, #FFF5E5 0%, #FFD8A8 100%);
+            border: 4px solid #FF922B;
+        }
+        
+        .story4 .text-box h2 {
+            color: #D9480F;
+        }
+        
+        .story5 .text-box {
+            background: linear-gradient(135deg, #F3E5FF 0%, #D5BAFF 100%);
+            border: 4px solid #9775FA;
+        }
+        
+        .story5 .text-box h2 {
+            color: #5F3DC4;
+        }
+        
+        .exercises {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .exercise {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .story1 .exercise {
+            background: linear-gradient(135deg, #FFF0F0 0%, #FFE0E0 100%);
+            border-left: 6px solid #FF6B6B;
+        }
+        
+        .story2 .exercise {
+            background: linear-gradient(135deg, #F0F8FF 0%, #E0F0FF 100%);
+            border-left: 6px solid #4DABF7;
+        }
+        
+        .story3 .exercise {
+            background: linear-gradient(135deg, #F0FFF0 0%, #E0FFE0 100%);
+            border-left: 6px solid #51CF66;
+        }
+        
+        .story4 .exercise {
+            background: linear-gradient(135deg, #FFFAF0 0%, #FFF0E0 100%);
+            border-left: 6px solid #FF922B;
+        }
+        
+        .story5 .exercise {
+            background: linear-gradient(135deg, #F8F0FF 0%, #F0E0FF 100%);
+            border-left: 6px solid #9775FA;
+        }
+        
+        .exercise h3 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            color: #333;
+        }
+        
+        .question {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .question label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .question label:hover {
+            background: #f0f0f0;
+        }
+        
+        input[type="radio"], input[type="checkbox"] {
+            margin-right: 10px;
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        select {
+            width: 150px;
+            padding: 8px;
+            margin: 0 5px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        
+        .check-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        .check-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .result.show {
+            display: block;
+        }
+        
+        .correct {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+        
+        .incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+        
+        .drag-item {
+            background: white;
+            padding: 10px 15px;
+            margin: 8px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            cursor: move;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .drag-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .drop-zone {
+            min-height: 50px;
+            border: 3px dashed #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            background: #fafafa;
+        }
+        
+        .drop-zone.drag-over {
+            background: #e3f2fd;
+            border-color: #667eea;
+        }
+        
+        @media (max-width: 1024px) {
+            .story-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .text-box {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📚 Have Got / Has Got Adventures 📚</h1>
+        <p>Read the stories and complete the exercises!</p>
+    </div>
+
+    <!-- STORY 1: EMMA'S PETS -->
+    <div class="story-container story1">
+        <div class="text-box">
+            <h2>🐾 Story 1: Emma's Pets</h2>
+            <p>Hi! I'm Emma. I have got three pets. I have got a black cat called Midnight and two dogs. My dogs haven't got long hair. They have got short brown hair. Has my cat got green eyes? No, she hasn't. She has got beautiful blue eyes. My brother hasn't got any pets, but he has got many books about animals. Have you got any pets? My best friend Lucy has got a rabbit. It has got white fur and long ears. I haven't got a rabbit, but I love Lucy's rabbit!</p>
+        </div>
+        
+        <div class="exercises">
+            <div class="exercise">
+                <h3>Exercise 1: Multiple Choice</h3>
+                <div class="question">
+                    <p><strong>1. How many pets has Emma got?</strong></p>
+                    <label><input type="radio" name="q1_1" value="a"> Two pets</label>
+                    <label><input type="radio" name="q1_1" value="b"> Three pets</label>
+                    <label><input type="radio" name="q1_1" value="c"> Four pets</label>
+                </div>
+                <div class="question">
+                    <p><strong>2. What colour eyes has Emma's cat got?</strong></p>
+                    <label><input type="radio" name="q1_2" value="a"> Green eyes</label>
+                    <label><input type="radio" name="q1_2" value="b"> Brown eyes</label>
+                    <label><input type="radio" name="q1_2" value="c"> Blue eyes</label>
+                </div>
+                <div class="question">
+                    <p><strong>3. Has Emma's brother got any pets?</strong></p>
+                    <label><input type="radio" name="q1_3" value="a"> Yes, he has</label>
+                    <label><input type="radio" name="q1_3" value="b"> No, he hasn't</label>
+                    <label><input type="radio" name="q1_3" value="c"> The story doesn't say</label>
+                </div>
+                <button class="check-btn" onclick="checkEx1_1()">Check Answers</button>
+                <div class="result" id="result1_1"></div>
+            </div>
+
+            <div class="exercise">
+                <h3>Exercise 2: True or False</h3>
+                <div class="question">
+                    <p><strong>1. Emma has got long-haired dogs.</strong></p>
+                    <label><input type="radio" name="q1_4" value="true"> True</label>
+                    <label><input type="radio" name="q1_4" value="false"> False</label>
+                </div>
+                <div class="question">
+                    <p><strong>2. Lucy has got a rabbit.</strong></p>
+                    <label><input type="radio" name="q1_5" value="true"> True</label>
+                    <label><input type="radio" name="q1_5" value="false"> False</label>
+                </div>
+                <div class="question">
+                    <p><strong>3. Emma's brother has got many books about animals.</strong></p>
+                    <label><input type="radio" name="q1_6" value="true"> True</label>
+                    <label><input type="radio" name="q1_6" value="false"> False</label>
+                </div>
+                <button class="check-btn" onclick="checkEx1_2()">Check Answers</button>
+                <div class="result" id="result1_2"></div>
+            </div>
+
+            <div class="exercise">
+                <h3>Exercise 3: Fill in the Blanks</h3>
+                <div class="question">
+                    <p><strong>1. Emma __________ three pets.</strong></p>
+                    <input type="text" id="q1_7" placeholder="has got / have got">
+                </div>
+                <div class="question">
+                    <p><strong>2. Her dogs __________ long hair.</strong></p>
+                    <input type="text" id="q1_8" placeholder="haven't got / hasn't got">
+                </div>
+                <div class="question">
+                    <p><strong>3. __________ her cat __________ green eyes?</strong></p>
+                    <input type="text" id="q1_9" placeholder="Has / Have ... got">
+                </div>
+                <button class="check-btn" onclick="checkEx1_3()">Check Answers</button>
+                <div class="result" id="result1_3"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STORY 2: TOM'S SCHOOL BAG -->
+    <div class="story-container story2">
+        <div class="text-box">
+            <h2>🎒 Story 2: Tom's School Bag</h2>
+            <p>Tom has got a new school bag. It's blue and very big. Has he got all his books in the bag? Yes, he has. He has got five books, three notebooks, and two pencil cases. His pencil cases have got many coloured pencils. Tom hasn't got a ruler, so his teacher gives him one. His friend Sarah hasn't got a blue bag. She has got a red bag. Has Sarah got pencil cases? Yes, she has got one pencil case. They have got everything for school today!</p>
+        </div>
+        
+        <div class="exercises">
+            <div class="exercise">
+                <h3>Exercise 1: Multiple Choice</h3>
+                <div class="question">
+                    <p><strong>1. What colour is Tom's bag?</strong></p>
+                    <label><input type="radio" name="q2_1" value="a"> Red</label>
+                    <label><input type="radio" name="q2_1" value="b"> Blue</label>
+                    <label><input type="radio" name="q2_1" value="c"> Green</label>
+                </div>
+                <div class="question">
+                    <p><strong>2. How many pencil cases has Tom got?</strong></p>
+                    <label><input type="radio" name="q2_2" value="a"> One</label>
+                    <label><input type="radio" name="q2_2" value="b"> Two</label>
+                    <label><input type="radio" name="q2_2" value="c"> Three</label>
+                </div>
+                <div class="question">
+                    <p><strong>3. Has Tom got a ruler?</strong></p>
+                    <label><input type="radio" name="q2_3" value="a"> Yes, he has</label>
+                    <label><input type="radio" name="q2_3" value="b"> No, he hasn't (but he gets one)</label>
+                    <label><input type="radio" name="q2_3" value="c"> The story doesn't say</label>
+                </div>
+                <button class="check-btn" onclick="checkEx2_1()">Check Answers</button>
+                <div class="result" id="result2_1"></div>
+            </div>
+
+            <div class="exercise">
+                <h3>Exercise 2: Drag and Drop - Complete the Sentences</h3>
+                <p><strong>Drag the correct words to complete each sentence:</strong></p>
+                <div style="margin: 20px 0;">
+                    <span class="drag-item" draggable="true">has got</span>
+                    <span class="drag-item" draggable="true">have got</span>
+                    <span class="drag-item" draggable="true">hasn't got</span>
+                    <span class="drag-item" draggable="true">haven't got</span>
+                </div>
+                <div class="question">
+                    <p>1. Tom <span class="drop-zone" data-answer="has got" id="drop2_1"></span> a new school bag.</p>
+                </div>
+                <div class="question">
+                    <p>2. Sarah <span class="drop-zone" data-answer="hasn't got" id="drop2_2"></span> a blue bag.</p>
+                </div>
+                <div class="question">
+                    <p>3. They <span class="drop-zone" data-answer="have got" id="drop2_3"></span> everything for school.</p>
+                </div>
+                <button class="check-btn" onclick="checkEx2_2()">Check Answers</button>
+                <div class="result" id="result2_2"></div>
+            </div>
+
+            <div class="exercise">
+                <h3>Exercise 3: True or False</h3>
+                <div class="question">
+                    <p><strong>1. Tom has got five books in his bag.</strong></p>
+                    <label><input type="radio" name="q2_4" value="true"> True</label>
+                    <label><input type="radio" name="q2_4" value="false"> False</label>
+                </div>
+                <div class="question">
+                    <p><strong>2. Sarah has got two pencil cases.</strong></p>
+                    <label><input type="radio" name="q2_5" value="true"> True</label>
+                    <label><input type="radio" name="q2_5" value="false"> False</label>
+                </div>
+                <div class="question">
+                    <p><strong>3. Tom's pencil cases have got many coloured pencils.</strong></p>
+                    <label><input type="radio" name="q2_6" value="true"> True</label>
+                    <label><input type="radio" name="q2_6" value="false"> False</label>
+                </div>
+                <button class="check-btn" onclick="checkEx2_3()">Check Answers</button>
+                <div class="result" id="result2_3"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STORY 3: THE JOHNSON FAMILY -->
+    <div class="story-container story3">
+        <div class="text-box">
+            <h2>👨‍👩‍👧‍👦 Story 3: The Johnson Family</h2>
+            <p>The Johnson family has got a big house. Mr Johnson has got a car, but Mrs Johnson hasn't got a car. She has got a bicycle. Have they got children? Yes, they have. They have got two children: a boy and a girl. The boy has got a football, and the girl has got a skateboard. Has the family got a garden? Yes, they have. They have got a beautiful garden with flowers. The children haven't got a swimming pool, but they have got a small playground. Mr Johnson hasn't got a bicycle, but he wants one!</p>
+        </div>
+        
+        <div class="exercises">
+            <div class="exercise">
+                <h3>Exercise 1: Fill in the Blanks</h3>
+                <div class="question">
+                    <p><strong>1. The Johnson family __________ a big house.</strong></p>
+                    <input type="text" id="q3_1" placeholder="has got / have got">
+                </div>
+                <div class="question">
+                    <p><strong>2. Mrs Johnson __________ a car.</strong></p>
+                    <input type="text" id="q3_2" placeholder="hasn't got / haven't got">
+                </div>
+                <div class="question">
+                    <p><strong>3. __________ the family __________ a garden?</strong></p>
+                    <input type="text" id="q3_3" placeholder="Has / Have ... got">
+                </div>
+                <button class="check-btn" onclick="checkEx3_1()">Check Answers</button>
+                <div class="result" id="result3_1"></div>
+            </div>
+
+            <div class="exercise">
+                <h3>Exercise 2: Multiple Choice</h3>
+                <div class="question">
+                    <p><strong>1. What has Mrs Johnson got?</strong></p>
+                    <label><input type="radio" name="q3_4" value="a"> A car</label>
+                    <label><input type="radio" name="q3_4" value="b"> A bicycle</label>
+                    <label><input type="radio" name="q3_4" value="c"> A motorcycle</label>
+                </div>
+                <div class="question">
+                    <p><strong>2. How many children have the Johnsons got?</strong></p>
+                    <label><input type="radio" name="q3_5" value="a"> One</label>
+                    <label><input type="radio" name="q3_5" value="b"> Two</label>
+                    <label><input type="radio" name="q3_5" value="c"> Three</label>
+                </div>
+                <div class="question">
+                    <p><strong>3. What has the girl got?</strong></p>
+                    <label><input type="radio" name="q3_6" value="a"> A football</label>
+                    <label><input type="radio" name="q3_6" value="b"> A skateboard</label>
+                    <label><input type="radio" name="q3_6" value="c"> A bicycle</label>
+                </div>
+                <button class="check-btn" onclick="checkEx3_2()">Check Answers</button>
+                <div class="result" id="result3_2"></div>
+            </div>
+
+            <div class="exercise">
+                <h3>Exercise 3: Short Answer Questions</h3>
+                <div class="question">
+                    <p><strong>1. Has Mr Johnson got a bicycle?</strong></p>
+                    <input type="text" id="q3_7" placeholder="Your answer">
+                </div>
+                <div class="question">
+                    <p><strong>2. Have the children got a swimming pool?</strong></p>
+                    <input type="text" id="q3_8" placeholder="Your answer">
+                </div>
+                <div class="question">
+                    <p><strong>3. What have the children got instead of a swimming pool?</strong></p>
+                    <input type="text" id="q3_9" placeholder="Your answer">
+                </div>
+                <button class="check-btn" onclick="checkEx3_3()">Check Answers</button>
+                <div class="result" id="result3_3"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STORY 4: MARIA'S BIRTHDAY -->
+    <div class="story-container story4">
+        <div class="text-box">
+            <h2>🎂 Story 4: Maria's Birthday</h2>
+            <p>Today is Maria's birthday! She has got many presents. She has got a new dress, some books, and a beautiful watch. Has she got a cake? Yes, she has! Her mother has got a big chocolate cake for her. Maria's friends haven't got presents for her yet, but they have got cards. Her best friend Anna has got a special surprise. What has Anna got? She has got tickets to the cinema! Maria hasn't got plans for next weekend, so they can go together. Has Maria got a happy birthday? Yes, she has!</p>
+        </div>
+        
+        <div class="exercises">
+            <div class="exercise">
+                <h3>Exercise 1: True or False</h3>
+                <div class="question">
+                    <p><strong>1. Maria has got a birthday cake.</strong></p>
+                    <label><input type="radio" name="q4_1" value="true"> True</label>
+                    <label><input type="radio" name="q4_1" value="false"> False</label>
+                </div>
+                <div class="question">
+                    <p><strong>2. Maria's friends have got presents for her.</strong></p>
+                    <label><input type="radio" name="q4_2" value="true"> True</label>
+                    <label><input type="radio" name="q4_2" value="false"> False</label>
+                </div>
+                <div class="question">
+                    <p><strong>3. Anna has got cinema tickets.</strong></p>
+                    <label><input type="radio" name="q4_3" value="true"> True</label>
+                    <label><input type="radio" name="q4_3" value="false"> False</label>
+                </div>
+                <button class="check-btn" onclick="checkEx4_1()">Check Answers</button>
+                <div class="result" id="result4_1"></div>
+            </div>
+
+            <div class="exercise">
+                <h3>Exercise 2: Select the Correct Form</h3>
+                <div class="question">
+                    <p><strong>1. Maria __________ many presents.</strong></p>
+                    <select id="q4_4">
+                        <option value="">Choose...</option>
+                        <option value="correct">has got</option>
+                        <option value="wrong1">have got</option>
+                        <option value="wrong2">hasn't got</option>
+                    </select>
+                </div>
+                <div class="question">
+                    <p><strong>2. Her friends __________ presents yet.</strong></p>
+                    <select id="q4_5">
+                        <option value="">Choose...</option>
+                        <option value="wrong1">has got</option>
+                        <option value="wrong2">have got</option>
+                        <option value="correct">haven't got</option>
+                    </select>
+                </div>
+                <div class="question">
+                    <p><strong>3. __________ Maria __________ plans for next weekend?</strong></p>
+                    <select id="q4_6">
+                        <option value="">Choose...</option>
+                        <option value="correct">Hasn't ... got</option>
+                        <option value="wrong1">Has ... got</option>
+                        <option value="wrong2">Haven't ... got</option>
+                    </select>
+                </div>
+                <button class="check-btn" onclick="checkEx4_2()">Check Answers</button>
+                <div class="result" id="result4_2"></div>
+            </div>
+
+            <div class="exercise">
+                <h3>Exercise 3: Multiple Choice</h3>
+                <div class="question">
+                    <p><strong>1. What kind of cake has Maria's mother got?</strong></p>
+                    <label><input type="radio" name="q4_7" value="a"> Vanilla cake</label>
+                    <label><input type="radio" name="q4_7" value="b"> Chocolate cake</label>
+                    <label><input type="radio" name="q4_7" value="c"> Strawberry cake</label>
+                </div>
+                <div class="question">
+                    <p><strong>2. What has Anna got for Maria?</strong></p>
+                    <label><input type="radio" name="q4_8" value="a"> A dress</label>
+                    <label><input type="radio" name="q4_8" value="b"> Cinema tickets</label>
+                    <label><input type="radio" name="q4_8" value="c"> Books</label>
+                </div>
+                <div class="question">
+                    <p><strong>3. Which presents has Maria got? (Choose all correct)</strong></p>
+                    <label><input type="checkbox" name="q4_9" value="a"> A new dress</label>
+                    <label><input type="checkbox" name="q4_9" value="b"> Some books</label>
+                    <label><input type="checkbox" name="q4_9" value="c"> A watch</label>
+                    <label><input type="checkbox" name="q4_9" value="d"> A bicycle</label>
+                </div>
+                <button class="check-btn" onclick="checkEx4_3()">Check Answers</button>
+                <div class="result" id="result4_3"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STORY 5: THE NEW RESTAURANT -->
+    <div class="story-container story5">
+        <div class="text-box">
+            <h2>🍕 Story 5: The New Restaurant</h2>
+            <p>There's a new restaurant in town! It has got a nice name: "Happy Meals". Has the restaurant got good food? Yes, it has. It has got pizza, pasta, and salads. The owner hasn't got a big team yet. He has got only three workers. They haven't got many customers today because it's Monday. Has the restaurant got a garden? No, it hasn't, but it has got a beautiful terrace. I haven't got time today, but I want to visit tomorrow. Have you got plans for lunch tomorrow? Let's go together!</p>
+        </div>
+        
+        <div class="exercises">
+            <div class="exercise">
+                <h3>Exercise 1: Fill in the Blanks</h3>
+                <div class="question">
+                    <p><strong>1. The restaurant __________ a nice name.</strong></p>
+                    <input type="text" id="q5_1" placeholder="has got / have got">
+                </div>
+                <div class="question">
+                    <p><strong>2. The owner __________ a big team yet.</strong></p>
+                    <input type="text" id="q5_2" placeholder="hasn't got / haven't got">
+                </div>
+                <div class="question">
+                    <p><strong>3. __________ the restaurant __________ a garden?</strong></p>
+                    <input type="text" id="q5_3" placeholder="Has / Have ... got">
+                </div>
+                <button class="check-btn" onclick="checkEx5_1()">Check Answers</button>
+                <div class="result" id="result5_1"></div>
+            </div>
+
+            <div class="exercise">
+                <h3>Exercise 2: Multiple Choice</h3>
+                <div class="question">
+                    <p><strong>1. What's the name of the restaurant?</strong></p>
+                    <label><input type="radio" name="q5_4" value="a"> Happy Meals</label>
+                    <label><input type="radio" name="q5_4" value="b"> Good Food</label>
+                    <label><input type="radio" name="q5_4" value="c"> New Restaurant</label>
+                </div>
+                <div class="question">
+                    <p><strong>2. How many workers has the owner got?</strong></p>
+                    <label><input type="radio" name="q5_5" value="a"> Two</label>
+                    <label><input type="radio" name="q5_5" value="b"> Three</label>
+                    <label><input type="radio" name="q5_5" value="c"> Four</label>
+                </div>
+                <div class="question">
+                    <p><strong>3. Has the restaurant got a garden?</strong></p>
+                    <label><input type="radio" name="q5_6" value="a"> Yes, it has</label>
+                    <label><input type="radio" name="q5_6" value="b"> No, it hasn't</label>
+                    <label><input type="radio" name="q5_6" value="c"> The story doesn't say</label>
+                </div>
+                <button class="check-btn" onclick="checkEx5_2()">Check Answers</button>
+                <div class="result" id="result5_2"></div>
+            </div>
+
+            <div class="exercise">
+                <h3>Exercise 3: Matching Exercise</h3>
+                <p><strong>Match the subjects with what they have got or haven't got:</strong></p>
+                <div class="question">
+                    <p><strong>1. The restaurant</strong></p>
+                    <select id="q5_7">
+                        <option value="">Choose...</option>
+                        <option value="correct">has got good food</option>
+                        <option value="wrong1">has got a big team</option>
+                        <option value="wrong2">has got a garden</option>
+                    </select>
+                </div>
+                <div class="question">
+                    <p><strong>2. The owner</strong></p>
+                    <select id="q5_8">
+                        <option value="">Choose...</option>
+                        <option value="wrong1">has got many customers today</option>
+                        <option value="correct">has got only three workers</option>
+                        <option value="wrong2">hasn't got a restaurant</option>
+                    </select>
+                </div>
+                <div class="question">
+                    <p><strong>3. They (the workers)</strong></p>
+                    <select id="q5_9">
+                        <option value="">Choose...</option>
+                        <option value="wrong1">have got a garden</option>
+                        <option value="wrong2">have got many customers</option>
+                        <option value="correct">haven't got many customers today</option>
+                    </select>
+                </div>
+                <button class="check-btn" onclick="checkEx5_3()">Check Answers</button>
+                <div class="result" id="result5_3"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Story 1 - Exercise 1
+        function checkEx1_1() {
+            const answers = {
+                q1_1: 'b',
+                q1_2: 'c',
+                q1_3: 'b'
+            };
+            let correct = 0;
+            let total = 3;
+            
+            for (let q in answers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === answers[q]) correct++;
+            }
+            
+            showResult('result1_1', correct, total);
+        }
+
+        // Story 1 - Exercise 2
+        function checkEx1_2() {
+            const answers = {
+                q1_4: 'false',
+                q1_5: 'true',
+                q1_6: 'true'
+            };
+            let correct = 0;
+            let total = 3;
+            
+            for (let q in answers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === answers[q]) correct++;
+            }
+            
+            showResult('result1_2', correct, total);
+        }
+
+        // Story 1 - Exercise 3
+        function checkEx1_3() {
+            const answers = {
+                q1_7: ['has got', 'hasgot', "'s got", "has"],
+                q1_8: ["haven't got", "havent got", "don't have"],
+                q1_9: ['has got', 'has...got', 'has … got']
+            };
+            let correct = 0;
+            let total = 3;
+            
+            for (let q in answers) {
+                const input = document.getElementById(q).value.trim().toLowerCase();
+                if (answers[q].some(ans => input.includes(ans.toLowerCase()))) correct++;
+            }
+            
+            showResult('result1_3', correct, total);
+        }
+
+        // Story 2 - Exercise 1
+        function checkEx2_1() {
+            const answers = {
+                q2_1: 'b',
+                q2_2: 'b',
+                q2_3: 'b'
+            };
+            let correct = 0;
+            let total = 3;
+            
+            for (let q in answers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === answers[q]) correct++;
+            }
+            
+            showResult('result2_1', correct, total);
+        }
+
+        // Story 2 - Exercise 2 (Drag and Drop)
+        const dragItems = document.querySelectorAll('.drag-item');
+        const dropZones = document.querySelectorAll('.drop-zone');
+
+        dragItems.forEach(item => {
+            item.addEventListener('dragstart', dragStart);
+            item.addEventListener('dragend', dragEnd);
+        });
+
+        dropZones.forEach(zone => {
+            zone.addEventListener('dragover', dragOver);
+            zone.addEventListener('drop', drop);
+            zone.addEventListener('dragleave', dragLeave);
+        });
+
+        function dragStart(e) {
+            e.dataTransfer.setData('text/plain', e.target.textContent);
+            e.target.style.opacity = '0.5';
+        }
+
+        function dragEnd(e) {
+            e.target.style.opacity = '1';
+        }
+
+        function dragOver(e) {
+            e.preventDefault();
+            e.currentTarget.classList.add('drag-over');
+        }
+
+        function dragLeave(e) {
+            e.currentTarget.classList.remove('drag-over');
+        }
+
+        function drop(e) {
+            e.preventDefault();
+            const data = e.dataTransfer.getData('text/plain');
+            e.currentTarget.textContent = data;
+            e.currentTarget.classList.remove('drag-over');
+        }
+
+        function checkEx2_2() {
+            const drops = ['drop2_1', 'drop2_2', 'drop2_3'];
+            let correct = 0;
+            let total = 3;
+            
+            drops.forEach(dropId => {
+                const zone = document.getElementById(dropId);
+                const answer = zone.getAttribute('data-answer');
+                if (zone.textContent.trim() === answer) correct++;
+            });
+            
+            showResult('result2_2', correct, total);
+        }
+
+        // Story 2 - Exercise 3
+        function checkEx2_3() {
+            const answers = {
+                q2_4: 'true',
+                q2_5: 'false',
+                q2_6: 'true'
+            };
+            let correct = 0;
+            let total = 3;
+            
+            for (let q in answers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === answers[q]) correct++;
+            }
+            
+            showResult('result2_3', correct, total);
+        }
+
+        // Story 3 - Exercise 1
+        function checkEx3_1() {
+            const answers = {
+                q3_1: ['has got', 'hasgot', "'s got"],
+                q3_2: ["hasn't got", "hasnt got", "doesn't have", "does not have"],
+                q3_3: ['has got', 'have got', 'has...got', 'have...got']
+            };
+            let correct = 0;
+            let total = 3;
+            
+            for (let q in answers) {
+                const input = document.getElementById(q).value.trim().toLowerCase();
+                if (answers[q].some(ans => input.includes(ans.toLowerCase()))) correct++;
+            }
+            
+            showResult('result3_1', correct, total);
+        }
+
+        // Story 3 - Exercise 2
+        function checkEx3_2() {
+            const answers = {
+                q3_4: 'b',
+                q3_5: 'b',
+                q3_6: 'b'
+            };
+            let correct = 0;
+            let total = 3;
+            
+            for (let q in answers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === answers[q]) correct++;
+            }
+            
+            showResult('result3_2', correct, total);
+        }
+
+        // Story 3 - Exercise 3
+        function checkEx3_3() {
+            let correct = 0;
+            let total = 3;
+            
+            const q7 = document.getElementById('q3_7').value.trim().toLowerCase();
+            if (q7.includes('no') || q7.includes("hasn't") || q7.includes('hasnt')) correct++;
+            
+            const q8 = document.getElementById('q3_8').value.trim().toLowerCase();
+            if (q8.includes('no') || q8.includes("haven't") || q8.includes('havent')) correct++;
+            
+            const q9 = document.getElementById('q3_9').value.trim().toLowerCase();
+            if (q9.includes('playground') || q9.includes('small playground')) correct++;
+            
+            showResult('result3_3', correct, total);
+        }
+
+        // Story 4 - Exercise 1
+        function checkEx4_1() {
+            const answers = {
+                q4_1: 'true',
+                q4_2: 'false',
+                q4_3: 'true'
+            };
+            let correct = 0;
+            let total = 3;
+            
+            for (let q in answers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === answers[q]) correct++;
+            }
+            
+            showResult('result4_1', correct, total);
+        }
+
+        // Story 4 - Exercise 2
+        function checkEx4_2() {
+            let correct = 0;
+            let total = 3;
+            
+            if (document.getElementById('q4_4').value === 'correct') correct++;
+            if (document.getElementById('q4_5').value === 'correct') correct++;
+            if (document.getElementById('q4_6').value === 'correct') correct++;
+            
+            showResult('result4_2', correct, total);
+        }
+
+        // Story 4 - Exercise 3
+        function checkEx4_3() {
+            let correct = 0;
+            let total = 3;
+            
+            const q7 = document.querySelector('input[name="q4_7"]:checked');
+            if (q7 && q7.value === 'b') correct++;
+            
+            const q8 = document.querySelector('input[name="q4_8"]:checked');
+            if (q8 && q8.value === 'b') correct++;
+            
+            const q9 = document.querySelectorAll('input[name="q4_9"]:checked');
+            const q9Values = Array.from(q9).map(cb => cb.value);
+            if (q9Values.includes('a') && q9Values.includes('b') && q9Values.includes('c') && !q9Values.includes('d')) correct++;
+            
+            showResult('result4_3', correct, total);
+        }
+
+        // Story 5 - Exercise 1
+        function checkEx5_1() {
+            const answers = {
+                q5_1: ['has got', 'hasgot', "'s got"],
+                q5_2: ["hasn't got", "hasnt got", "doesn't have"],
+                q5_3: ['has got', 'has...got']
+            };
+            let correct = 0;
+            let total = 3;
+            
+            for (let q in answers) {
+                const input = document.getElementById(q).value.trim().toLowerCase();
+                if (answers[q].some(ans => input.includes(ans.toLowerCase()))) correct++;
+            }
+            
+            showResult('result5_1', correct, total);
+        }
+
+        // Story 5 - Exercise 2
+        function checkEx5_2() {
+            const answers = {
+                q5_4: 'a',
+                q5_5: 'b',
+                q5_6: 'b'
+            };
+            let correct = 0;
+            let total = 3;
+            
+            for (let q in answers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === answers[q]) correct++;
+            }
+            
+            showResult('result5_2', correct, total);
+        }
+
+        // Story 5 - Exercise 3
+        function checkEx5_3() {
+            let correct = 0;
+            let total = 3;
+            
+            if (document.getElementById('q5_7').value === 'correct') correct++;
+            if (document.getElementById('q5_8').value === 'correct') correct++;
+            if (document.getElementById('q5_9').value === 'correct') correct++;
+            
+            showResult('result5_3', correct, total);
+        }
+
+        // Generic result display function
+        function showResult(elementId, correct, total) {
+            const resultDiv = document.getElementById(elementId);
+            const percentage = Math.round((correct / total) * 100);
+            
+            resultDiv.classList.remove('correct', 'incorrect');
+            resultDiv.classList.add('show');
+            
+            if (percentage >= 70) {
+                resultDiv.classList.add('correct');
+                resultDiv.innerHTML = `✅ Great job! You got ${correct} out of ${total} correct! (${percentage}%)`;
+            } else {
+                resultDiv.classList.add('incorrect');
+                resultDiv.innerHTML = `📝 You got ${correct} out of ${total} correct (${percentage}%). Try again!`;
+            }
+        }
+    </script>
+</body>
+</html>

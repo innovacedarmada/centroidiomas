@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correct or Incorrect? Comparative & Superlative</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .instructions {
+            background: #e9e9e9;
+            padding: 10px;
+            border-left: 5px solid #007BFF;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        .options label {
+            display: inline-block;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+        .correct-answer {
+            color: green;
+            font-weight: bold;
+        }
+        .incorrect-answer {
+            color: red;
+        }
+        #results {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            display: none;
+        }
+        .button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .feedback {
+            font-style: italic;
+            margin-top: 5px;
+            color: #555;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Correct or Incorrect?</h1>
+    <h2>Comparative and Superlative Adjectives</h2>
+
+    <div class="instructions">
+        <p><strong>INSTRUCTIONS:</strong> Read each sentence carefully. Choose if the sentence is grammatically **correct** or **incorrect**.</p>
+    </div>
+
+    <form id="quizForm">
+        <div class="question" data-correct="true">
+            <p>1. My new phone is better than my old one.</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="true"> Correct</label>
+                <label><input type="radio" name="q1" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback1"></div>
+        </div>
+
+        <div class="question" data-correct="false" data-feedback="The correct form of 'big' is **bigger**. You don't use 'more' with short adjectives.">
+            <p>2. This bag is more big than that one.</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="true"> Correct</label>
+                <label><input type="radio" name="q2" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback2"></div>
+        </div>
+
+        <div class="question" data-correct="true">
+            <p>3. This is the most beautiful song I know.</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="true"> Correct</label>
+                <label><input type="radio" name="q3" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback3"></div>
+        </div>
+        
+        <div class="question" data-correct="false" data-feedback="The superlative form of 'fast' is **the fastest**. You don't use 'most' with short adjectives.">
+            <p>4. He thinks this is the most fast train.</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="true"> Correct</label>
+                <label><input type="radio" name="q4" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback4"></div>
+        </div>
+        
+        <div class="question" data-correct="true">
+            <p>5. My sister is more creative than me.</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="true"> Correct</label>
+                <label><input type="radio" name="q5" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback5"></div>
+        </div>
+        
+        <div class="question" data-correct="false" data-feedback="The comparative form of 'tall' is **taller**. You add '-er' to the end of short adjectives.">
+            <p>6. My brother is more tall than me.</p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="true"> Correct</label>
+                <label><input type="radio" name="q6" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback6"></div>
+        </div>
+        
+        <div class="question" data-correct="true">
+            <p>7. The blue car is the fastest car on the road.</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="true"> Correct</label>
+                <label><input type="radio" name="q7" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback7"></div>
+        </div>
+        
+        <div class="question" data-correct="false" data-feedback="The superlative form of 'bad' is **the worst**. This is an irregular adjective.">
+            <p>8. This homework is the worse I have ever done.</p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="true"> Correct</label>
+                <label><input type="radio" name="q8" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback8"></div>
+        </div>
+
+        <div class="question" data-correct="true">
+            <p>9. This city is cleaner than my hometown.</p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="true"> Correct</label>
+                <label><input type="radio" name="q9" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback9"></div>
+        </div>
+        
+        <div class="question" data-correct="false" data-feedback="The superlative form of 'cheap' is **the cheapest**. You add '-est' to the end of short adjectives.">
+            <p>10. This is the most cheap restaurant in the city.</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="true"> Correct</label>
+                <label><input type="radio" name="q10" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback10"></div>
+        </div>
+        
+        <div class="question" data-correct="true">
+            <p>11. He is the most intelligent student in the class.</p>
+            <div class="options">
+                <label><input type="radio" name="q11" value="true"> Correct</label>
+                <label><input type="radio" name="q11" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback11"></div>
+        </div>
+
+        <div class="question" data-correct="false" data-feedback="The comparative form of 'good' is **better**. This is an irregular adjective.">
+            <p>12. She is gooder at tennis than I am.</p>
+            <div class="options">
+                <label><input type="radio" name="q12" value="true"> Correct</label>
+                <label><input type="radio" name="q12" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback12"></div>
+        </div>
+        
+        <div class="question" data-correct="true">
+            <p>13. My new flat is larger than my old one.</p>
+            <div class="options">
+                <label><input type="radio" name="q13" value="true"> Correct</label>
+                <label><input type="radio" name="q13" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback13"></div>
+        </div>
+
+        <div class="question" data-correct="false" data-feedback="The correct form is **more beautiful** because 'beautiful' is a long adjective.">
+            <p>14. Your bike is beautifuler than mine.</p>
+            <div class="options">
+                <label><input type="radio" name="q14" value="true"> Correct</label>
+                <label><input type="radio" name="q14" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback14"></div>
+        </div>
+
+        <div class="question" data-correct="true">
+            <p>15. I think this is the biggest pizza in the world.</p>
+            <div class="options">
+                <label><input type="radio" name="q15" value="true"> Correct</label>
+                <label><input type="radio" name="q15" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback15"></div>
+        </div>
+
+        <div class="question" data-correct="false" data-feedback="The superlative form of 'nice' is **the nicest**. You add '-est' to the end of short adjectives.">
+            <p>16. He is the most nice person in the office.</p>
+            <div class="options">
+                <label><input type="radio" name="q16" value="true"> Correct</label>
+                <label><input type="radio" name="q16" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback16"></div>
+        </div>
+
+        <div class="question" data-correct="true">
+            <p>17. Today I am happier than yesterday.</p>
+            <div class="options">
+                <label><input type="radio" name="q17" value="true"> Correct</label>
+                <label><input type="radio" name="q17" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback17"></div>
+        </div>
+
+        <div class="question" data-correct="false" data-feedback="The superlative form of 'difficult' is **the most difficult**. You use 'most' with long adjectives.">
+            <p>18. Math is the difficulter subject for me.</p>
+            <div class="options">
+                <label><input type="radio" name="q18" value="true"> Correct</label>
+                <label><input type="radio" name="q18" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback18"></div>
+        </div>
+
+        <div class="question" data-correct="true">
+            <p>19. My new jacket is warmer than my old one.</p>
+            <div class="options">
+                <label><input type="radio" name="q19" value="true"> Correct</label>
+                <label><input type="radio" name="q19" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback19"></div>
+        </div>
+
+        <div class="question" data-correct="false" data-feedback="The correct form is **more exciting** because 'exciting' is a long adjective.">
+            <p>20. I think this is the excitingest movie of the year.</p>
+            <div class="options">
+                <label><input type="radio" name="q20" value="true"> Correct</label>
+                <label><input type="radio" name="q20" value="false"> Incorrect</label>
+            </div>
+            <div class="feedback" id="feedback20"></div>
+        </div>
+        
+        <button type="button" class="button" onclick="checkAnswers()">Check Answers</button>
+    </form>
+
+    <div id="results"></div>
+
+</div>
+
+<script>
+    function checkAnswers() {
+        let correctCount = 0;
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = '';
+        resultsDiv.style.display = 'block';
+
+        const questions = document.querySelectorAll('.question');
+        questions.forEach((question, index) => {
+            const questionNumber = index + 1;
+            const selectedOption = document.querySelector(`input[name="q${questionNumber}"]:checked`);
+            const correctAnswer = question.getAttribute('data-correct') === 'true';
+
+            const resultText = document.createElement('p');
+            const feedbackDiv = document.getElementById(`feedback${questionNumber}`);
+            feedbackDiv.style.display = 'none';
+
+            if (selectedOption) {
+                const isUserCorrect = (selectedOption.value === 'true') === correctAnswer;
+                
+                if (isUserCorrect) {
+                    correctCount++;
+                    resultText.innerHTML = `<strong>Question ${questionNumber}:</strong> <span class="correct-answer">Correct!</span>`;
+                } else {
+                    resultText.innerHTML = `<strong>Question ${questionNumber}:</strong> <span class="incorrect-answer">Incorrect.</span>`;
+                    const feedbackMessage = question.getAttribute('data-feedback');
+                    if (feedbackMessage) {
+                        feedbackDiv.innerHTML = `**Feedback:** ${feedbackMessage}`;
+                        feedbackDiv.style.display = 'block';
+                    }
+                }
+            } else {
+                 resultText.innerHTML = `<strong>Question ${questionNumber}:</strong> <span class="incorrect-answer">No answer selected.</span>`;
+            }
+            resultsDiv.appendChild(resultText);
+        });
+
+        const finalScoreText = document.createElement('h3');
+        finalScoreText.textContent = `You got ${correctCount} out of ${questions.length} correct!`;
+        resultsDiv.prepend(finalScoreText);
+    }
+</script>
+
+</body>
+</html>
+

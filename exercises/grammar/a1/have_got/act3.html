@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speaking Practice: Have Got/Has Got</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header .goal {
+            font-size: 1.2em;
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .instructions {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 30px;
+            border-left: 6px solid #2196F3;
+        }
+        
+        .instructions h2 {
+            color: #1565C0;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .instructions ol {
+            margin-left: 25px;
+        }
+        
+        .instructions li {
+            margin: 12px 0;
+            font-size: 1.1em;
+            color: #333;
+        }
+        
+        .instructions .highlight {
+            background: #FFF9C4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .scenario-section {
+            padding: 30px;
+            background: #FAFAFA;
+        }
+        
+        .scenario-section h2 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .dialogue-box {
+            background: white;
+            border: 3px solid #9C27B0;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .dialogue-line {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1em;
+        }
+        
+        .dialogue-line.alex {
+            background: linear-gradient(135deg, #E1F5FE 0%, #B3E5FC 100%);
+            border-left: 5px solid #0288D1;
+        }
+        
+        .dialogue-line.you {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            border-left: 5px solid #8E24AA;
+        }
+        
+        .speaker {
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .you .speaker {
+            color: #6A1B9A;
+        }
+        
+        .prompt-section {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 3px solid #FF9800;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .prompt-section h3 {
+            color: #E65100;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .prompt-item {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .prompt-number {
+            background: #FF9800;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 1.2em;
+        }
+        
+        .prompt-text {
+            font-size: 1.15em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .form-hint {
+            background: #FFF9C4;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.95em;
+            color: #F57F17;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        .record-button {
+            background: linear-gradient(135deg, #E53935 0%, #C62828 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(229, 57, 53, 0.4);
+            transition: all 0.3s;
+        }
+        
+        .record-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(229, 57, 53, 0.6);
+        }
+        
+        .record-button.recording {
+            background: linear-gradient(135deg, #43A047 0%, #2E7D32 100%);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .mic-icon {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+        
+        .answer-key {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 30px;
+            border-left: 6px solid #4CAF50;
+        }
+        
+        .answer-key h2 {
+            color: #2E7D32;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .answer-item {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+        
+        .answer-number {
+            background: #4CAF50;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .answer-examples {
+            margin-top: 12px;
+            padding-left: 20px;
+        }
+        
+        .answer-examples li {
+            color: #1B5E20;
+            margin: 8px 0;
+            font-size: 1.05em;
+        }
+        
+        .toggle-answers {
+            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+            transition: all 0.3s;
+        }
+        
+        .toggle-answers:hover {
+            transform: scale(1.05);
+        }
+        
+        .answer-key.hidden {
+            display: none;
+        }
+        
+        .recording-status {
+            background: #FFEBEE;
+            border: 2px solid #E53935;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            display: none;
+        }
+        
+        .recording-status.active {
+            display: block;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            border: 3px solid #FFC107;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .tip-box h4 {
+            color: #F57F17;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .tip-box p {
+            color: #333;
+            font-size: 1.05em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>🎤 Speaking Practice Activity</h1>
+            <h2>Have Got / Has Got</h2>
+            <div class="goal">
+                <strong>📌 Learning Goal:</strong> Practice using 'have got' and 'has got' in affirmative (✓), negative (✗), and question (?) forms through a real conversation scenario.
+            </div>
+        </div>
+
+        <!-- INSTRUCTIONS -->
+        <div class="instructions">
+            <h2>📋 How to Complete This Activity</h2>
+            <ol>
+                <li>Read the <span class="highlight">starter dialogue</span> below to understand the situation.</li>
+                <li>Look at each <span class="highlight">prompt</span> (numbered 1-8) and think about your answer.</li>
+                <li>Click the <span class="highlight">🎤 Record Button</span> and speak your answer out loud in English.</li>
+                <li>After speaking, click <span class="highlight">"Show Model Answers"</span> to compare your response with the examples.</li>
+                <li>Repeat the activity to improve your <span class="highlight">fluency and pronunciation</span>!</li>
+            </ol>
+            
+            <div class="tip-box">
+                <h4>💡 Speaking Tip:</h4>
+                <p>Don't worry about mistakes! The goal is to practice speaking. Try to speak clearly and use complete sentences with 'have got' or 'has got'.</p>
+            </div>
+        </div>
+
+        <!-- SCENARIO -->
+        <div class="scenario-section">
+            <h2>🎬 Scenario: Meeting a New Friend</h2>
+            <p style="font-size: 1.15em; margin-bottom: 20px; color: #555;">
+                You meet Alex, a new student at your English class. You're having a friendly conversation about what you both have (possessions, family, pets, etc.). Read the starter dialogue, then respond to the prompts.
+            </p>
+
+            <div class="dialogue-box">
+                <div class="dialogue-line alex">
+                    <div class="speaker">👤 Alex:</div>
+                    <div>Hi! I'm Alex. Nice to meet you! I'm new here in this English class.</div>
+                </div>
+                
+                <div class="dialogue-line you">
+                    <div class="speaker">🗣️ You:</div>
+                    <div>Hi Alex! Nice to meet you too! Welcome to the class.</div>
+                </div>
+                
+                <div class="dialogue-line alex">
+                    <div class="speaker">👤 Alex:</div>
+                    <div>Thanks! I've got a question for you. Have you got any pets?</div>
+                </div>
+            </div>
+
+            <!-- PROMPTS -->
+            <div class="prompt-section">
+                <h3>🎯 Your Speaking Prompts</h3>
+                <p style="margin-bottom: 20px; color: #E65100;"><strong>Click the record button and speak your answer for each prompt:</strong></p>
+
+                <!-- Prompt 1 -->
+                <div class="prompt-item">
+                    <div class="prompt-text">
+                        <span class="prompt-number">1</span>
+                        <strong>Answer Alex's question about pets.</strong> (Do you have a pet? Tell Alex yes or no, and what pet/pets you have.)
+                    </div>
+                    <div class="form-hint">💬 Use: "Yes, I've got..." or "No, I haven't got..."</div>
+                    <button class="record-button" onclick="toggleRecording(this, 1)">
+                        <svg class="mic-icon" viewBox="0 0 24 24">
+                            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                        </svg>
+                        <span class="btn-text">Start Recording</span>
+                    </button>
+                    <div class="recording-status" id="status-1">
+                        <strong>🔴 Recording...</strong> Speak now!
+                    </div>
+                </div>
+
+                <!-- Prompt 2 -->
+                <div class="prompt-item">
+                    <div class="prompt-text">
+                        <span class="prompt-number">2</span>
+                        <strong>Alex says: "Cool! I've got a dog. His name is Max. Have you got any brothers or sisters?"</strong> Answer the question.
+                    </div>
+                    <div class="form-hint">💬 Use: "Yes, I've got..." or "No, I haven't got..."</div>
+                    <button class="record-button" onclick="toggleRecording(this, 2)">
+                        <svg class="mic-icon" viewBox="0 0 24 24">
+                            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                        </svg>
+                        <span class="btn-text">Start Recording</span>
+                    </button>
+                    <div class="recording-status" id="status-2">
+                        <strong>🔴 Recording...</strong> Speak now!
+                    </div>
+                </div>
+
+                <!-- Prompt 3 -->
+                <div class="prompt-item">
+                    <div class="prompt-text">
+                        <span class="prompt-number">3</span>
+                        <strong>Ask Alex if he has got a bicycle.</strong>
+                    </div>
+                    <div class="form-hint">❓ Use: "Have you got...?"</div>
+                    <button class="record-button" onclick="toggleRecording(this, 3)">
+                        <svg class="mic-icon" viewBox="0 0 24 24">
+                            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                        </svg>
+                        <span class="btn-text">Start Recording</span>
+                    </button>
+                    <div class="recording-status" id="status-3">
+                        <strong>🔴 Recording...</strong> Speak now!
+                    </div>
+                </div>
+
+                <!-- Prompt 4 -->
+                <div class="prompt-item">
+                    <div class="prompt-text">
+                        <span class="prompt-number">4</span>
+                        <strong>Alex answers: "Yes, I have! I've got a red bicycle. It's very fast!"</strong> Now tell Alex what YOU have got in your bag today (or what you haven't got).
+                    </div>
+                    <div class="form-hint">💬 Use: "I've got..." or "I haven't got..."</div>
+                    <button class="record-button" onclick="toggleRecording(this, 4)">
+                        <svg class="mic-icon" viewBox="0 0 24 24">
+                            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                        </svg>
+                        <span class="btn-text">Start Recording</span>
+                    </button>
+                    <div class="recording-status" id="status-4">
+                        <strong>🔴 Recording...</strong> Speak now!
+                    </div>
+                </div>
+
+                <!-- Prompt 5 -->
+                <div class="prompt-item">
+                    <div class="prompt-text">
+                        <span class="prompt-number">5</span>
+                        <strong>Ask Alex if he has got a smartphone.</strong>
+                    </div>
+                    <div class="form-hint">❓ Use: "Have you got...?"</div>
+                    <button class="record-button" onclick="toggleRecording(this, 5)">
+                        <svg class="mic-icon" viewBox="0 0 24 24">
+                            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                        </svg>
+                        <span class="btn-text">Start Recording</span>
+                    </button>
+                    <div class="recording-status" id="status-5">
+                        <strong>🔴 Recording...</strong> Speak now!
+                    </div>
+                </div>
+
+                <!-- Prompt 6 -->
+                <div class="prompt-item">
+                    <div class="prompt-text">
+                        <span class="prompt-number">6</span>
+                        <strong>Alex says: "Yes, I have. It's new!"</strong> Now tell Alex about your teacher. Say if your teacher has got brown hair or not.
+                    </div>
+                    <div class="form-hint">💬 Use: "He/She has got..." or "He/She hasn't got..."</div>
+                    <button class="record-button" onclick="toggleRecording(this, 6)">
+                        <svg class="mic-icon" viewBox="0 0 24 24">
+                            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                        </svg>
+                        <span class="btn-text">Start Recording</span>
+                    </button>
+                    <div class="recording-status" id="status-6">
+                        <strong>🔴 Recording...</strong> Speak now!
+                    </div>
+                </div>
+
+                <!-- Prompt 7 -->
+                <div class="prompt-item">
+                    <div class="prompt-text">
+                        <span class="prompt-number">7</span>
+                        <strong>Ask Alex if his family has got a car.</strong>
+                    </div>
+                    <div class="form-hint">❓ Use: "Has your family got...?" or "Have you got...?"</div>
+                    <button class="record-button" onclick="toggleRecording(this, 7)">
+                        <svg class="mic-icon" viewBox="0 0 24 24">
+                            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                        </svg>
+                        <span class="btn-text">Start Recording</span>
+                    </button>
+                    <div class="recording-status" id="status-7">
+                        <strong>🔴 Recording...</strong> Speak now!
+                    </div>
+                </div>
+
+                <!-- Prompt 8 -->
+                <div class="prompt-item">
+                    <div class="prompt-text">
+                        <span class="prompt-number">8</span>
+                        <strong>Alex says: "Yes, we have. We've got a blue car."</strong> Now say goodbye to Alex and say you haven't got time now, but you want to talk again tomorrow.
+                    </div>
+                    <div class="form-hint">💬 Use: "I haven't got..." in your response</div>
+                    <button class="record-button" onclick="toggleRecording(this, 8)">
+                        <svg class="mic-icon" viewBox="0 0 24 24">
+                            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                        </svg>
+                        <span class="btn-text">Start Recording</span>
+                    </button>
+                    <div class="recording-status" id="status-8">
+                        <strong>🔴 Recording...</strong> Speak now!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOGGLE BUTTON -->
+        <button class="toggle-answers" onclick="toggleAnswers()">
+            👁️ Show Model Answers
+        </button>
+
+        <!-- ANSWER KEY -->
+        <div class="answer-key hidden" id="answerKey">
+            <h2>✅ Model Answers / Example Responses</h2>
+            <p style="margin-bottom: 20px; color: #2E7D32; font-size: 1.1em;">
+                <strong>Note:</strong> These are example answers. Your answers can be different! The important thing is to use 'have got'/'has got' correctly.
+            </p>
+
+            <div class="answer-item">
+                <span class="answer-number">Prompt 1</span>
+                <strong>Answer Alex's question about pets</strong>
+                <ul class="answer-examples">
+                    <li>"Yes, I've got a cat. Her name is Bella."</li>
+                    <li>"Yes, I have! I've got two dogs."</li>
+                    <li>"No, I haven't got any pets."</li>
+                    <li>"No, I haven't, but I want a rabbit!"</li>
+                </ul>
+            </div>
+
+            <div class="answer-item">
+                <span class="answer-number">Prompt 2</span>
+                <strong>Answer about brothers or sisters</strong>
+                <ul class="answer-examples">
+                    <li>"Yes, I've got one brother and one sister."</li>
+                    <li>"Yes, I have. I've got two sisters."</li>
+                    <li>"No, I haven't got any brothers or sisters. I'm an only child."</li>
+                    <li>"No, I haven't, but I've got many cousins!"</li>
+                </ul>
+            </div>
+
+            <div class="answer-item">
+                <span class="answer-number">Prompt 3</span>
+                <strong>Ask Alex if he has got a bicycle</strong>
+                <ul class="answer-examples">
+                    <li>"Have you got a bicycle?"</li>
+                    <li>"Alex, have you got a bike?"</li>
+                    <li>"Have you got a bicycle, Alex?"</li>
+                </ul>
+            </div>
+
+            <div class="answer-item">
+                <span class="answer-number">Prompt 4</span>
+                <strong>Tell Alex what you have got in your bag</strong>
+                <ul class="answer-examples">
+                    <li>"I've got my books, a pen, and a water bottle in my bag."</li>
+                    <li>"I've got a notebook and some pencils."</li>
+                    <li>"I haven't got my phone today, but I've got my homework."</li>
+                    <li>"I've got a sandwich and an apple in my bag."</li>
+                </ul>
+            </div>
+
+            <div class="answer-item">
+                <span class="answer-number">Prompt 5</span>
+                <strong>Ask Alex if he has got a smartphone</strong>
+                <ul class="answer-examples">
+                    <li>"Have you got a smartphone?"</li>
+                    <li>"Have you got a phone, Alex?"</li>
+                    <li>"Alex, have you got a smartphone?"</li>
+                </ul>
+            </div>
+
+            <div class="answer-item">
+                <span class="answer-number">Prompt 6</span>
+                <strong>Tell Alex about your teacher's hair</strong>
+                <ul class="answer-examples">
+                    <li>"My teacher has got brown hair."</li>
+                    <li>"She has got long brown hair."</li>
+                    <li>"He hasn't got brown hair. He has got black hair."</li>
+                    <li>"My teacher hasn't got brown hair. She's got blonde hair."</li>
+                </ul>
+            </div>
+
+            <div class="answer-item">
+                <span class="answer-number">Prompt 7</span>
+                <strong>Ask Alex if his family has got a car</strong>
+                <ul class="answer-examples">
+                    <li>"Has your family got a car?"</li>
+                    <li>"Have you got a car in your family?"</li>
+                    <li>"Has your family got a car, Alex?"</li>
+                </ul>
+            </div>
+
+            <div class="answer-item">
+                <span class="answer-number">Prompt 8</span>
+                <strong>Say goodbye and that you haven't got time now</strong>
+                <ul class="answer-examples">
+                    <li>"Nice talking to you, Alex! I haven't got time now, but let's talk tomorrow!"</li>
+                    <li>"Goodbye, Alex! I haven't got time today, but see you tomorrow!"</li>
+                    <li>"It was nice meeting you! I haven't got time right now, but we can talk again tomorrow."</li>
+                    <li>"See you later! I haven't got time now, but let's chat tomorrow!"</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let recordingStates = {};
+        let mediaRecorders = {};
+        let audioChunks = {};
+
+        function toggleRecording(button, promptNumber) {
+            const isRecording = recordingStates[promptNumber] || false;
+            const statusDiv = document.getElementById(`status-${promptNumber}`);
+            const btnText = button.querySelector('.btn-text');
+            
+            if (!isRecording) {
+                startRecording(button, promptNumber, statusDiv, btnText);
+            } else {
+                stopRecording(button, promptNumber, statusDiv, btnText);
+            }
+        }
+
+        async function startRecording(button, promptNumber, statusDiv, btnText) {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                const mediaRecorder = new MediaRecorder(stream);
+                
+                audioChunks[promptNumber] = [];
+                
+                mediaRecorder.ondataavailable = (event) => {
+                    audioChunks[promptNumber].push(event.data);
+                };
+                
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks[promptNumber], { type: 'audio/wav' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    
+                    let audioPlayer = document.getElementById(`audio-${promptNumber}`);
+                    if (!audioPlayer) {
+                        audioPlayer = document.createElement('audio');
+                        audioPlayer.id = `audio-${promptNumber}`;
+                        audioPlayer.controls = true;
+                        audioPlayer.style.cssText = 'width: 100%; margin-top: 15px; border-radius: 8px;';
+                        button.parentElement.appendChild(audioPlayer);
+                    }
+                    audioPlayer.src = audioUrl;
+                    
+                    stream.getTracks().forEach(track => track.stop());
+                };
+                
+                mediaRecorder.start();
+                mediaRecorders[promptNumber] = mediaRecorder;
+                recordingStates[promptNumber] = true;
+                
+                button.classList.add('recording');
+                btnText.textContent = 'Stop Recording';
+                statusDiv.classList.add('active');
+                
+            } catch (error) {
+                alert('❌ Could not access microphone. Please allow microphone access in your browser settings.');
+                console.error('Error accessing microphone:', error);
+            }
+        }
+
+        function stopRecording(button, promptNumber, statusDiv, btnText) {
+            const mediaRecorder = mediaRecorders[promptNumber];
+            
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+            }
+            
+            recordingStates[promptNumber] = false;
+            button.classList.remove('recording');
+            btnText.textContent = 'Start Recording';
+            statusDiv.classList.remove('active');
+        }
+
+        function toggleAnswers() {
+            const answerKey = document.getElementById('answerKey');
+            const button = document.querySelector('.toggle-answers');
+            
+            if (answerKey.classList.contains('hidden')) {
+                answerKey.classList.remove('hidden');
+                button.textContent = '👁️ Hide Model Answers';
+            } else {
+                answerKey.classList.add('hidden');
+                button.textContent = '👁️ Show Model Answers';
+            }
+        }
+    </script>
+</body>
+</html>
