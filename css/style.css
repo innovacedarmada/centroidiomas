@@ -725,6 +725,78 @@ section.page-banner-section {
   .tp-caption {
     display: none !important; } }
 
+
+/*------------------------------------------------- */
+/* =  IMAGES PRINCIPAL INDEX section */
+/*------------------------------------------------- */
+.course-thumbnail-holder {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+}
+
+.course-thumbnail-holder img {
+  width: 100%;
+  height: auto;
+  transition: all 0.6s ease;
+  filter: brightness(0.9) saturate(1.1);
+}
+
+/* Efecto principal */
+.course-thumbnail-holder:hover img {
+  transform: scale(1.08);
+  filter: brightness(1.15) saturate(1.3);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+}
+
+/* Overlay futurista */
+.course-thumbnail-holder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,255,255,0.15) 0%, rgba(0,0,0,0.6) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.course-thumbnail-holder:hover::after {
+  opacity: 1;
+}
+
+/* Borde neón animado */
+.course-thumbnail-holder::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  background: linear-gradient(90deg, #00f5ff, #0066ff, #00f5ff);
+  background-size: 200% 100%;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease, background-position 1s linear;
+}
+
+.course-thumbnail-holder:hover::before {
+  opacity: 1;
+  background-position: 200% 0;
+}
+
+/*------------------------------------------------- */
+/* =  IMAGES PRINCIPAL TAE ONLINE section */
+/*------------------------------------------------- */
+
+
+
+
+
+
+
+
+
 /*------------------------------------------------- */
 /* =  feature section */
 /*------------------------------------------------- */
