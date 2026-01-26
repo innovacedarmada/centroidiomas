@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transportation Adventures</title>
+    <!-- Load Tailwind CSS for modern utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for A1 accessibility and engagement */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light background */
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+        }
+        .lesson-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            padding: 20px;
+            transition: transform 0.2s;
+        }
+        .lesson-card:hover {
+            transform: translateY(-2px);
+        }
+        .lesson-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1e3a8a; /* Dark Blue */
+            margin-bottom: 15px;
+            border-bottom: 3px solid #60a5fa; /* Medium Blue underline */
+            padding-bottom: 8px;
+        }
+        .task-box {
+            background-color: #fef3c7; /* Light Yellow/Cream */
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        .task-instruction {
+            font-weight: 600;
+            color: #92400e; /* Dark Brown/Orange */
+            margin-bottom: 10px;
+        }
+        .reading-text {
+            border-left: 5px solid #34d399; /* Green border */
+            padding-left: 15px;
+            margin: 20px 0;
+            font-size: 1.05rem;
+            color: #374151; /* Dark Grey text */
+            background-color: #f0fdf4; /* Very light green background */
+            border-radius: 4px;
+            padding: 15px;
+        }
+        .check-btn {
+            background-color: #3b82f6; /* Blue */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 9999px; /* Fully rounded */
+            font-weight: 700;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        .check-btn:hover {
+            background-color: #2563eb;
+            transform: scale(1.02);
+        }
+        .feedback-message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            min-height: 40px; /* Prevent CLS */
+        }
+        .correct {
+            background-color: #d1fae5; /* Light Green */
+            color: #065f46; /* Dark Green */
+        }
+        .incorrect {
+            background-color: #fee2e2; /* Light Red */
+            color: #991b1b; /* Dark Red */
+        }
+        /* Custom form styling for A1 clarity */
+        input[type="text"] {
+            border: 2px solid #9ca3af;
+            border-radius: 6px;
+            padding: 5px 10px;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus {
+            border-color: #3b82f6;
+            outline: none;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        .radio-option {
+            margin-right: 15px;
+            display: inline-flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div class="container mx-auto">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
+                Transportation Adventures
+            </h1>
+            <p class="text-xl text-gray-600 mt-2">20 Interactive Reading Lessons (CEFR A1)</p>
+            <p class="text-md text-gray-500 mt-1">Focus: Essential Transportation Vocabulary</p>
+        </header>
+
+        <!-- LESSON 1: The Fast Train Trip -->
+        <div class="lesson-card" data-lesson="1">
+            <h2 class="lesson-title">1. The Fast Train Trip</h2>
+            
+            <div class="task-box pre-reading">
+                <p class="task-instruction">Warm-up: Do you like to travel by train? Why or why not?</p>
+            </div>
+            
+            <div class="reading-text">
+                Leo loves to travel. Tomorrow, he will take a fast train to the city. The train is new and very comfortable. It leaves the station at 7:00 AM. Leo needs to walk to the station, so he must start early. He is a passenger, not the driver. He hopes the train is not slow! When he arrives in the city, he will see his friend. The train trip is safe and quick. Leo will take a taxi from the city station to his friend’s house on a busy street.
+            </div>
+
+            <!-- Activity 1: Comprehension Check (Multiple Choice) -->
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Select the correct option.</p>
+                <label class="radio-option"><input type="radio" name="q1_1" data-correct="false"> Leo is driving the train.</label>
+                <label class="radio-option"><input type="radio" name="q1_1" data-correct="true"> The train is new and fast.</label>
+                <label class="radio-option"><input type="radio" name="q1_1" data-correct="false"> Leo will take a bus to the station.</label>
+            </div>
+
+            <!-- Activity 2: Lexicon Use (Fill in the Blank) -->
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Use a word from the text (e.g., fast, walk, station).</p>
+                <p>1. Leo must 
+                    <input type="text" id="q1_2_1" data-correct="walk" class="w-20 inline-block text-center" placeholder="verb"> to the station.
+                </p>
+                <p>2. The train is a 
+                    <input type="text" id="q1_2_2" data-correct="fast" class="w-20 inline-block text-center" placeholder="adjective"> vehicle.
+                </p>
+            </div>
+
+            <button onclick="checkAnswers(1)" class="check-btn">Check Answers</button>
+            <div id="feedback-1" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 2: Maria's Old Bike -->
+        <div class="lesson-card" data-lesson="2">
+            <h2 class="lesson-title">2. Maria's Old Bike</h2>
+            
+            <div class="task-box pre-reading">
+                <p class="task-instruction">Warm-up: Is a bike a fast or slow way to travel?</p>
+            </div>
+            
+            <div class="reading-text">
+                Maria has an old bike, but she loves it. She rides her bike to the park every afternoon. The park is not far from her house. She does not like to take the bus because it is slow and there is often traffic on the road. Her bike is slow, but it is free! Maria never rides her motorbike to the park; she saves the motorbike for long trips. The bike is small and very easy to stop. Today, she will ride to the park and then walk home.
+            </div>
+
+            <!-- Activity 1: Comprehension Check (True/False) -->
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Write 'T' (True) or 'F' (False).</p>
+                <p>1. Maria rides her bike because the bus has traffic. 
+                    <input type="text" id="q2_1_1" data-correct="T" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1">
+                </p>
+                <p>2. Maria's bike is new. 
+                    <input type="text" id="q2_1_2" data-correct="F" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1">
+                </p>
+            </div>
+
+            <!-- Activity 2: Lexicon Use (Matching) -->
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Match the word to the vehicle type.</p>
+                <p>1. road: 
+                    <input type="text" id="q2_2_1" data-correct="bus" class="w-20 inline-block text-center" placeholder="Noun">
+                </p>
+                <p>2. water: 
+                    <input type="text" id="q2_2_2" data-correct="boat" class="w-20 inline-block text-center" placeholder="Noun">
+                </p>
+            </div>
+
+            <button onclick="checkAnswers(2)" class="check-btn">Check Answers</button>
+            <div id="feedback-2" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 3: The Big Airport -->
+        <div class="lesson-card" data-lesson="3">
+            <h2 class="lesson-title">3. The Big Airport</h2>
+            
+            <div class="task-box pre-reading">
+                <p class="task-instruction">Warm-up: What two things arrive and leave at an airport?</p>
+            </div>
+            
+            <div class="reading-text">
+                The city has a very big airport. Many people travel by plane every day. Planes are very fast! Today, two big planes arrive at the airport, and three small planes leave. A small group of passengers is waiting to get on the plane to Paris. The airport is safe. The driver of the bus that brings people from the parking lot waits at the bus stop. No one wants to walk to the plane. The airport has a garage for fixing airport cars.
+            </div>
+
+            <!-- Activity 1: Comprehension Check (Multiple Choice) -->
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Select the correct option.</p>
+                <label class="radio-option"><input type="radio" name="q3_1" data-correct="false"> The airport is small.</label>
+                <label class="radio-option"><input type="radio" name="q3_1" data-correct="true"> Planes are fast and safe.</label>
+                <label class="radio-option"><input type="radio" name="q3_1" data-correct="false"> Passengers walk to the plane.</label>
+            </div>
+
+            <!-- Activity 2: Lexicon Use (Fill in the Blank) -->
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Use a word from the text (e.g., plane, big, driver).</p>
+                <p>1. People 
+                    <input type="text" id="q3_2_1" data-correct="travel" class="w-20 inline-block text-center" placeholder="verb"> by plane.
+                </p>
+                <p>2. The 
+                    <input type="text" id="q3_2_2" data-correct="driver" class="w-20 inline-block text-center" placeholder="noun"> waits at the bus stop.
+                </p>
+            </div>
+
+            <button onclick="checkAnswers(3)" class="check-btn">Check Answers</button>
+            <div id="feedback-3" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 4: Traffic on the Street -->
+        <div class="lesson-card" data-lesson="4">
+            <h2 class="lesson-title">4. Traffic on the Street</h2>
+            
+            <div class="task-box pre-reading">
+                <p class="task-instruction">Warm-up: What is a problem when many cars are on the road?</p>
+            </div>
+            
+            <div class="reading-text">
+                My dad drives his old car to work every day. He drives on a long road and then turns onto a small city street. The problem is the traffic. There are many cars, and they move very slowly. He must start driving at 6:30 AM to arrive on time. The traffic makes the trip slow. Sometimes, he takes a tram because it is faster than the car. Today, he will leave work early. He hopes the road is clear so he can drive fast and get home.
+            </div>
+
+            <!-- Activity 1: Comprehension Check (True/False) -->
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Write 'T' (True) or 'F' (False).</p>
+                <p>1. The dad drives a new car. 
+                    <input type="text" id="q4_1_1" data-correct="F" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1">
+                </p>
+                <p>2. The tram is often faster than the car. 
+                    <input type="text" id="q4_1_2" data-correct="T" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1">
+                </p>
+            </div>
+
+            <!-- Activity 2: Lexicon Use (Word Order) -->
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Order the words to make a correct sentence (use words from the text).</p>
+                <p>1. The / is / slow / traffic: 
+                    <input type="text" id="q4_2_1" data-correct="The traffic is slow." class="w-64 inline-block text-center" placeholder="Write sentence here">
+                </p>
+                <p>2. He / his / car / drives: 
+                    <input type="text" id="q4_2_2" data-correct="He drives his car." class="w-64 inline-block text-center" placeholder="Write sentence here">
+                </p>
+            </div>
+
+            <button onclick="checkAnswers(4)" class="check-btn">Check Answers</button>
+            <div id="feedback-4" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 5: A Trip on the Boat -->
+        <div class="lesson-card" data-lesson="5">
+            <h2 class="lesson-title">5. A Trip on the Boat</h2>
+            
+            <div class="task-box pre-reading">
+                <p class="task-instruction">Warm-up: Do you think travelling by boat is fast or slow?</p>
+            </div>
+            
+            <div class="reading-text">
+                Today is a holiday. My family and I will travel by boat to a small island. The boat is small and safe. It leaves the dock at 10:00 AM. We must get on the boat now! We are all passengers. The driver of the boat is called the captain. He is a very old man, but he is a good driver. The trip is slow, but we like to watch the water. We will arrive at the island in two hours. We will not take a bus today; the boat is better!
+            </div>
+
+            <!-- Activity 1: Comprehension Check (Multiple Choice) -->
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Select the correct option.</p>
+                <label class="radio-option"><input type="radio" name="q5_1" data-correct="true"> The trip is slow but safe.</label>
+                <label class="radio-option"><input type="radio" name="q5_1" data-correct="false"> The boat leaves at 11:00 AM.</label>
+                <label class="radio-option"><input type="radio" name="q5_1" data-correct="false"> They will walk to the island.</label>
+            </div>
+
+            <!-- Activity 2: Lexicon Use (Fill in the Blank) -->
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Use a word from the text (e.g., boat, slow, driver).</p>
+                <p>1. They 
+                    <input type="text" id="q5_2_1" data-correct="travel" class="w-20 inline-block text-center" placeholder="verb"> by boat.
+                </p>
+                <p>2. The boat’s 
+                    <input type="text" id="q5_2_2" data-correct="driver" class="w-20 inline-block text-center" placeholder="noun"> is called the captain.
+                </p>
+            </div>
+
+            <button onclick="checkAnswers(5)" class="check-btn">Check Answers</button>
+            <div id="feedback-5" class="feedback-message"></div>
+        </div>
+        
+        <!-- The remaining 15 lessons follow the exact same structure for the full 20 -->
+
+        <!-- LESSON 6: The Emergency Truck -->
+        <div class="lesson-card" data-lesson="6">
+            <h2 class="lesson-title">6. The Emergency Truck</h2>
+            <div class="task-box pre-reading"><p class="task-instruction">Warm-up: Does a truck usually go fast or slow?</p></div>
+            <div class="reading-text">
+                The big fire truck is very important. It must always go fast on the road and on the street. It cannot wait for traffic to stop. Today, the truck driver needs to leave the garage quickly. The fire station is near the bus stop. The truck is old, but the driver keeps it safe and clean. After the emergency, the driver will bring the truck back to the garage for fixing. The other cars on the road must stop when they see the truck go!
+            </div>
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Write 'T' (True) or 'F' (False).</p>
+                <p>1. The truck driver must drive fast. <input type="text" id="q6_1_1" data-correct="T" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1"></p>
+                <p>2. The fire truck is new. <input type="text" id="q6_1_2" data-correct="F" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1"></p>
+            </div>
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Use a word from the text (e.g., fast, stop, driver).</p>
+                <p>1. The truck must always go <input type="text" id="q6_2_1" data-correct="fast" class="w-20 inline-block text-center" placeholder="adjective">.</p>
+                <p>2. The truck is kept in a <input type="text" id="q6_2_2" data-correct="garage" class="w-20 inline-block text-center" placeholder="noun">.</p>
+            </div>
+            <button onclick="checkAnswers(6)" class="check-btn">Check Answers</button>
+            <div id="feedback-6" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 7: The City Tram -->
+        <div class="lesson-card" data-lesson="7">
+            <h2 class="lesson-title">7. The City Tram</h2>
+            <div class="task-box pre-reading"><p class="task-instruction">Warm-up: Is a tram a train or a bus?</p></div>
+            <div class="reading-text">
+                The new tram is a perfect way to travel in the city. It runs on a special track down the street. It is faster than a car, especially when there is a lot of traffic. All the passengers wait for the tram at the station. The tram leaves the station every 15 minutes. You must get on quickly. The driver is a woman named Jane. Jane drives the tram all day. She likes that the tram is big and safe for everyone.
+            </div>
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Select the correct option.</p>
+                <label class="radio-option"><input type="radio" name="q7_1" data-correct="true"> The tram is faster than a car in traffic.</label>
+                <label class="radio-option"><input type="radio" name="q7_1" data-correct="false"> The tram leaves every hour.</label>
+            </div>
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Fill in the blank (Lexicon).</p>
+                <p>1. The tram runs down the <input type="text" id="q7_2_1" data-correct="street" class="w-20 inline-block text-center" placeholder="noun">.</p>
+                <p>2. People waiting are <input type="text" id="q7_2_2" data-correct="passengers" class="w-20 inline-block text-center" placeholder="noun">.</p>
+            </div>
+            <button onclick="checkAnswers(7)" class="check-btn">Check Answers</button>
+            <div id="feedback-7" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 8: The Bus Driver's Day -->
+        <div class="lesson-card" data-lesson="8">
+            <h2 class="lesson-title">8. The Bus Driver's Day</h2>
+            <div class="task-box pre-reading"><p class="task-instruction">Warm-up: What two words are opposites: 'get on' and 'get off'?</p></div>
+            <div class="reading-text">
+                Tom is a bus driver. He drives a big, old bus. His bus trip starts at the station. He drives slowly on the road. At every bus stop, people get on or get off the bus. He must stop and wait for all the passengers. He always checks the traffic before he leaves the station. He drives all day. He likes his job because it is safe and he meets many people. When his day is over, he parks the big bus at the garage.
+            </div>
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Write 'T' (True) or 'F' (False).</p>
+                <p>1. Tom drives a small bus. <input type="text" id="q8_1_1" data-correct="F" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1"></p>
+                <p>2. People get on and get off at the bus stop. <input type="text" id="q8_1_2" data-correct="T" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1"></p>
+            </div>
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Choose the correct word for the sentence.</p>
+                <p>1. Tom must <input type="text" id="q8_2_1" data-correct="wait" class="w-20 inline-block text-center" placeholder="verb"> for the people.</p>
+                <p>2. He <input type="text" id="q8_2_2" data-correct="drives" class="w-20 inline-block text-center" placeholder="verb"> the bus slowly.</p>
+            </div>
+            <button onclick="checkAnswers(8)" class="check-btn">Check Answers</button>
+            <div id="feedback-8" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 9: A New Motorbike -->
+        <div class="lesson-card" data-lesson="9">
+            <h2 class="lesson-title">9. A New Motorbike</h2>
+            <div class="task-box pre-reading"><p class="task-instruction">Warm-up: What is different between a bike and a motorbike?</p></div>
+            <div class="reading-text">
+                Sam has a new motorbike. He loves to ride it! It is very fast, much faster than a small car. Sam’s motorbike is big and shiny. He uses it to travel to the town outside the city. He never has to worry about traffic on the street. When he arrives home, he keeps the motorbike safe in his garage. He never rides it in the rain. Tomorrow, he will leave early to ride to the mountains. It is a long but fast trip.
+            </div>
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Select the correct option.</p>
+                <label class="radio-option"><input type="radio" name="q9_1" data-correct="false"> Sam drives a car to the town.</label>
+                <label class="radio-option"><input type="radio" name="q9_1" data-correct="true"> Sam's motorbike is fast and big.</label>
+            </div>
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Fill in the blank (Lexicon).</p>
+                <p>1. Sam must keep his motorbike in the <input type="text" id="q9_2_1" data-correct="garage" class="w-20 inline-block text-center" placeholder="noun">.</p>
+                <p>2. He uses the motorbike to <input type="text" id="q9_2_2" data-correct="travel" class="w-20 inline-block text-center" placeholder="verb"> to the town.</p>
+            </div>
+            <button onclick="checkAnswers(9)" class="check-btn">Check Answers</button>
+            <div id="feedback-9" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 10: Waiting at the Station -->
+        <div class="lesson-card" data-lesson="10">
+            <h2 class="lesson-title">10. Waiting at the Station</h2>
+            <div class="task-box pre-reading"><p class="task-instruction">Warm-up: What transport can you catch at a station?</p></div>
+            <div class="reading-text">
+                It is 5:00 PM. Many passengers are waiting at the station. They want to get on the train to go home. The train is a bit old, but it is safe. The driver is ready to start the engine. The train leaves at 5:15 PM. They all hope the train is fast because they are tired. One passenger must take a taxi when he arrives at his station. He does not want to walk from the station to his street. They must wait a little more.
+            </div>
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Write 'T' (True) or 'F' (False).</p>
+                <p>1. The train is new. <input type="text" id="q10_1_1" data-correct="F" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1"></p>
+                <p>2. The train leaves at 5:15 PM. <input type="text" id="q10_1_2" data-correct="T" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1"></p>
+            </div>
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Use a word from the text (e.g., train, wait, taxi).</p>
+                <p>1. The passengers must <input type="text" id="q10_2_1" data-correct="wait" class="w-20 inline-block text-center" placeholder="verb"> for the train.</p>
+                <p>2. The train is at the <input type="text" id="q10_2_2" data-correct="station" class="w-20 inline-block text-center" placeholder="noun">.</p>
+            </div>
+            <button onclick="checkAnswers(10)" class="check-btn">Check Answers</button>
+            <div id="feedback-10" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 11: The Big Yellow School Bus -->
+        <div class="lesson-card" data-lesson="11">
+            <h2 class="lesson-title">11. The Big Yellow School Bus</h2>
+            <div class="task-box pre-reading"><p class="task-instruction">Warm-up: Is a school bus a big or small vehicle?</p></div>
+            <div class="reading-text">
+                This is a big yellow bus. It takes children to school. The bus driver is always happy. The children are passengers. They get on the bus at the bus stop on the street. The driver must stop for all the kids. The bus is old, but it is safe. It drives slowly on the road because of the children. It does not go fast. After school, the bus arrives at the bus stop at 3:30 PM. The children walk home from the bus stop.
+            </div>
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Select the correct option.</p>
+                <label class="radio-option"><input type="radio" name="q11_1" data-correct="true"> The children are passengers.</label>
+                <label class="radio-option"><input type="radio" name="q11_1" data-correct="false"> The bus drives fast.</label>
+            </div>
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Fill in the blank (Lexicon).</p>
+                <p>1. The bus must <input type="text" id="q11_2_1" data-correct="stop" class="w-20 inline-block text-center" placeholder="verb"> for the children.</p>
+                <p>2. The bus is a <input type="text" id="q11_2_2" data-correct="big" class="w-20 inline-block text-center" placeholder="adjective"> vehicle.</p>
+            </div>
+            <button onclick="checkAnswers(11)" class="check-btn">Check Answers</button>
+            <div id="feedback-11" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 12: A New Car for Mum -->
+        <div class="lesson-card" data-lesson="12">
+            <h2 class="lesson-title">12. A New Car for Mum</h2>
+            <div class="task-box pre-reading"><p class="task-instruction">Warm-up: Would you like a new car or an old car?</p></div>
+            <div class="reading-text">
+                Mum has a new car. Her old car was slow, but the new car is very fast! She loves to drive it on the road. The car is small and easy to park in the street outside our house. She does not like to drive in heavy traffic, so she leaves home very early. She is the driver, and I am the passenger. When she is not using it, she parks the car in the garage. The new car is safe and comfortable for our family to travel.
+            </div>
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Write 'T' (True) or 'F' (False).</p>
+                <p>1. Mum's old car was fast. <input type="text" id="q12_1_1" data-correct="F" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1"></p>
+                <p>2. The new car is safe. <input type="text" id="q12_1_2" data-correct="T" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1"></p>
+            </div>
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Choose the correct word for the sentence.</p>
+                <p>1. She is the <input type="text" id="q12_2_1" data-correct="driver" class="w-20 inline-block text-center" placeholder="noun"> of the car.</p>
+                <p>2. She does not like <input type="text" id="q12_2_2" data-correct="traffic" class="w-20 inline-block text-center" placeholder="noun">.</p>
+            </div>
+            <button onclick="checkAnswers(12)" class="check-btn">Check Answers</button>
+            <div id="feedback-12" class="feedback-message"></div>
+        </div>
+        
+        <!-- LESSON 13: The Fast Plane to Madrid -->
+        <div class="lesson-card" data-lesson="13">
+            <h2 class="lesson-title">13. The Fast Plane to Madrid</h2>
+            <div class="task-box pre-reading"><p class="task-instruction">Warm-up: Do planes arrive or leave from a station?</p></div>
+            <div class="reading-text">
+                We are at the airport. We will travel to Madrid by plane. The plane is very big and very fast! We must get on the plane now because it leaves at 11:00 AM. We are excited to arrive in Madrid. The airport is safe and easy to find. Before the plane trip, we took a taxi to the airport. The taxi driver drove fast, but there was no traffic. The plane trip is the fastest way to travel to Spain. We will not walk there!
+            </div>
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Select the correct option.</p>
+                <label class="radio-option"><input type="radio" name="q13_1" data-correct="false"> They took the bus to the airport.</label>
+                <label class="radio-option"><input type="radio" name="q13_1" data-correct="true"> The plane is big and fast.</label>
+            </div>
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Fill in the blank (Lexicon).</p>
+                <p>1. They are at the <input type="text" id="q13_2_1" data-correct="airport" class="w-20 inline-block text-center" placeholder="noun">.</p>
+                <p>2. They will <input type="text" id="q13_2_2" data-correct="travel" class="w-20 inline-block text-center" placeholder="verb"> by plane.</p>
+            </div>
+            <button onclick="checkAnswers(13)" class="check-btn">Check Answers</button>
+            <div id="feedback-13" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 14: Walking is Slow -->
+        <div class="lesson-card" data-lesson="14">
+            <h2 class="lesson-title">14. Walking is Slow</h2>
+            <div class="task-box pre-reading"><p class="task-instruction">Warm-up: Name two places you can walk to.</p></div>
+            <div class="reading-text">
+                I like to walk, but walking is very slow. I must walk to the bus stop every morning. It is a long street to the stop. I always arrive at the bus stop at 7:45 AM. I wait for the bus. The bus is faster than walking. I get on the bus and get off near my job. I am a passenger. I do not like to walk home, but sometimes the bus driver is slow because of the traffic on the road. I wish I had a fast motorbike!
+            </div>
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Write 'T' (True) or 'F' (False).</p>
+                <p>1. Walking is fast. <input type="text" id="q14_1_1" data-correct="F" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1"></p>
+                <p>2. The person is a passenger on the bus. <input type="text" id="q14_1_2" data-correct="T" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1"></p>
+            </div>
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Use a word from the text (e.g., walk, slow, bus stop).</p>
+                <p>1. The person must <input type="text" id="q14_2_1" data-correct="wait" class="w-20 inline-block text-center" placeholder="verb"> for the bus.</p>
+                <p>2. The street to the <input type="text" id="q14_2_2" data-correct="bus stop" class="w-20 inline-block text-center" placeholder="noun"> is long.</p>
+            </div>
+            <button onclick="checkAnswers(14)" class="check-btn">Check Answers</button>
+            <div id="feedback-14" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 15: The Old Truck Needs Help -->
+        <div class="lesson-card" data-lesson="15">
+            <h2 class="lesson-title">15. The Old Truck Needs Help</h2>
+            <div class="task-box pre-reading"><p class="task-instruction">Warm-up: Where do you take a broken car or truck?</p></div>
+            <div class="reading-text">
+                Mr. Smith has an old truck. It is big, but it is very slow. Today, the truck will not start! The driver, Mr. Smith, cannot drive it. He must take the truck to the garage. The garage is on a long road outside the city. He needs a friend to drive his car and help him. The old truck will arrive at the garage at 4:00 PM. Mr. Smith hopes the mechanic can fix it fast. He needs his truck to travel to work.
+            </div>
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Select the correct option.</p>
+                <label class="radio-option"><input type="radio" name="q15_1" data-correct="true"> The old truck is slow.</label>
+                <label class="radio-option"><input type="radio" name="q15_1" data-correct="false"> The truck starts easily.</label>
+            </div>
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Fill in the blank (Lexicon).</p>
+                <p>1. The truck will not <input type="text" id="q15_2_1" data-correct="start" class="w-20 inline-block text-center" placeholder="verb">.</p>
+                <p>2. The truck is a <input type="text" id="q15_2_2" data-correct="big" class="w-20 inline-block text-center" placeholder="adjective"> vehicle.</p>
+            </div>
+            <button onclick="checkAnswers(15)" class="check-btn">Check Answers</button>
+            <div id="feedback-15" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 16: Don't Stop! -->
+        <div class="lesson-card" data-lesson="16">
+            <h2 class="lesson-title">16. Don't Stop!</h2>
+            <div class="task-box pre-reading"><p class="task-instruction">Warm-up: Why must a bus stop at a bus stop?</p></div>
+            <div class="reading-text">
+                It is a very fast taxi. The taxi driver wants to get to the airport quickly. She drives very fast on the long road. She cannot stop! The passengers inside are nervous. There is no traffic, so the trip is fast and smooth. When they arrive at the airport, the passengers will get off quickly and pay. The driver hopes the next passenger wants to travel to a street without traffic. She likes to drive fast, but she also likes to be safe.
+            </div>
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Write 'T' (True) or 'F' (False).</p>
+                <p>1. The taxi is driving slow. <input type="text" id="q16_1_1" data-correct="F" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1"></p>
+                <p>2. The taxi is going to the airport. <input type="text" id="q16_1_2" data-correct="T" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1"></p>
+            </div>
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Use a word from the text (e.g., taxi, drive, fast).</p>
+                <p>1. The driver wants to <input type="text" id="q16_2_1" data-correct="drive" class="w-20 inline-block text-center" placeholder="verb"> fast.</p>
+                <p>2. The people in the taxi are <input type="text" id="q16_2_2" data-correct="passengers" class="w-20 inline-block text-center" placeholder="noun">.</p>
+            </div>
+            <button onclick="checkAnswers(16)" class="check-btn">Check Answers</button>
+            <div id="feedback-16" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 17: The Bike Ride to the Street -->
+        <div class="lesson-card" data-lesson="17">
+            <h2 class="lesson-title">17. The Bike Ride to the Street</h2>
+            <div class="task-box pre-reading"><p class="task-instruction">Warm-up: Is riding a bike usually safe?</p></div>
+            <div class="reading-text">
+                My friend has a small, safe bike. She loves to ride it to the small street market. It is a slow ride, but she likes the exercise. She never rides a motorbike; she thinks motorbikes are too fast. She starts her trip at 8:00 AM. She stops to buy bread, and then she leaves the market. She does not take the tram or the bus. When she arrives home, she puts the bike in the garage next to her old car.
+            </div>
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Select the correct option.</p>
+                <label class="radio-option"><input type="radio" name="q17_1" data-correct="true"> She thinks motorbikes are too fast.</label>
+                <label class="radio-option"><input type="radio" name="q17_1" data-correct="false"> She rides her bike to the train station.</label>
+            </div>
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Fill in the blank (Lexicon).</p>
+                <p>1. Her bike is <input type="text" id="q17_2_1" data-correct="small" class="w-20 inline-block text-center" placeholder="adjective"> and safe.</p>
+                <p>2. She puts the bike in the <input type="text" id="q17_2_2" data-correct="garage" class="w-20 inline-block text-center" placeholder="noun">.</p>
+            </div>
+            <button onclick="checkAnswers(17)" class="check-btn">Check Answers</button>
+            <div id="feedback-17" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 18: Big Boats and the Sea -->
+        <div class="lesson-card" data-lesson="18">
+            <h2 class="lesson-title">18. Big Boats and the Sea</h2>
+            <div class="task-box pre-reading"><p class="task-instruction">Warm-up: Can a boat travel on a road?</p></div>
+            <div class="reading-text">
+                Big boats travel on the sea. They are very slow, much slower than a train or a plane. Many people go on the big boat to travel to other countries. The boat is very safe. The passengers get on and get off at the dock. The boat driver is the captain. This big boat leaves today at 4:30 PM. We wait for the boat to start its trip. We are happy to travel. We will not take a bus or a car this time!
+            </div>
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Write 'T' (True) or 'F' (False).</p>
+                <p>1. Boats are faster than planes. <input type="text" id="q18_1_1" data-correct="F" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1"></p>
+                <p>2. The big boat is safe. <input type="text" id="q18_1_2" data-correct="T" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1"></p>
+            </div>
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Choose the correct word for the sentence.</p>
+                <p>1. The boat is very <input type="text" id="q18_2_1" data-correct="slow" class="w-20 inline-block text-center" placeholder="adjective">.</p>
+                <p>2. The boat <input type="text" id="q18_2_2" data-correct="leaves" class="w-20 inline-block text-center" placeholder="verb"> today at 4:30 PM.</p>
+            </div>
+            <button onclick="checkAnswers(18)" class="check-btn">Check Answers</button>
+            <div id="feedback-18" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 19: The Tram Stop Problem -->
+        <div class="lesson-card" data-lesson="19">
+            <h2 class="lesson-title">19. The Tram Stop Problem</h2>
+            <div class="task-box pre-reading"><p class="task-instruction">Warm-up: What is a "stop"?</p></div>
+            <div class="reading-text">
+                The tram stops at the corner of the street. Today, the tram is old and slow. The driver must stop the tram quickly, but it is difficult. A small car is stopped on the tracks! The passengers must get off the tram and walk to the station. They cannot wait. The tram cannot start again until the car leaves. There is big traffic now on the whole street. This is a big problem for everyone who wants to travel.
+            </div>
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Select the correct option.</p>
+                <label class="radio-option"><input type="radio" name="q19_1" data-correct="false"> The tram is new and fast.</label>
+                <label class="radio-option"><input type="radio" name="q19_1" data-correct="true"> A small car is blocking the tram.</label>
+            </div>
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Fill in the blank (Lexicon).</p>
+                <p>1. The tram must <input type="text" id="q19_2_1" data-correct="stop" class="w-20 inline-block text-center" placeholder="verb"> on the street.</p>
+                <p>2. The passengers must <input type="text" id="q19_2_2" data-correct="walk" class="w-20 inline-block text-center" placeholder="verb"> to the station.</p>
+            </div>
+            <button onclick="checkAnswers(19)" class="check-btn">Check Answers</button>
+            <div id="feedback-19" class="feedback-message"></div>
+        </div>
+
+        <!-- LESSON 20: Traffic Lights and Roads -->
+        <div class="lesson-card" data-lesson="20">
+            <h2 class="lesson-title">20. Traffic Lights and Roads</h2>
+            <div class="task-box pre-reading"><p class="task-instruction">Warm-up: What color tells a driver to stop?</p></div>
+            <div class="reading-text">
+                My brother is learning to drive a car. He drives very slowly because he is new. He must learn about the road and traffic. Today, he will drive on a big road, but he must not go fast. There is often heavy traffic in the morning. When the light is red, he must stop. He is the driver. I am the passenger. We hope to arrive at the station on time to get on the train. We do not want to wait for the next train.
+            </div>
+            <div class="task-box activity-1">
+                <p class="task-instruction">Activity 1: Comprehension. Write 'T' (True) or 'F' (False).</p>
+                <p>1. The brother drives fast. <input type="text" id="q20_1_1" data-correct="F" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1"></p>
+                <p>2. They want to catch a train. <input type="text" id="q20_1_2" data-correct="T" class="w-10 inline-block text-center uppercase" placeholder="T/F" maxlength="1"></p>
+            </div>
+            <div class="task-box activity-2">
+                <p class="task-instruction">Activity 2: Use a word from the text (e.g., slow, car, passenger).</p>
+                <p>1. The brother is learning to <input type="text" id="q20_2_1" data-correct="drive" class="w-20 inline-block text-center" placeholder="verb"> a car.</p>
+                <p>2. They are on a big <input type="text" id="q20_2_2" data-correct="road" class="w-20 inline-block text-center" placeholder="noun">.</p>
+            </div>
+            <button onclick="checkAnswers(20)" class="check-btn">Check Answers</button>
+            <div id="feedback-20" class="feedback-message"></div>
+        </div>
+
+    </div>
+
+    <script>
+        // Simple JavaScript function to handle answer checking and feedback
+        function checkAnswers(lessonId) {
+            const feedbackElement = document.getElementById(`feedback-${lessonId}`);
+            const lesson = document.querySelector(`[data-lesson="${lessonId}"]`);
+            const inputs = lesson.querySelectorAll('input[data-correct]');
+            let allCorrect = true;
+            let correctCount = 0;
+
+            inputs.forEach(input => {
+                const isText = input.type === 'text';
+                const isRadio = input.type === 'radio';
+                const correctValue = input.getAttribute('data-correct').toLowerCase().trim();
+                
+                let isAnswerCorrect = false;
+
+                if (isRadio) {
+                    // Check if the radio button is selected AND is marked as correct="true"
+                    if (input.checked && correctValue === 'true') {
+                        isAnswerCorrect = true;
+                    }
+                    if (input.checked && correctValue === 'false') {
+                        isAnswerCorrect = false; // Incorrectly selected
+                    }
+                } else if (isText) {
+                    // Check if the trimmed, lowercased user input matches the correct answer
+                    const userAnswer = input.value.toLowerCase().trim();
+                    if (userAnswer === correctValue) {
+                        isAnswerCorrect = true;
+                    }
+                }
+
+                // Visual feedback on the input field itself
+                input.style.borderColor = isAnswerCorrect ? '#065f46' : (isRadio && input.checked) || (isText && input.value) ? '#991b1b' : '#9ca3af';
+
+                if (isAnswerCorrect) {
+                    correctCount++;
+                } else {
+                    // Only mark 'allCorrect' as false if it was a required answer that was wrong
+                    if (correctValue !== 'false' || (isRadio && input.checked)) {
+                        allCorrect = false;
+                    }
+                }
+            });
+
+            // Calculate total required answers (excluding radio 'false' options)
+            const totalRequired = Array.from(inputs).filter(i => i.getAttribute('data-correct').toLowerCase().trim() !== 'false').length;
+
+            // Update main feedback message
+            if (correctCount === totalRequired) {
+                feedbackElement.className = 'feedback-message correct';
+                feedbackElement.textContent = `Great job! You got ${correctCount} out of ${totalRequired} correct. Keep traveling! 🚀`;
+            } else {
+                feedbackElement.className = 'feedback-message incorrect';
+                feedbackElement.textContent = `Nice try! You got ${correctCount} out of ${totalRequired} correct. Review the text and try again.`;
+                allCorrect = false; // Ensure it's marked incorrect if not perfect
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A1 Family Vocabulary Quiz</title>
+    <style>
+        /* Basic Styling for A1 Level Clarity and Accessibility */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #007bff;
+            text-align: center;
+        }
+        h1 {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .instructions {
+            background-color: #e9f7ff;
+            padding: 15px;
+            border-left: 5px solid #007bff;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+        }
+        .quiz-question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+        .options label {
+            display: block;
+            margin: 8px 0;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .options label:hover {
+            background-color: #f0f0f0;
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+        .btn-check {
+            display: block;
+            width: 200px;
+            margin: 30px auto 10px;
+            padding: 12px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+        .btn-check:hover {
+            background-color: #218838;
+        }
+        
+        /* Feedback Styles */
+        .feedback {
+            margin-top: 10px;
+            padding: 5px;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+            font-weight: bold;
+        }
+        .correct-answer {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .incorrect-answer {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .highlight-correct {
+            background-color: #c9f5d1 !important; /* Light green for correct choice */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>👨‍👩‍👧‍👦 A1 Family Vocabulary Multiple Choice</h1>
+    
+    <div class="instructions">
+        Instructions: Choose the best answer to complete each sentence or question. Click 'Check Answers' when you are finished!
+    </div>
+
+    <form id="family-quiz">
+        
+        <div class="quiz-question" data-correct="b">
+            <p class="question-text">1. My mom's sister is my</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> a) cousin</label>
+                <label><input type="radio" name="q1" value="b"> b) aunt</label>
+                <label><input type="radio" name="q1" value="c"> c) niece</label>
+                <label><input type="radio" name="q1" value="d"> d) grandmother</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="quiz-question" data-correct="b">
+            <p class="question-text">2. The word that describes a close family is</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> a) distant</label>
+                <label><input type="radio" name="q2" value="b"> b) tight knit</label>
+                <label><input type="radio" name="q2" value="c"> c) casual</label>
+                <label><input type="radio" name="q2" value="d"> d) separate</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="b">
+            <p class="question-text">3. Families often ____ together for dinner.</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="a"> a) run</label>
+                <label><input type="radio" name="q3" value="b"> b) eat</label>
+                <label><input type="radio" name="q3" value="c"> c) jump</label>
+                <label><input type="radio" name="q3" value="d"> d) sleep</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="a">
+            <p class="question-text">4. My brother is my parents'</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="a"> a) son</label>
+                <label><input type="radio" name="q4" value="b"> b) nephew</label>
+                <label><input type="radio" name="q4" value="c"> c) uncle</label>
+                <label><input type="radio" name="q4" value="d"> d) grandfather</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="b">
+            <p class="question-text">5. The baby is crying ____ because he is hungry.</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="a"> a) happily</label>
+                <label><input type="radio" name="q5" value="b"> b) loudly</label>
+                <label><input type="radio" name="q5" value="c"> c) quietly</label>
+                <label><input type="radio" name="q5" value="d"> d) carefully</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="c">
+            <p class="question-text">6. My mother's mother is my</p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="a"> a) sister</label>
+                <label><input type="radio" name="q6" value="b"> b) aunt</label>
+                <label><input type="radio" name="q6" value="c"> c) grandmother</label>
+                <label><input type="radio" name="q6" value="d"> d) cousin</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="a">
+            <p class="question-text">7. He ____ his father. They have the same eyes.</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="a"> a) looks like</label>
+                <label><input type="radio" name="q7" value="b"> b) plays with</label>
+                <label><input type="radio" name="q7" value="c"> c) talks to</label>
+                <label><input type="radio" name="q7" value="d"> d) lives with</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="a">
+            <p class="question-text">8. My parents ____ me to always be kind.</p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="a"> a) teach</label>
+                <label><input type="radio" name="q8" value="b"> b) play</label>
+                <label><input type="radio" name="q8" value="c"> c) learn</label>
+                <label><input type="radio" name="q8" value="d"> d) study</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="c">
+            <p class="question-text">9. My aunt's children are my</p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="a"> a) siblings</label>
+                <label><input type="radio" name="q9" value="b"> b) nephews</label>
+                <label><input type="radio" name="q9" value="c"> c) cousins</label>
+                <label><input type="radio" name="q9" value="d"> d) parents</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="b">
+            <p class="question-text">10. The word that describes a father or mother is</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="a"> a) relative</label>
+                <label><input type="radio" name="q10" value="b"> b) parent</label>
+                <label><input type="radio" name="q10" value="c"> c) sibling</label>
+                <label><input type="radio" name="q10" value="d"> d) offspring</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="b">
+            <p class="question-text">11. Families often spend time ____ at Christmas.</p>
+            <div class="options">
+                <label><input type="radio" name="q11" value="a"> a) quietly</label>
+                <label><input type="radio" name="q11" value="b"> b) happily</label>
+                <label><input type="radio" name="q11" value="c"> c) sadly</label>
+                <label><input type="radio" name="q11" value="d"> d) quickly</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="d">
+            <p class="question-text">12. The husband and wife are the ____ of the family.</p>
+            <div class="options">
+                <label><input type="radio" name="q12" value="a"> a) children</label>
+                <label><input type="radio" name="q12" value="b"> b) grandparents</label>
+                <label><input type="radio" name="q12" value="c"> c) neighbours</label>
+                <label><input type="radio" name="q12" value="d"> d) couple</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="b">
+            <p class="question-text">13. My uncle is my father's</p>
+            <div class="options">
+                <label><input type="radio" name="q13" value="a"> a) nephew</label>
+                <label><input type="radio" name="q13" value="b"> b) brother</label>
+                <label><input type="radio" name="q13" value="c"> c) son</label>
+                <label><input type="radio" name="q13" value="d"> d) father</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="c">
+            <p class="question-text">14. The verb that means "to raise a child" is</p>
+            <div class="options">
+                <label><input type="radio" name="q14" value="a"> a) play</label>
+                <label><input type="radio" name="q14" value="b"> b) grow</label>
+                <label><input type="radio" name="q14" value="c"> c) raise</label>
+                <label><input type="radio" name="q14" value="d"> d) jump</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="b">
+            <p class="question-text">15. My grandparents are getting old, so we help them ____.</p>
+            <div class="options">
+                <label><input type="radio" name="q15" value="a"> a) slowly</label>
+                <label><input type="radio" name="q15" value="b"> b) carefully</label>
+                <label><input type="radio" name="q15" value="c"> c) quickly</label>
+                <label><input type="radio" name="q15" value="d"> d) happily</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="a">
+            <p class="question-text">16. My sister and I are</p>
+            <div class="options">
+                <label><input type="radio" name="q16" value="a"> a) siblings</label>
+                <label><input type="radio" name="q16" value="b"> b) nieces</label>
+                <label><input type="radio" name="q16" value="c"> c) aunts</label>
+                <label><input type="radio" name="q16" value="d"> d) cousins</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="c">
+            <p class="question-text">17. Who's your father's mother?</p>
+            <div class="options">
+                <label><input type="radio" name="q17" value="a"> a) Your aunt</label>
+                <label><input type="radio" name="q17" value="b"> b) Your sister</label>
+                <label><input type="radio" name="q17" value="c"> c) Your grandmother</label>
+                <label><input type="radio" name="q17" value="d"> d) Your niece</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="b">
+            <p class="question-text">18. He is very ____ to his family. He always helps them.</p>
+            <div class="options">
+                <label><input type="radio" name="q18" value="a"> a) selfish</label>
+                <label><input type="radio" name="q18" value="b"> b) kind</label>
+                <label><input type="radio" name="q18" value="c"> c) lazy</label>
+                <label><input type="radio" name="q18" value="d"> d) lonely</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="c">
+            <p class="question-text">19. They live ____ their grandparents in a big house.</p>
+            <div class="options">
+                <label><input type="radio" name="q19" value="a"> a) from</label>
+                <label><input type="radio" name="q19" value="b"> b) to</label>
+                <label><input type="radio" name="q19" value="c"> c) with</label>
+                <label><input type="radio" name="q19" value="d"> d) on</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <div class="quiz-question" data-correct="c">
+            <p class="question-text">20. A group of people who are related to each other is a</p>
+            <div class="options">
+                <label><input type="radio" name="q20" value="a"> a) class</label>
+                <label><input type="radio" name="q20" value="b"> b) team</label>
+                <label><input type="radio" name="q20" value="c"> c) family</label>
+                <label><input type="radio" name="q20" value="d"> d) club</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <button type="button" class="btn-check" onclick="checkAnswers()">Check Answers</button>
+        
+        <p style="text-align: center; margin-top: 20px;" id="score-display"></p>
+
+    </form>
+</div>
+
+<script>
+    function checkAnswers() {
+        const questions = document.querySelectorAll('.quiz-question');
+        let score = 0;
+        const totalQuestions = questions.length;
+
+        questions.forEach((question, index) => {
+            const correctValue = question.getAttribute('data-correct');
+            const feedbackDiv = question.querySelector('.feedback');
+            const options = question.querySelectorAll('input[type="radio"]');
+            let isCorrect = false;
+
+            // Clear previous feedback and highlighting
+            feedbackDiv.style.display = 'none';
+            feedbackDiv.className = 'feedback';
+            question.querySelectorAll('label').forEach(label => label.classList.remove('highlight-correct'));
+            
+            options.forEach(option => {
+                const label = option.parentElement;
+                
+                if (option.checked) {
+                    if (option.value === correctValue) {
+                        isCorrect = true;
+                        label.classList.add('highlight-correct');
+                    }
+                }
+                
+                // Highlight the correct answer permanently for review
+                if (option.value === correctValue) {
+                    label.style.fontWeight = 'bold'; // Optionally make the correct text bold
+                } else {
+                    label.style.fontWeight = 'normal';
+                }
+            });
+
+            // Display feedback
+            feedbackDiv.style.display = 'block';
+            if (isCorrect) {
+                feedbackDiv.classList.add('correct-answer');
+                feedbackDiv.textContent = '✅ Correct!';
+                score++;
+            } else {
+                feedbackDiv.classList.add('incorrect-answer');
+                feedbackDiv.textContent = '❌ Try again. The correct answer is highlighted.';
+            }
+        });
+
+        // Display final score
+        const scoreDisplay = document.getElementById('score-display');
+        scoreDisplay.innerHTML = `Your Score: ${score} out of ${totalQuestions}`;
+    }
+</script>
+
+</body>
+</html>

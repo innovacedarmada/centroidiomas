@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transportation Quiz - A1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .activity-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .activity-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .activity-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .activity-header h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option {
+            background: white;
+            border: 3px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .option.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .option.correct {
+            background: #4caf50 !important;
+            color: white !important;
+            border-color: #4caf50 !important;
+        }
+
+        .option.incorrect {
+            background: #f44336 !important;
+            color: white !important;
+            border-color: #f44336 !important;
+        }
+
+        /* Drag and Drop Styles */
+        .word-bank {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            min-height: 80px;
+            border: 3px dashed #667eea;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .word-bank-title {
+            width: 100%;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .draggable-word {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: grab;
+            border: 2px solid #667eea;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .draggable-word:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .draggable-word.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+        }
+
+        .drop-zone {
+            display: inline-block;
+            min-width: 150px;
+            min-height: 40px;
+            border: 3px dashed #667eea;
+            border-radius: 10px;
+            padding: 8px 15px;
+            margin: 0 5px;
+            background: #fff;
+            vertical-align: middle;
+            position: relative;
+        }
+
+        .drop-zone.drag-over {
+            background: #e3f2fd;
+            border-color: #2196f3;
+        }
+
+        .drop-zone.filled {
+            border-style: solid;
+            background: #667eea;
+            color: white;
+        }
+
+        .drop-zone.correct-drop {
+            border-color: #4caf50 !important;
+            background: #4caf50 !important;
+            color: white !important;
+        }
+
+        .drop-zone.incorrect-drop {
+            border-color: #f44336 !important;
+            background: #f44336 !important;
+            color: white !important;
+        }
+
+        .sentence-with-blank {
+            font-size: 1.2em;
+            line-height: 2.5;
+            color: #333;
+        }
+
+        /* Matching Styles */
+        .matching-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .match-column {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .match-column h3 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .match-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 3px solid #e0e0e0;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .match-item:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .match-item.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .match-item.matched-correct {
+            background: #4caf50 !important;
+            color: white !important;
+            border-color: #4caf50 !important;
+            cursor: default;
+        }
+
+        .match-item.matched-incorrect {
+            background: #f44336 !important;
+            color: white !important;
+            border-color: #f44336 !important;
+        }
+
+        .match-item.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 1.5em;
+            color: #667eea;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .final-results {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .final-results.active {
+            display: block;
+        }
+
+        .final-score {
+            font-size: 3em;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .emoji {
+            font-size: 4em;
+            margin: 20px 0;
+        }
+
+        .feedback {
+            font-size: 1.3em;
+            color: #666;
+            margin: 15px 0;
+        }
+
+        .true-false {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .tf-button {
+            padding: 20px;
+            font-size: 1.3em;
+            border-radius: 15px;
+        }
+
+        .image-option {
+            text-align: center;
+            font-size: 2em;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .matching-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .drop-zone {
+                min-width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚗 Transportation Quiz 🚂</h1>
+        <p class="subtitle">CEFR A1 Level - 50 Questions</p>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar">0/50</div>
+        </div>
+
+        <div class="score-display" id="scoreDisplay">Score: 0 / 50</div>
+
+        <!-- Activity 1: Multiple Choice -->
+        <div class="activity-section active" id="activity1">
+            <div class="activity-header">
+                <h2>📝 Activity 1: Multiple Choice</h2>
+                <p>Choose the correct answer!</p>
+            </div>
+            <div id="activity1Questions"></div>
+        </div>
+
+        <!-- Activity 2: True or False -->
+        <div class="activity-section" id="activity2">
+            <div class="activity-header">
+                <h2>✅ Activity 2: True or False</h2>
+                <p>Is it true or false?</p>
+            </div>
+            <div id="activity2Questions"></div>
+        </div>
+
+        <!-- Activity 3: Drag and Drop -->
+        <div class="activity-section" id="activity3">
+            <div class="activity-header">
+                <h2>🎯 Activity 3: Drag and Drop</h2>
+                <p>Drag the correct word to complete each sentence!</p>
+            </div>
+            <div class="word-bank" id="wordBank">
+                <div class="word-bank-title">📦 Word Bank - Drag words from here:</div>
+            </div>
+            <div id="activity3Questions"></div>
+        </div>
+
+        <!-- Activity 4: Matching -->
+        <div class="activity-section" id="activity4">
+            <div class="activity-header">
+                <h2>🔗 Activity 4: Matching Terms & Definitions</h2>
+                <p>Click a term on the left, then click its matching definition on the right!</p>
+            </div>
+            <div id="activity4Questions"></div>
+        </div>
+
+        <!-- Activity 5: Picture Choice -->
+        <div class="activity-section" id="activity5">
+            <div class="activity-header">
+                <h2>🖼️ Activity 5: Picture Questions</h2>
+                <p>Choose the correct emoji!</p>
+            </div>
+            <div id="activity5Questions"></div>
+        </div>
+
+        <!-- Final Results -->
+        <div class="final-results" id="finalResults">
+            <div class="emoji" id="resultEmoji">🎉</div>
+            <h2>Quiz Complete!</h2>
+            <div class="final-score" id="finalScore">0/50</div>
+            <div class="feedback" id="finalFeedback"></div>
+            <button onclick="location.reload()">🔄 Try Again</button>
+        </div>
+
+        <div class="button-container">
+            <button id="checkBtn">Check Answers</button>
+            <button id="nextBtn" style="display: none;">Next Activity ➡️</button>
+        </div>
+    </div>
+
+    <script>
+        const quizData = {
+            activity1: [
+                {q: "I _____ to school by bus every day.", options: ["go", "goes", "going", "went"], answer: 0},
+                {q: "A _____ is a big vehicle that carries many people.", options: ["car", "bus", "bike", "taxi"], answer: 1},
+                {q: "My father _____ his car to work.", options: ["ride", "drive", "drives", "rides"], answer: 2},
+                {q: "We wait for the bus at the _____.", options: ["airport", "station", "bus stop", "garage"], answer: 2},
+                {q: "Trains are very _____.", options: ["slow", "fast", "small", "late"], answer: 1},
+                {q: "I _____ my bike to the park.", options: ["drive", "ride", "walk", "take"], answer: 1},
+                {q: "Planes arrive and leave at the _____.", options: ["station", "airport", "bus stop", "garage"], answer: 1},
+                {q: "The _____ stops here at 8 o'clock.", options: ["bus", "road", "traffic", "stop"], answer: 0},
+                {q: "A person who drives a car is a _____.", options: ["passenger", "driver", "traveler", "walker"], answer: 1},
+                {q: "This is a _____ car. It's very shiny!", options: ["old", "new", "slow", "busy"], answer: 1}
+            ],
+            activity2: [
+                {q: "A bike has four wheels.", answer: false},
+                {q: "You can ride a motorbike.", answer: true},
+                {q: "A taxi is free. You don't pay.", answer: false},
+                {q: "Trains run on tracks.", answer: true},
+                {q: "A truck carries people to school.", answer: false},
+                {q: "Walking is faster than driving.", answer: false},
+                {q: "A passenger sits in a vehicle.", answer: true},
+                {q: "A garage is a place to catch trains.", answer: false},
+                {q: "You can travel by boat on water.", answer: true},
+                {q: "A tram is a street train in the city.", answer: true}
+            ],
+            activity3: [
+                {q: "I _____ for the train at the station.", correct: "wait", options: ["wait", "walk", "start", "stop"]},
+                {q: "The bus _____ at 7 o'clock in the morning.", correct: "arrives", options: ["arrives", "leaves", "stops", "waits"]},
+                {q: "She walks _____ to school.", correct: "slowly", options: ["slowly", "quickly", "early", "late"]},
+                {q: "We _____ the bus to go downtown.", correct: "take", options: ["take", "drive", "ride", "walk"]},
+                {q: "The road is very _____ today. Many cars!", correct: "busy", options: ["busy", "safe", "new", "fast"]},
+                {q: "I _____ on the bus at the first stop.", correct: "get on", options: ["get on", "get off", "arrive", "leave"]},
+                {q: "Planes can _____ very fast.", correct: "travel", options: ["travel", "walk", "stop", "wait"]},
+                {q: "The train _____ at 9:00 AM.", correct: "starts", options: ["starts", "stops", "waits", "arrives"]},
+                {q: "I am _____ for the bus. It's 8:30!", correct: "late", options: ["late", "early", "slow", "fast"]},
+                {q: "A _____ has two wheels and an engine.", correct: "motorbike", options: ["motorbike", "bike", "car", "truck"]}
+            ],
+            activity4: [
+                {term: "driver", definition: "a person who drives a vehicle"},
+                {term: "passenger", definition: "a person who travels in a vehicle"},
+                {term: "station", definition: "a place where trains or buses stop"},
+                {term: "traffic", definition: "many cars moving on the road"},
+                {term: "garage", definition: "a place where you fix or keep cars"},
+                {term: "fast", definition: "moving or happening quickly"},
+                {term: "slow", definition: "not moving or happening quickly"},
+                {term: "arrive", definition: "to reach a place or destination"},
+                {term: "leave", definition: "to go away from a place"},
+                {term: "stop", definition: "to end movement or action"}
+            ],
+            activity5: [
+                {q: "Which emoji shows a car?", options: ["🚗", "🚌", "🚂", "✈️"], answer: 0},
+                {q: "Which emoji shows a plane?", options: ["🚁", "✈️", "🚀", "🛸"], answer: 1},
+                {q: "Which emoji shows a bike?", options: ["🏍️", "🚲", "🛴", "🚗"], answer: 1},
+                {q: "Which emoji shows a bus?", options: ["🚐", "🚌", "🚗", "🚕"], answer: 1},
+                {q: "Which emoji shows a train?", options: ["🚂", "🚃", "🚇", "🚝"], answer: 0},
+                {q: "Which emoji shows a boat?", options: ["⛵", "🚤", "🛥️", "🚢"], answer: 1},
+                {q: "Which emoji shows a taxi?", options: ["🚗", "🚕", "🚙", "🚘"], answer: 1},
+                {q: "Which emoji shows a truck?", options: ["🚚", "🚛", "🚐", "🚌"], answer: 0},
+                {q: "Which emoji shows walking?", options: ["🚶", "🏃", "🧍", "🚴"], answer: 0},
+                {q: "Which emoji shows a stop sign?", options: ["🛑", "⛔", "🚫", "📛"], answer: 0}
+            ]
+        };
+
+        let currentActivity = 1;
+        let currentScore = 0;
+        let totalQuestions = 50;
+        let answersChecked = false;
+        let userAnswers = {};
+        let dragDropAnswers = {};
+        let matchingAnswers = [];
+        let selectedTerm = null;
+        let selectedDef = null;
+
+        // Utility function to shuffle array
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        function initActivity1() {
+            console.log('Initializing Activity 1...');
+            const container = document.getElementById('activity1Questions');
+            if (!container) {
+                console.error('Activity 1 container not found!');
+                return;
+            }
+            container.innerHTML = '';
+            
+            quizData.activity1.forEach((q, idx) => {
+                const div = document.createElement('div');
+                div.className = 'question';
+                div.innerHTML = `
+                    <div class="question-text">${idx + 1}. ${q.q}</div>
+                    <div class="options">
+                        ${q.options.map((opt, i) => `
+                            <div class="option" data-activity="1" data-question="${idx}" data-option="${i}">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+            
+            console.log('Activity 1 questions created:', quizData.activity1.length);
+            addOptionListeners(1);
+        }
+
+        function initActivity2() {
+            const container = document.getElementById('activity2Questions');
+            container.innerHTML = '';
+            quizData.activity2.forEach((q, idx) => {
+                const div = document.createElement('div');
+                div.className = 'question';
+                div.innerHTML = `
+                    <div class="question-text">${idx + 1}. ${q.q}</div>
+                    <div class="true-false">
+                        <button class="option tf-button" data-activity="2" data-question="${idx}" data-value="true">✅ TRUE</button>
+                        <button class="option tf-button" data-activity="2" data-question="${idx}" data-value="false">❌ FALSE</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+            addTFListeners();
+        }
+
+        function initActivity3() {
+            const container = document.getElementById('activity3Questions');
+            const wordBank = document.getElementById('wordBank');
+            container.innerHTML = '';
+            
+            // Collect all words and shuffle them
+            const allWords = [];
+            quizData.activity3.forEach(q => {
+                allWords.push(...q.options);
+            });
+            const shuffledWords = shuffleArray([...new Set(allWords)]);
+            
+            // Clear and populate word bank
+            wordBank.innerHTML = '<div class="word-bank-title">📦 Word Bank - Drag words from here:</div>';
+            shuffledWords.forEach((word, idx) => {
+                const wordEl = document.createElement('div');
+                wordEl.className = 'draggable-word';
+                wordEl.draggable = true;
+                wordEl.textContent = word;
+                wordEl.dataset.word = word;
+                wordEl.dataset.wordId = `word-${idx}`;
+                wordBank.appendChild(wordEl);
+            });
+            
+            // Create questions with drop zones
+            quizData.activity3.forEach((q, idx) => {
+                const div = document.createElement('div');
+                div.className = 'question';
+                const sentenceWithDrop = q.q.replace('_____', `<span class="drop-zone" data-question="${idx}" data-correct="${q.correct}"></span>`);
+                div.innerHTML = `
+                    <div class="question-text">${idx + 1}.</div>
+                    <div class="sentence-with-blank">${sentenceWithDrop}</div>
+                `;
+                container.appendChild(div);
+            });
+            
+            addDragDropListeners();
+        }
+
+        function addDragDropListeners() {
+            const draggables = document.querySelectorAll('.draggable-word');
+            const dropZones = document.querySelectorAll('.drop-zone');
+            
+            draggables.forEach(draggable => {
+                draggable.addEventListener('dragstart', (e) => {
+                    if (answersChecked) return;
+                    draggable.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('text/plain', draggable.dataset.word);
+                    e.dataTransfer.setData('wordId', draggable.dataset.wordId);
+                });
+                
+                draggable.addEventListener('dragend', () => {
+                    draggable.classList.remove('dragging');
+                });
+            });
+            
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', (e) => {
+                    if (answersChecked) return;
+                    e.preventDefault();
+                    zone.classList.add('drag-over');
+                });
+                
+                zone.addEventListener('dragleave', () => {
+                    zone.classList.remove('drag-over');
+                });
+                
+                zone.addEventListener('drop', (e) => {
+                    if (answersChecked) return;
+                    e.preventDefault();
+                    zone.classList.remove('drag-over');
+                    
+                    const word = e.dataTransfer.getData('text/plain');
+                    const wordId = e.dataTransfer.getData('wordId');
+                    const qIdx = parseInt(zone.dataset.question);
+                    
+                    // If zone already has a word, return it to word bank
+                    if (zone.dataset.currentWord) {
+                        const oldWordId = zone.dataset.currentWordId;
+                        const oldWord = document.querySelector(`[data-word-id="${oldWordId}"]`);
+                        if (oldWord) {
+                            oldWord.style.display = 'block';
+                        }
+                    }
+                    
+                    // Place new word in zone
+                    zone.textContent = word;
+                    zone.classList.add('filled');
+                    zone.dataset.currentWord = word;
+                    zone.dataset.currentWordId = wordId;
+                    
+                    // Hide word from word bank
+                    const draggableWord = document.querySelector(`[data-word-id="${wordId}"]`);
+                    if (draggableWord) {
+                        draggableWord.style.display = 'none';
+                    }
+                    
+                    // Store answer
+                    dragDropAnswers[qIdx] = word;
+                });
+                
+                // Allow clicking to remove word
+                zone.addEventListener('click', () => {
+                    if (answersChecked) return;
+                    if (zone.dataset.currentWord) {
+                        const wordId = zone.dataset.currentWordId;
+                        const word = document.querySelector(`[data-word-id="${wordId}"]`);
+                        if (word) {
+                            word.style.display = 'block';
+                        }
+                        zone.textContent = '';
+                        zone.classList.remove('filled');
+                        const qIdx = parseInt(zone.dataset.question);
+                        delete dragDropAnswers[qIdx];
+                        delete zone.dataset.currentWord;
+                        delete zone.dataset.currentWordId;
+                    }
+                });
+            });
+        }
+
+        function initActivity4() {
+            const container = document.getElementById('activity4Questions');
+            container.innerHTML = '';
+            
+            // Shuffle both terms and definitions
+            const shuffledTerms = shuffleArray(quizData.activity4);
+            const definitions = shuffleArray(quizData.activity4.map(item => ({
+                definition: item.definition,
+                term: item.term
+            })));
+            
+            const matchingDiv = document.createElement('div');
+            matchingDiv.className = 'matching-container';
+            
+            // Left column - Terms
+            const leftColumn = document.createElement('div');
+            leftColumn.className = 'match-column';
+            leftColumn.innerHTML = '<h3>📝 Terms</h3>';
+            shuffledTerms.forEach((item, idx) => {
+                const termEl = document.createElement('div');
+                termEl.className = 'match-item term-item';
+                termEl.textContent = item.term;
+                termEl.dataset.term = item.term;
+                termEl.dataset.termIdx = idx;
+                leftColumn.appendChild(termEl);
+            });
+            
+            // Right column - Definitions
+            const rightColumn = document.createElement('div');
+            rightColumn.className = 'match-column';
+            rightColumn.innerHTML = '<h3>📖 Definitions</h3>';
+            definitions.forEach((item, idx) => {
+                const defEl = document.createElement('div');
+                defEl.className = 'match-item def-item';
+                defEl.textContent = item.definition;
+                defEl.dataset.correctTerm = item.term;
+                defEl.dataset.defIdx = idx;
+                rightColumn.appendChild(defEl);
+            });
+            
+            matchingDiv.appendChild(leftColumn);
+            matchingDiv.appendChild(rightColumn);
+            container.appendChild(matchingDiv);
+            
+            addMatchingListeners();
+        }
+
+        function addMatchingListeners() {
+            const termItems = document.querySelectorAll('.term-item');
+            const defItems = document.querySelectorAll('.def-item');
+            
+            termItems.forEach(term => {
+                term.addEventListener('click', () => {
+                    if (answersChecked || term.classList.contains('matched-correct')) return;
+                    
+                    // Deselect all terms
+                    termItems.forEach(t => t.classList.remove('selected'));
+                    term.classList.add('selected');
+                    selectedTerm = term.dataset.term;
+                    
+                    // Check if definition is already selected
+                    if (selectedDef !== null) {
+                        makeMatch();
+                    }
+                });
+            });
+            
+            defItems.forEach(def => {
+                def.addEventListener('click', () => {
+                    if (answersChecked || def.classList.contains('matched-correct')) return;
+                    
+                    // Deselect all definitions
+                    defItems.forEach(d => d.classList.remove('selected'));
+                    def.classList.add('selected');
+                    selectedDef = def;
+                    
+                    // Check if term is already selected
+                    if (selectedTerm !== null) {
+                        makeMatch();
+                    }
+                });
+            });
+        }
+
+        function makeMatch() {
+            if (selectedTerm && selectedDef) {
+                matchingAnswers.push({
+                    term: selectedTerm,
+                    selectedDef: selectedDef.textContent,
+                    correctTerm: selectedDef.dataset.correctTerm
+                });
+                
+                // Mark as matched
+                const termEl = document.querySelector(`.term-item[data-term="${selectedTerm}"]`);
+                termEl.classList.remove('selected');
+                termEl.classList.add('matched-correct');
+                
+                selectedDef.classList.remove('selected');
+                selectedDef.classList.add('matched-correct');
+                
+                // Reset selections
+                selectedTerm = null;
+                selectedDef = null;
+            }
+        }
+
+        function initActivity5() {
+            const container = document.getElementById('activity5Questions');
+            container.innerHTML = '';
+            quizData.activity5.forEach((q, idx) => {
+                const div = document.createElement('div');
+                div.className = 'question';
+                div.innerHTML = `
+                    <div class="question-text">${idx + 1}. ${q.q}</div>
+                    <div class="options">
+                        ${q.options.map((opt, i) => `
+                            <div class="option image-option" data-activity="5" data-question="${idx}" data-option="${i}">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+            addOptionListeners(5);
+        }
+
+        function addOptionListeners(activity) {
+            const options = document.querySelectorAll(`[data-activity="${activity}"]`);
+            console.log(`Adding listeners to ${options.length} options for activity ${activity}`);
+            
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    if (answersChecked) return;
+                    
+                    const qIdx = parseInt(this.dataset.question);
+                    const optIdx = parseInt(this.dataset.option);
+                    
+                    const allOptions = document.querySelectorAll(`[data-activity="${activity}"][data-question="${qIdx}"]`);
+                    allOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    if (!userAnswers[activity - 1]) userAnswers[activity - 1] = {};
+                    userAnswers[activity - 1][qIdx] = optIdx;
+                });
+            });
+        }
+
+        function addTFListeners() {
+            const buttons = document.querySelectorAll('[data-activity="2"]');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (answersChecked) return;
+                    
+                    const qIdx = parseInt(this.dataset.question);
+                    const value = this.dataset.value === 'true';
+                    
+                    const allButtons = document.querySelectorAll(`[data-activity="2"][data-question="${qIdx}"]`);
+                    allButtons.forEach(btn => btn.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    if (!userAnswers[1]) userAnswers[1] = {};
+                    userAnswers[1][qIdx] = value;
+                });
+            });
+        }
+
+        function checkAnswers() {
+            answersChecked = true;
+            let activityScore = 0;
+
+            if (currentActivity === 1) {
+                quizData.activity1.forEach((q, idx) => {
+                    const options = document.querySelectorAll(`[data-activity="1"][data-question="${idx}"]`);
+                    
+                    if (userAnswers[0] && userAnswers[0][idx] === q.answer) {
+                        options[userAnswers[0][idx]].classList.add('correct');
+                        activityScore++;
+                    } else {
+                        if (userAnswers[0] && userAnswers[0][idx] !== undefined) {
+                            options[userAnswers[0][idx]].classList.add('incorrect');
+                        }
+                        options[q.answer].classList.add('correct');
+                    }
+                });
+            } else if (currentActivity === 2) {
+                quizData.activity2.forEach((q, idx) => {
+                    const buttons = document.querySelectorAll(`[data-activity="2"][data-question="${idx}"]`);
+                    
+                    if (userAnswers[1] && userAnswers[1][idx] === q.answer) {
+                        if (q.answer) {
+                            buttons[0].classList.add('correct');
+                        } else {
+                            buttons[1].classList.add('correct');
+                        }
+                        activityScore++;
+                    } else {
+                        if (userAnswers[1] && userAnswers[1][idx] !== undefined) {
+                            if (userAnswers[1][idx]) {
+                                buttons[0].classList.add('incorrect');
+                            } else {
+                                buttons[1].classList.add('incorrect');
+                            }
+                        }
+                        if (q.answer) {
+                            buttons[0].classList.add('correct');
+                        } else {
+                            buttons[1].classList.add('correct');
+                        }
+                    }
+                });
+            } else if (currentActivity === 3) {
+                quizData.activity3.forEach((q, idx) => {
+                    const dropZone = document.querySelector(`.drop-zone[data-question="${idx}"]`);
+                    const userAnswer = dragDropAnswers[idx];
+                    
+                    if (userAnswer && userAnswer.toLowerCase() === q.correct.toLowerCase()) {
+                        dropZone.classList.add('correct-drop');
+                        activityScore++;
+                    } else {
+                        dropZone.classList.add('incorrect-drop');
+                        if (!userAnswer) {
+                            dropZone.textContent = `✗ (${q.correct})`;
+                        } else {
+                            dropZone.textContent = `${userAnswer} ✗ (${q.correct})`;
+                        }
+                    }
+                });
+                
+                // Disable dragging
+                document.querySelectorAll('.draggable-word').forEach(word => {
+                    word.draggable = false;
+                    word.style.cursor = 'default';
+                });
+            } else if (currentActivity === 4) {
+                matchingAnswers.forEach(match => {
+                    const termEl = document.querySelector(`.term-item[data-term="${match.term}"]`);
+                    const defEl = document.querySelector(`.def-item[data-correct-term="${match.correctTerm}"]`);
+                    
+                    if (match.term === match.correctTerm) {
+                        termEl.classList.remove('matched-correct');
+                        termEl.classList.add('matched-correct');
+                        defEl.classList.remove('matched-correct');
+                        defEl.classList.add('matched-correct');
+                        activityScore++;
+                    } else {
+                        termEl.classList.remove('matched-correct');
+                        termEl.classList.add('matched-incorrect');
+                        defEl.classList.remove('matched-correct');
+                        defEl.classList.add('matched-incorrect');
+                    }
+                });
+                
+                // Show correct answers for unmatched items
+                document.querySelectorAll('.term-item:not(.matched-correct):not(.matched-incorrect)').forEach(term => {
+                    term.classList.add('disabled');
+                });
+                document.querySelectorAll('.def-item:not(.matched-correct):not(.matched-incorrect)').forEach(def => {
+                    def.classList.add('disabled');
+                });
+            } else if (currentActivity === 5) {
+                quizData.activity5.forEach((q, idx) => {
+                    const options = document.querySelectorAll(`[data-activity="5"][data-question="${idx}"]`);
+                    
+                    if (userAnswers[4] && userAnswers[4][idx] === q.answer) {
+                        options[userAnswers[4][idx]].classList.add('correct');
+                        activityScore++;
+                    } else {
+                        if (userAnswers[4] && userAnswers[4][idx] !== undefined) {
+                            options[userAnswers[4][idx]].classList.add('incorrect');
+                        }
+                        options[q.answer].classList.add('correct');
+                    }
+                });
+            }
+
+            currentScore += activityScore;
+            updateScore();
+            
+            document.getElementById('checkBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'inline-block';
+        }
+
+        function nextActivity() {
+            currentActivity++;
+            answersChecked = false;
+            selectedTerm = null;
+            selectedDef = null;
+            
+            document.querySelectorAll('.activity-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            if (currentActivity <= 5) {
+                document.getElementById(`activity${currentActivity}`).classList.add('active');
+                document.getElementById('checkBtn').style.display = 'inline-block';
+                document.getElementById('nextBtn').style.display = 'none';
+                updateProgress();
+            } else {
+                showResults();
+            }
+        }
+
+        function updateScore() {
+            document.getElementById('scoreDisplay').textContent = `Score: ${currentScore} / ${totalQuestions}`;
+        }
+
+        function updateProgress() {
+            const progress = ((currentActivity - 1) / 5) * 100;
+            const questionsAnswered = (currentActivity - 1) * 10;
+            const progressBar = document.getElementById('progressBar');
+            if (progressBar) {
+                progressBar.style.width = progress + '%';
+                progressBar.textContent = `${questionsAnswered}/50`;
+            }
+        }
+
+        function showResults() {
+            document.querySelectorAll('.activity-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.querySelector('.button-container').style.display = 'none';
+            document.getElementById('finalResults').classList.add('active');
+            document.getElementById('finalScore').textContent = `${currentScore} / ${totalQuestions}`;
+            
+            const percentage = (currentScore / totalQuestions) * 100;
+            let emoji, feedback;
+            
+            if (percentage >= 90) {
+                emoji = '🏆';
+                feedback = 'Outstanding! You are a transportation expert!';
+            } else if (percentage >= 75) {
+                emoji = '🎉';
+                feedback = 'Excellent work! You know a lot about transportation!';
+            } else if (percentage >= 60) {
+                emoji = '😊';
+                feedback = 'Good job! Keep practicing!';
+            } else if (percentage >= 40) {
+                emoji = '📚';
+                feedback = 'Not bad! Study more and try again!';
+            } else {
+                emoji = '💪';
+                feedback = 'Keep trying! Practice makes perfect!';
+            }
+            
+            document.getElementById('resultEmoji').textContent = emoji;
+            document.getElementById('finalFeedback').textContent = feedback;
+            
+            document.getElementById('progressBar').style.width = '100%';
+            document.getElementById('progressBar').textContent = '50/50';
+        }
+
+        // Initialize all activities on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, initializing activities...');
+            
+            // Initialize progress bar
+            updateProgress();
+            
+            // Initialize all activities
+            initActivity1();
+            initActivity2();
+            initActivity3();
+            initActivity4();
+            initActivity5();
+            
+            // Add button listeners
+            document.getElementById('checkBtn').addEventListener('click', checkAnswers);
+            document.getElementById('nextBtn').addEventListener('click', nextActivity);
+            
+            console.log('All activities initialized');
+        });
+    </script>
+</body>
+</html>

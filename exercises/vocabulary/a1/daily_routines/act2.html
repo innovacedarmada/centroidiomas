@@ -1,0 +1,601 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Daily Activities – Crossword (A1)</title>
+https://fonts.googleapis.com
+https://fonts.gstatic.com
+https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --primary: #5b8def;     /* soft blue */
+    --accent: #ff8f3d;      /* warm orange */
+    --card: #ffffffcc;      /* translucent white */
+    --card-solid: #ffffff;  /* pure white */
+    --ok: #2e7d32;
+    --no: #c62828;
+    --border: #dbe2f0;
+    --chip-bg: #eff4ff;
+    --chip-border: #cfe0ff;
+    --shadow: 0 10px 30px rgba(91,141,239,0.15);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--text);
+    margin: 0;
+    background:
+      radial-gradient(1200px 800px at 15% 10%, #e3f2fd 0%, transparent 60%),
+      radial-gradient(1200px 800px at 85% 0%, #fff3e8 0%, transparent 60%),
+      linear-gradient(#f6f7fb, #f6f7fb);
+    padding: 0 16px 40px;
+  }
+
+  /* Header */
+  .hero {
+    max-width: 1100px;
+    margin: 28px auto 16px;
+    background: linear-gradient(135deg, #5b8def 0%, #86b6ff 40%, #ffc58c 100%);
+    border-radius: 20px;
+    padding: 24px;
+    color: #0b1020;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(255,255,255,0.35), transparent 60%);
+    border-radius: 50%;
+    filter: blur(20px);
+  }
+  .hero h1 {
+    margin: 0 0 6px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    color: #08112a;
+  }
+  .hero p {
+    margin: 0;
+    font-weight: 600;
+    color: #0b1020;
+  }
+
+  /* Panel & layout */
+  .layout {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  @media (min-width: 960px) {
+    .layout {
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: start;
+    }
+    .sticky {
+      position: sticky;
+      top: 20px;
+    }
+  }
+
+  .panel {
+    background: var(--card);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+  }
+  .panel .inner {
+    padding: 16px 18px;
+  }
+
+  .instructions {
+    display: grid;
+    gap: 8px;
+  }
+  .instructions p { margin: 0; color: var(--muted); }
+  .chips {
+    margin-top: 8px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .chip {
+    background: var(--chip-bg);
+    border: 1px solid var(--chip-border);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 0.95em;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .chip .emoji { font-size: 1.1em; }
+
+  /* Progress */
+  .progress {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .bar {
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .bar > span {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 999px;
+    transition: width 0.3s ease;
+  }
+  .counter { font-weight: 700; color: var(--primary); }
+
+  /* Crossword grid */
+  .crossword {
+    display: grid;
+    grid-template-columns: repeat(18, 36px);
+    grid-auto-rows: 36px;
+    gap: 6px;
+    padding: 18px;
+    border-radius: 18px;
+    background: var(--card-solid);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    justify-content: center;
+  }
+  .cell {
+    width: 36px; height: 36px;
+    border: 1.5px solid #d7def0;
+    border-radius: 8px;
+    background: #f3f6ff;
+    position: relative;
+    transition: transform 0.08s ease, box-shadow 0.2s ease, background 0.3s ease;
+  }
+  .cell:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(0,0,0,0.08); }
+  .cell input {
+    width: 100%; height: 100%;
+    border: none; background: transparent;
+    text-transform: uppercase; text-align: center;
+    font-weight: 700; color: var(--text);
+    font-size: 0.95em;
+  }
+  .cell input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(91,141,239,0.25);
+    border-radius: 8px;
+  }
+  .block {
+    background: #e9edf7;
+    border-color: #e9edf7;
+  }
+  .number {
+    position: absolute;
+    top: 2px; left: 4px;
+    font-size: 0.7em; color: var(--muted); font-weight: 700;
+  }
+
+  /* Clues */
+  .clues h2 {
+    margin: 0 0 8px; font-size: 1.1em; color: var(--accent);
+  }
+  .clue {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+  }
+  .clue strong { color: var(--primary); }
+  .clue .desc { color: var(--muted); }
+
+  /* Controls */
+  .controls {
+    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+    margin-top: 14px;
+  }
+  .btn {
+    background: var(--primary);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    font-size: 1em;
+    box-shadow: var(--shadow);
+    transition: background 0.2s ease, transform 0.06s ease;
+  }
+  .btn:hover { background: #4a79d9; transform: translateY(-1px); }
+  .btn.secondary { background: #6b7280; }
+  .btn.light { background: #f3f4f6; color: #374151; }
+
+  .score {
+    text-align: center;
+    font-weight: 800;
+    margin-top: 10px;
+    display: none;
+    color: var(--primary);
+  }
+
+  .results {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 12px 16px;
+    box-shadow: var(--shadow);
+    display: none;
+  }
+  .results h3 {
+    margin: 0 0 8px 0; color: var(--accent); font-size: 1.05em;
+  }
+  .results ul { margin: 0; padding-left: 18px; }
+  .results li { margin: 6px 0; }
+  .ok { color: var(--ok); font-weight: 700; }
+  .bad { color: var(--no); font-weight: 700; }
+
+  /* Hint modal */
+  .modal {
+    position: fixed; inset: 0;
+    display: none; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.35);
+    z-index: 40;
+  }
+  .modal .box {
+    background: #fff;
+    border-radius: 14px;
+    padding: 16px 18px;
+    width: min(520px, 92vw);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  .modal .box h3 { margin: 0 0 8px; color: var(--primary); }
+  .modal .box p { margin: 6px 0; color: var(--muted); }
+  .modal .box .close {
+    margin-top: 10px;
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* Confetti */
+  .confetti {
+    position: fixed; inset: 0; pointer-events: none; overflow: hidden; display: none;
+  }
+  .confetti .piece {
+    position: absolute;
+    width: 10px; height: 16px;
+    background: var(--accent);
+    opacity: 0.9;
+    transform: translateY(-100%);
+    animation: fall 2.2s linear forwards;
+  }
+  @keyframes fall {
+    to { transform: translateY(110vh) rotate(720deg); opacity: 0.7; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <h1>Daily Activities – Crossword</h1>
+  <p>Type each phrase <strong>without spaces</strong> (e.g., <em>have breakfast</em> → <code>HAVEBREAKFAST</code>). Upper/lowercase both OK.</p>
+</section>
+
+<div class="layout">
+  <!-- LEFT: Grid & Controls -->
+  <section class="panel">
+    <div class="inner instructions">
+      <div class="chips" aria-label="keywords">
+        <span class="chip"><span class="emoji">⏰</span> wake up</span>
+        <span class="chip"><span class="emoji">🪥</span> brush my teeth</span>
+        <span class="chip"><span class="emoji">🚿</span> take a shower</span>
+        <span class="chip"><span class="emoji">👕</span> get dressed</span>
+        <span class="chip"><span class="emoji">🍳</span> have breakfast</span>
+        <span class="chip"><span class="emoji">🏠</span> go home</span>
+        <span class="chip"><span class="emoji">🥪</span> have lunch</span>
+        <span class="chip"><span class="emoji">🐾</span> feed the pets</span>
+        <span class="chip"><span class="emoji">🧘</span> relax</span>
+        <span class="chip"><span class="emoji">📺</span> watch TV</span>
+        <span class="chip"><span class="emoji">🍽️</span> have dinner</span>
+        <span class="chip"><span class="emoji">🛍️</span> go shopping</span>
+        <span class="chip"><span class="emoji">😴</span> take a nap</span>
+        <span class="chip"><span class="emoji">🧹</span> tidy up</span>
+        <span class="chip"><span class="emoji">🐕</span> walk the dog</span>
+        <span class="chip"><span class="emoji">💬</span> chat with friends</span>
+        <span class="chip"><span class="emoji">👩‍💼</span> attend meetings</span>
+        <span class="chip"><span class="emoji">🍳</span> cook</span>
+      </div>
+
+      <div class="progress" aria-label="Progress">
+        <span class="counter" id="progressText">0 / 18 letters entered</span>
+        <div class="bar"><span id="barFill"></span></div>
+        <span id="percent">0%</span>
+      </div>
+    </div>
+
+    <!-- Crossword Grid -->
+    <div class="crossword" id="grid" aria-label="Crossword grid"></div>
+
+    <!-- Controls -->
+    <div class="inner">
+      <div class="controls">
+        <button type="button" class="btn" onclick="checkAnswers()">✅ Check Answers</button>
+        <button type="button" class="btn secondary" onclick="resetGrid()">↺ Reset</button>
+        <button type="button" class="btn light" onclick="openHint()">💡 Hint</button>
+      </div>
+      <div id="score" class="score"></div>
+    </div>
+  </section>
+
+  <!-- RIGHT: Clues & Results -->
+  <aside class="panel sticky">
+    <div class="inner">
+      <h2 style="margin:0 0 10px; color: var(--accent);">Across Clues</h2>
+
+      <div class="clue"><strong>1.</strong> <span class="desc">Morning routine: open your eyes to start the day.</span></div>
+      <div class="clue"><strong>2.</strong> <span class="desc">Night routine: clean your teeth with toothpaste.</span></div>
+      <div class="clue"><strong>3.</strong> <span class="desc">Bathroom: wash your body with water.</span></div>
+      <div class="clue"><strong>4.</strong> <span class="desc">Put on your clothes for the day.</span></div>
+      <div class="clue"><strong>5.</strong> <span class="desc">First meal in the morning.</span></div>
+      <div class="clue"><strong>6.</strong> <span class="desc">Return to your house after work or school.</span></div>
+      <div class="clue"><strong>7.</strong> <span class="desc">Midday meal with classmates or friends.</span></div>
+      <div class="clue"><strong>8.</strong> <span class="desc">Give food to animals at home.</span></div>
+      <div class="clue"><strong>9.</strong> <span class="desc">Rest and feel calm after a busy day.</span></div>
+      <div class="clue"><strong>10.</strong> <span class="desc">Enjoy a series or movie on TV.</span></div>
+      <div class="clue"><strong>11.</strong> <span class="desc">Evening meal with family.</span></div>
+      <div class="clue"><strong>12.</strong> <span class="desc">Buy things at a store or mall.</span></div>
+      <div class="clue"><strong>13.</strong> <span class="desc">Short sleep in the afternoon.</span></div>
+      <div class="clue"><strong>14.</strong> <span class="desc">Make your room clean and organized.</span></div>
+      <div class="clue"><strong>15.</strong> <span class="desc">Go outside with your pet for exercise.</span></div>
+      <div class="clue"><strong>16.</strong> <span class="desc">Talk online or by phone with your friends.</span></div>
+      <div class="clue"><strong>17.</strong> <span class="desc">Be present in a work or school session with your team.</span></div>
+      <div class="clue"><strong>18.</strong> <span class="desc">Prepare food in the kitchen.</span></div>
+
+      <div id="results" class="results" aria-live="polite" aria-atomic="true">
+        <h3>Results</h3>
+        <ul id="resultsList"></ul>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- Hint Modal -->
+<div class="modal" id="hintModal">
+  <div class="box">
+    <h3>Hint</h3>
+    <p id="hintText">We will reveal one helpful letter in a random word.</p>
+    <button type="button" class="btn close" onclick="closeHint()">Close</button>
+  </div>
+</div>
+
+<!-- Confetti -->
+<div id="confetti" class="confetti" aria-hidden="true"></div>
+
+<script>
+  // Normalize helper
+  function norm(s) { return (s||'').trim().toUpperCase().replace(/\s+/g, ''); }
+
+  // Crossword configuration
+  const rows = 18, cols = 18;
+
+  // Words (Across, one per row) – no answers shown in the UI; only internal keys.
+  const words = [
+    {num:1,  row:1,  col:1,  answer:"WAKEUP"},
+    {num:2,  row:2,  col:1,  answer:"BRUSHMYTEETH"},
+    {num:3,  row:3,  col:1,  answer:"TAKEASHOWER"},
+    {num:4,  row:4,  col:1,  answer:"GETDRESSED"},
+    {num:5,  row:5,  col:1,  answer:"HAVEBREAKFAST"},
+    {num:6,  row:6,  col:1,  answer:"GOHOME"},
+    {num:7,  row:7,  col:1,  answer:"HAVELUNCH"},
+    {num:8,  row:8,  col:1,  answer:"FEEDTHEPETS"},
+    {num:9,  row:9,  col:1,  answer:"RELAX"},
+    {num:10, row:10, col:1,  answer:"WATCHTV"},
+    {num:11, row:11, col:1,  answer:"HAVEDINNER"},
+    {num:12, row:12, col:1,  answer:"GOSHOPPING"},
+    {num:13, row:13, col:1,  answer:"TAKEANAP"},
+    {num:14, row:14, col:1,  answer:"TIDYUP"},
+    {num:15, row:15, col:1,  answer:"WALKTHEDOG"},
+    {num:16, row:16, col:1,  answer:"CHATWITHFRIENDS"},
+    {num:17, row:17, col:1,  answer:"ATTENDMEETINGS"},
+    {num:18, row:18, col:1,  answer:"COOK"}
+  ];
+
+  // Build empty grid
+  const gridEl = document.getElementById('grid');
+  const grid = []; // 2D array of cells
+  for (let r = 1; r <= rows; r++) {
+    grid[r] = [];
+    for (let c = 1; c <= cols; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell block'; // default blocked
+      cell.dataset.row = r;
+      cell.dataset.col = c;
+      grid[r][c] = cell;
+      gridEl.appendChild(cell);
+    }
+  }
+
+  // Place words (Across) with inputs
+  const inputs = []; // for progress and navigation
+  words.forEach(w => {
+    for (let i = 0; i < w.answer.length; i++) {
+      const r = w.row, c = w.col + i;
+      const cell = grid[r][c];
+      cell.className = 'cell'; // active
+      if (i === 0) {
+        const numEl = document.createElement('div');
+        numEl.className = 'number';
+        numEl.textContent = w.num;
+        cell.appendChild(numEl);
+      }
+      const inp = document.createElement('input');
+      inp.setAttribute('inputmode','latin');
+      inp.setAttribute('maxlength','1');
+      inp.setAttribute('aria-label', `Row ${r}, Col ${c}`);
+      inp.dataset.word = w.num;
+      inp.dataset.index = i;
+      cell.appendChild(inp);
+      inputs.push(inp);
+
+      // Auto-advance on typing
+      inp.addEventListener('input', (e) => {
+        e.target.value = e.target.value.toUpperCase().slice(0,1);
+        const nextIndex = i + 1;
+        if (nextIndex < w.answer.length) {
+          const nextCell = grid[r][w.col + nextIndex].querySelector('input');
+          if (nextCell) nextCell.focus();
+        }
+        updateProgress();
+      });
+
+      // Backspace to previous
+      inp.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !e.target.value) {
+          const prevIndex = i - 1;
+          if (prevIndex >= 0) {
+            const prevCell = grid[r][w.col + prevIndex].querySelector('input');
+            if (prevCell) prevCell.focus();
+          }
+        }
+      });
+    }
+  });
+
+  // Progress bar
+  const progressText = document.getElementById('progressText');
+  const barFill = document.getElementById('barFill');
+  const percentEl = document.getElementById('percent');
+
+  function updateProgress() {
+    const filled = inputs.filter(i => i.value.trim().length > 0).length;
+    const total = inputs.length;
+    const percent = Math.round((filled / total) * 100);
+    progressText.textContent = `${filled} / ${total} letters entered`;
+    barFill.style.width = `${percent}%`;
+    percentEl.textContent = `${percent}%`;
+  }
+  updateProgress();
+
+  // Confetti
+  function launchConfetti() {
+    const container = document.getElementById('confetti');
+    container.innerHTML = '';
+    container.style.display = 'block';
+    const colors = ['#ff8f3d', '#5b8def', '#22c55e', '#e11d48', '#f59e0b'];
+    for (let i = 0; i < 100; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'piece';
+      piece.style.left = Math.random() * 100 + 'vw';
+      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.animationDelay = (Math.random() * 0.8) + 's';
+      container.appendChild(piece);
+    }
+    setTimeout(() => { container.style.display = 'none'; }, 2800);
+  }
+
+  function getWordInput(num) {
+    const w = words.find(x => x.num === num);
+    let text = '';
+    for (let i = 0; i < w.answer.length; i++) {
+      const cell = grid[w.row][w.col + i];
+      const inp = cell.querySelector('input');
+      text += inp ? (inp.value || '').toUpperCase() : '';
+    }
+    return text;
+  }
+
+  function checkAnswers() {
+    let correct = 0;
+    const resultsPanel = document.getElementById('results');
+    const resultsList = document.getElementById('resultsList');
+    resultsList.innerHTML = '';
+
+    words.forEach(w => {
+      const typed = getWordInput(w.num);
+      const isCorrect = norm(typed) === norm(w.answer);
+
+      // Color cells
+      for (let i = 0; i < w.answer.length; i++) {
+        const cell = grid[w.row][w.col + i];
+        cell.style.boxShadow = isCorrect
+          ? '0 0 0 2px rgba(46,125,50,0.5)'
+          : '0 0 0 2px rgba(198,40,40,0.5)';
+      }
+
+      // Results list item (no answers shown)
+      const li = document.createElement('li');
+      li.innerHTML = isCorrect
+        ? `<span class="ok">✅ Across ${w.num}: Correct</span>`
+        : `<span class="bad">❌ Across ${w.num}: Try again</span>`;
+      resultsList.appendChild(li);
+
+      if (isCorrect) correct++;
+    });
+
+    const scoreEl = document.getElementById('score');
+    scoreEl.textContent = `Score: ${correct} / ${words.length}`;
+    scoreEl.style.display = 'block';
+
+    resultsPanel.style.display = 'block';
+
+    if (correct === words.length) launchConfetti();
+  }
+
+  function resetGrid() {
+    inputs.forEach(inp => {
+      inp.value = '';
+      const cell = inp.parentElement;
+      cell.style.boxShadow = 'none';
+    });
+    document.getElementById('score').style.display = 'none';
+    document.getElementById('score').textContent = '';
+    document.getElementById('confetti').style.display = 'none';
+    const resultsPanel = document.getElementById('results');
+    const resultsList = document.getElementById('resultsList');
+    resultsPanel.style.display = 'none';
+    resultsList.innerHTML = '';
+    updateProgress();
+  }
+
+  // Hint: reveal one helpful letter in a random word (not showing the full answer)
+  function openHint() {
+    const w = words[Math.floor(Math.random() * words.length)];
+    // Pick random position to reveal
+    const pos = Math.floor(Math.random() * w.answer.length);
+    const cell = grid[w.row][w.col + pos];
+    const inp = cell.querySelector('input');
+    if (inp) {
+      inp.value = w.answer[pos];
+      // subtle highlight
+      cell.style.background = '#fffbe8';
+      setTimeout(() => { cell.style.background = '#f3f6ff'; }, 1500);
+      updateProgress();
+    }
+    const modal = document.getElementById('hintModal');
+    const text = document.getElementById('hintText');
+    text.textContent = `Hint added to Across ${w.num}: one letter was revealed. Keep going!`;
+    modal.style.display = 'flex';
+  }
+  function closeHint() {
+    document.getElementById('hintModal').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>

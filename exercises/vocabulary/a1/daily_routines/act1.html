@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Daily Activities - Fill in the Blanks (A1)</title>
+<style>
+  :root {
+    --primary: #2a7ae2;
+    --accent: #ff6f00;
+    --bg: #f7fafc;
+    --card: #ffffff;
+    --text: #202124;
+    --muted: #5f6368;
+    --ok: #2e7d32;
+    --no: #c62828;
+    --chip-bg: #eef4ff;
+    --chip-border: #cfe0ff;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 24px;
+    line-height: 1.6;
+  }
+
+  h1 {
+    text-align: center;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+
+  .panel {
+    max-width: 980px;
+    margin: 0 auto 18px;
+    background: var(--card);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .instructions p { margin: 6px 0; color: var(--muted); }
+
+  .wordbank {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;
+  }
+  .bank-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--chip-bg);
+    color: var(--text);
+    border: 1px solid var(--chip-border);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 0.95em;
+  }
+  .bank-chip .emoji { font-size: 1.1em; }
+
+  .progress {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+    align-items: center;
+    margin-top: 14px;
+  }
+  .bar {
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .bar > span {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 999px;
+    transition: width 0.3s ease;
+  }
+  .counter { font-weight: 700; color: var(--primary); }
+
+  .grid {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: 1fr;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  @media (min-width: 800px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .exercise {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    position: relative;
+  }
+  .exercise .icon {
+    position: absolute; top: 12px; right: 12px;
+    font-size: 1.2em; opacity: 0.6;
+  }
+  .sentence { margin: 0 0 10px 0; font-size: 1.05em; }
+  input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 1em;
+    background: transparent;
+    color: var(--text);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(96,165,250,0.25);
+  }
+
+  .feedback {
+    display: none;
+    margin-top: 8px;
+    font-weight: 700;
+  }
+  .correct { color: var(--ok); }
+  .incorrect { color: var(--no); }
+
+  .controls {
+    max-width: 980px;
+    margin: 18px auto 0;
+    display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+  }
+  .btn {
+    background: var(--primary);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    margin: 6px;
+    font-size: 1em;
+    transition: background 0.2s ease;
+  }
+  .btn:hover { background: #1a5bb8; }
+  .btn.secondary { background: #6b7280; }
+
+  .score {
+    text-align: center;
+    font-weight: 800;
+    margin-top: 10px;
+    display: none;
+    color: var(--primary);
+  }
+
+  /* Confetti */
+  .confetti {
+    position: fixed; inset: 0; pointer-events: none; overflow: hidden; display: none;
+  }
+  .confetti .piece {
+    position: absolute;
+    width: 10px; height: 16px;
+    background: var(--accent);
+    opacity: 0.9;
+    transform: translateY(-100%);
+    animation: fall 2.2s linear forwards;
+  }
+  @keyframes fall {
+    to { transform: translateY(110vh) rotate(720deg); opacity: 0.7; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Daily Activities – Fill in the Blanks</h1>
+
+<div class="panel instructions">
+  <p><strong>Instructions:</strong> Complete the sentences with the correct phrase from the word bank. Use each word <em>only once</em>.</p>
+
+  <div class="wordbank" aria-label="Word bank">
+    <span class="bank-chip"><span class="emoji">⏰</span> wake up</span>
+    <span class="bank-chip"><span class="emoji">🪥</span> brush my teeth</span>
+    <span class="bank-chip"><span class="emoji">🚿</span> take a shower</span>
+    <span class="bank-chip"><span class="emoji">👕</span> get dressed</span>
+    <span class="bank-chip"><span class="emoji">🍳</span> have breakfast</span>
+    <span class="bank-chip"><span class="emoji">🏠</span> go home</span>
+    <span class="bank-chip"><span class="emoji">🥪</span> have lunch</span>
+    <span class="bank-chip"><span class="emoji">🐾</span> feed the pets</span>
+    <span class="bank-chip"><span class="emoji">🧘</span> relax</span>
+    <span class="bank-chip"><span class="emoji">📺</span> watch TV</span>
+    <span class="bank-chip"><span class="emoji">🍽️</span> have dinner</span>
+    <span class="bank-chip"><span class="emoji">🛍️</span> go shopping</span>
+    <span class="bank-chip"><span class="emoji">😴</span> take a nap</span>
+    <span class="bank-chip"><span class="emoji">🧹</span> tidy up</span>
+    <span class="bank-chip"><span class="emoji">🐕</span> walk the dog</span>
+  </div>
+
+  <div class="progress" aria-label="Progress">
+    <span class="counter" id="progressText">0 / 15 completed</span>
+    <div class="bar"><span id="barFill"></span></div>
+    <span id="percent">0%</span>
+  </div>
+</div>
+
+<form id="quiz" autocomplete="off" class="grid">
+  <!-- 1 -->
+  <div class="exercise">
+    <div class="icon">⏰</div>
+    <p class="sentence">1. I __________ at 7:00 a.m. because I start school early.</p>
+    <input type="text" id="q1" name="q1" />
+    <div class="feedback" id="f1"></div>
+  </div>
+  <!-- 2 -->
+  <div class="exercise">
+    <div class="icon">🪥</div>
+    <p class="sentence">2. Every night, I __________ before I go to bed to keep my teeth clean.</p>
+    <input type="text" id="q2" name="q2" />
+    <div class="feedback" id="f2"></div>
+  </div>
+  <!-- 3 -->
+  <div class="exercise">
+    <div class="icon">🚿</div>
+    <p class="sentence">3. After I wake up, I __________ to feel fresh in the morning.</p>
+    <input type="text" id="q3" name="q3" />
+    <div class="feedback" id="f3"></div>
+  </div>
+  <!-- 4 -->
+  <div class="exercise">
+    <div class="icon">👕</div>
+    <p class="sentence">4. Next, I __________ and choose my clothes for the day.</p>
+    <input type="text" id="q4" name="q4" />
+    <div class="feedback" id="f4"></div>
+  </div>
+  <!-- 5 -->
+  <div class="exercise">
+    <div class="icon">🍳</div>
+    <p class="sentence">5. At 8:00 a.m., I __________ with my family because we are hungry.</p>
+    <input type="text" id="q5" name="q5" />
+    <div class="feedback" id="f5"></div>
+  </div>
+  <!-- 6 -->
+  <div class="exercise">
+    <div class="icon">🏠</div>
+    <p class="sentence">6. After work, I __________ and rest because I am tired.</p>
+    <input type="text" id="q6" name="q6" />
+    <div class="feedback" id="f6"></div>
+  </div>
+  <!-- 7 -->
+  <div class="exercise">
+    <div class="icon">🥪</div>
+    <p class="sentence">7. At 12:30, I __________ at the cafeteria with my friends.</p>
+    <input type="text" id="q7" name="q7" />
+    <div class="feedback" id="f7"></div>
+  </div>
+  <!-- 8 -->
+  <div class="exercise">
+    <div class="icon">🐾</div>
+    <p class="sentence">8. Every morning, I __________ before I leave home because my pets are hungry.</p>
+    <input type="text" id="q8" name="q8" />
+    <div class="feedback" id="f8"></div>
+  </div>
+  <!-- 9 -->
+  <div class="exercise">
+    <div class="icon">🧘</div>
+    <p class="sentence">9. In the evening, I __________ to feel calm after a busy day.</p>
+    <input type="text" id="q9" name="q9" />
+    <div class="feedback" id="f9"></div>
+  </div>
+  <!-- 10 -->
+  <div class="exercise">
+    <div class="icon">📺</div>
+    <p class="sentence">10. After I relax, I __________ and enjoy a funny series.</p>
+    <input type="text" id="q10" name="q10" />
+    <div class="feedback" id="f10"></div>
+  </div>
+  <!-- 11 -->
+  <div class="exercise">
+    <div class="icon">🍽️</div>
+    <p class="sentence">11. At 6:30 p.m., I __________ with my family because it is dinner time.</p>
+    <input type="text" id="q11" name="q11" />
+    <div class="feedback" id="f11"></div>
+  </div>
+  <!-- 12 -->
+  <div class="exercise">
+    <div class="icon">🛍️</div>
+    <p class="sentence">12. On Saturday, we __________ at the mall to buy clothes.</p>
+    <input type="text" id="q12" name="q12" />
+    <div class="feedback" id="f12"></div>
+  </div>
+  <!-- 13 -->
+  <div class="exercise">
+    <div class="icon">😴</div>
+    <p class="sentence">13. When I feel tired in the afternoon, I __________ for 20 minutes.</p>
+    <input type="text" id="q13" name="q13" />
+    <div class="feedback" id="f13"></div>
+  </div>
+  <!-- 14 -->
+  <div class="exercise">
+    <div class="icon">🧹</div>
+    <p class="sentence">14. After dinner, I __________ my room because it is messy.</p>
+    <input type="text" id="q14" name="q14" />
+    <div class="feedback" id="f14"></div>
+  </div>
+  <!-- 15 -->
+  <div class="exercise">
+    <div class="icon">🐕</div>
+    <p class="sentence">15. In the evening, I __________ in the park because my dog needs exercise.</p>
+    <input type="text" id="q15" name="q15" />
+    <div class="feedback" id="f15"></div>
+  </div>
+</form>
+
+<div class="controls">
+  <button type="button" class="btn" onclick="checkAnswers()">✅ Check Answers</button>
+  <button type="reset" class="btn secondary" onclick="resetFeedback()">↺ Reset</button>
+</div>
+<div id="score" class="score"></div>
+
+<!-- Confetti container -->
+<div id="confetti" class="confetti" aria-hidden="true"></div>
+
+<script>
+  // Progress bar
+  const inputs = Array.from(document.querySelectorAll('input[type="text"]'));
+  const progressText = document.getElementById('progressText');
+  const barFill = document.getElementById('barFill');
+  const percentEl = document.getElementById('percent');
+
+  function updateProgress() {
+    const filled = inputs.filter(i => i.value.trim().length > 0).length;
+    const percent = Math.round((filled / inputs.length) * 100);
+    progressText.textContent = `${filled} / ${inputs.length} completed`;
+    barFill.style.width = `${percent}%`;
+    percentEl.textContent = `${percent}%`;
+  }
+  inputs.forEach(i => i.addEventListener('input', updateProgress));
+  updateProgress();
+
+  // Normalize user input
+  function normalize(str) {
+    return (str || "").trim().toLowerCase().replace(/\s+/g, " ");
+  }
+
+  // Answer key (each word once)
+  const key = {
+    q1: ["wake up"],
+    q2: ["brush my teeth"],
+    q3: ["take a shower"],
+    q4: ["get dressed"],
+    q5: ["have breakfast"],
+    q6: ["go home"],
+    q7: ["have lunch"],
+    q8: ["feed the pets"],
+    q9: ["relax"],
+    q10: ["watch tv", "watch television"],
+    q11: ["have dinner"],
+    q12: ["go shopping"],
+    q13: ["take a nap"],
+    q14: ["tidy up"],
+    q15: ["walk the dog"]
+  };
+
+  // Confetti
+  function launchConfetti() {
+    const container = document.getElementById('confetti');
+    container.innerHTML = '';
+    container.style.display = 'block';
+    const colors = ['#ff6f00', '#2a7ae2', '#22c55e', '#e11d48', '#f59e0b'];
+    for (let i = 0; i < 80; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'piece';
+      piece.style.left = Math.random() * 100 + 'vw';
+      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.animationDelay = (Math.random() * 0.8) + 's';
+      container.appendChild(piece);
+    }
+    setTimeout(() => { container.style.display = 'none'; }, 2600);
+  }
+
+  // Check answers shows feedback under each input
+  function checkAnswers() {
+    let correctCount = 0;
+    const totalItems = Object.keys(key).length;
+
+    for (let i = 1; i <= 15; i++) {
+      const qid = "q" + i;
+      const feedback = document.getElementById("f" + i);
+      const user = normalize(document.getElementById(qid).value);
+      const isCorrect = (key[qid] || []).some(ans => normalize(ans) === user);
+
+      if (isCorrect) {
+        feedback.textContent = "✔ Correct!";
+        feedback.className = "feedback correct";
+        correctCount++;
+      } else {
+        const showAns = (key[qid] || [""])[0];
+        feedback.textContent = `✘ Incorrect. Correct answer: “${showAns}”.`;
+        feedback.className = "feedback incorrect";
+      }
+      feedback.style.display = "block";
+    }
+
+    const scoreEl = document.getElementById("score");
+    scoreEl.textContent = `Score: ${correctCount} / ${totalItems}`;
+    scoreEl.style.display = "block";
+
+    if (correctCount === totalItems) {
+      launchConfetti();
+    }
+  }
+
+  function resetFeedback() {
+    for (let i = 1; i <= 15; i++) {
+      const feedback = document.getElementById("f" + i);
+      if (feedback) {
+        feedback.style.display = "none";
+        feedback.textContent = "";
+      }
+    }
+    const scoreEl = document.getElementById("score");
+    scoreEl.style.display = "none";
+    scoreEl.textContent = "";
+    document.getElementById('confetti').style.display = 'none';
+    inputs.forEach(i => i.value = '');
+    updateProgress();
+  }
+</script>
+
+</body>
+</html>

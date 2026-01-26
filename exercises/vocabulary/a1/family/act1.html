@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Vocabulary Activity - A1 Level</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .instructions {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .instructions h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .instructions p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .story-container {
+            background: #fafbff;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            border: 2px solid #e0e7ff;
+        }
+
+        .story-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .story-title {
+            color: #764ba2;
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+
+        .story-number {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .word-bank {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px dashed #667eea;
+            min-height: 60px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .word-bank-title {
+            width: 100%;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .word {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: move;
+            font-weight: 500;
+            transition: transform 0.2s, box-shadow 0.2s;
+            user-select: none;
+        }
+
+        .word:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .word.dragging {
+            opacity: 0.5;
+        }
+
+        .story-text {
+            line-height: 2;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        .gap {
+            display: inline-block;
+            min-width: 120px;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border-bottom: 2px solid #667eea;
+            background: white;
+            border-radius: 5px;
+            text-align: center;
+            min-height: 35px;
+            vertical-align: middle;
+            transition: background 0.3s;
+        }
+
+        .gap.filled {
+            background: #e0e7ff;
+        }
+
+        .gap.dragover {
+            background: #ffd700;
+            border-color: #ffa500;
+        }
+
+        .gap .word {
+            margin: 0;
+            cursor: move;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .reset-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .feedback {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .feedback p {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .score {
+            font-size: 3em;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 20px 0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .story-text {
+                font-size: 1em;
+            }
+
+            .gap {
+                min-width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👨‍👩‍👧‍👦 Family Vocabulary Activity</h1>
+        <p class="subtitle">Complete the stories with the correct family words</p>
+
+        <div class="instructions">
+            <h2>📝 Instructions:</h2>
+            <p>1. Read each story carefully<br>
+            2. Drag words from the word box to fill in the gaps<br>
+            3. You can move words back to the word box if you change your mind<br>
+            4. Click "Check Answers" when you're done<br>
+            5. Try to get all 10 stories correct!</p>
+        </div>
+
+        <!-- Story 1 -->
+        <div class="story-container">
+            <div class="story-header">
+                <span class="story-title">My Family</span>
+                <span class="story-number">Story 1</span>
+            </div>
+            <div class="word-bank" data-story="1">
+                <span class="word-bank-title">Word Box:</span>
+                <span class="word" draggable="true">mother</span>
+                <span class="word" draggable="true">father</span>
+                <span class="word" draggable="true">sister</span>
+                <span class="word" draggable="true">brother</span>
+            </div>
+            <div class="story-text">
+                Hello! My name is Anna. I live with my <span class="gap" data-answer="mother"></span> and <span class="gap" data-answer="father"></span>. I have one <span class="gap" data-answer="brother"></span>. His name is Tom. I also have a <span class="gap" data-answer="sister"></span>. Her name is Lisa. We are a happy family!
+            </div>
+        </div>
+
+        <!-- Story 2 -->
+        <div class="story-container">
+            <div class="story-header">
+                <span class="story-title">Grandparents' Visit</span>
+                <span class="story-number">Story 2</span>
+            </div>
+            <div class="word-bank" data-story="2">
+                <span class="word-bank-title">Word Box:</span>
+                <span class="word" draggable="true">grandmother</span>
+                <span class="word" draggable="true">grandfather</span>
+                <span class="word" draggable="true">grandparents</span>
+            </div>
+            <div class="story-text">
+                Every Sunday, my <span class="gap" data-answer="grandparents"></span> come to our house. My <span class="gap" data-answer="grandmother"></span> makes delicious cookies. My <span class="gap" data-answer="grandfather"></span> tells us funny stories. We love spending time with them!
+            </div>
+        </div>
+
+        <!-- Story 3 -->
+        <div class="story-container">
+            <div class="story-header">
+                <span class="story-title">Family Party</span>
+                <span class="story-number">Story 3</span>
+            </div>
+            <div class="word-bank" data-story="3">
+                <span class="word-bank-title">Word Box:</span>
+                <span class="word" draggable="true">aunt</span>
+                <span class="word" draggable="true">uncle</span>
+                <span class="word" draggable="true">cousin</span>
+                <span class="word" draggable="true">relatives</span>
+            </div>
+            <div class="story-text">
+                Yesterday was my birthday party. My <span class="gap" data-answer="aunt"></span> Maria brought a big cake. Her husband, my <span class="gap" data-answer="uncle"></span> John, gave me a present. Their son, my <span class="gap" data-answer="cousin"></span> Mike, played games with me. All my <span class="gap" data-answer="relatives"></span> were there!
+            </div>
+        </div>
+
+        <!-- Story 4 -->
+        <div class="story-container">
+            <div class="story-header">
+                <span class="story-title">New Baby</span>
+                <span class="story-number">Story 4</span>
+            </div>
+            <div class="word-bank" data-story="4">
+                <span class="word-bank-title">Word Box:</span>
+                <span class="word" draggable="true">baby</span>
+                <span class="word" draggable="true">son</span>
+                <span class="word" draggable="true">daughter</span>
+                <span class="word" draggable="true">child</span>
+            </div>
+            <div class="story-text">
+                My aunt has a new <span class="gap" data-answer="baby"></span>! It's a boy, so she has a <span class="gap" data-answer="son"></span> now. My uncle wanted a <span class="gap" data-answer="daughter"></span>, but he is still very happy. This is their first <span class="gap" data-answer="child"></span>.
+            </div>
+        </div>
+
+        <!-- Story 5 -->
+        <div class="story-container">
+            <div class="story-header">
+                <span class="story-title">Wedding Day</span>
+                <span class="story-number">Story 5</span>
+            </div>
+            <div class="word-bank" data-story="5">
+                <span class="word-bank-title">Word Box:</span>
+                <span class="word" draggable="true">husband</span>
+                <span class="word" draggable="true">wife</span>
+                <span class="word" draggable="true">spouse</span>
+            </div>
+            <div class="story-text">
+                My sister got married last month! Now she has a <span class="gap" data-answer="husband"></span>. His name is David. David has a <span class="gap" data-answer="wife"></span> now - my sister! They are happy to have a <span class="gap" data-answer="spouse"></span> to share their life with.
+            </div>
+        </div>
+
+        <!-- Story 6 -->
+        <div class="story-container">
+            <div class="story-header">
+                <span class="story-title">Growing Up</span>
+                <span class="story-number">Story 6</span>
+            </div>
+            <div class="word-bank" data-story="6">
+                <span class="word-bank-title">Word Box:</span>
+                <span class="word" draggable="true">toddler</span>
+                <span class="word" draggable="true">teenager</span>
+                <span class="word" draggable="true">children</span>
+            </div>
+            <div class="story-text">
+                My parents have three <span class="gap" data-answer="children"></span>. My little brother is three years old. He is a <span class="gap" data-answer="toddler"></span>. My sister is fifteen. She is a <span class="gap" data-answer="teenager"></span>. I am ten years old!
+            </div>
+        </div>
+
+        <!-- Story 7 -->
+        <div class="story-container">
+            <div class="story-header">
+                <span class="story-title">Uncle Tom's Family</span>
+                <span class="story-number">Story 7</span>
+            </div>
+            <div class="word-bank" data-story="7">
+                <span class="word-bank-title">Word Box:</span>
+                <span class="word" draggable="true">nephew</span>
+                <span class="word" draggable="true">niece</span>
+                <span class="word" draggable="true">siblings</span>
+            </div>
+            <div class="story-text">
+                Uncle Tom loves his sister's children. He has one <span class="gap" data-answer="nephew"></span> named Paul and one <span class="gap" data-answer="niece"></span> named Emma. Paul and Emma are <span class="gap" data-answer="siblings"></span>. They visit Uncle Tom every weekend.
+            </div>
+        </div>
+
+        <!-- Story 8 -->
+        <div class="story-container">
+            <div class="story-header">
+                <span class="story-title">New In-Laws</span>
+                <span class="story-number">Story 8</span>
+            </div>
+            <div class="word-bank" data-story="8">
+                <span class="word-bank-title">Word Box:</span>
+                <span class="word" draggable="true">mother-in-law</span>
+                <span class="word" draggable="true">brother-in-law</span>
+                <span class="word" draggable="true">in-laws</span>
+            </div>
+            <div class="story-text">
+                After my brother got married, we have new family members! My <span class="gap" data-answer="mother-in-law"></span> is my brother's wife's mother. She is very kind. My sister's husband is my <span class="gap" data-answer="brother-in-law"></span>. I like my new <span class="gap" data-answer="in-laws"></span> very much!
+            </div>
+        </div>
+
+        <!-- Story 9 -->
+        <div class="story-container">
+            <div class="story-header">
+                <span class="story-title">Family Tree</span>
+                <span class="story-number">Story 9</span>
+            </div>
+            <div class="word-bank" data-story="9">
+                <span class="word-bank-title">Word Box:</span>
+                <span class="word" draggable="true">ancestors</span>
+                <span class="word" draggable="true">descendants</span>
+                <span class="word" draggable="true">grandchild</span>
+            </div>
+            <div class="story-text">
+                We made a family tree at school. My great-grandparents are my <span class="gap" data-answer="ancestors"></span>. Their children and grandchildren are their <span class="gap" data-answer="descendants"></span>. I am my grandmother's <span class="gap" data-answer="grandchild"></span>. It's interesting to see our family history!
+            </div>
+        </div>
+
+        <!-- Story 10 -->
+        <div class="story-container">
+            <div class="story-header">
+                <span class="story-title">Family Love</span>
+                <span class="story-number">Story 10</span>
+            </div>
+            <div class="word-bank" data-story="10">
+                <span class="word-bank-title">Word Box:</span>
+                <span class="word" draggable="true">parents</span>
+                <span class="word" draggable="true">infant</span>
+                <span class="word" draggable="true">relative</span>
+            </div>
+            <div class="story-text">
+                My <span class="gap" data-answer="parents"></span> take care of our new baby sister. She is an <span class="gap" data-answer="infant"></span> and she is only two months old. Every <span class="gap" data-answer="relative"></span> in our family wants to visit her. She is so cute!
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button onclick="checkAnswers()">Check Answers ✓</button>
+            <button class="reset-btn" onclick="resetActivity()">Reset Activity ↻</button>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="feedback" id="feedback">
+        <h2 id="feedbackTitle">Great Job! 🎉</h2>
+        <div class="score" id="score">10/10</div>
+        <p id="feedbackMessage">You got all the answers correct!</p>
+        <button onclick="closeFeedback()">Continue</button>
+    </div>
+
+    <script>
+        let draggedElement = null;
+
+        // Initialize drag and drop
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDragAndDrop();
+        });
+
+        function initializeDragAndDrop() {
+            const words = document.querySelectorAll('.word');
+            const gaps = document.querySelectorAll('.gap');
+
+            words.forEach(word => {
+                word.addEventListener('dragstart', handleDragStart);
+                word.addEventListener('dragend', handleDragEnd);
+            });
+
+            gaps.forEach(gap => {
+                gap.addEventListener('dragover', handleDragOver);
+                gap.addEventListener('drop', handleDrop);
+                gap.addEventListener('dragleave', handleDragLeave);
+            });
+
+            // Also allow dropping back to word banks
+            const wordBanks = document.querySelectorAll('.word-bank');
+            wordBanks.forEach(bank => {
+                bank.addEventListener('dragover', handleDragOver);
+                bank.addEventListener('drop', handleDropToBank);
+                bank.addEventListener('dragleave', handleDragLeave);
+            });
+        }
+
+        function handleDragStart(e) {
+            draggedElement = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            if (this.classList.contains('gap')) {
+                this.classList.add('dragover');
+            }
+            return false;
+        }
+
+        function handleDragLeave(e) {
+            if (this.classList.contains('gap')) {
+                this.classList.remove('dragover');
+            }
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            this.classList.remove('dragover');
+
+            if (this.classList.contains('gap') && draggedElement) {
+                // If gap already has a word, return it to word bank
+                const existingWord = this.querySelector('.word');
+                if (existingWord) {
+                    const storyNum = this.closest('.story-container').querySelector('.word-bank').dataset.story;
+                    const wordBank = document.querySelector(`.word-bank[data-story="${storyNum}"]`);
+                    wordBank.appendChild(existingWord);
+                }
+
+                // Add new word to gap
+                this.appendChild(draggedElement);
+                this.classList.add('filled');
+                
+                // Re-initialize drag and drop for the moved element
+                draggedElement.addEventListener('dragstart', handleDragStart);
+                draggedElement.addEventListener('dragend', handleDragEnd);
+            }
+
+            return false;
+        }
+
+        function handleDropToBank(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            this.classList.remove('dragover');
+
+            if (this.classList.contains('word-bank') && draggedElement) {
+                // Remove from gap if it was in one
+                const parentGap = draggedElement.parentElement;
+                if (parentGap && parentGap.classList.contains('gap')) {
+                    parentGap.classList.remove('filled');
+                }
+
+                // Add to word bank
+                this.appendChild(draggedElement);
+            }
+
+            return false;
+        }
+
+        function checkAnswers() {
+            const gaps = document.querySelectorAll('.gap');
+            let correct = 0;
+            let total = 0;
+
+            gaps.forEach(gap => {
+                total++;
+                const word = gap.querySelector('.word');
+                const correctAnswer = gap.dataset.answer;
+
+                if (word && word.textContent.toLowerCase() === correctAnswer.toLowerCase()) {
+                    correct++;
+                    gap.style.borderColor = '#4ade80';
+                    gap.style.background = '#d1fae5';
+                } else {
+                    gap.style.borderColor = '#f87171';
+                    gap.style.background = '#fee2e2';
+                }
+            });
+
+            showFeedback(correct, total);
+        }
+
+        function showFeedback(correct, total) {
+            const overlay = document.getElementById('overlay');
+            const feedback = document.getElementById('feedback');
+            const score = document.getElementById('score');
+            const title = document.getElementById('feedbackTitle');
+            const message = document.getElementById('feedbackMessage');
+
+            score.textContent = `${correct}/${total}`;
+
+            if (correct === total) {
+                title.textContent = 'Perfect! 🎉';
+                message.textContent = 'You got all the answers correct! Excellent work!';
+            } else if (correct >= total * 0.7) {
+                title.textContent = 'Great Job! 👍';
+                message.textContent = `You got ${correct} out of ${total} correct. Keep practicing!`;
+            } else {
+                title.textContent = 'Keep Trying! 💪';
+                message.textContent = `You got ${correct} out of ${total} correct. Try again!`;
+            }
+
+            overlay.classList.add('show');
+            feedback.classList.add('show');
+        }
+
+        function closeFeedback() {
+            document.getElementById('overlay').classList.remove('show');
+            document.getElementById('feedback').classList.remove('show');
+        }
+
+        function resetActivity() {
+            // Reset all gaps
+            const gaps = document.querySelectorAll('.gap');
+            gaps.forEach(gap => {
+                const word = gap.querySelector('.word');
+                if (word) {
+                    const storyNum = gap.closest('.story-container').querySelector('.word-bank').dataset.story;
+                    const wordBank = document.querySelector(`.word-bank[data-story="${storyNum}"]`);
+                    wordBank.appendChild(word);
+                }
+                gap.classList.remove('filled');
+                gap.style.borderColor = '#667eea';
+                gap.style.background = 'white';
+            });
+
+            closeFeedback();
+        }
+    </script>
+</body>
+</html>

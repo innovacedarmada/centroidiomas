@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A2 Vocabulary: Animals & Pets Story Challenge</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        h1 {
+            color: #2a9d8f;
+            text-align: center;
+            border-bottom: 3px solid #e9c46a;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #e76f51;
+            margin-top: 25px;
+        }
+
+        .story-section {
+            background-color: #f8f8ff;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .story-text {
+            margin-bottom: 10px;
+        }
+
+        .gap-fill {
+            padding: 5px;
+            margin: 0 5px;
+            border: 2px solid #2a9d8f;
+            border-radius: 4px;
+            width: 120px;
+            text-align: center;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .gap-fill:focus {
+            border-color: #e76f51;
+            outline: none;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: none; /* Hidden by default */
+        }
+
+        .correct {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .check-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #2a9d8f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .check-button:hover {
+            background-color: #264653;
+        }
+
+        .check-button:active {
+            transform: translateY(1px);
+        }
+
+        .score-box {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #264653;
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px dashed #e9c46a;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🐻  Vocabulary Challenge: Amazing Animals! 🐠</h1>
+    <p><strong>Instructions:</strong> Read the short stories. Write the correct animal name in the gap. Use the vocabulary list below. When you finish, click Check My Answers!</p>
+
+    <p style="text-align: center; font-style: italic; color: #38a3a5; font-weight: bold;">
+        Vocabulary: Bear, bird, cat, chicken, cow, dog, duck, elephant, fish, frog, goat, horse, lion, monkey, mouse, pig, rabbit, sheep, snake, turtle
+    </p>
+
+    <div class="story-section" id="story1">
+        <h2>Story 1: On the Farm </h2>
+        <div class="story-text">
+            My grandpa has a farm. Every morning, he collects eggs from the **<input type="text" id="q1a" class="gap-fill" data-answer="chicken">**. He also milks the large, friendly **<input type="text" id="q1b" class="gap-fill" data-answer="cow">**. The loudest animal is the **<input type="text" id="q1c" class="gap-fill" data-answer="pig">** that lives in the mud. There is also a small, white **<input type="text" id="q1d" class="gap-fill" data-answer="sheep">** that helps keep the grass short. Finally, a fluffy **<input type="text" id="q1e" class="gap-fill" data-answer="rabbit">** sometimes jumps around the garden.
+        </div>
+        <div class="feedback" id="f1"></div>
+    </div>
+
+    <div class="story-section" id="story2">
+        <h2>Story 2: A Day at the Zoo </h2>
+        <div class="story-text">
+            We visited the zoo yesterday. The **<input type="text" id="q2a" class="gap-fill" data-answer="lion">** was sleeping, but the big, grey **<input type="text" id="q2b" class="gap-fill" data-answer="elephant">** was eating leaves. We saw a clever brown **<input type="text" id="q2c" class="gap-fill" data-answer="monkey">** playing with its friends. In the reptile house, a long, quiet **<input type="text" id="q2d" class="gap-fill" data-answer="snake">** was behind the glass. And outside, a lazy brown **<input type="text" id="q2e" class="gap-fill" data-answer="bear">** was looking for food.
+        </div>
+        <div class="feedback" id="f2"></div>
+    </div>
+
+    <div class="story-section" id="story3">
+        <h2>Story 3: My Favourite Pets </h2>
+        <div class="story-text">
+            I have two pets. My **<input type="text" id="q3a" class="gap-fill" data-answer="dog">** loves to run in the park and play 'fetch'. My **<input type="text" id="q3b" class="gap-fill" data-answer="cat">** is very quiet and sleeps all day on my bed. My sister has a small tank with one colorful **<input type="text" id="q3c" class="gap-fill" data-answer="fish">** and a slow green **<input type="text" id="q3d" class="gap-fill" data-answer="turtle">**. We also see a little grey **<input type="text" id="q3e" class="gap-fill" data-answer="mouse">** in the kitchen sometimes!
+        </div>
+        <div class="feedback" id="f3"></div>
+    </div>
+    
+    <div class="story-section" id="story4">
+        <h2>Story 4: By the River </h2>
+        <div class="story-text">
+            I like walking near the river. I often see a yellow **<input type="text" id="q4a" class="gap-fill" data-answer="duck">** swimming with its babies. A green **<input type="text" id="q4b" class="gap-fill" data-answer="frog">** likes to sit on the big green leaves. High in the trees, a small singing **<input type="text" id="q4c" class="gap-fill" data-answer="bird">** makes a lot of noise. Sometimes, a big brown **<input type="text" id="q4d" class="gap-fill" data-answer="horse">** comes to drink water. And a small, bearded **<input type="text" id="q4e" class="gap-fill" data-answer="goat">** eats grass nearby.
+        </div>
+        <div class="feedback" id="f4"></div>
+    </div>
+
+    <button class="check-button" onclick="checkAnswers()">Check My Answers!</button>
+
+    <div class="score-box" id="total-score">Your Score: 0 / 20</div>
+
+</div>
+
+<script>
+    // Correct answers (always lowercase for checking)
+    const answers = {
+        q1a: "chicken", q1b: "cow", q1c: "pig", q1d: "sheep", q1e: "rabbit",
+        q2a: "lion", q2b: "elephant", q2c: "monkey", q2d: "snake", q2e: "bear",
+        q3a: "dog", q3b: "cat", q3c: "fish", q3d: "turtle", q3e: "mouse",
+        q4a: "duck", q4b: "frog", q4c: "bird", q4d: "horse", q4e: "goat"
+    };
+
+    function checkAnswers() {
+        let totalCorrect = 0;
+        let numQuestions = Object.keys(answers).length;
+
+        // Loop through all questions
+        for (const id in answers) {
+            const inputElement = document.getElementById(id);
+            if (!inputElement) continue; // Skip if element not found
+
+            const studentAnswer = inputElement.value.toLowerCase().trim();
+            const correctAnswer = answers[id];
+            
+            // Get the feedback element for the current story
+            const storyNumber = id[1]; // '1' from q1a, '2' from q2a, etc.
+            const feedbackBox = document.getElementById(`f${storyNumber}`);
+            
+            if (studentAnswer === correctAnswer) {
+                totalCorrect++;
+                inputElement.style.borderColor = '#155724'; // Green for correct
+                inputElement.style.backgroundColor = '#d4edda';
+            } else {
+                inputElement.style.borderColor = '#721c24'; // Red for incorrect
+                inputElement.style.backgroundColor = '#f8d7da';
+            }
+        }
+        
+        // Calculate score for each story and display feedback
+        const stories = [1, 2, 3, 4];
+        stories.forEach(storyNum => {
+            let storyCorrect = 0;
+            const feedbackBox = document.getElementById(`f${storyNum}`);
+            
+            // Count correct answers for the specific story
+            for (let i = 0; i < 5; i++) {
+                const questionId = `q${storyNum}${String.fromCharCode(97 + i)}`; // q1a, q1b, etc.
+                const inputElement = document.getElementById(questionId);
+                
+                if (inputElement && inputElement.value.toLowerCase().trim() === answers[questionId]) {
+                    storyCorrect++;
+                }
+            }
+
+            // Update feedback box for the story
+            feedbackBox.style.display = 'block';
+            if (storyCorrect === 5) {
+                feedbackBox.className = 'feedback correct';
+                feedbackBox.innerHTML = `✅ **Great job!** You got all 5 points for this story!`;
+            } else if (storyCorrect > 0) {
+                feedbackBox.className = 'feedback incorrect';
+                feedbackBox.innerHTML = `⚠️ **Almost!** You got ${storyCorrect} / 5 correct. Try to fix the others!`;
+            } else {
+                 feedbackBox.className = 'feedback incorrect';
+                feedbackBox.innerHTML = `❌ **Keep trying!** Review your vocabulary and try again!`;
+            }
+        });
+
+        // Display total score
+        const percentage = (totalCorrect / numQuestions) * 100;
+        const scoreBox = document.getElementById('total-score');
+        scoreBox.innerHTML = `Your Score: **${totalCorrect} / 20** (${Math.round(percentage)}%)`;
+        scoreBox.style.borderColor = totalCorrect === numQuestions ? '#2a9d8f' : '#e76f51';
+    }
+</script>
+
+</body>
+</html>

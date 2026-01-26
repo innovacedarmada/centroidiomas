@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>🏙️ Places in Town — Crossword Practice (A2)</title>
+<style>
+  :root{
+    --bg:#f7fafc;
+    --card:#ffffff;
+    --accent:#2563eb;
+    --correct:#58cc02;
+    --incorrect:#ea2b2b;
+    --border:#e5e7eb;
+    --text:#111827;
+  }
+  body{font-family:'Segoe UI',sans-serif;margin:0;background:var(--bg);color:var(--text);}
+  .wrap{max-width:980px;margin:0 auto;padding:20px;}
+  h1{text-align:center;font-size:26px;margin-bottom:5px;}
+  h2{text-align:center;font-size:18px;color:#4b5563;margin-bottom:18px;}
+  h3{margin-top:28px;font-size:20px;color:var(--accent);border-bottom:2px solid var(--accent);padding-bottom:6px;}
+
+  .crossword-section{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,0.05);margin-bottom:26px;}
+  .pair{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px;gap:10px;}
+  .row{display:flex;align-items:center;flex-wrap:wrap;}
+  .num{width:34px;height:34px;border-radius:8px;background:#eef2ff;color:var(--accent);font-weight:700;display:flex;align-items:center;justify-content:center;margin-right:8px;flex-shrink:0;}
+  .cell{width:34px;height:34px;border:2px solid var(--border);border-radius:6px;margin-right:4px;display:flex;align-items:center;justify-content:center;background:#fff;flex-shrink:0;transition:border-color .2s;}
+  .cell input{width:100%;height:100%;text-align:center;border:none;font-weight:700;font-size:15px;text-transform:lowercase;outline:none;background:transparent;}
+  .cell.lock{background:#f0fdf4;border-color:var(--correct);}
+  .cell.wrong{border-color:var(--incorrect);}
+  .controls{margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  button{background:var(--accent);color:white;padding:10px 14px;border:none;border-radius:10px;font-weight:700;cursor:pointer;transition:background .18s;}
+  button:hover{background:#1d4ed8;}
+  button.secondary{background:#eef2ff;color:var(--accent);}
+  .status{text-align:center;margin-top:10px;font-weight:600;}
+  .image-slot{
+    width:130px;
+    border:2px solid var(--border);
+    border-radius:8px;
+    overflow:hidden;
+    background:#fbfdff;
+    position:relative;
+  }
+  .image-slot img{
+    width:100%;
+    height:auto;
+    max-height:110px;
+    object-fit:contain;
+    border-radius:6px;
+    display:block;
+  }
+  .slot-label{
+    position:absolute;
+    left:6px;
+    top:6px;
+    background:rgba(255,255,255,0.8);
+    padding:2px 6px;
+    border-radius:6px;
+    font-weight:700;
+    color:var(--accent);
+    font-size:13px;
+  }
+  @media(max-width:600px){
+    .pair{flex-direction:column;align-items:flex-start;}
+    .image-slot{width:100%;max-width:300px;}
+    .cell,.num{width:28px;height:28px;}
+    .cell input{font-size:13px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🏙️ Places in Town — Crossword Practice (A2)</h1>
+  <h2>Type the name of each place. Use lowercase letters and no spaces.</h2>
+
+  <h3>Part 1 — Places 1–10</h3>
+  <section class="crossword-section" id="part1"></section>
+  <div class="controls">
+    <button onclick="checkAll(1)">Check Answers</button>
+    <button class="secondary" onclick="showHints(1)">Show Hints</button>
+    <button class="secondary" onclick="revealAll(1)">Reveal All</button>
+  </div>
+  <div id="status1" class="status"></div>
+
+  <h3>Part 2 — Places 11–20</h3>
+  <section class="crossword-section" id="part2"></section>
+  <div class="controls">
+    <button onclick="checkAll(2)">Check Answers</button>
+    <button class="secondary" onclick="showHints(2)">Show Hints</button>
+    <button class="secondary" onclick="revealAll(2)">Reveal All</button>
+  </div>
+  <div id="status2" class="status"></div>
+</div>
+
+<script>
+const allWords = [
+  'bakery','bank','busstation','church','cinema','firestation','hospital','hotel','library','museum',
+  'park','pharmacy','policestation','postoffice','restaurant','school','shoppingmall','supermarket','trainstation','zoo'
+];
+function shuffleArray(arr){
+  const a=arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+const shuffled=shuffleArray(allWords);
+const part1Words=shuffled.slice(0,10);
+const part2Words=shuffled.slice(10);
+
+function createCrossword(words,part){
+  const section=document.getElementById(`part${part}`);
+  words.forEach((w,idx)=>{
+    const num=(part===1?idx+1:idx+11);
+    const pair=document.createElement('div');
+    pair.className='pair';
+
+    // word input row
+    const row=document.createElement('div');
+    row.className='row';
+    const numBox=document.createElement('div');
+    numBox.className='num';
+    numBox.textContent=num;
+    row.appendChild(numBox);
+
+    for(let i=0;i<w.length;i++){
+      const cell=document.createElement('div');
+      cell.className='cell';
+      const input=document.createElement('input');
+      input.maxLength=1;
+      input.dataset.part=part;
+      input.dataset.word=num;
+      input.dataset.pos=i;
+
+      input.addEventListener('input',e=>{
+        e.target.value=e.target.value.replace(/[^a-z]/gi,'').toLowerCase();
+        if(e.target.value && i < w.length-1){
+          const next=document.querySelector(`input[data-part='${part}'][data-word='${num}'][data-pos='${i+1}']`);
+          if(next) next.focus();
+        }
+      });
+      input.addEventListener('keydown',e=>{
+        if(e.key==='Backspace' && !e.target.value && i>0){
+          const prev=document.querySelector(`input[data-part='${part}'][data-word='${num}'][data-pos='${i-1}']`);
+          if(prev) prev.focus();
+        }
+      });
+
+      cell.appendChild(input);
+      row.appendChild(cell);
+    }
+
+    const imgSlot=document.createElement('div');
+    imgSlot.className='image-slot';
+    imgSlot.innerHTML=`<div class="slot-label">#${num}</div><img src="crossword-images/${w}.png" alt="${w}">`;
+
+    pair.appendChild(row);
+    pair.appendChild(imgSlot);
+    section.appendChild(pair);
+  });
+}
+
+createCrossword(part1Words,1);
+createCrossword(part2Words,2);
+
+function checkAll(part){
+  const words=(part==1?part1Words:part2Words);
+  let wrong=0;
+  words.forEach((w,idx)=>{
+    const num=(part==1?idx+1:idx+11);
+    let typed='';
+    for(let i=0;i<w.length;i++){
+      const input=document.querySelector(`input[data-part='${part}'][data-word='${num}'][data-pos='${i}']`);
+      typed+=input.value;
+    }
+
+    // Reset colors
+    for(let i=0;i<w.length;i++){
+      const input=document.querySelector(`input[data-part='${part}'][data-word='${num}'][data-pos='${i}']`);
+      input.parentElement.classList.remove('wrong','lock');
+    }
+
+    if(typed===w){
+      // Correct word: green
+      for(let i=0;i<w.length;i++){
+        const input=document.querySelector(`input[data-part='${part}'][data-word='${num}'][data-pos='${i}']`);
+        input.disabled=true;
+        input.parentElement.classList.add('lock');
+      }
+    } else {
+      // Wrong letters: red
+      wrong++;
+      for(let i=0;i<w.length;i++){
+        const input=document.querySelector(`input[data-part='${part}'][data-word='${num}'][data-pos='${i}']`);
+        if(input.value!==w[i]) input.parentElement.classList.add('wrong');
+      }
+    }
+  });
+  document.getElementById(`status${part}`).textContent=wrong?`${wrong} incorrect. Try again!`:'🎉 All correct!';
+}
+
+function showHints(part){
+  const words=(part==1?part1Words:part2Words);
+  words.forEach((w,idx)=>{
+    const num=(part==1?idx+1:idx+11);
+    const input=document.querySelector(`input[data-part='${part}'][data-word='${num}'][data-pos='0']`);
+    if(input&&!input.disabled)input.value=w[0];
+  });
+}
+
+function revealAll(part){
+  const words=(part==1?part1Words:part2Words);
+  words.forEach((w,idx)=>{
+    const num=(part==1?idx+1:idx+11);
+    for(let i=0;i<w.length;i++){
+      const input=document.querySelector(`input[data-part='${part}'][data-word='${num}'][data-pos='${i}']`);
+      input.value=w[i];
+      input.disabled=true;
+      input.parentElement.classList.add('lock');
+    }
+  });
+  document.getElementById(`status${part}`).textContent='Answers revealed.';
+}
+</script>
+</body>
+</html>

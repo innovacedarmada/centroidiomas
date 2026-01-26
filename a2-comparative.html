@@ -289,8 +289,15 @@
 
 	</div>
 	<!-- End Container -->
-
-	
+	<!-- SCRIPT HEADER ---------------------->	
+	<script>
+  // Cargar el footer automáticamente
+	fetch("header.html")
+		.then(response => response.text())
+		.then(data => {
+		document.getElementById("header-placeholder").innerHTML = data;
+		});
+	</script>
 	<script src="js/studiare-plugins.min.js"></script>
 	<script src="js/jquery.countTo.js"></script>
 	<script src="js/popper.js"></script>

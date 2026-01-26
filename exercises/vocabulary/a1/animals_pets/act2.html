@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A1 Vocabulary: Animals and Pets (Expanded)</title>
+    <style>
+        :root {
+            --primary-color: #03a9f4; /* Light Blue - Clear and clean */
+            --secondary-color: #8bc34a; /* Lime Green - Lively and natural */
+            --background-color: #e1f5fe; /* Very Light Blue Background */
+            --card-background: #ffffff;
+            --text-color: #333;
+            --border-color: #b3e5fc;
+            --success-color: #4CAF50;
+            --error-color: #f44336;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background-color: var(--card-background);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 4px solid var(--primary-color);
+            padding-bottom: 15px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            font-size: 1.8em;
+            border-left: 6px solid var(--secondary-color);
+            padding-left: 10px;
+            margin-top: 35px;
+            margin-bottom: 20px;
+        }
+
+        .activity-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            background-color: #f8fcfd; /* Off-white background for activities */
+        }
+
+        .question-group {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: var(--card-background);
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .prompt {
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+            color: var(--text-color);
+        }
+
+        /* --- Activity 1: Image Matching Styles --- */
+        .match-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+        .image-card {
+            background-color: #e0f2f1;
+            padding: 15px 10px;
+            border-radius: 8px;
+            border: 1px solid #b2dfdb;
+            transition: box-shadow 0.2s;
+        }
+        .image-card:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .image-card img {
+            width: 100%;
+            max-width: 90px;
+            height: auto;
+            border-radius: 4px;
+            /* Placeholder for image generation tags */
+            /* These tags will be replaced by actual images */
+            content: attr(data-animal-image); 
+            background-color: #ccc;
+            display: block;
+            margin: 0 auto 10px;
+            line-height: 90px;
+            font-size: 0.8em;
+            color: #555;
+        }
+        .match-input {
+            width: 90%;
+            padding: 8px;
+            margin-top: 8px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            text-transform: lowercase;
+        }
+
+        /* --- Activity 3: Multiple Choice Styles --- */
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 10px 15px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            transition: background-color 0.2s, border-color 0.2s;
+            background-color: #fafafa;
+        }
+        .options label:hover {
+            background-color: #e0f7fa; /* Light hover */
+            border-color: var(--primary-color);
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        /* --- Activity 4: Reading Styles --- */
+        .reading-text {
+            border: 2px dashed var(--secondary-color);
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f1f8e9;
+            font-size: 1.1em;
+        }
+        .reading-text strong {
+            color: #d84315; /* Emphasis color */
+        }
+        .find-input {
+            padding: 10px;
+            margin-top: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 2px solid var(--primary-color);
+            border-radius: 5px;
+            text-transform: lowercase;
+        }
+
+        /* --- Feedback and Button Styles --- */
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: none; /* Hidden by default */
+            font-size: 0.9em;
+        }
+
+        .correct {
+            background-color: #e8f5e9; /* Light Green */
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+        }
+
+        .incorrect {
+            background-color: #ffebee; /* Light Red */
+            color: var(--error-color);
+            border: 1px solid var(--error-color);
+        }
+
+        .btn-check {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 30px;
+            transition: background-color 0.3s ease, transform 0.1s;
+            width: 100%;
+            box-sizing: border-box;
+            font-weight: bold;
+        }
+
+        .btn-check:hover {
+            background-color: #0288d1;
+            transform: translateY(-2px);
+        }
+
+        .total-score {
+            text-align: center;
+            font-size: 1.5em;
+            margin-top: 30px;
+            padding: 20px;
+            border: 3px dashed var(--secondary-color);
+            border-radius: 10px;
+            background-color: #f1f8e9;
+            display: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🦁 Pets and Wild Animals! </h1>
+        <p>Let's learn and use  new words for animals and pets. Ready to start?</p>
+    </header>
+
+    <form id="animalVocabForm">
+
+        <div class="activity-section">
+            <h2>🖼️ Activity 1: Match the Picture to the Name</h2>
+            <p><strong>Task:</strong> Look at the picture. Write the correct animal name next to it. (Use: **Cat, Horse, Dog, Monkey, Cow**)</p>
+
+            <div class="match-grid">
+                
+                <div class="image-card">
+                    <img src="images/Cat.jpg" alt="Cartoon cat" data-animal-image="">
+                    <p>1. <input type="text" class="match-input" name="act1_q1" data-answer="cat" placeholder="e.g. cat"></p>
+                    <div class="feedback" id="act1_q1_feedback"></div>
+                </div>
+
+                <div class="image-card">
+                    <img src="images/Horse.jpg" alt="Cartoon horse" data-animal-image="">
+                    <p>2. <input type="text" class="match-input" name="act1_q2" data-answer="horse" placeholder="e.g. horse"></p>
+                    <div class="feedback" id="act1_q2_feedback"></div>
+                </div>
+
+                <div class="image-card">
+                    <img src="images/Dog.jpg" alt="Cartoon dog" data-animal-image="">
+                    <p>3. <input type="text" class="match-input" name="act1_q3" data-answer="dog" placeholder="e.g. dog"></p>
+                    <div class="feedback" id="act1_q3_feedback"></div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="images/Monkey.jpg" alt="Cartoon monkey" data-animal-image="">
+                    <p>4. <input type="text" class="match-input" name="act1_q4" data-answer="monkey" placeholder="e.g. monkey"></p>
+                    <div class="feedback" id="act1_q4_feedback"></div>
+                </div>
+
+                <div class="image-card">
+                    <img src="images/Cow.jpg" alt="Cartoon cow" data-animal-image="">
+                    <p>5. <input type="text" class="match-input" name="act1_q5" data-answer="cow" placeholder="e.g. cow"></p>
+                    <div class="feedback" id="act1_q5_feedback"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="activity-section">
+            <h2>✏️ Activity 2: Complete the Sentence (Gap Fill)</h2>
+            <p><strong>Task:</strong> Use the words to complete the sentences: Chicken, Rabbit, Mouse, Frog, Elephant</p>
+
+            <div class="question-group">
+                <span class="prompt">6. The tiny pet is a white ___. It likes to eat cheese.</span>
+                <input type="text" class="match-input" name="act2_q6" data-answer="mouse" placeholder="Write animal name here">
+                <div class="feedback" id="act2_q6_feedback"></div>
+            </div>
+
+            <div class="question-group">
+                <span class="prompt">7. An ___ is a very large animal with a long trunk.</span>
+                <input type="text" class="match-input" name="act2_q7" data-answer="elephant" placeholder="Write animal name here">
+                <div class="feedback" id="act2_q7_feedback"></div>
+            </div>
+
+            <div class="question-group">
+                <span class="prompt">8. I saw a small green ___ jump into the pond.</span>
+                <input type="text" class="match-input" name="act2_q8" data-answer="frog" placeholder="Write animal name here">
+                <div class="feedback" id="act2_q8_feedback"></div>
+            </div>
+
+            <div class="question-group">
+                <span class="prompt">9. A white ___ has long ears and likes carrots.</span>
+                <input type="text" class="match-input" name="act2_q9" data-answer="rabbit" placeholder="Write animal name here">
+                <div class="feedback" id="act2_q9_feedback"></div>
+            </div>
+
+            <div class="question-group">
+                <span class="prompt">10. We often eat eggs from a ___.</span>
+                <input type="text" class="match-input" name="act2_q10" data-answer="chicken" placeholder="Write animal name here">
+                <div class="feedback" id="act2_q10_feedback"></div>
+            </div>
+        </div>
+
+        <div class="activity-section">
+            <h2>❓ Activity 3: Choose the Correct Word</h2>
+            <p><strong>Task:</strong> Read the sentence and choose the animal it describes.</p>
+
+            <div class="question-group" data-answer="Lion">
+                <span class="prompt">11. This big, yellow animal is called the King of the Jungle.</span>
+                <div class="options">
+                    <label><input type="radio" name="act3_q11" value="Duck"> Duck</label>
+                    <label><input type="radio" name="act3_q11" value="Bear"> Bear</label>
+                    <label><input type="radio" name="act3_q11" value="Lion"> Lion</label>
+                    <label><input type="radio" name="act3_q11" value="Sheep"> Sheep</label>
+                </div>
+                <div class="feedback" id="act3_q11_feedback"></div>
+            </div>
+
+            <div class="question-group" data-answer="Snake">
+                <span class="prompt">12. This long animal has no legs and moves on the ground.</span>
+                <div class="options">
+                    <label><input type="radio" name="act3_q12" value="Fish"> Fish</label>
+                    <label><input type="radio" name="act3_q12" value="Snake"> Snake</label>
+                    <label><input type="radio" name="act3_q12" value="Goat"> Goat</label>
+                    <label><input type="radio" name="act3_q12" value="Bird"> Bird</label>
+                </div>
+                <div class="feedback" id="act3_q12_feedback"></div>
+            </div>
+
+            <div class="question-group" data-answer="Turtle">
+                <span class="prompt">13. This animal is slow and has a hard shell on its back.</span>
+                <div class="options">
+                    <label><input type="radio" name="act3_q13" value="Pig"> Pig</label>
+                    <label><input type="radio" name="act3_q13" value="Goat"> Goat</label>
+                    <label><input type="radio" name="act3_q13" value="Turtle"> Turtle</label>
+                    <label><input type="radio" name="act3_q13" value="Horse"> Horse</label>
+                </div>
+                <div class="feedback" id="act3_q13_feedback"></div>
+            </div>
+
+            <div class="question-group" data-answer="Sheep">
+                <span class="prompt">14. We get wool (for clothes) from this animal. It says "Baa".</span>
+                <div class="options">
+                    <label><input type="radio" name="act3_q14" value="Duck"> Duck</label>
+                    <label><input type="radio" name="act3_q14" value="Sheep"> Sheep</label>
+                    <label><input type="radio" name="act3_q14" value="Lion"> Lion</label>
+                    <label><input type="radio" name="act3_q14" value="Frog"> Frog</label>
+                </div>
+                <div class="feedback" id="act3_q14_feedback"></div>
+            </div>
+
+            <div class="question-group" data-answer="Bird">
+                <span class="prompt">15. This small animal can fly and often lives in a nest.</span>
+                <div class="options">
+                    <label><input type="radio" name="act3_q15" value="Bear"> Bear</label>
+                    <label><input type="radio" name="act3_q15" value="Pig"> Pig</label>
+                    <label><input type="radio" name="act3_q15" value="Cat"> Cat</label>
+                    <label><input type="radio" name="act3_q15" value="Bird"> Bird</label>
+                </div>
+                <div class="feedback" id="act3_q15_feedback"></div>
+            </div>
+        </div>
+
+        <div class="activity-section">
+            <h2>🔍 Activity 4: Reading Detective</h2>
+            <p><strong>Task:</strong> Read the short text about the farm. Write down the five farm animals you can find in the story.</p>
+
+            <div class="reading-text">
+                <p>I woke up early today. The chicken made a lot of noise. Outside, the brown horse was eating. I saw a goat jump on a box, and the small pink pig was playing in the mud. My brother says he wants to keep a pet mouse, but my mum prefers the cat.</p>
+            </div>
+
+            <p class="prompt" style="margin-top:15px;">Write the 5 farm animals you found (separated by a comma, e.g., chicken, horse, ...):</p>
+            <input type="text" class="find-input" name="act4_q16" data-answer="chicken,horse,goat,pig,mouse" placeholder="e.g. animal1, animal2, animal3, animal4, animal5">
+            <div class="feedback" id="act4_q16_feedback"></div>
+        </div>
+
+        <button type="button" class="btn-check" onclick="checkAllAnswers()">✅ Check My Answers!</button>
+
+        <div class="total-score" id="totalScore"></div>
+
+    </form>
+</div>
+
+<script>
+    // Correct answers are stored in the data-answer attribute or hardcoded in the script (must be lowercase for text inputs)
+    const correctAnswers = {
+        'act1_q1': 'cat', 'act1_q2': 'horse', 'act1_q3': 'dog', 'act1_q4': 'monkey', 'act1_q5': 'cow',
+        'act2_q6': 'mouse', 'act2_q7': 'elephant', 'act2_q8': 'frog', 'act2_q9': 'rabbit', 'act2_q10': 'chicken',
+        'act3_q11': 'Lion', 'act3_q12': 'Snake', 'act3_q13': 'Turtle', 'act3_q14': 'Sheep', 'act3_q15': 'Bird',
+        // Activity 4 answer list (The question asks for the 5 farm animals in the text, excluding "cat")
+        // The five animals in the text are: chicken, horse, goat, pig, mouse, cat. Farm animals are: chicken, horse, goat, pig. Mouse is a pet. Let's make the answer list flexible and allow "mouse" as a common pet/farm pest for A1, but focus on the main four.
+        'act4_q16_list': ['chicken', 'horse', 'goat', 'pig', 'mouse'] // Using all 5 mentioned before 'cat' for simplicity at A1
+    };
+
+    function normalizeText(text) {
+        // Lowercase, remove extra spaces, and trim leading/trailing commas
+        return text.toLowerCase().replace(/\s/g, '').replace(/^,|,$/g, '');
+    }
+
+    function checkAllAnswers() {
+        let totalCorrect = 0;
+        const totalQuestions = 20; // 4 activities * 5 points = 20 total points
+
+        // --- Activity 1 & 2 (Text Inputs) ---
+        for (let i = 1; i <= 10; i++) {
+            const name = i <= 5 ? `act1_q${i}` : `act2_q${i}`;
+            const input = document.querySelector(`input[name="${name}"]`);
+            const feedbackElement = document.getElementById(`${name}_feedback`);
+
+            if (!input) continue;
+
+            const studentAnswer = normalizeText(input.value);
+            const correctAnswer = correctAnswers[name];
+
+            feedbackElement.style.display = 'block';
+            feedbackElement.className = 'feedback'; // Reset classes
+
+            if (studentAnswer === correctAnswer) {
+                feedbackElement.classList.add('correct');
+                feedbackElement.textContent = '⭐ Correct!';
+                totalCorrect++;
+            } else {
+                feedbackElement.classList.add('incorrect');
+                feedbackElement.textContent = `❌ Incorrect. Try: ${correctAnswer}`;
+            }
+        }
+
+        // --- Activity 3 (Radio Buttons) ---
+        for (let i = 11; i <= 15; i++) {
+            const name = `act3_q${i}`;
+            const questionGroup = document.querySelector(`.question-group[data-answer]:has(input[name="${name}"])`);
+            const feedbackElement = document.getElementById(`${name}_feedback`);
+            const selectedInput = document.querySelector(`input[name="${name}"]:checked`);
+
+            if (!questionGroup) continue;
+
+            const correctAnswer = questionGroup.getAttribute('data-answer');
+
+            feedbackElement.style.display = 'block';
+            feedbackElement.className = 'feedback'; // Reset classes
+
+            if (selectedInput) {
+                const selectedAnswer = selectedInput.value;
+                if (selectedAnswer === correctAnswer) {
+                    feedbackElement.classList.add('correct');
+                    feedbackElement.textContent = '⭐ Correct!';
+                    totalCorrect++;
+                } else {
+                    feedbackElement.classList.add('incorrect');
+                    feedbackElement.textContent = `❌ Incorrect. The answer is: ${correctAnswer}.`;
+                }
+            } else {
+                feedbackElement.classList.add('incorrect');
+                feedbackElement.textContent = '❌ Please select an option.';
+            }
+        }
+
+        // --- Activity 4 (Reading/List Check - 5 points) ---
+        const name = 'act4_q16';
+        const input = document.querySelector(`input[name="${name}"]`);
+        const feedbackElement = document.getElementById(`${name}_feedback`);
+        const correctAnimalList = correctAnswers['act4_q16_list']; 
+
+        feedbackElement.style.display = 'block';
+        feedbackElement.className = 'feedback'; // Reset classes
+
+        if (input.value.trim() === '') {
+            feedbackElement.classList.add('incorrect');
+            feedbackElement.textContent = '❌ Please find and list the animals.';
+        } else {
+            // Split student input by comma and normalize each item
+            const studentAnimals = input.value.split(',').map(normalizeText).filter(item => item !== '');
+            let activity4Correct = 0;
+            const foundCorrect = new Set();
+
+            studentAnimals.forEach(studentWord => {
+                if (correctAnimalList.includes(studentWord) && !foundCorrect.has(studentWord)) {
+                    activity4Correct++;
+                    foundCorrect.add(studentWord);
+                }
+            });
+
+            totalCorrect += activity4Correct;
+
+            if (activity4Correct === 5) {
+                feedbackElement.classList.add('correct');
+                feedbackElement.textContent = `⭐⭐ Perfect! You found all 5 animals!`;
+            } else {
+                feedbackElement.classList.add('incorrect');
+                feedbackElement.textContent = `❌ You found ${activity4Correct} out of 5 animals. The words are: ${correctAnimalList.join(', ')}.`;
+            }
+        }
+
+
+        // --- Show Final Score ---
+        const scoreElement = document.getElementById('totalScore');
+        const percentage = ((totalCorrect / totalQuestions) * 100).toFixed(0);
+
+        scoreElement.style.display = 'block';
+        scoreElement.innerHTML = `<h3>Final Score: ${totalCorrect} / ${totalQuestions} points (${percentage}%)</h3>
+                                  <p>Fantastic job! You know ${totalCorrect} animal words!</p>`;
+    }
+</script>
+
+</body>
+</html>

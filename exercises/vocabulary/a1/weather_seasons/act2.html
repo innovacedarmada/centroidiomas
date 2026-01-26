@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Weather & Seasons – Unscramble the Words</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        max-width: 900px;
+        margin: 40px auto;
+        line-height: 1.6;
+    }
+
+    h1, h2 {
+        text-align: center;
+    }
+
+    .activity {
+        margin-top: 30px;
+    }
+
+    .item {
+        margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+        margin-left: 10px;
+        padding: 4px;
+    }
+
+    button {
+        margin-top: 30px;
+        padding: 10px 16px;
+        font-size: 16px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .result {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Weather & Seasons</h1>
+<h2>Vocabulary – Activity 1</h2>
+
+<p><strong>Instructions:</strong> Unscramble each word related to weather or seasons.</p>
+
+<div class="activity">
+
+<div class="item">nus → <input id="w1" type="text"></div>
+<div class="item">nira → <input id="w2" type="text"></div>
+<div class="item">dulco → <input id="w3" type="text"></div>
+<div class="item">wons → <input id="w4" type="text"></div>
+<div class="item">dinw → <input id="w5" type="text"></div>
+<div class="item">mrots → <input id="w6" type="text"></div>
+<div class="item">mretuarepte → <input id="w7" type="text"></div>
+<div class="item">saones → <input id="w8" type="text"></div>
+<div class="item">ignspr → <input id="w9" type="text"></div>
+<div class="item">rmmesu → <input id="w10" type="text"></div>
+<div class="item">tanumu → <input id="w11" type="text"></div>
+<div class="item">rntwei → <input id="w12" type="text"></div>
+<div class="item">cie → <input id="w13" type="text"></div>
+<div class="item">dolc → <input id="w14" type="text"></div>
+<div class="item">aeth → <input id="w15" type="text"></div>
+<div class="item">nehis → <input id="w16" type="text"></div>
+<div class="item">wbol → <input id="w17" type="text"></div>
+<div class="item">ynnus → <input id="w18" type="text"></div>
+<div class="item">dyolcu → <input id="w19" type="text"></div>
+<div class="item">yinar → <input id="w20" type="text"></div>
+<div class="item">ywnos → <input id="w21" type="text"></div>
+<div class="item">yidwn → <input id="w22" type="text"></div>
+<div class="item">toh → <input id="w23" type="text"></div>
+<div class="item">mraw → <input id="w24" type="text"></div>
+<div class="item">oocl → <input id="w25" type="text"></div>
+
+</div>
+
+<button onclick="checkAnswers()">Check Answers</button>
+
+<div class="result" id="result"></div>
+
+<script>
+function normalize(text) {
+    return text.trim().toLowerCase();
+}
+
+function checkAnswers() {
+    let score = 0;
+
+    if (normalize(w1.value) === "sun") score++;
+    if (normalize(w2.value) === "rain") score++;
+    if (normalize(w3.value) === "cloud") score++;
+    if (normalize(w4.value) === "snow") score++;
+    if (normalize(w5.value) === "wind") score++;
+    if (normalize(w6.value) === "storm") score++;
+    if (normalize(w7.value) === "temperature") score++;
+    if (normalize(w8.value) === "seasons") score++;
+    if (normalize(w9.value) === "spring") score++;
+    if (normalize(w10.value) === "summer") score++;
+    if (normalize(w11.value) === "autumn") score++;
+    if (normalize(w12.value) === "winter") score++;
+    if (normalize(w13.value) === "ice") score++;
+    if (normalize(w14.value) === "cold") score++;
+    if (normalize(w15.value) === "heat") score++;
+    if (normalize(w16.value) === "shine") score++;
+    if (normalize(w17.value) === "blow") score++;
+    if (normalize(w18.value) === "sunny") score++;
+    if (normalize(w19.value) === "cloudy") score++;
+    if (normalize(w20.value) === "rainy") score++;
+    if (normalize(w21.value) === "snowy") score++;
+    if (normalize(w22.value) === "windy") score++;
+    if (normalize(w23.value) === "hot") score++;
+    if (normalize(w24.value) === "warm") score++;
+    if (normalize(w25.value) === "cool") score++;
+
+    document.getElementById("result").textContent =
+        "Your score: " + score + " / 25";
+}
+</script>
+
+</body>
+</html>
